@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,8 +17,11 @@ namespace DVLD_Management_System
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-            // 
+            Application.Run(new FormPerson());
+
+
+           // Application.Run(new Form1()); // Test
+           // 
         }
     }
 }
