@@ -18,13 +18,21 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
         public ctrl_InfoPerson()
         {
             InitializeComponent();
+           
+
             person = FrmShowPerson.person;
+        
+
             LoadData();
         }
         public Person person;
 
         void LoadData()
         {
+            if (DesignMode)
+                return;
+            if (person == null)
+                return;
             lbl_IDPerson.Text      = "ID : " +person.IDPerson.ToString();
             lblFullName.Text       = person.FullName;
             lblNationalNumber.Text = person.National_Number;
