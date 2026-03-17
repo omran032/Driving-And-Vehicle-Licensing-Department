@@ -47,6 +47,7 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.ErrorProviderLogin = new System.Windows.Forms.ErrorProvider(this.components);
             this.lbl_ISError = new System.Windows.Forms.Label();
+            this.Chk_RememberMy = new Guna.UI2.WinForms.Guna2CheckBox();
             this.pnl_TopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicClose)).BeginInit();
@@ -171,7 +172,7 @@
             this.btnLogin.Image = ((System.Drawing.Image)(resources.GetObject("btnLogin.Image")));
             this.btnLogin.ImageOffset = new System.Drawing.Point(-4, 0);
             this.btnLogin.ImageSize = new System.Drawing.Size(50, 50);
-            this.btnLogin.Location = new System.Drawing.Point(548, 511);
+            this.btnLogin.Location = new System.Drawing.Point(548, 510);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(217, 41);
             this.btnLogin.TabIndex = 4;
@@ -260,12 +261,29 @@
             this.lbl_ISError.AutoSize = true;
             this.lbl_ISError.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_ISError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lbl_ISError.Location = new System.Drawing.Point(544, 474);
+            this.lbl_ISError.Location = new System.Drawing.Point(544, 488);
             this.lbl_ISError.Name = "lbl_ISError";
             this.lbl_ISError.Size = new System.Drawing.Size(231, 19);
             this.lbl_ISError.TabIndex = 10;
             this.lbl_ISError.Text = "اسم المستخدم أو كلمة المرور غير صحيحة";
             this.lbl_ISError.Visible = false;
+            // 
+            // Chk_RememberMy
+            // 
+            this.Chk_RememberMy.AutoSize = true;
+            this.Chk_RememberMy.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.Chk_RememberMy.CheckedState.BorderRadius = 0;
+            this.Chk_RememberMy.CheckedState.BorderThickness = 0;
+            this.Chk_RememberMy.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.Chk_RememberMy.Location = new System.Drawing.Point(579, 457);
+            this.Chk_RememberMy.Name = "Chk_RememberMy";
+            this.Chk_RememberMy.Size = new System.Drawing.Size(161, 28);
+            this.Chk_RememberMy.TabIndex = 11;
+            this.Chk_RememberMy.Text = "Remember Me";
+            this.Chk_RememberMy.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.Chk_RememberMy.UncheckedState.BorderRadius = 0;
+            this.Chk_RememberMy.UncheckedState.BorderThickness = 0;
+            this.Chk_RememberMy.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             // 
             // FormLogin
             // 
@@ -273,6 +291,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(857, 646);
+            this.Controls.Add(this.Chk_RememberMy);
             this.Controls.Add(this.lbl_ISError);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.guna2Panel1);
@@ -322,5 +341,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ErrorProvider ErrorProviderLogin;
         private System.Windows.Forms.Label lbl_ISError;
+        private Guna.UI2.WinForms.Guna2CheckBox Chk_RememberMy;
     }
 }

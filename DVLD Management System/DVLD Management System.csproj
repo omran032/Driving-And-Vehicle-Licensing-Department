@@ -124,6 +124,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="الواجهة الرئيسية\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="الواجهة الرئيسية\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="الواجهة الرئيسية\تسجيل الدخول\Class\ClassUser.cs" />
     <Compile Include="الواجهة الرئيسية\تسجيل الدخول\Class\ClsPersonAuthorities.cs" />
     <Compile Include="الواجهة الرئيسية\تسجيل الدخول\FormLogin.cs">
@@ -168,6 +174,9 @@
     </Compile>
     <EmbeddedResource Include="Manage Persons\FormPerson.resx">
       <DependentUpon>FormPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="الواجهة الرئيسية\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="الواجهة الرئيسية\تسجيل الدخول\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>

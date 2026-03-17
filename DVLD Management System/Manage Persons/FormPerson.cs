@@ -100,7 +100,7 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
         #endregion
 
         string TypeFelter;
-        private void TxtFelter_Leave(object sender, EventArgs e)
+        private void TxtFelter_Leave(object sender, EventArgs e) // حدث عند الخروج من العنصر
         {
             string textFelter = TxtFelter.Text;
 
@@ -117,10 +117,11 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
                 DGV.DataSource = Cls_CMD_PresonsDB.SearchPerson_ID(textFelter, "National Number");
 
         }
-        private void ComboFelter_SelectedIndexChanged(object sender, EventArgs e)
+
+
+        private void ComboFelter_SelectedIndexChanged(object sender, EventArgs e) // ComboBox  عند الاختيار في
         {
             TypeFelter = ComboFelter.Text.Trim();
-
         }
 
 
