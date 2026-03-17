@@ -123,7 +123,7 @@
             // 
             this.TxtUserName.BorderRadius = 15;
             this.TxtUserName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TxtUserName.DefaultText = "Majd";
+            this.TxtUserName.DefaultText = "";
             this.TxtUserName.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.TxtUserName.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.TxtUserName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -206,7 +206,7 @@
             // 
             this.TxtPassword.BorderRadius = 15;
             this.TxtPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TxtPassword.DefaultText = "1234";
+            this.TxtPassword.DefaultText = "";
             this.TxtPassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.TxtPassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.TxtPassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -284,6 +284,7 @@
             this.Chk_RememberMy.UncheckedState.BorderRadius = 0;
             this.Chk_RememberMy.UncheckedState.BorderThickness = 0;
             this.Chk_RememberMy.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.Chk_RememberMy.CheckedChanged += new System.EventHandler(this.Chk_RememberMy_CheckedChanged);
             // 
             // FormLogin
             // 

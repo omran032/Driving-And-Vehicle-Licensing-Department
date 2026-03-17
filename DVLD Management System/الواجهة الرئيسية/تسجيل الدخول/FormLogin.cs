@@ -64,7 +64,7 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
                 IsCheck_RememberMy();
 
                 //   Close();
-                FormPerson formMain = new FormPerson();
+                FormMain formMain = new FormMain();
                 MyTools.ShowForm(formMain);
                 return;
             }
@@ -145,6 +145,10 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
                 SaveLoginToRegistry(username ,password);
             }
         }
-        
+
+        private void Chk_RememberMy_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
