@@ -33,10 +33,10 @@ namespace DVLD_Management_System.Manage_Persons.واجهات_فرعية
             lblTitle.Text = "تعديل المعلومات";
 
 
-            ctrl_Add_UpdatePerson1.OnRefreshData = RerechData; //ارسال مثود للحدث
+            ctrl_Add_UpdatePerson1.OnRefreshData = RefrechData; //ارسال مثود للحدث
         }
 
-
+        public int PersonID;
         public static Person person;
         public static bool   IsUpdate;
 
@@ -51,13 +51,13 @@ namespace DVLD_Management_System.Manage_Persons.واجهات_فرعية
             lblTitle.Text = "إضافة شخص";
             ctrl_Add_UpdatePerson1.IsUpdate = false;
 
-            ctrl_Add_UpdatePerson1.OnRefreshData = RerechData; //ارسال مثود للحدث
+            ctrl_Add_UpdatePerson1.OnRefreshData = RefrechData; //ارسال مثود للحدث
         }
 
         /// <summary>
         /// تحديث القائمة
         /// </summary>
-        void RerechData()
+        void RefrechData()
         {
             onEventRefreachData?.Invoke();
         }

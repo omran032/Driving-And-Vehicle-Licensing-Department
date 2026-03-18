@@ -10,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -30,13 +31,14 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
         }
 
         public Action OnRefreshData; // حدث لتحديث البيانات 
+        public event Action<int> OnProcessCompleted; // بعد الاضافة ID حدث ارجاع 
 
 
         public bool IsUpdate {  get; set; } // هل العنصر للتعديل ؟ ام لللاضافة
 
         public Person person; //تخزين المعلومات
 
-        int ID  ;
+        public int PersonID;
 
 
         #region عناصر و ازرار
@@ -136,7 +138,10 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
 
         void AddPerson()
         {
-            lbl_IDPerson.Text = "ID : " + Cls_CMD_PresonsDB.AddPerson(person);
+            PersonID = Cls_CMD_PresonsDB.AddPerson(person);
+            lbl_IDPerson.Text = "ID : " + PersonID;
+            OnProcessCompleted?.Invoke(PersonID); // ID  تنفيذ حدث ارجاع ال 
+
         }
         void UpdatePerson()
         {

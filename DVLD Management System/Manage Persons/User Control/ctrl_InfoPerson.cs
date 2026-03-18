@@ -1,5 +1,6 @@
 ﻿using DVLD_Management_System.Class.Class;
 using DVLD_Management_System.Manage_Persons.واجهات_فرعية;
+using Emgu.CV.XFeatures2D;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,20 +20,29 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
         {
             InitializeComponent();
            
-
-            person = FrmShowPerson.person;
-        
-
-            LoadData();
+            LoadData(FrmShowPerson.person);
         }
-        public Person person;
-
-        void LoadData()
+        public ctrl_InfoPerson(Person person_)
         {
-            if (DesignMode)
+            InitializeComponent();
+            person = person_;
+
+            LoadData(person_);
+        }
+        public int PersonID
+        {
+            get { return int.Parse(lbl_IDPerson.Text); }
+            set { lbl_IDPerson.Text = value.ToString(); }
+        }
+
+        public Person person { set; get; }
+
+       public void LoadData(Person person)
+        {
+            if (DesignMode || person == null)
                 return;
-            if (person == null)
-                return;
+      
+
             lbl_IDPerson.Text      = "ID : " +person.IDPerson.ToString();
             lblFullName.Text       = person.FullName;
             lblNationalNumber.Text = person.National_Number;

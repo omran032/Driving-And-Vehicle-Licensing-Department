@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLD_Management_System.الواجهة_الرئيسية;
+using DVLD_Management_System.Manage_Users;
 
 
 
@@ -20,9 +21,13 @@ namespace DVLD_Management_System
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormPerson()); //Main
-            //Application.Run(new FormMain());
-            //Application.Run(new FormLogin());
+            //Application.Run(new FormLogin()); // Log
+            //Application.Run(new FormMain()); //Main
+
+            //Application.Run(new FormPerson());
+            //Application.Run(new FormPerson());  
+            //Application.Run(new FormShowUsers());
+            Application.Run(new FrmAdd_UpdateUser());
 
 
             // Application.Run(new Form1()); // Test

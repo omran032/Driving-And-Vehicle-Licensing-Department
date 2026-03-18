@@ -194,7 +194,7 @@ namespace DVLD_Management_System.Class.Class_DB
         /// </summary>
         public static bool IsExistUser(string username, string password , string Role)
         {
-             string p    = returnEncrptionPassword(password);
+             string p    = ReturnEncrptionPassword(password);
             try
             {
                 using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -243,7 +243,7 @@ namespace DVLD_Management_System.Class.Class_DB
         /// <summary>
         /// دالة لتشفير كلمة المرور باستخدام SHA256
         /// </summary>
-        static string  returnEncrptionPassword(string password)
+        public static string  ReturnEncrptionPassword(string password)
         {
             // استخدام SHA256 لتشفير كلمة المرور
             using (var sha256 = System.Security.Cryptography.SHA256.Create())

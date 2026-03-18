@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dev_Note_Assistant;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,9 +18,12 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
             InitializeComponent();
         }
 
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        private void tsDdb_Users_Click(object sender, EventArgs e) //عرض المستخدمين
         {
-
+            FormShowUsers showUsers = new FormShowUsers();  
+            MyTools.ShowForm(showUsers);
         }
+
+
     }
 }

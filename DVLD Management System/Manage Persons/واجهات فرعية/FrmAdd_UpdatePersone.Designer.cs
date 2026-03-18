@@ -73,6 +73,6 @@
 
         #endregion
         private System.Windows.Forms.Label lblTitle;
-        private User_Control.Ctrl_Add_UpdatePerson ctrl_Add_UpdatePerson1;
+        public User_Control.Ctrl_Add_UpdatePerson ctrl_Add_UpdatePerson1;
     }
 }

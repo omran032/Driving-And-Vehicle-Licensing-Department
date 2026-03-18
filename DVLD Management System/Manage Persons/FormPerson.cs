@@ -99,32 +99,6 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
 
         #endregion
 
-        string TypeFelter;
-        private void TxtFelter_Leave(object sender, EventArgs e) // حدث عند الخروج من العنصر
-        {
-            string textFelter = TxtFelter.Text;
-
-            if (string.IsNullOrEmpty(TypeFelter) && string.IsNullOrEmpty(textFelter))
-                return;
-
-            if (TypeFelter == "البحث برقم الشخص")
-                DGV.DataSource = Cls_CMD_PresonsDB.SearchPerson_ID(textFelter, "ID");
-
-            if (TypeFelter =="البحث بالاسم")
-                DGV.DataSource = Cls_CMD_PresonsDB.SearchPerson_ID(textFelter, "FullName");
-
-            if (TypeFelter =="البحث بالرقم الوطني")
-                DGV.DataSource = Cls_CMD_PresonsDB.SearchPerson_ID(textFelter, "National Number");
-
-        }
-
-
-        private void ComboFelter_SelectedIndexChanged(object sender, EventArgs e) // ComboBox  عند الاختيار في
-        {
-            TypeFelter = ComboFelter.Text.Trim();
-        }
-
-
         // *********************************************
 
         #region [[[[ اوامر التعامل مع الواجهة وبياناتها  ]]]]
@@ -158,6 +132,18 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
             DGV.Columns["الجنس"].Visible = false;
             DGV.Columns["الميلاد"].Visible = false;
             DGV.Columns["الصورة"].Visible = false;
+
+            //الحدث الذي ينفذ عند الفلترة 
+            ctrlFelterPersons.EventFelterPersons += ShowFelter;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="person">شكليا فقط</param>
+        void ShowFelter( ) // تنفذ بعد الفلترة
+        {
+            DGV.DataSource = ctrlFelterPersons.dataTablePerson;
         }
 
         private void DGV_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e) // حدث تحديد الصف بالماوس
@@ -221,8 +207,11 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
 
 
 
+
         #endregion
 
-      
+        
+
+       
     }
 }

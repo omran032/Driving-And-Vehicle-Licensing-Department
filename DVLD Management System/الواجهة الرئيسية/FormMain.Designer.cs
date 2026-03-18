@@ -169,7 +169,6 @@
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(290, 30);
             this.toolStripMenuItem3.Text = "Detain Lisenses";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // manageDetainedLicensesToolStripMenuItem
             // 
@@ -242,6 +241,7 @@
             this.tsDdb_Users.Name = "tsDdb_Users";
             this.tsDdb_Users.Size = new System.Drawing.Size(124, 52);
             this.tsDdb_Users.Text = "Users   ";
+            this.tsDdb_Users.Click += new System.EventHandler(this.tsDdb_Users_Click);
             // 
             // toolStripSeparator4
             // 

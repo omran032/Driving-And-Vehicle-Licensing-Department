@@ -36,15 +36,15 @@ namespace DVLD_Management_System.Manage_Persons.Class
             return ClsCommandDB.SelectCommand(Query);
         }
 
-      
+
 
 
 
         /// <summary>
         /// Stored Prosedure إضافة شخص جديد باستخدام
         /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
+        /// <param name="person">  لاضافته Person معلومات </param>
+        /// <returns> ارجاع ID </returns>
         public static int AddPerson(Person person)
         {
             string Query = "AddPerson"; // اسم الـ SP
@@ -210,7 +210,7 @@ FETCH NEXT 50 ROWS ONLY;";
             if (TypeSearch == "ID")
                 where = "where IDPerson = @value";
 
-            else if(TypeSearch == "Name")
+            else if(TypeSearch == "FullName")
                 where = "where FullName = @value";
 
             else if (TypeSearch == "National Number")
@@ -220,7 +220,7 @@ FETCH NEXT 50 ROWS ONLY;";
                 where = "";
 
 
-            string Query = $@"SELECT  
+            string Query = $@"SELECT 
     IDPerson AS [ID],
     FullName AS [الاسم الكامل],
     [National Number] as [الرقم الوطني],
@@ -233,9 +233,7 @@ FETCH NEXT 50 ROWS ONLY;";
     Picture AS [الصورة]
 FROM Persons
 {where}
-ORDER BY IDPerson   
-OFFSET {0} ROWS 
-FETCH NEXT 100 ROWS ONLY;";
+";
 
             return ClsCommandDB.SelectCommand(Query , parameters);
 
@@ -245,15 +243,6 @@ FETCH NEXT 100 ROWS ONLY;";
         #endregion
 
 
-        //////////////////////////////////////////////////////////////////////////
-        ///////////////////////////  [ Users اوامر جدول ]   ////////////////////////////////
-
-        #region  Users اوامر جدول
-
-
-
-
-        #endregion
 
 
     }
