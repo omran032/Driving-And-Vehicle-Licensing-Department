@@ -22,10 +22,18 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
             InitializeComponent();
 
             LoadData();
+            Events();
         }
 
         int IgnoreRow = 0;
         int CountPerson = 0;
+
+        // الذي يعمل عند الفلنرة CtrlFeltterUser تسجيل الحدث في عنصر 
+        void Events()
+        {
+               // العنصر
+            ctrlFeltterUser1.EventShowFelterUser += ShowFeltter;
+        }
 
         void LoadData()
         {    
@@ -52,6 +60,14 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
             DGV.Columns["الدور"].Visible = false;
 
         }
+
+
+
+        void ShowFeltter(DataTable data)
+        {
+            DGV.DataSource = data;
+        }
+
 
         int currentRow = -1; //رقم الصف المختار
         private void DGV_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e) // حدث تحديد الصف بالماوس
@@ -105,6 +121,7 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
             lblNumberInfo.Text = IgnoreRow.ToString();
         }
 
+
         private void PicPrevious_Click(object sender, EventArgs e)// زر عرض 50 صف السابقين
         {
             if (IgnoreRow >= 50)
@@ -121,6 +138,9 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
             lblNumberInfo.Text = IgnoreRow.ToString();
         }
 
+
+
+
         private void CTMS_btnShowInfo_Click(object sender, EventArgs e) //عرض المعلومات
         {
             InformationRow();
@@ -129,13 +149,16 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
         private void CTMS_btnUpdate_Click(object sender, EventArgs e) // تعديل بيانات المستخدم
         {
             InformationRow();
+            FrmAdd_UpdateUser frmAdd_Update = new FrmAdd_UpdateUser(users);
+            //تنفيذه عند الإضافة او التعديل
+            frmAdd_Update.Add_UpdateUser += LoadData; 
+            MyTools.ShowForm(frmAdd_Update);
 
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e) // تعديل كلمة السر
         {
             InformationRow();
-
         }
 
         private void CTMS_btnDelete_Click(object sender, EventArgs e) // حذف المستخدم

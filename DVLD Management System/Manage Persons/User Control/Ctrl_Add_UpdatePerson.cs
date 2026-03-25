@@ -70,21 +70,6 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
         // تعيين صورة
         private void AddPicture_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            #region لجلب وعرض الصورة
-            // بتستخدمها بعدين بس  انا حطيتا هون
-            //if (person.Picture != null)
-            //{
-            //    using (MemoryStream ms = new MemoryStream(person.Picture))
-            //    {
-            //        PicPerson.Image = Image.FromStream(ms);
-            //    }
-            //}
-            //else
-            //{
-            //    PicPerson.Image = null; // أو صورة افتراضية
-            //}
-          #endregion
-
             //التحقق من الصورة اذا كانت تحوي على وجه
 
             OpenFileDialog ofd = new OpenFileDialog();
@@ -143,6 +128,7 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
             OnProcessCompleted?.Invoke(PersonID); // ID  تنفيذ حدث ارجاع ال 
 
         }
+
         void UpdatePerson()
         {
             Cls_CMD_PresonsDB.UpdatePerson(person);

@@ -1,6 +1,6 @@
-﻿namespace DVLD_Management_System.Manage_Persons.User_Control
+﻿namespace DVLD_Management_System.Manage_Users.User_Control
 {
-    partial class CtrlFelterPersons
+    partial class CtrlFeltterUser
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,26 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label3 = new System.Windows.Forms.Label();
             this.TxtFelter = new Guna.UI2.WinForms.Guna2TextBox();
             this.ComboFelter = new Guna.UI2.WinForms.Guna2ComboBox();
             this.SuspendLayout();
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label3.Location = new System.Drawing.Point(2, 25);
-            this.label3.Name = "label3";
-            this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label3.Size = new System.Drawing.Size(59, 22);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Felter";
-            // 
             // TxtFelter
             // 
             this.TxtFelter.BorderRadius = 15;
-            this.TxtFelter.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TxtFelter.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TxtFelter.DefaultText = "";
             this.TxtFelter.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.TxtFelter.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
@@ -56,13 +44,13 @@
             this.TxtFelter.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TxtFelter.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtFelter.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TxtFelter.Location = new System.Drawing.Point(282, 15);
+            this.TxtFelter.Location = new System.Drawing.Point(237, 4);
             this.TxtFelter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TxtFelter.Name = "TxtFelter";
             this.TxtFelter.PlaceholderText = "";
             this.TxtFelter.SelectedText = "";
-            this.TxtFelter.Size = new System.Drawing.Size(244, 36);
-            this.TxtFelter.TabIndex = 15;
+            this.TxtFelter.Size = new System.Drawing.Size(239, 36);
+            this.TxtFelter.TabIndex = 24;
             this.TxtFelter.TextChanged += new System.EventHandler(this.TxtFelter_TextChanged);
             this.TxtFelter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtFelter_KeyPress);
             // 
@@ -79,34 +67,33 @@
             this.ComboFelter.ItemHeight = 30;
             this.ComboFelter.Items.AddRange(new object[] {
             "الكل",
-            "البحث بالاسم",
-            "البحث بالرقم الوطني",
-            "البحث برقم الشخص"});
-            this.ComboFelter.Location = new System.Drawing.Point(66, 15);
+            "البحث برقم الشخص",
+            "البحث عن اسم مستخدم",
+            "الحساب الفعال",
+            "الحساب الغير فعال"});
+            this.ComboFelter.Location = new System.Drawing.Point(3, 6);
             this.ComboFelter.Name = "ComboFelter";
-            this.ComboFelter.Size = new System.Drawing.Size(205, 36);
-            this.ComboFelter.TabIndex = 14;
+            this.ComboFelter.Size = new System.Drawing.Size(227, 36);
+            this.ComboFelter.TabIndex = 23;
             this.ComboFelter.SelectedIndexChanged += new System.EventHandler(this.ComboFelter_SelectedIndexChanged);
             // 
-            // CtrlFelterPersons
+            // CtrlFeltterUser
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.TxtFelter);
             this.Controls.Add(this.ComboFelter);
-            this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.Name = "CtrlFelterPersons";
-            this.Size = new System.Drawing.Size(535, 66);
+            this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "CtrlFeltterUser";
+            this.Size = new System.Drawing.Size(485, 49);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label3;
+
         private Guna.UI2.WinForms.Guna2TextBox TxtFelter;
         private Guna.UI2.WinForms.Guna2ComboBox ComboFelter;
     }

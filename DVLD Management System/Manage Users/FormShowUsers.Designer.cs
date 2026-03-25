@@ -34,8 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormShowUsers));
             this.label3 = new System.Windows.Forms.Label();
-            this.TxtFelter = new Guna.UI2.WinForms.Guna2TextBox();
-            this.ComboFelter = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lblNumberInfo = new System.Windows.Forms.Label();
             this.DGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,22 +41,21 @@
             this.lblNumberUsers = new System.Windows.Forms.Label();
             this.ElipseDGV = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.MyContextMenuStrip = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PicNext = new System.Windows.Forms.PictureBox();
+            this.PicPrevious = new System.Windows.Forms.PictureBox();
+            this.btnAdd = new Guna.UI2.WinForms.Guna2GradientButton();
             this.CTMS_btnShowInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.CTMS_btnUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.CTMS_btnDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.CTMS_btnSendEmail = new System.Windows.Forms.ToolStripMenuItem();
             this.CTMS_btnSend = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.PicNext = new System.Windows.Forms.PictureBox();
-            this.PicPrevious = new System.Windows.Forms.PictureBox();
-            this.btnAdd = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.ctrlFeltterUser1 = new DVLD_Management_System.Manage_Users.User_Control.CtrlFeltterUser();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.MyContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicPrevious)).BeginInit();
             this.SuspendLayout();
@@ -73,46 +70,6 @@
             this.label3.Size = new System.Drawing.Size(59, 22);
             this.label3.TabIndex = 21;
             this.label3.Text = "Felter";
-            // 
-            // TxtFelter
-            // 
-            this.TxtFelter.BorderRadius = 15;
-            this.TxtFelter.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TxtFelter.DefaultText = "";
-            this.TxtFelter.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.TxtFelter.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.TxtFelter.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.TxtFelter.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.TxtFelter.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TxtFelter.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFelter.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TxtFelter.Location = new System.Drawing.Point(201, 124);
-            this.TxtFelter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.TxtFelter.Name = "TxtFelter";
-            this.TxtFelter.PlaceholderText = "";
-            this.TxtFelter.SelectedText = "";
-            this.TxtFelter.Size = new System.Drawing.Size(206, 36);
-            this.TxtFelter.TabIndex = 20;
-            // 
-            // ComboFelter
-            // 
-            this.ComboFelter.BackColor = System.Drawing.Color.Transparent;
-            this.ComboFelter.BorderRadius = 15;
-            this.ComboFelter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ComboFelter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboFelter.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ComboFelter.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ComboFelter.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ComboFelter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.ComboFelter.ItemHeight = 30;
-            this.ComboFelter.Items.AddRange(new object[] {
-            "البحث برقم الشخص",
-            "البحث بالاسم",
-            "البحث بالرقم الوطني"});
-            this.ComboFelter.Location = new System.Drawing.Point(27, 124);
-            this.ComboFelter.Name = "ComboFelter";
-            this.ComboFelter.Size = new System.Drawing.Size(167, 36);
-            this.ComboFelter.TabIndex = 19;
             // 
             // lblNumberInfo
             // 
@@ -239,65 +196,10 @@
             this.MyContextMenuStrip.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             this.MyContextMenuStrip.Size = new System.Drawing.Size(204, 166);
             // 
-            // CTMS_btnShowInfo
-            // 
-            this.CTMS_btnShowInfo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CTMS_btnShowInfo.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnShowInfo.Image")));
-            this.CTMS_btnShowInfo.Name = "CTMS_btnShowInfo";
-            this.CTMS_btnShowInfo.Size = new System.Drawing.Size(203, 26);
-            this.CTMS_btnShowInfo.Text = "Display Information";
-            this.CTMS_btnShowInfo.Click += new System.EventHandler(this.CTMS_btnShowInfo_Click);
-            // 
-            // CTMS_btnUpdate
-            // 
-            this.CTMS_btnUpdate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CTMS_btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnUpdate.Image")));
-            this.CTMS_btnUpdate.Name = "CTMS_btnUpdate";
-            this.CTMS_btnUpdate.Size = new System.Drawing.Size(203, 26);
-            this.CTMS_btnUpdate.Text = "Update";
-            this.CTMS_btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.CTMS_btnUpdate.Click += new System.EventHandler(this.CTMS_btnUpdate_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(203, 26);
-            this.toolStripMenuItem1.Text = "Change Password";
-            this.toolStripMenuItem1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // CTMS_btnDelete
-            // 
-            this.CTMS_btnDelete.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CTMS_btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnDelete.Image")));
-            this.CTMS_btnDelete.Name = "CTMS_btnDelete";
-            this.CTMS_btnDelete.Size = new System.Drawing.Size(203, 26);
-            this.CTMS_btnDelete.Text = "Delete";
-            this.CTMS_btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.CTMS_btnDelete.Click += new System.EventHandler(this.CTMS_btnDelete_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(200, 6);
-            // 
-            // CTMS_btnSendEmail
-            // 
-            this.CTMS_btnSendEmail.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CTMS_btnSendEmail.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnSendEmail.Image")));
-            this.CTMS_btnSendEmail.Name = "CTMS_btnSendEmail";
-            this.CTMS_btnSendEmail.Size = new System.Drawing.Size(203, 26);
-            this.CTMS_btnSendEmail.Text = "Send Email";
-            // 
-            // CTMS_btnSend
-            // 
-            this.CTMS_btnSend.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CTMS_btnSend.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnSend.Image")));
-            this.CTMS_btnSend.Name = "CTMS_btnSend";
-            this.CTMS_btnSend.Size = new System.Drawing.Size(203, 26);
-            this.CTMS_btnSend.Text = "Call";
             // 
             // pictureBox1
             // 
@@ -308,17 +210,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 26;
             this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(370, 128);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(30, 26);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 22;
-            this.pictureBox2.TabStop = false;
             // 
             // PicNext
             // 
@@ -366,19 +257,82 @@
             this.btnAdd.Text = "إضافة";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // CTMS_btnShowInfo
+            // 
+            this.CTMS_btnShowInfo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CTMS_btnShowInfo.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnShowInfo.Image")));
+            this.CTMS_btnShowInfo.Name = "CTMS_btnShowInfo";
+            this.CTMS_btnShowInfo.Size = new System.Drawing.Size(203, 26);
+            this.CTMS_btnShowInfo.Text = "Display Information";
+            this.CTMS_btnShowInfo.Click += new System.EventHandler(this.CTMS_btnShowInfo_Click);
+            // 
+            // CTMS_btnUpdate
+            // 
+            this.CTMS_btnUpdate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CTMS_btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnUpdate.Image")));
+            this.CTMS_btnUpdate.Name = "CTMS_btnUpdate";
+            this.CTMS_btnUpdate.Size = new System.Drawing.Size(203, 26);
+            this.CTMS_btnUpdate.Text = "Update";
+            this.CTMS_btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.CTMS_btnUpdate.Click += new System.EventHandler(this.CTMS_btnUpdate_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(203, 26);
+            this.toolStripMenuItem1.Text = "Change Password";
+            this.toolStripMenuItem1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // CTMS_btnDelete
+            // 
+            this.CTMS_btnDelete.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CTMS_btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnDelete.Image")));
+            this.CTMS_btnDelete.Name = "CTMS_btnDelete";
+            this.CTMS_btnDelete.Size = new System.Drawing.Size(203, 26);
+            this.CTMS_btnDelete.Text = "Delete";
+            this.CTMS_btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.CTMS_btnDelete.Click += new System.EventHandler(this.CTMS_btnDelete_Click);
+            // 
+            // CTMS_btnSendEmail
+            // 
+            this.CTMS_btnSendEmail.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CTMS_btnSendEmail.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnSendEmail.Image")));
+            this.CTMS_btnSendEmail.Name = "CTMS_btnSendEmail";
+            this.CTMS_btnSendEmail.Size = new System.Drawing.Size(203, 26);
+            this.CTMS_btnSendEmail.Text = "Send Email";
+            // 
+            // CTMS_btnSend
+            // 
+            this.CTMS_btnSend.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CTMS_btnSend.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnSend.Image")));
+            this.CTMS_btnSend.Name = "CTMS_btnSend";
+            this.CTMS_btnSend.Size = new System.Drawing.Size(203, 26);
+            this.CTMS_btnSend.Text = "Call";
+            // 
+            // ctrlFeltterUser1
+            // 
+            this.ctrlFeltterUser1.BackColor = System.Drawing.Color.Transparent;
+            this.ctrlFeltterUser1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlFeltterUser1.Location = new System.Drawing.Point(12, 116);
+            this.ctrlFeltterUser1.Margin = new System.Windows.Forms.Padding(4);
+            this.ctrlFeltterUser1.Name = "ctrlFeltterUser1";
+            this.ctrlFeltterUser1.Size = new System.Drawing.Size(485, 43);
+            this.ctrlFeltterUser1.TabIndex = 27;
+            // 
             // FormShowUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 598);
+            this.Controls.Add(this.ctrlFeltterUser1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblNumberUsers);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.TxtFelter);
-            this.Controls.Add(this.ComboFelter);
             this.Controls.Add(this.lblNumberInfo);
             this.Controls.Add(this.PicNext);
             this.Controls.Add(this.PicPrevious);
@@ -392,7 +346,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
             this.MyContextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicNext)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicPrevious)).EndInit();
             this.ResumeLayout(false);
@@ -401,11 +354,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label3;
-        private Guna.UI2.WinForms.Guna2TextBox TxtFelter;
-        private Guna.UI2.WinForms.Guna2ComboBox ComboFelter;
         private System.Windows.Forms.Label lblNumberInfo;
         private System.Windows.Forms.PictureBox PicNext;
         private System.Windows.Forms.PictureBox PicPrevious;
@@ -424,5 +373,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem CTMS_btnSendEmail;
         private System.Windows.Forms.ToolStripMenuItem CTMS_btnSend;
+        private Manage_Users.User_Control.CtrlFeltterUser ctrlFeltterUser1;
     }
 }

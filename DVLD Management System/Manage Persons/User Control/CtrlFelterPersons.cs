@@ -11,7 +11,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace DVLD_Management_System.Manage_Persons.User_Control
@@ -36,7 +35,7 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
 
 
         CancellationTokenSource cts;
-        private async void TxtFelter_TextChanged(object sender, EventArgs e) // حدث عند تغيير النص بالنعنصر
+        private async void TxtFelter_TextChanged(object sender, EventArgs e) // حدث عند تغيير النص بالعنصر
         {
             cts?.Cancel(); // إلغاء أي عملية سابقة
             cts = new CancellationTokenSource();
@@ -71,6 +70,8 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
             }
         }
 
+
+
         bool NumberOnly = false;
 
         string TypeFelter;
@@ -78,7 +79,7 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
         {
             TxtFelter.Text = null;
            TypeFelter = ComboFelter.Text.Trim();
-            
+
             if (TypeFelter == "الكل")
             {
                 dataTablePerson = Cls_CMD_PresonsDB.Next50Person(0); //عرض اول 50 شخص بدون تجاهل
@@ -86,8 +87,10 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
             }
             else if (TypeFelter == "البحث برقم الشخص") NumberOnly = true;
 
-
+            else NumberOnly = false;
         }
+
+
 
         /// <summary>
         /// Class Person حفظ البيانات في 
@@ -123,15 +126,22 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
 
         }
 
-        private void TxtFelter_KeyPress(object sender, KeyPressEventArgs e) //منع
+        private void TxtFelter_KeyPress(object sender, KeyPressEventArgs e) //منع ادخال احرف
         {
-            if(NumberOnly)
-               if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
-                {
-                    System.Media.SystemSounds.Hand.Play(); // Error صوت   
-                    e.Handled = true;
-                }
+            //  رجّع كل شيء لطبيعته
+            if (!NumberOnly)
+                return;
+
+            //   امنع الأحرف
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                System.Media.SystemSounds.Hand.Play(); // صوت خطأ
+                e.Handled = true;
+            }
         }
+
+      
+
 
     }
 }

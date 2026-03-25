@@ -135,6 +135,12 @@
     <Compile Include="Manage Users\FrmAdd_UpdateUser.Designer.cs">
       <DependentUpon>FrmAdd_UpdateUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Manage Users\User Control\CtrlFeltterUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Manage Users\User Control\CtrlFeltterUser.Designer.cs">
+      <DependentUpon>CtrlFeltterUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Manage Users\Users.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Manage Users\FrmAdd_UpdateUser.resx">
       <DependentUpon>FrmAdd_UpdateUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manage Users\User Control\CtrlFeltterUser.resx">
+      <DependentUpon>CtrlFeltterUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -249,7 +258,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Manage Users\User Control\" />
     <Folder Include="Manage Users\واجهات فرعية\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

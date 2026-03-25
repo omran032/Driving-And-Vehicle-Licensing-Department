@@ -242,7 +242,7 @@
             this.lblNationalNumber.Name = "lblNationalNumber";
             this.lblNationalNumber.Size = new System.Drawing.Size(40, 22);
             this.lblNationalNumber.TabIndex = 57;
-            this.lblNationalNumber.Text = "___";
+            this.lblNationalNumber.Text = "???";
             // 
             // lblEmail
             // 
@@ -251,7 +251,7 @@
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(40, 22);
             this.lblEmail.TabIndex = 56;
-            this.lblEmail.Text = "___";
+            this.lblEmail.Text = "???";
             // 
             // lblNumberPhone
             // 
@@ -260,7 +260,7 @@
             this.lblNumberPhone.Name = "lblNumberPhone";
             this.lblNumberPhone.Size = new System.Drawing.Size(40, 22);
             this.lblNumberPhone.TabIndex = 55;
-            this.lblNumberPhone.Text = "___";
+            this.lblNumberPhone.Text = "???";
             // 
             // lblFullName
             // 
@@ -269,7 +269,7 @@
             this.lblFullName.Name = "lblFullName";
             this.lblFullName.Size = new System.Drawing.Size(40, 22);
             this.lblFullName.TabIndex = 54;
-            this.lblFullName.Text = "___";
+            this.lblFullName.Text = "???";
             // 
             // lblBirthDate
             // 
@@ -278,7 +278,7 @@
             this.lblBirthDate.Name = "lblBirthDate";
             this.lblBirthDate.Size = new System.Drawing.Size(40, 22);
             this.lblBirthDate.TabIndex = 60;
-            this.lblBirthDate.Text = "___";
+            this.lblBirthDate.Text = "???";
             // 
             // lblNationalty
             // 
@@ -287,7 +287,7 @@
             this.lblNationalty.Name = "lblNationalty";
             this.lblNationalty.Size = new System.Drawing.Size(40, 22);
             this.lblNationalty.TabIndex = 59;
-            this.lblNationalty.Text = "___";
+            this.lblNationalty.Text = "???";
             // 
             // lblHousing
             // 
@@ -296,7 +296,7 @@
             this.lblHousing.Name = "lblHousing";
             this.lblHousing.Size = new System.Drawing.Size(40, 22);
             this.lblHousing.TabIndex = 58;
-            this.lblHousing.Text = "___";
+            this.lblHousing.Text = "???";
             // 
             // ctrl_InfoPerson
             // 

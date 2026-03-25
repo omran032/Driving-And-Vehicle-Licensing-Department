@@ -25,9 +25,8 @@ namespace DVLD_Management_System
             //Application.Run(new FormMain()); //Main
 
             //Application.Run(new FormPerson());
-            //Application.Run(new FormPerson());  
-            //Application.Run(new FormShowUsers());
-            Application.Run(new FrmAdd_UpdateUser());
+            Application.Run(new FormShowUsers());
+            //Application.Run(new FrmAdd_UpdateUser());
 
 
             // Application.Run(new Form1()); // Test

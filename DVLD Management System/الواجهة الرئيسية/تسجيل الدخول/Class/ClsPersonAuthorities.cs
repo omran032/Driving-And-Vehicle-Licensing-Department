@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول.Class
 {
     /// <summary>
-    ///  كلاس يقوم بعرض الواجهة حسب صلاحيات الضخص
+    ///  كلاس يقوم بعرض الواجهة حسب صلاحيات الشخص
     /// </summary>
     internal class ClsPersonAuthorities
     {

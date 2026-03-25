@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DVLD_Management_System.Manage_Users
 {
-    internal class Users
+     public class Users
     {
         public int IDUser { get; set; } //
 

@@ -53,8 +53,8 @@
             this.btnSave = new Guna.UI2.WinForms.Guna2GradientButton();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.guna2PictureBox5 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.ctrlFelterPersons = new DVLD_Management_System.Manage_Persons.User_Control.CtrlFelterPersons();
             this.ctrl_InfoPerson = new DVLD_Management_System.Manage_Persons.User_Control.ctrl_InfoPerson();
+            this.ctrlFelterPersons1 = new DVLD_Management_System.Manage_Persons.User_Control.CtrlFelterPersons();
             this.TabCtrl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -78,11 +78,11 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.ctrlFelterPersons1);
             this.tabPage1.Controls.Add(this.btnAddPerson);
             this.tabPage1.Controls.Add(this.btnNext);
-            this.tabPage1.Controls.Add(this.ctrlFelterPersons);
             this.tabPage1.Controls.Add(this.ctrl_InfoPerson);
-            this.tabPage1.Cursor = System.Windows.Forms.Cursors.No;
+            this.tabPage1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabPage1.Location = new System.Drawing.Point(4, 31);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -106,7 +106,7 @@
             this.btnAddPerson.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnAddPerson.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPerson.Image")));
             this.btnAddPerson.ImageSize = new System.Drawing.Size(40, 40);
-            this.btnAddPerson.Location = new System.Drawing.Point(721, 22);
+            this.btnAddPerson.Location = new System.Drawing.Point(721, 20);
             this.btnAddPerson.Name = "btnAddPerson";
             this.btnAddPerson.Size = new System.Drawing.Size(124, 45);
             this.btnAddPerson.TabIndex = 30;
@@ -385,17 +385,6 @@
             this.guna2PictureBox5.TabIndex = 31;
             this.guna2PictureBox5.TabStop = false;
             // 
-            // ctrlFelterPersons
-            // 
-            this.ctrlFelterPersons.BackColor = System.Drawing.Color.Transparent;
-            this.ctrlFelterPersons.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ctrlFelterPersons.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlFelterPersons.Location = new System.Drawing.Point(11, 8);
-            this.ctrlFelterPersons.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.ctrlFelterPersons.Name = "ctrlFelterPersons";
-            this.ctrlFelterPersons.Size = new System.Drawing.Size(535, 66);
-            this.ctrlFelterPersons.TabIndex = 29;
-            // 
             // ctrl_InfoPerson
             // 
             this.ctrl_InfoPerson.Cursor = System.Windows.Forms.Cursors.Default;
@@ -406,6 +395,16 @@
             this.ctrl_InfoPerson.person = null;
             this.ctrl_InfoPerson.Size = new System.Drawing.Size(795, 427);
             this.ctrl_InfoPerson.TabIndex = 28;
+            // 
+            // ctrlFelterPersons1
+            // 
+            this.ctrlFelterPersons1.BackColor = System.Drawing.Color.Transparent;
+            this.ctrlFelterPersons1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlFelterPersons1.Location = new System.Drawing.Point(6, 8);
+            this.ctrlFelterPersons1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.ctrlFelterPersons1.Name = "ctrlFelterPersons1";
+            this.ctrlFelterPersons1.Size = new System.Drawing.Size(535, 66);
+            this.ctrlFelterPersons1.TabIndex = 31;
             // 
             // FrmAdd_UpdateUser
             // 
@@ -460,9 +459,9 @@
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox2;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Manage_Persons.User_Control.ctrl_InfoPerson ctrl_InfoPerson;
-        private Manage_Persons.User_Control.CtrlFelterPersons ctrlFelterPersons;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private Guna.UI2.WinForms.Guna2GradientButton btnAddPerson;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox5;
+        private Manage_Persons.User_Control.CtrlFelterPersons ctrlFelterPersons1;
     }
 }

@@ -206,7 +206,8 @@ FETCH NEXT 50 ROWS ONLY;";
                 { "@value", value }
             };
 
-            string where;
+            string where ="";
+
             if (TypeSearch == "ID")
                 where = "where IDPerson = @value";
 
@@ -215,9 +216,6 @@ FETCH NEXT 50 ROWS ONLY;";
 
             else if (TypeSearch == "National Number")
                 where = "where [National Number] = @value";
-
-            else
-                where = "";
 
 
             string Query = $@"SELECT 
@@ -238,6 +236,56 @@ FROM Persons
             return ClsCommandDB.SelectCommand(Query , parameters);
 
         }
+
+
+        /// <summary>
+        ///  Class Person إرجاع معلومات الشخص وتخزينها داخل 
+        /// </summary>
+        /// <param name="ID">معرف الشخص</param>
+        public static Person GetPersonByID(int ID)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "@IDPerson", ID }
+            };
+
+            string query = @"SELECT 
+            IDPerson,
+            FullName,
+            Housing,
+            NumPhone,
+            Email,
+            Nationality,
+            [National Number],
+            Gender,
+            Birthdate,
+            Picture
+        FROM Persons
+        WHERE IDPerson = @IDPerson";
+
+            DataTable dt = ClsCommandDB.SelectCommand(query, parameters)  ;
+
+            if (dt.Rows.Count == 0)
+                return null;
+
+            DataRow row = dt.Rows[0];
+
+            Person person = new Person
+            {
+                IDPerson = Convert.ToInt32(row["IDPerson"]),
+                FullName = row["FullName"]?.ToString(),
+                Housing = row["Housing"]?.ToString(),
+                NumPhone = row["NumPhone"]?.ToString(),
+                Email = row["Email"]?.ToString(),
+                Nationality = row["Nationality"]?.ToString(),
+                National_Number = row["National Number"]?.ToString(),
+                Gender = row["Gender"]?.ToString(),
+                Birthdate = Convert.ToDateTime(row["Birthdate"]),
+                Picture = row["Picture"] as byte[]
+            };
+            return person;
+        }
+
 
 
         #endregion

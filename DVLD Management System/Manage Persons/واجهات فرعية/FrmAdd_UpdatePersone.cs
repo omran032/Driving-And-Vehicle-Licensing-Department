@@ -61,10 +61,6 @@ namespace DVLD_Management_System.Manage_Persons.واجهات_فرعية
         {
             onEventRefreachData?.Invoke();
         }
-
-
-     
-
-      
+ 
     }
 }
