@@ -3,6 +3,7 @@ using DVLD_Management_System.Class.Class;
 using DVLD_Management_System.Manage_Persons.Class;
 using DVLD_Management_System.Manage_Users;
 using DVLD_Management_System.Manage_Users.Class;
+using DVLD_Management_System.Manage_Users.User_Control;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -91,6 +92,9 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
         }
 
         Users users = new Users();
+        Person person = new Person();
+
+
         /// <summary>
         /// تخزين المعلومات
         /// </summary>
@@ -104,6 +108,14 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
             users.Status_Account = row.Cells["حالة الحساب"].Value.ToString();
             users.Authorities    = row.Cells["الصلاحيات"].Value.ToString();
             users.Role           = row.Cells["الدور"].Value.ToString();
+        }
+
+        /// <summary>
+        /// Person إحضار معلومات ال
+        /// </summary>
+        void InfoPerson()
+        {
+            person =  Cls_CMD_PresonsDB.GetPersonByID(users.IDPerson);
         }
 
         private void PicNext_Click(object sender, EventArgs e) // زر عرض 50 الصف الجدد
@@ -144,6 +156,10 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
         private void CTMS_btnShowInfo_Click(object sender, EventArgs e) //عرض المعلومات
         {
             InformationRow();
+            InfoPerson();
+
+            FrmInfoUser infoUser = new FrmInfoUser(users, person);
+            MyTools.ShowForm(infoUser);
         }
 
         private void CTMS_btnUpdate_Click(object sender, EventArgs e) // تعديل بيانات المستخدم
@@ -159,11 +175,25 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
         private void toolStripMenuItem1_Click(object sender, EventArgs e) // تعديل كلمة السر
         {
             InformationRow();
+            InfoPerson();
+
+            FrmChangePassword changePassword = new FrmChangePassword(users, person);
+            MyTools.ShowForm(changePassword);
         }
 
         private void CTMS_btnDelete_Click(object sender, EventArgs e) // حذف المستخدم
         {
             InformationRow();
+            DialogResult = MessageBox.Show("هل انت متأكد من حذف المستخدم ؟", "تأكيد", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            int result = 0;
+
+            if(DialogResult == DialogResult.OK)
+                result = ClsCMD_UserDB.DeleteUser(users.IDUser);
+
+            //إذا نحذف ...حدث القائمة
+            if (result == 1)
+                LoadData();
 
         }
 

@@ -129,17 +129,35 @@
       <DependentUpon>FrmShowPerson.cs</DependentUpon>
     </Compile>
     <Compile Include="Manage Users\Class\ClsCMD_UserDB.cs" />
-    <Compile Include="Manage Users\FrmAdd_UpdateUser.cs">
+    <Compile Include="Manage Users\واجهات فرعية\FrmAdd_UpdateUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Manage Users\FrmAdd_UpdateUser.Designer.cs">
+    <Compile Include="Manage Users\واجهات فرعية\FrmAdd_UpdateUser.Designer.cs">
       <DependentUpon>FrmAdd_UpdateUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Manage Users\واجهات فرعية\FrmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Manage Users\واجهات فرعية\FrmChangePassword.Designer.cs">
+      <DependentUpon>FrmChangePassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Manage Users\User Control\CtrlFeltterUser.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Manage Users\User Control\CtrlFeltterUser.Designer.cs">
       <DependentUpon>CtrlFeltterUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Manage Users\User Control\CtrlInfoUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Manage Users\User Control\CtrlInfoUser.Designer.cs">
+      <DependentUpon>CtrlInfoUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Manage Users\واجهات فرعية\FrmInfoUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Manage Users\واجهات فرعية\FrmInfoUser.Designer.cs">
+      <DependentUpon>FrmInfoUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Manage Users\Users.cs" />
     <Compile Include="Program.cs" />
@@ -191,11 +209,20 @@
     <EmbeddedResource Include="Manage Persons\واجهات فرعية\FrmShowPerson.resx">
       <DependentUpon>FrmShowPerson.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Manage Users\FrmAdd_UpdateUser.resx">
+    <EmbeddedResource Include="Manage Users\واجهات فرعية\FrmAdd_UpdateUser.resx">
       <DependentUpon>FrmAdd_UpdateUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manage Users\واجهات فرعية\FrmChangePassword.resx">
+      <DependentUpon>FrmChangePassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Manage Users\User Control\CtrlFeltterUser.resx">
       <DependentUpon>CtrlFeltterUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manage Users\User Control\CtrlInfoUser.resx">
+      <DependentUpon>CtrlInfoUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manage Users\واجهات فرعية\FrmInfoUser.resx">
+      <DependentUpon>FrmInfoUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -257,9 +284,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Manage Users\واجهات فرعية\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.CV.4.1.1.3497\build\EMGU.CV.targets" Condition="Exists('..\packages\EMGU.CV.4.1.1.3497\build\EMGU.CV.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

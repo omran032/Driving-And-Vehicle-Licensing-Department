@@ -180,21 +180,13 @@ namespace DVLD_Management_System.Class.Class_DB
 
 
 
-
-
-
-
-
-
-
-
-
         /// <summary>
         /// التحقق من المستخدم عند تسجيل الدخول
         /// </summary>
         public static bool IsExistUser(string username, string password , string Role)
         {
-             string p    = ReturnEncrptionPassword(password);
+            password = ReturnEncrptionPassword(password);
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -208,7 +200,7 @@ namespace DVLD_Management_System.Class.Class_DB
 
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@Username", username);
-                    command.Parameters.AddWithValue("@Password", p);
+                    command.Parameters.AddWithValue("@Password", password);
                     command.Parameters.AddWithValue("@Role", Role);
 
                     connection.Open();

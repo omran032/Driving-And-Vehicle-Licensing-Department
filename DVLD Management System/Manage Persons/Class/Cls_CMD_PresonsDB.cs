@@ -141,7 +141,6 @@ namespace DVLD_Management_System.Manage_Persons.Class
             return ClsCommandDB.ExecuteScalar_Command(Query); ;
         }
 
-         
 
         /// <summary>
         ///  عرض 50 شخص الجدد او السابقين
@@ -287,6 +286,7 @@ FROM Persons
         }
 
 
+      
 
         #endregion
 

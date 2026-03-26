@@ -25,15 +25,27 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
         public ctrl_InfoPerson(Person person_)
         {
             InitializeComponent();
+
             person = person_;
 
             LoadData(person_);
         }
         public int PersonID
         {
-            get { return int.Parse(lbl_IDPerson.Text); }
-            set { lbl_IDPerson.Text = value.ToString(); }
+            get
+            {
+                int id;
+                if (int.TryParse(lbl_IDPerson.Text, out id))
+                    return id;
+
+                return 0; // قيمة افتراضية
+            }
+            set
+            {
+                lbl_IDPerson.Text = value.ToString();
+            }
         }
+
 
         public Person person { set; get; }
 

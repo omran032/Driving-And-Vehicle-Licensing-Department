@@ -41,17 +41,17 @@
             this.lblNumberUsers = new System.Windows.Forms.Label();
             this.ElipseDGV = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.MyContextMenuStrip = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
+            this.CTMS_btnShowInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.CTMS_btnUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.CTMS_ChangePassword = new System.Windows.Forms.ToolStripMenuItem();
+            this.CTMS_btnDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.CTMS_btnSendEmail = new System.Windows.Forms.ToolStripMenuItem();
+            this.CTMS_btnSend = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PicNext = new System.Windows.Forms.PictureBox();
             this.PicPrevious = new System.Windows.Forms.PictureBox();
             this.btnAdd = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.CTMS_btnShowInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.CTMS_btnUpdate = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CTMS_btnDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.CTMS_btnSendEmail = new System.Windows.Forms.ToolStripMenuItem();
-            this.CTMS_btnSend = new System.Windows.Forms.ToolStripMenuItem();
             this.ctrlFeltterUser1 = new DVLD_Management_System.Manage_Users.User_Control.CtrlFeltterUser();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.MyContextMenuStrip.SuspendLayout();
@@ -75,7 +75,7 @@
             // 
             this.lblNumberInfo.AutoSize = true;
             this.lblNumberInfo.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumberInfo.Location = new System.Drawing.Point(571, 131);
+            this.lblNumberInfo.Location = new System.Drawing.Point(571, 127);
             this.lblNumberInfo.Name = "lblNumberInfo";
             this.lblNumberInfo.Size = new System.Drawing.Size(24, 26);
             this.lblNumberInfo.TabIndex = 18;
@@ -179,7 +179,7 @@
             this.MyContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CTMS_btnShowInfo,
             this.CTMS_btnUpdate,
-            this.toolStripMenuItem1,
+            this.CTMS_ChangePassword,
             this.CTMS_btnDelete,
             this.toolStripSeparator1,
             this.CTMS_btnSendEmail,
@@ -196,10 +196,65 @@
             this.MyContextMenuStrip.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             this.MyContextMenuStrip.Size = new System.Drawing.Size(204, 166);
             // 
+            // CTMS_btnShowInfo
+            // 
+            this.CTMS_btnShowInfo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CTMS_btnShowInfo.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnShowInfo.Image")));
+            this.CTMS_btnShowInfo.Name = "CTMS_btnShowInfo";
+            this.CTMS_btnShowInfo.Size = new System.Drawing.Size(203, 26);
+            this.CTMS_btnShowInfo.Text = "Display Information";
+            this.CTMS_btnShowInfo.Click += new System.EventHandler(this.CTMS_btnShowInfo_Click);
+            // 
+            // CTMS_btnUpdate
+            // 
+            this.CTMS_btnUpdate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CTMS_btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnUpdate.Image")));
+            this.CTMS_btnUpdate.Name = "CTMS_btnUpdate";
+            this.CTMS_btnUpdate.Size = new System.Drawing.Size(203, 26);
+            this.CTMS_btnUpdate.Text = "Update";
+            this.CTMS_btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.CTMS_btnUpdate.Click += new System.EventHandler(this.CTMS_btnUpdate_Click);
+            // 
+            // CTMS_ChangePassword
+            // 
+            this.CTMS_ChangePassword.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CTMS_ChangePassword.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_ChangePassword.Image")));
+            this.CTMS_ChangePassword.Name = "CTMS_ChangePassword";
+            this.CTMS_ChangePassword.Size = new System.Drawing.Size(203, 26);
+            this.CTMS_ChangePassword.Text = "Change Password";
+            this.CTMS_ChangePassword.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.CTMS_ChangePassword.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // CTMS_btnDelete
+            // 
+            this.CTMS_btnDelete.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CTMS_btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnDelete.Image")));
+            this.CTMS_btnDelete.Name = "CTMS_btnDelete";
+            this.CTMS_btnDelete.Size = new System.Drawing.Size(203, 26);
+            this.CTMS_btnDelete.Text = "Delete";
+            this.CTMS_btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.CTMS_btnDelete.Click += new System.EventHandler(this.CTMS_btnDelete_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(200, 6);
+            // 
+            // CTMS_btnSendEmail
+            // 
+            this.CTMS_btnSendEmail.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CTMS_btnSendEmail.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnSendEmail.Image")));
+            this.CTMS_btnSendEmail.Name = "CTMS_btnSendEmail";
+            this.CTMS_btnSendEmail.Size = new System.Drawing.Size(203, 26);
+            this.CTMS_btnSendEmail.Text = "Send Email";
+            // 
+            // CTMS_btnSend
+            // 
+            this.CTMS_btnSend.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CTMS_btnSend.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnSend.Image")));
+            this.CTMS_btnSend.Name = "CTMS_btnSend";
+            this.CTMS_btnSend.Size = new System.Drawing.Size(203, 26);
+            this.CTMS_btnSend.Text = "Call";
             // 
             // pictureBox1
             // 
@@ -215,7 +270,7 @@
             // 
             this.PicNext.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PicNext.Image = ((System.Drawing.Image)(resources.GetObject("PicNext.Image")));
-            this.PicNext.Location = new System.Drawing.Point(621, 123);
+            this.PicNext.Location = new System.Drawing.Point(621, 119);
             this.PicNext.Name = "PicNext";
             this.PicNext.Size = new System.Drawing.Size(33, 34);
             this.PicNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -227,7 +282,7 @@
             // 
             this.PicPrevious.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PicPrevious.Image = ((System.Drawing.Image)(resources.GetObject("PicPrevious.Image")));
-            this.PicPrevious.Location = new System.Drawing.Point(509, 123);
+            this.PicPrevious.Location = new System.Drawing.Point(509, 119);
             this.PicPrevious.Name = "PicPrevious";
             this.PicPrevious.Size = new System.Drawing.Size(33, 34);
             this.PicPrevious.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -257,69 +312,14 @@
             this.btnAdd.Text = "إضافة";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // CTMS_btnShowInfo
-            // 
-            this.CTMS_btnShowInfo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CTMS_btnShowInfo.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnShowInfo.Image")));
-            this.CTMS_btnShowInfo.Name = "CTMS_btnShowInfo";
-            this.CTMS_btnShowInfo.Size = new System.Drawing.Size(203, 26);
-            this.CTMS_btnShowInfo.Text = "Display Information";
-            this.CTMS_btnShowInfo.Click += new System.EventHandler(this.CTMS_btnShowInfo_Click);
-            // 
-            // CTMS_btnUpdate
-            // 
-            this.CTMS_btnUpdate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CTMS_btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnUpdate.Image")));
-            this.CTMS_btnUpdate.Name = "CTMS_btnUpdate";
-            this.CTMS_btnUpdate.Size = new System.Drawing.Size(203, 26);
-            this.CTMS_btnUpdate.Text = "Update";
-            this.CTMS_btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.CTMS_btnUpdate.Click += new System.EventHandler(this.CTMS_btnUpdate_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(203, 26);
-            this.toolStripMenuItem1.Text = "Change Password";
-            this.toolStripMenuItem1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // CTMS_btnDelete
-            // 
-            this.CTMS_btnDelete.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CTMS_btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnDelete.Image")));
-            this.CTMS_btnDelete.Name = "CTMS_btnDelete";
-            this.CTMS_btnDelete.Size = new System.Drawing.Size(203, 26);
-            this.CTMS_btnDelete.Text = "Delete";
-            this.CTMS_btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.CTMS_btnDelete.Click += new System.EventHandler(this.CTMS_btnDelete_Click);
-            // 
-            // CTMS_btnSendEmail
-            // 
-            this.CTMS_btnSendEmail.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CTMS_btnSendEmail.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnSendEmail.Image")));
-            this.CTMS_btnSendEmail.Name = "CTMS_btnSendEmail";
-            this.CTMS_btnSendEmail.Size = new System.Drawing.Size(203, 26);
-            this.CTMS_btnSendEmail.Text = "Send Email";
-            // 
-            // CTMS_btnSend
-            // 
-            this.CTMS_btnSend.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CTMS_btnSend.Image = ((System.Drawing.Image)(resources.GetObject("CTMS_btnSend.Image")));
-            this.CTMS_btnSend.Name = "CTMS_btnSend";
-            this.CTMS_btnSend.Size = new System.Drawing.Size(203, 26);
-            this.CTMS_btnSend.Text = "Call";
-            // 
             // ctrlFeltterUser1
             // 
             this.ctrlFeltterUser1.BackColor = System.Drawing.Color.Transparent;
             this.ctrlFeltterUser1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlFeltterUser1.Location = new System.Drawing.Point(12, 116);
+            this.ctrlFeltterUser1.Location = new System.Drawing.Point(12, 115);
             this.ctrlFeltterUser1.Margin = new System.Windows.Forms.Padding(4);
             this.ctrlFeltterUser1.Name = "ctrlFeltterUser1";
-            this.ctrlFeltterUser1.Size = new System.Drawing.Size(485, 43);
+            this.ctrlFeltterUser1.Size = new System.Drawing.Size(485, 46);
             this.ctrlFeltterUser1.TabIndex = 27;
             // 
             // FormShowUsers
@@ -368,7 +368,7 @@
         private Guna.UI2.WinForms.Guna2ContextMenuStrip MyContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem CTMS_btnShowInfo;
         private System.Windows.Forms.ToolStripMenuItem CTMS_btnUpdate;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem CTMS_ChangePassword;
         private System.Windows.Forms.ToolStripMenuItem CTMS_btnDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem CTMS_btnSendEmail;

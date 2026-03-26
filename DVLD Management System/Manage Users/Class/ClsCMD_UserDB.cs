@@ -74,13 +74,14 @@ FETCH NEXT 50 ROWS ONLY;";
         /// <returns> بعد الإضافة  ID User </returns>
         public static int AddUser(string UserName ,  string Password , string Status_Account , int PersonID)
         {
+            Password = ClsCommandDB.ReturnEncrptionPassword(Password); // تشغير كلمة المرور 
+
             string Query = @"
         INSERT INTO Users (Username, Password, IDPerson, [Status Account] ,Authorities , Role)
         VALUES (@UserName, @Password, @PersonID, @Status_Account , @Authorities ,@Role );
 
         SELECT SCOPE_IDENTITY();";
 
-            Password = ClsCommandDB.ReturnEncrptionPassword(Password); // تشغير كلمة المرور 
 
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
@@ -127,17 +128,28 @@ FETCH NEXT 50 ROWS ONLY;";
                 Where = @"where [Status Account] = @value";
 
 
-            string Query = $@"select IDUser as [ID] ,
-       UserName as [اسم المستخدم] ,
-       [Status Account] as [حالة لحساب]  
-       from users {Where}";
+            string Query = $@"SELECT  
+    IDUser as[ID],
+    IDPerson as [معرف الشخص],
+    UserName as [أسم المستخدم],
+    [Status Account] as [حالة الحساب],
+    Authorities as [الصلاحيات],
+    Role as [الدور]
+FROM Users {Where}";
 
             return ClsCommandDB.SelectCommand(Query, parameters);
         }
 
-       
 
 
+        /// <summary>
+        ///  User تعديل معلومات ال
+        /// </summary>
+        /// <param name="IDUser"></param>
+        /// <param name="UserName"></param>
+        /// <param name="Password"></param>
+        /// <param name="Status_Account"></param>
+        /// <param name="PersonID"></param>
         public static void UpdateUser(int IDUser , string UserName, string Password, string Status_Account, int PersonID)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>()
@@ -168,6 +180,80 @@ WHERE
                 MessageBox.Show("تم تعديل المستخدم بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 MessageBox.Show("لم يتم تعديل المستخدم ", "فشل العملية", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
+        /// تغيير كلمة المرور
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="Password"></param>
+        public static void UpdatePassword(int ID, string Password)
+        {
+            // تشفير الكلمة قبل تخزينها
+            Password = ClsCommandDB.ReturnEncrptionPassword(Password);
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "@Password", Password } ,
+                {  "@IDUser" , ID       }
+            };
+
+            string Query = $@"UPDATE Users
+                              SET Password = @Password
+                              WHERE IDUser = @IDUser;";
+
+            object result = ClsCommandDB.ExecuteNonQuery_Command(Query, parameters , false);
+
+            if (result != null)
+                MessageBox.Show("تم تعديل كلمة السر الخاصة بك", "نجاح العملية", MessageBoxButtons.OK,  MessageBoxIcon.Information);
+
+            else
+                MessageBox.Show("لم يتم تعديل كلمة المرور", " لم تكتمل العملية", MessageBoxButtons.OK,  MessageBoxIcon.Warning);
+        }
+
+        /// <summary>
+        /// User حذف 
+        /// </summary>
+        /// <param name="ID"></param>
+        public static int DeleteUser(int ID)
+        {
+            string Query = "DeleteUser";
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+               { "@ID", ID }
+            };
+
+            object result = ClsCommandDB.ExecuteScalar_Command(Query, parameters, true);
+
+            if (result == null)
+            {
+                MessageBox.Show("حدث خطأ غير متوقع", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
+
+            int value = Convert.ToInt32(result);
+
+            switch (value)
+            {
+                case 1:
+                    MessageBox.Show("تم حذف المستخدم", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+
+                case 0:
+                    MessageBox.Show("المستخدم غير موجود", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    break;
+
+                case -1:
+                    MessageBox.Show("لا يمكن حذف هذا المستخدم لأنه مرتبط ببيانات أخرى",
+                                    "عملية غير مسموحة",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                    break;
+
+            }
+            return value;
+
         }
 
 
