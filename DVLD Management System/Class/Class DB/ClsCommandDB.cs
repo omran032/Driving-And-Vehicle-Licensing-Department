@@ -191,7 +191,7 @@ namespace DVLD_Management_System.Class.Class_DB
             {
                 using (SqlConnection connection = new SqlConnection(ConnectionString))
                 {
-                    string query = @"SELECT  Authorities, IDUser, IDPerson 
+                    string query = @"SELECT  Authorities, IDUser, IDPerson ,[Status Account]
                      FROM Users 
                      WHERE Username = @Username 
                      AND Password = @Password 
@@ -210,11 +210,12 @@ namespace DVLD_Management_System.Class.Class_DB
                         if (reader.Read())   // يعني وجد صف واحد على الأقل
                         {
                             // حفظ القيم
-                            ClassUser.Authorities = reader["Authorities"].ToString();
-                            ClassUser.IDUser = Convert.ToInt32(reader["IDUser"]);
-                            ClassUser.IDPerson = Convert.ToInt32(reader["IDPerson"]);
+                            ClassUser.Authorities   = reader["Authorities"].ToString();
+                            ClassUser.IDUser        = Convert.ToInt32(reader["IDUser"]);
+                            ClassUser.IDPerson      = Convert.ToInt32(reader["IDPerson"]);
+                            ClassUser.StatusAccount = reader["Status Account"].ToString();  
                             ClassUser.UserName = username;
-                            ClassUser.Role = Role;
+                            ClassUser.Role     = Role;
                             return true;
                         }
                         else

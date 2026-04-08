@@ -21,11 +21,11 @@ namespace DVLD_Management_System
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new FormLogin()); // Log
-            //Application.Run(new FormMain()); //Main
+            //Application.Run(new FormLogin()); // Log (Main)
+            Application.Run(new FormMain()); //Main
 
             //Application.Run(new FormPerson());
-            Application.Run(new FormShowUsers());
+            //Application.Run(new FormShowUsers());
             //Application.Run(new FrmAdd_UpdateUser());
 
 

@@ -35,6 +35,9 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
             }
         }
 
+       public static string StatusAccount { get; set;  } // حالة الحساب 
+
+
 
         static string userName_;
 
@@ -59,6 +62,8 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
             get { return role_; }
             set { role_ = value; }
         }
+
+
 
     }
 }

@@ -33,7 +33,7 @@ namespace DVLD_Management_System.Manage_Users
             else
             {
                 user = users_;
-                LoadUserData();
+                LoadUserDataInUpdate();
             }
 
             EventFilter();
@@ -64,15 +64,15 @@ namespace DVLD_Management_System.Manage_Users
                 // Person  إحضار معلومات ال
                 ctrlFelterPersons1.EventFelterPersons += GetPerson;
 
-                //  (الكل) Combox  إخفاء خيار في   
-                ctrlFelterPersons1.HighFelterAll();
+            //   Combox  إخفاء خيار (الكل) في   
+            ctrlFelterPersons1.HighFelterAll();
             
         }
 
         /// <summary>
         /// تحميل بيانات المستخدم عند التعديل
         /// </summary>
-        void LoadUserData()
+        void LoadUserDataInUpdate()
         {
             lblTitle.Text = "Update User";
             this.Text = "Update User";
@@ -176,7 +176,7 @@ namespace DVLD_Management_System.Manage_Users
                 Mode = "Update";
 
                 // 4) تحميل البيانات
-                LoadUserData();
+                LoadUserDataInUpdate();
             }
             else // Update
             {

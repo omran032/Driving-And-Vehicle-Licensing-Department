@@ -108,6 +108,9 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
 
         void LoadData()
         {
+            //ContextMenuStrip فتظهر Row تفعيل جدث الضغط كلك يمين على ال
+            ControlHelper.EnableRightClickSelection(DGV, MyContextMenuStrip, RowClicked);
+
             // عرض اول 50 شخص
             DGV.DataSource = Cls_CMD_PresonsDB.Next50Person(IgnoreRow);
 
@@ -138,35 +141,23 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
         }
 
         /// <summary>
-        /// 
+        /// تنفذ بعد الفلترة 
         /// </summary>
-        /// <param name="person">شكليا فقط</param>
-        void ShowFelter( ) // تنفذ بعد الفلترة
+        void ShowFelter( ) 
         {
             DGV.DataSource = ctrlFelterPersons.dataTablePerson;
         }
 
-        private void DGV_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e) // حدث تحديد الصف بالماوس
+        /// <summary>
+        /// EnableRightClickSelection مثود لارجاع رقم الصف ..يستخدم مع حدث
+        /// </summary>
+        private void RowClicked(int row)
         {
-            if (e.Button == MouseButtons.Right && e.RowIndex >= 0)
-            {
-                DGV.ClearSelection();
-                DGV.Rows[e.RowIndex].Selected = true;
-
-                currentRow = e.RowIndex; // تخزين رقم الصف
-
-                DGV.ClearSelection();
-                DGV.Rows[e.RowIndex].Selected = true;
-                DGV.CurrentCell = DGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
-                // إظهار القائمة
-                DGV.ContextMenuStrip = MyContextMenuStrip;
-            }
-            else
-                DGV.ContextMenuStrip = null;
+            currentRow = row;
         }
 
 
+       
         Person person = new Person(); // معلومات الشخص
 
         /// <summary>
@@ -187,8 +178,6 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
             person.Birthdate  = Convert.ToDateTime(row.Cells["الميلاد"].Value);
             person.Picture  =        row.Cells["الصورة"].Value as byte[];
 
-
-           // MessageBox.Show(person.IDPerson + "");
         }
   
       
