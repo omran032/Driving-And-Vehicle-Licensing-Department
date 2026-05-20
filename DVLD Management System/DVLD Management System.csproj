@@ -91,6 +91,18 @@
     <Compile Include="Applications\Driver Licenses Services\New Driving License\Local License\واجهات\FrmAddUpdateApplication.Designer.cs">
       <DependentUpon>FrmAddUpdateApplication.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\Manage Application\Local Driving license Application\User Control\CtrlLicenseAppFelter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Applications\Manage Application\Local Driving license Application\User Control\CtrlLicenseAppFelter.Designer.cs">
+      <DependentUpon>CtrlLicenseAppFelter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\Manage Application\Local Driving license Application\واجهات\FrmLocalDrivingLicenseApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Manage Application\Local Driving license Application\واجهات\FrmLocalDrivingLicenseApplication.Designer.cs">
+      <DependentUpon>FrmLocalDrivingLicenseApplication.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applications\Manage Application Type\Class\ClsCMD_ApplicationDB.cs" />
     <Compile Include="Applications\Manage Application Type\Class\InfoApplicationType.cs" />
     <Compile Include="Applications\Manage Application Type\واجهات\FormManageApplicationType.cs">
@@ -233,6 +245,12 @@
     <EmbeddedResource Include="Applications\Driver Licenses Services\New Driving License\Local License\واجهات\FrmAddUpdateApplication.resx">
       <DependentUpon>FrmAddUpdateApplication.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Manage Application\Local Driving license Application\User Control\CtrlLicenseAppFelter.resx">
+      <DependentUpon>CtrlLicenseAppFelter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Manage Application\Local Driving license Application\واجهات\FrmLocalDrivingLicenseApplication.resx">
+      <DependentUpon>FrmLocalDrivingLicenseApplication.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Applications\Manage Application Type\واجهات\FormManageApplicationType.resx">
       <DependentUpon>FormManageApplicationType.cs</DependentUpon>
     </EmbeddedResource>
@@ -339,8 +357,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Applications\Manage Application\Class\" />
-    <Folder Include="Applications\Manage Application\واجهات\" />
+    <Folder Include="Applications\Manage Application\Local Driving license Application\Class\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.CV.4.1.1.3497\build\EMGU.CV.targets" Condition="Exists('..\packages\EMGU.CV.4.1.1.3497\build\EMGU.CV.targets')" />

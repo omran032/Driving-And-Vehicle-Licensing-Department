@@ -52,6 +52,26 @@ namespace DVLD_Management_System.Class.Class
             }
         }
 
+        /// <summary>
+        /// تفعيل أو إلغاء تفعيل منع إدخال الأحرف في TextBox، 
+        /// بحيث يسمح فقط بالأرقام عند التفعيل.
+        /// </summary>
+        public static void EnableNumbersOnly(Control txt, bool enable)
+        {
+            txt.KeyPress -= Txt_KeyPress; // إزالة أي حدث سابق
+            if (enable)
+                txt.KeyPress += Txt_KeyPress; // إضافة الحدث فقط إذا enable = true
+        }
+        // حدث عند الكتابة
+        private static void Txt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                System.Media.SystemSounds.Hand.Play();
+                e.Handled = true;
+            }
+        }
+
 
     }
 }

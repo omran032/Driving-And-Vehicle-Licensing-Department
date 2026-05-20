@@ -93,5 +93,11 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
             MyTools.ShowForm(updateApplication);
 
         }
+
+        private void ToolS_LocalDrivingLicenseApplication_Click(object sender, EventArgs e) // طلبات الرخص المحلية
+        {
+            FrmLocalDrivingLicenseApplication localDrivingLicenseApplication = new FrmLocalDrivingLicenseApplication();
+            MyTools.ShowForm(localDrivingLicenseApplication);
+        }
     }
 }

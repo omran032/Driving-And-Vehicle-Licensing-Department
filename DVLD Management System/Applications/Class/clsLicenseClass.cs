@@ -77,5 +77,86 @@ namespace DVLD_Management_System.Applications.Driver_Licenses_Services.New_Drivi
             return ClsCommandDB.SelectCommand(Query);
         }
 
+
+        /// <summary>
+        ///  يقوم بـ عرض ( كل طلبات ) الرخص المحلية مع معلومات الشخص والفئة وعدد الاختبارات الناجحة.
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetLocalLicenseRequests()
+        {
+            // View يجب تحويله ل 
+            string Query = $@"SELECT * from GetLocalLicenseRequests_View";
+
+            return ClsCommandDB.SelectCommand(Query);
+        }
+
+
+
+        /// <summary>
+        /// الشخص National lNumber فلترة  طلبات الرخص المحلية بوساطة 
+        /// </summary>
+        public static DataTable FelterLocalLicenseRequestsByNationalNum(int NationalNum)
+        {
+            Dictionary<string, object> Parameters = new Dictionary<string, object>()
+            {
+                {"@NationalNum" ,NationalNum }
+            };
+
+            string Query = $@"SELECT * from GetLocalLicenseRequests_View 
+                            where [National Number] = @NationalNum ";
+
+            return ClsCommandDB.SelectCommand(Query, Parameters);
+        }
+
+        /// <summary>
+        /// ( رقم الطلب )  RequestID فلترة  طلبات الرخص المحلية بوساطة 
+        /// </summary>
+        public static DataTable FelterLocalLicenseRequestsByRequestID(int RequestID)
+        {
+            Dictionary<string, object> Parameters = new Dictionary<string, object>()
+            {
+                {"@RequestID" ,RequestID }
+            };
+
+            string Query = $@"SELECT * from GetLocalLicenseRequests_View 
+                            where [Request ID] = @RequestID ";
+
+            return ClsCommandDB.SelectCommand(Query, Parameters);
+        }
+
+        /// <summary>
+        /// ( اسم الشخص الكامل ) FullName فلترة  طلبات الرخص المحلية بوساطة 
+        /// </summary>
+        public static DataTable FelterLocalLicenseRequestsByFullNamePerson(string FullNamePerson)
+        {
+            Dictionary<string, object> Parameters = new Dictionary<string, object>()
+            {
+                {"@FullNamePerson" ,FullNamePerson }
+            };
+
+            string Query = $@"SELECT * from GetLocalLicenseRequests_View 
+                            where FullName = @FullNamePerson ";
+
+            return ClsCommandDB.SelectCommand(Query, Parameters);
+        }
+
+        /// <summary>
+        /// ( حالة الطلب ) StatusRequest فلترة  طلبات الرخص المحلية بوساطة 
+        /// </summary>
+        public static DataTable FelterLocalLicenseRequestsByStatusRequest(int StatusRequest)
+        {
+            string Status = StatusRequest == 1 ? "" : "";
+
+            Dictionary<string, object> Parameters = new Dictionary<string, object>()
+            {
+                {"@Status" ,Status }
+            };
+
+            string Query = $@"SELECT * from GetLocalLicenseRequests_View 
+                            where Status = @Status ";
+
+            return ClsCommandDB.SelectCommand(Query, Parameters);
+        }
+
     }
 }
