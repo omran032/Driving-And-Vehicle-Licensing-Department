@@ -33,7 +33,7 @@ namespace DVLD.Applications.LocalDrivingLicense
 
         CancellationTokenSource cts;
 
-        private async void TxtFelter_TextChanged(object sender, EventArgs e)// TextBox  عند تغيير النص في العنصر
+        private async void TxtFelter_TextChanged_1(object sender, EventArgs e) // TextBox  عند تغيير النص في العنصر
         {
             cts?.Cancel(); // إلغاء أي عملية سابقة
             cts = new CancellationTokenSource();
@@ -50,12 +50,12 @@ namespace DVLD.Applications.LocalDrivingLicense
                 switch (TypeFelter)
                 {
                     case "request id":
-                        int ID = text !="" ? int.Parse(text) : 0;
+                        int ID = text != "" ? int.Parse(text) : 0;
                         DataTableUser = clsLicenseClass.FelterLocalLicenseRequestsByRequestID(ID);
                         break;
 
                     case "national number":
-                        int NationaNum = text != "" ? int.Parse(text) : 0;
+                        string NationaNum = text != "" ? text : "0";
                         DataTableUser = clsLicenseClass.FelterLocalLicenseRequestsByNationalNum(NationaNum);
                         break;
 
@@ -76,33 +76,32 @@ namespace DVLD.Applications.LocalDrivingLicense
             }
         }
 
-        string TypeFelter;
 
-        private void ComboFelter_SelectedIndexChanged(object sender, EventArgs e) // Combox Filter
+
+        string TypeFelter;
+   
+        private void ComboxFelter_SelectedIndexChanged(object sender, EventArgs e)  // Combox Filter
         {
             TxtFelter.Text = null;
             TypeFelter = ComboxFelter.Text.Trim().ToLower();
 
-            TxtFelter.Enabled = false; // القيمة الافتراضية
-            ControlHelper.EnableNumbersOnly(TxtFelter, true);
-
+            TxtFelter.Enabled = true; // القيمة الافتراضية
+            ControlHelper.EnableNumbersOnly(TxtFelter, false);
             switch (TypeFelter)
             {
-                case "non":
-                    TxtFelter.Enabled = false;
+                case "none":
                     DataTableUser = clsLicenseClass.GetLocalLicenseRequests();
                     EventShowFelterUser?.Invoke(DataTableUser);
                     break;
 
                 case "request id":
-                case "national number":
-                       TxtFelter.Enabled = true;
-                       ControlHelper.EnableNumbersOnly(TxtFelter, false);
+              //  case "national number":
+                    TxtFelter.Enabled = true;
+                    ControlHelper.EnableNumbersOnly(TxtFelter, true);
                     break;
+ 
             }
-
-
         }
-
     }
+
 }

@@ -95,7 +95,7 @@ namespace DVLD_Management_System.Applications.Driver_Licenses_Services.New_Drivi
         /// <summary>
         /// الشخص National lNumber فلترة  طلبات الرخص المحلية بوساطة 
         /// </summary>
-        public static DataTable FelterLocalLicenseRequestsByNationalNum(int NationalNum)
+        public static DataTable FelterLocalLicenseRequestsByNationalNum(string NationalNum)
         {
             Dictionary<string, object> Parameters = new Dictionary<string, object>()
             {

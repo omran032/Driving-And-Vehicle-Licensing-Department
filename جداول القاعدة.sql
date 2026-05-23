@@ -71,6 +71,16 @@ ADD CONSTRAINT FK_Requests_RequestTypes
 FOREIGN KEY ([RequestTypeID]) REFERENCES RequestTypes([RequestTypeID]);
 
 
+--  إضافة عمود لمعرفة الموظف الذي قام باضافة الطلب
+
+ALTER TABLE Requests
+ADD CreateByUserID INT NULL;
+
+ALTER TABLE Requests
+ADD CONSTRAINT FK_Requests_Users
+FOREIGN KEY (CreateByUserID) REFERENCES Users(IDUser);
+
+
 
 -- الفحوصات
 CREATE TABLE [dbo].Tests
@@ -99,6 +109,13 @@ ADD CONSTRAINT FK_Requests_TestTypes
 FOREIGN KEY ([TestTypeID]) REFERENCES TestTypes([TestTypeID]);
 
  
+ --  إضافة عمود لمعرفة الموظف الذي قام باضافة الاختبار
+ALTER TABLE Tests
+ADD CreateByUserID INT NULL;
+
+ALTER TABLE Tests
+ADD CONSTRAINT FK_Tests_Users
+FOREIGN KEY (CreateByUserID) REFERENCES Users(IDUser);
 
 
 

@@ -47,7 +47,7 @@ namespace DVLD_Management_System.Class.Class_DB
 
         public static string ConnectionString = $@"
             Data Source=(LocalDB)\MSSQLLocalDB;
-            AttachDbFilename=""{dbPath}"";
+            AttachDbFilename= {dbPath};
             Integrated Security=True;
             Connect Timeout=30; ";
     }

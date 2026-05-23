@@ -64,6 +64,7 @@
             this.ComboxFelter.Name = "ComboxFelter";
             this.ComboxFelter.Size = new System.Drawing.Size(245, 36);
             this.ComboxFelter.TabIndex = 1;
+            this.ComboxFelter.SelectedIndexChanged += new System.EventHandler(this.ComboxFelter_SelectedIndexChanged);
             // 
             // TxtFelter
             // 
@@ -83,8 +84,9 @@
             this.TxtFelter.SelectedText = "";
             this.TxtFelter.Size = new System.Drawing.Size(286, 36);
             this.TxtFelter.TabIndex = 2;
+            this.TxtFelter.TextChanged += new System.EventHandler(this.TxtFelter_TextChanged_1);
             // 
-            // CtrlFelter_LocalDrivingLicenseApplication
+            // CtrlLicenseAppFelter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -93,7 +95,7 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "CtrlFelter_LocalDrivingLicenseApplication";
+            this.Name = "CtrlLicenseAppFelter";
             this.Size = new System.Drawing.Size(681, 54);
             this.ResumeLayout(false);
             this.PerformLayout();
