@@ -25,6 +25,26 @@ namespace DVLD_Management_System.Tests.Class
         public int LicenseClassID { set; get; }
         public clsLicenseClass LicenseClassInfo;
 
+        public static clsLDLApp FindByLocalDrivingAppLicenseID(int requestID)
+        {
+            // Simple test stub: try to get basic info from Requests table
+            try
+            {
+                var dt = DVLD_Management_System.Class.Class_DB.ClsCommandDB.SelectCommand("SELECT RequestID, LicenseClassID, Fees FROM Requests WHERE RequestID = " + requestID);
+                if (dt.Rows.Count == 0) return null;
+
+                var row = dt.Rows[0];
+                clsLDLApp app = new clsLDLApp();
+                app.LocalDrivingLicenseApplicationID = Convert.ToInt32(row["RequestID"]);
+                app.LicenseClassID = row["LicenseClassID"] == DBNull.Value ? -1 : Convert.ToInt32(row["LicenseClassID"]);
+                return app;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         //public string PersonFullName { set; get; }
         //{
         //    get

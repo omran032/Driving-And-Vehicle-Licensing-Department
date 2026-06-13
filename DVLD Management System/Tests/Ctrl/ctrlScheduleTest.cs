@@ -1,6 +1,8 @@
 ﻿using DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.Class;
 using DVLD_Management_System.Properties;
 using DVLD_Management_System.Tests.Class;
+using DVLD_Management_System.Class.Class_DB;
+using System.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -87,6 +89,73 @@ namespace DVLD_Management_System.Tests.Ctrl
             _TestAppointmentID = AppointmentID;
             _LocalDrivingLicenseApplication = clsLDLApp.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
 
+            if (_LocalDrivingLicenseApplication == null)
+            {
+                MessageBox.Show("خطأ: لا يوجد طلب رخصة قيادة محلية بالمعرف = " + _LocalDrivingLicenseApplicationID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btnSave.Enabled = false;
+                return;
+            }
+
+            //قرر إذا كان وضع الإنشاء هو إعادة الامتحان أم لا بناءً على ما إذا كان الشخص قد حضر هذا الاختبار من قبل
+
+            if (_LocalDrivingLicenseApplication.DoesAttendTestType(_TestTypeID))
+
+                _CreationMode = enCreationMode.RetakeTestSchedule;
+            else
+                _CreationMode = enCreationMode.FirstTimeSchedule;
+
+
+            if (_CreationMode == enCreationMode.RetakeTestSchedule)
+            {
+                lblRetakeAppFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.RetakeTest).Fees.ToString();
+                gbRetakeTestInfo.Enabled = true;
+                lblTitle.Text = "Schedule Retake Test";
+                lblRetakeTestAppID.Text = "0";
+            }
+            else
+            {
+                gbRetakeTestInfo.Enabled = false;
+                lblTitle.Text = "Schedule Test";
+                lblRetakeAppFees.Text = "0";
+                lblRetakeTestAppID.Text = "N/A";
+            }
+
+            lblLocalDrivingLicenseAppID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
+            lblDrivingClass.Text = _LocalDrivingLicenseApplication.LicenseClassInfo.ClassName;
+            lblFullName.Text = _LocalDrivingLicenseApplication.PersonFullName;
+
+            //قرر إذا //هذا سيعرض التجارب لهذا الاختبار من قبل
+            lblTrial.Text = _LocalDrivingLicenseApplication.TotalTrialsPerTest(_TestTypeID).ToString();
+
+
+            if (_Mode == enMode.AddNew)
+            {
+                lblFees.Text = clsTestType.Find(_TestTypeID).Fees.ToString();
+                dtpTestDate.MinDate = DateTime.Now;
+                lblRetakeTestAppID.Text = "N/A";
+
+                _TestAppointment = new clsTestAppointment();
+            }
+
+            else
+            {
+
+                if (!_LoadTestAppointmentData())
+                    return;
+            }
+
+
+            lblTotalFees.Text = (Convert.ToSingle(lblFees.Text) + Convert.ToSingle(lblRetakeAppFees.Text)).ToString();
+
+
+            if (!_HandleActiveTestAppointmentConstraint())
+                return;
+
+            if (!_HandleAppointmentLockedConstraint())
+                return;
+
+            if (!_HandlePrviousTestConstraint())
+                return;
 
 
         }
