@@ -71,6 +71,10 @@ namespace DVLD_Management_System.Tests.Ctrl
         public enum enMode { AddNew = 0, Update = 1 };
         private enMode _Mode = enMode.AddNew;
 
+        // Creation mode: first time, retake, or street test
+        private enum enCreationMode { FirstTimeSchedule = 0, RetakeTestSchedule = 1, StreetTestSchedule = 2 }
+        private enCreationMode _CreationMode = enCreationMode.FirstTimeSchedule;
+
 
 
         private int _LocalDrivingLicenseApplicationID = -1;
@@ -78,83 +82,253 @@ namespace DVLD_Management_System.Tests.Ctrl
         private clsLDLApp _LocalDrivingLicenseApplication;
         private int _ApplicantPersonID = -1; // معرف الشخص صاحب الطلب
 
-         public event EventHandler AppointmentSaved; // لا يتم استعماله حاليا
+        // حدث ليقوم الفورم الأب بعمل Refresh عند الحفظ/التعديل
+        public event EventHandler AppointmentSaved;
 
-        // الحث يعمل عند الحفظ و التعديل ...وهو لتحديث البيانات التي تعرض في الجدول
+        // بديل بسيط لاستدعاء Refresh (يستخدم في بعض الأماكن)
         public Action OnAppointmentSaved;
 
         public void LoadInfo(int LocalDrivingLicenseApplicationID, int AppointmentID = -1)
         {
-            // تحديد وضع الشاشة: إضافة جديدة أو تعديل
+            // تنظيم الاستدعاءات: هذه الدالة مرتبة وواضحة — تستخدم الميثودات المساعدة أدناه
             if (AppointmentID == -1)
                 _Mode = enMode.AddNew;
             else
                 _Mode = enMode.Update;
 
-
-            if(_Mode == enMode.AddNew)
-            {
-                dtpTestDate.Value = DateTime.Today;
-            }
-            // حفظ المعرفات محلياً
             _LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
             _TestAppointmentID = AppointmentID;
 
-            // جلب معلومات الطلب (يتضمن معلومات الشخص وفئة الرخصة والرسوم)
-            // هذه الدالة تستخدم الاستعلام الموجود في ClassInfoLicenseAplication.FindInfoRequest
-            var info = ClassInfoLicenseAplication.FindInfoRequest(_LocalDrivingLicenseApplicationID);
-
+            // جلب بيانات الطلب من الدالة المخصصة
+            var info = GetApplicationInfo(_LocalDrivingLicenseApplicationID);
             if (info == null)
             {
-                // إذا لم توجد بيانات للطلب، تعطيل زر الحفظ وإظهار رسالة خطأ
                 MessageBox.Show("لا يوجد طلب برقم المعرف المحدد.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 btnSave.Enabled = false;
                 return;
             }
 
-            // تعبئة عناصر الواجهة بالمعلومات المستخرجة
+            // تعبئة الواجهة
+            PopulateBasicInfo(info);
+
+            // تحديد وضع الإنشاء (أول مرة / إعادة / شارع)
+            DetermineCreationMode();
+
+            // تحقق شروط الحجز (مثل اجتياز فحص الرؤية إن لزم)
+            UpdateSchedulingConstraints(info);
+
+            // إذا وضع التعديل: جلب بيانات الموعد
+            if (_Mode == enMode.Update && _TestAppointmentID > 0)
+            {
+                var appt = GetTestAppointment(_TestAppointmentID);
+                if (appt != null)
+                    PopulateAppointmentInfo(appt);
+            }
+
+            // حفظ كائن الطلب البسيط للاستخدام اللاحق
+            _LocalDrivingLicenseApplication = clsLDLApp.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
+        }
+
+        // =========================
+        // Helper Methods - DB ops
+        // =========================
+
+        /// <summary>
+        /// جلب معلومات الطلب (يغلف ClassInfoLicenseAplication.FindInfoRequest)
+        /// </summary>
+        private ClassInfoLicenseAplication GetApplicationInfo(int requestID)
+        {
+            // التعليق: نستعمل دالة موجودة في الكلاس المسؤول عن تجميع معلومات الطلب
+            return ClassInfoLicenseAplication.FindInfoRequest(requestID);
+        }
+
+        /// <summary>
+        /// يجلب صف الموعد من جدول Tests بحسب TestID
+        /// </summary>
+        private DataRow GetTestAppointment(int testID)
+        {
+            try
+            {
+                string q = "SELECT TestID, ExamDate, FeesExam, Result, TestTypeID FROM Tests WHERE TestID = @TestID";
+                var p = new Dictionary<string, object>() { { "@TestID", testID } };
+                var dt = ClsCommandDB.SelectCommand(q, p);
+                if (dt != null && dt.Rows.Count > 0)
+                    return dt.Rows[0];
+            }
+            catch
+            {
+                // تجاهل الأخطاء البسيطة
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// عدد المحاولات السابقة لنوع اختبار معين ولطلب معين
+        /// </summary>
+        private int CountPreviousAttempts(int requestID, int testTypeID)
+        {
+            try
+            {
+                string q = "SELECT COUNT(*) FROM Tests WHERE RequestID = @RequestID AND TestTypeID = @TestTypeID";
+                var p = new Dictionary<string, object>() { { "@RequestID", requestID }, { "@TestTypeID", testTypeID } };
+                var dt = ClsCommandDB.SelectCommand(q, p);
+                if (dt != null && dt.Rows.Count > 0)
+                    return Convert.ToInt32(dt.Rows[0][0]);
+            }
+            catch { }
+            return 0;
+        }
+
+        /// <summary>
+        /// يتحقق إن كان للشخص نتيجة ناجحة لنوع الاختبار (يمنع جدولة جديدة)
+        /// </summary>
+        private bool HasPersonPassedTestTypeLocal(int personID, int testTypeID)
+        {
+            // التفاف على الدالة المشتركة في Cls_CMDCommandLocalDrivingLicenceApp
+            return Cls_CMDCommandLocalDrivingLicenceApp.HasPersonPassedTestType(personID, testTypeID);
+        }
+
+        /// <summary>
+        /// يتحقق إن كان هناك موعد مجدول نشط لنفس الطلب ونوع الاختبار
+        /// </summary>
+        private bool IsThereActiveScheduledTestLocal(int requestID, int testTypeID)
+        {
+            return Cls_CMDCommandLocalDrivingLicenceApp.IsThereAnActiveScheduledTest(requestID, testTypeID);
+        }
+
+        /// <summary>
+        /// يفحص إذا كانت نتيجة الموعد مُسجلة (Pass/Fail) — يستخدم قبل التعديل
+        /// </summary>
+        private bool IsAppointmentResultSet(int testID)
+        {
+            try
+            {
+                string q = "SELECT Result FROM Tests WHERE TestID = @TestID";
+                var p = new Dictionary<string, object>() { { "@TestID", testID } };
+                var dt = ClsCommandDB.SelectCommand(q, p);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    var v = dt.Rows[0][0];
+                    return (v != DBNull.Value && !string.IsNullOrWhiteSpace(v.ToString()));
+                }
+            }
+            catch { }
+            return false;
+        }
+
+        // =========================
+        // UI Population Helpers
+        // =========================
+
+        /// <summary>
+        /// يعبئ المعلومات الأساسية (الاسم، الفئة، الرسوم)
+        /// </summary>
+        private void PopulateBasicInfo(ClassInfoLicenseAplication info)
+        {
             lblLocalDrivingLicenseAppID.Text = _LocalDrivingLicenseApplicationID.ToString();
             lblDrivingClass.Text = info.LicenseClass ?? "[غير معروفة]";
             lblFullName.Text = info.Person != null ? info.Person.FullName : "[غير معروف]";
             lblFees.Text = info.Fees.ToString();
 
-            // حساب عدد الاختبارات الناجحة للشخص (تجارب سابقة)
-            try
+            // حفظ معرف الشخص لعمليات التحقق لاحقاً
+            _ApplicantPersonID = info.Person != null ? info.Person.IDPerson : -1;
+
+            // عرض عدد المحاولات الناجحة
+            try { lblTrial.Text = Cls_CMDCommandLocalDrivingLicenceApp.GetPassedTestsCount(_ApplicantPersonID).ToString(); }
+            catch { lblTrial.Text = "0"; }
+        }
+
+        /// <summary>
+        /// يعبئ بيانات الموعد عند وجوده
+        /// </summary>
+        private void PopulateAppointmentInfo(DataRow row)
+        {
+            dtpTestDate.Value = Convert.ToDateTime(row["ExamDate"]);
+            lblRetakeTestAppID.Text = row["TestID"].ToString();
+            lblRetakeAppFees.Text = row["FeesExam"].ToString();
+            // التحديث الأولي لمجموع الرسوم
+            lblTotalFees.Text = row["FeesExam"].ToString();
+        }
+
+        /// <summary>
+        /// يحدد وضع الإنشاء (FirstTime/Retake/Street) اعتماداً على البيانات
+        /// </summary>
+        private void DetermineCreationMode()
+        {
+            if (TestTypeID == ClassInfoLicenseAplication.enTestType.StreetTest)
             {
-                if (info.Person != null)
-                {
-                    lblTrial.Text = Cls_CMDCommandLocalDrivingLicenceApp.GetPassedTestsCount(info.Person.IDPerson).ToString();
-                    _ApplicantPersonID = info.Person.IDPerson; // حفظ معرف الشخص لاستخدامه لاحقاً
-                }
-                else
-                    lblTrial.Text = "0";
+                _CreationMode = enCreationMode.StreetTestSchedule;
             }
-            catch
+            else
             {
-                lblTrial.Text = "0";
+                int attempts = CountPreviousAttempts(_LocalDrivingLicenseApplicationID, (int)TestTypeID);
+                _CreationMode = attempts > 0 ? enCreationMode.RetakeTestSchedule : enCreationMode.FirstTimeSchedule;
             }
 
-            // إذا كان نوع الاختبار ليس فحص الرؤية، فتأكد أن فحص الرؤية قد تم اجتيازه سابقاً
+      //      ApplyFeesRules(); // تحديد رسوم الدفع حسب الوضع
+
+            // ضبط واجهة إعادة الاختبار
+            if (_CreationMode == enCreationMode.RetakeTestSchedule)
+            {
+                // محاولة جلب رسوم إعادة الاختبار من RequestTypes (بحث بسيط)
+                try
+                {
+                    string qFee = "SELECT TOP 1 Fees FROM RequestTypes WHERE TypeName LIKE '%Retake%' OR TypeName LIKE '%retake%'";
+                    var dtf = ClsCommandDB.SelectCommand(qFee);
+                    int retakeFees = (dtf != null && dtf.Rows.Count > 0) ? Convert.ToInt32(dtf.Rows[0][0]) : 0;
+                    lblRetakeAppFees.Text = retakeFees.ToString();
+                }
+                catch { lblRetakeAppFees.Text = "0"; }
+
+                gbRetakeTestInfo.Enabled = true;
+                lblTitle.Text = "Schedule Retake Test";
+                lblRetakeTestAppID.Text = "0";
+            }
+            else if (_CreationMode == enCreationMode.StreetTestSchedule)
+            {
+                gbRetakeTestInfo.Enabled = false;
+                lblTitle.Text = "Schedule Street Test";
+                lblRetakeAppFees.Text = "0";
+                lblRetakeTestAppID.Text = "N/A";
+            }
+            else
+            {
+                gbRetakeTestInfo.Enabled = false;
+                lblTitle.Text = "Schedule Test";
+                lblRetakeAppFees.Text = "0";
+                lblRetakeTestAppID.Text = "N/A";
+            }
+
+            // جلب رسوم الاختبار من TestTypes
+            try
+            {
+                string qFeesTest = "SELECT TOP 1 Fees FROM TestTypes WHERE TestTypeID = @TestTypeID";
+                var pf = new Dictionary<string, object>() { { "@TestTypeID", (int)TestTypeID } };
+                var dtf2 = ClsCommandDB.SelectCommand(qFeesTest, pf);
+                if (dtf2 != null && dtf2.Rows.Count > 0)
+                    lblFees.Text = dtf2.Rows[0][0].ToString();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// يحدّث القيود المطبقة على إمكانية الحجز (مثلاً فحص الرؤية شرط للأنواع الأخرى)
+        /// </summary>
+        private void UpdateSchedulingConstraints(ClassInfoLicenseAplication info)
+        {
             if (TestTypeID != ClassInfoLicenseAplication.enTestType.VisionTest)
             {
                 bool canSchedule = true;
                 try
                 {
-                    if (info.Person != null)
+                    if (_ApplicantPersonID > 0)
                     {
-                        int passed = Cls_CMDCommandLocalDrivingLicenceApp.GetPassedTestsCount(info.Person.IDPerson);
-                        if (passed == 0)
-                            canSchedule = false;
+                        int passed = Cls_CMDCommandLocalDrivingLicenceApp.GetPassedTestsCount(_ApplicantPersonID);
+                        if (passed == 0) canSchedule = false; // يجب أن يجتاز فحص الرؤية أولاً
                     }
-                    else
-                    {
-                        canSchedule = false;
-                    }
+                    else canSchedule = false;
                 }
-                catch
-                {
-                    canSchedule = false;
-                }
+                catch { canSchedule = false; }
 
                 lblUserMessage.Visible = !canSchedule;
                 btnSave.Enabled = canSchedule;
@@ -164,33 +338,6 @@ namespace DVLD_Management_System.Tests.Ctrl
                 lblUserMessage.Visible = false;
                 btnSave.Enabled = true;
             }
-
-            // إذا الوضع تعديل، جلب معلومات الموعد من جدول Tests
-            if (_Mode == enMode.Update && _TestAppointmentID > 0)
-            {
-                try
-                {
-                    string q = "SELECT TestID, ExamDate, FeesExam, Result FROM Tests WHERE TestID = @TestID";
-                    var p = new Dictionary<string, object>() { { "@TestID", _TestAppointmentID } };
-                    var dt = ClsCommandDB.SelectCommand(q, p);
-
-                    if (dt != null && dt.Rows.Count > 0)
-                    {
-                        var row = dt.Rows[0];
-                        dtpTestDate.Value = Convert.ToDateTime(row["ExamDate"]);
-                        lblRetakeTestAppID.Text = row["TestID"].ToString();
-                        lblRetakeAppFees.Text = row["FeesExam"].ToString();
-                        lblTotalFees.Text = row["FeesExam"].ToString();
-                    }
-                }
-                catch
-                {
-                    // تجاهل أي خطأ أثناء تحميل بيانات الموعد لضمان عدم تعطل الواجهة
-                }
-            }
-
-            // حفظ كائن الطلب البسيط للاستخدام اللاحق
-            _LocalDrivingLicenseApplication = clsLDLApp.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
         }
 
         // زر الحفظ
@@ -214,7 +361,8 @@ namespace DVLD_Management_System.Tests.Ctrl
                     return;
                 }
 
-                int Fees = Convert.ToInt32(string.IsNullOrWhiteSpace(lblFees.Text) ? "0" : lblFees.Text.Replace("[$$$]", "").Trim());
+                int Fees;
+                int.TryParse(lblFees.Text.Replace("[$$$]", "").Trim(), out Fees);
                 int IDUser = (ClassUser.IDUser <= 0) ? 3 : ClassUser.IDUser;
 
 
@@ -237,7 +385,8 @@ namespace DVLD_Management_System.Tests.Ctrl
                     return;
                 }
 
-                int fees = Convert.ToInt32( string.IsNullOrWhiteSpace(lblFees.Text) ? "0" : lblFees.Text.Replace("[$$$]", "").Trim() );
+                int fees;
+                int.TryParse(lblFees.Text.Replace("[$$$]", "").Trim(), out fees);
 
                 int result = UpdateTestAppointment(_TestAppointmentID, dtpTestDate.Value.Date,  fees );
 
@@ -327,6 +476,37 @@ namespace DVLD_Management_System.Tests.Ctrl
         {
             if (dtpTestDate.Value.Date < DateTime.Today)
                 dtpTestDate.Value = DateTime.Today;
+        }
+
+
+        /// <summary>
+        /// تضبط الرسوم حسب وضع الإنشاء (Street / FirstTime / Retake)
+        /// </summary>
+        private void ApplyFeesRules()
+        {
+            int baseFees = 1000;      // رسوم الاختبار الأساسية
+            int retakeFees = 250;     // رسوم إعادة الاختبار
+
+            switch (_CreationMode)
+            {
+                case enCreationMode.StreetTestSchedule:
+                    lblFees.Text = baseFees.ToString();
+                    lblRetakeAppFees.Text = "0";
+                    lblTotalFees.Text = baseFees.ToString();
+                    break;
+
+                case enCreationMode.FirstTimeSchedule:
+                    lblFees.Text = baseFees.ToString();
+                    lblRetakeAppFees.Text = "0";
+                    lblTotalFees.Text = baseFees.ToString();
+                    break;
+
+                case enCreationMode.RetakeTestSchedule:
+                    lblFees.Text = baseFees.ToString();
+                    lblRetakeAppFees.Text = retakeFees.ToString();
+                    lblTotalFees.Text = (baseFees + retakeFees).ToString();
+                    break;
+            }
         }
 
     }
