@@ -56,10 +56,13 @@ namespace DVLD_Management_System.Tests
         }
 
         DataTable DT;
-      void LoadData_()
+  void LoadData_()
         {
-            // تجلب جميع الاختبارات المرتبطة بطلب معيّن ونوع اختبار محدد
+            ///   تجلب  جميع الاختبارات المرتبطة بطلب معيّن ونوع اختبار محدد
             DT = Cls_CMDCommandLocalDrivingLicenceApp.GetTestsPerType(infoLicenseApplication.RequestID, (int)TestType);
+
+            if (DGV.Columns.Contains("Result"))
+                DGV.Columns["Result"].Visible = false;
 
             if (DT == null)
             {
@@ -67,71 +70,133 @@ namespace DVLD_Management_System.Tests
                 return;
             }
 
-            // لا نكتب نصوص داخل أعمدة رقمية: نضيف عمود عرض نصي للحقل IsLocked
-            if (DT.Columns.Contains("IsLocked") && !DT.Columns.Contains("IsLockedText"))
+            // فحص الأعمدة الرقمية: إذا وُجدت فيها قيم نصية مثل "No" أو "N/A" نضيف عمود نصي بديل لعرضها
+            // هذا يمنع DataGridView من محاولة تحويل نص غير رقمي إلى Int32 وإظهار استثناء،
+            // وفي الوقت نفسه نحافظ على العمود الرقمي الأصلي للعمليات الحسابية.
+            var cols = DT.Columns.Cast<System.Data.DataColumn>().ToList();
+            foreach (var col in cols)
             {
-                DT.Columns.Add("IsLockedText", typeof(string));
-                foreach (DataRow dr in DT.Rows)
+                // نطبق على أنواع الأعداد الشائعة (صحيحة وعشرية)
+                if (col.DataType == typeof(int) || col.DataType == typeof(long) || col.DataType == typeof(short) ||
+                    col.DataType == typeof(decimal) || col.DataType == typeof(double) || col.DataType == typeof(float))
                 {
-                    try
+                    bool hasNonNumeric = false;
+                    foreach (System.Data.DataRow dr in DT.Rows)
                     {
-                        if (dr.IsNull("IsLocked"))
-                            dr["IsLockedText"] = "No";
-                        else
+                        var v = dr[col.ColumnName];
+                        if (v == null || v == System.DBNull.Value) continue;
+                        // إذا كانت القيمة ليست قابلة للتحويل لعدد نعتبرها نصية
+                        long tmpLong;
+                        decimal tmpDec;
+                        if (!long.TryParse(v.ToString(), out tmpLong) && !decimal.TryParse(v.ToString(), out tmpDec))
                         {
-                            int v = 0;
-                            int.TryParse(dr["IsLocked"].ToString(), out v);
-                            dr["IsLockedText"] = (v == 1) ? "Yes" : "No";
+                            hasNonNumeric = true;
+                            break;
                         }
                     }
-                    catch { dr["IsLockedText"] = "No"; }
+
+                    if (hasNonNumeric)
+                    {
+                        string textColName = col.ColumnName + "Text";
+                        if (!DT.Columns.Contains(textColName))
+                        {
+                            DT.Columns.Add(textColName, typeof(string));
+                            foreach (System.Data.DataRow dr in DT.Rows)
+                            {
+                                var v = dr[col.ColumnName];
+                                if (v == null || v == System.DBNull.Value)
+                                    dr[textColName] = string.Empty;
+                                else
+                                {
+                                    // حافظ على العلامات النصية كما هي، وحول القيم الرقمية الشائعة إلى تمثيل نصي مقروء
+                                    var s = v.ToString();
+                                    if (s == "0") dr[textColName] = "No";
+                                    else if (s == "1") dr[textColName] = "Yes";
+                                    else dr[textColName] = s;
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
-            // اربط الـ DataTable بعد تجهيز الأعمدة النصية
+            // اربط DataGridView بالجدول بعد إضافة أعمدة النص حتى يتم استخدام أعمدة العرض النصية عندما وُجدت
             DGV.DataSource = DT;
 
-            // ضبط رؤوس الأعمدة وتنسيقها دون تغيير قيم الأعمدة الرقمية
-            if (DGV.Columns.Contains("TestID"))
-            {
-                DGV.Columns["TestID"].HeaderText = "Appointment ID";
-                DGV.Columns["TestID"].ReadOnly = true; // منع تعديل يدخّل نص غير رقمي
-            }
-
-            if (DGV.Columns.Contains("ExamDate"))
-            {
-                DGV.Columns["ExamDate"].HeaderText = "Appointment Date";
-                DGV.Columns["ExamDate"].DefaultCellStyle.Format = "d";
-            }
-
-            if (DGV.Columns.Contains("FeesExam"))
-            {
-                DGV.Columns["FeesExam"].HeaderText = "Paid Fees";
-                DGV.Columns["FeesExam"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                DGV.Columns["FeesExam"].ReadOnly = true; // منع التعديل غير الرقمي
-            }
-
-            if (DGV.Columns.Contains("Result"))
-                DGV.Columns["Result"].HeaderText = "Result";
-
-            // نعرض العمود النصي بدلاً من العمود الرقمي IsLocked
-            if (DGV.Columns.Contains("IsLockedText"))
-            {
-                DGV.Columns["IsLockedText"].HeaderText = "Is Locked";
-                DGV.Columns["IsLockedText"].DisplayIndex = DGV.Columns.Count - 1;
-                DGV.Columns["IsLockedText"].ReadOnly = true;
-            }
-
-            // تسجيل معالج أخطاء البيانات لمنع استثناءات التحويل
+            // ربط معالج أخطاء البيانات لمنع ظهور مربع خطأ عند تحويل القيم
             DGV.DataError -= DGV_DataError;
             DGV.DataError += DGV_DataError;
 
-            // إخفاء أعمدة تقنية لا نريد عرضها للمستخدم
-            if (DGV.Columns.Contains("Result"))
-                DGV.Columns["Result"].Visible = false;
+            // إذا أضفنا أعمدة نصية بديلة مثل ColNameText نخفي العمود الرقمي الأصلي حتى لا يحدث تحويل
+            foreach (DataColumn c in DT.Columns)
+            {
+                if (c.ColumnName.EndsWith("Text"))
+                {
+                    string original = c.ColumnName.Substring(0, c.ColumnName.Length - 4);
+                    if (DGV.Columns.Contains(c.ColumnName))
+                    {
+                        DGV.Columns[c.ColumnName].HeaderText = original;
+                        DGV.Columns[c.ColumnName].ReadOnly = true;
+                    }
+                    if (DGV.Columns.Contains(original))
+                    {
+                        DGV.Columns[original].Visible = false;
+                    }
+                }
+            }
 
-            if (DGV.Columns.Contains("IsLocked"))
-                DGV.Columns["IsLocked"].Visible = false;
+            // تأكد من أن رؤوس الأعمدة والبيانات متوافقة مع أسماء الأعمدة الفعلية
+            if (DT != null && DT.Columns.Count > 0)
+            {
+                if (DGV.Columns.Contains("TestID"))
+                    DGV.Columns["TestID"].HeaderText = "Appointment ID";
+
+                if (DGV.Columns.Contains("ExamDate"))
+                    DGV.Columns["ExamDate"].HeaderText = "Appointment Date";
+
+                if (DGV.Columns.Contains("FeesExam"))
+                {
+                    DGV.Columns["FeesExam"].HeaderText = "Paid Fees";
+                    // حاول تنسيق الرسوم كقيمة رقمية
+                    DGV.Columns["FeesExam"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                }
+
+                if (DGV.Columns.Contains("Result"))
+                    DGV.Columns["Result"].HeaderText = "Result";
+
+                // إذا أضفنا عمود IsLockedText فاعرضه وأخفي العمود الرقمي الأصلي لتجنب مشاكل التحويل
+                if (DT.Columns.Contains("IsLockedText"))
+                {
+                    if (DGV.Columns.Contains("IsLockedText"))
+                        DGV.Columns["IsLockedText"].HeaderText = "Is Locked";
+                    if (DGV.Columns.Contains("IsLocked"))
+                        DGV.Columns["IsLocked"].Visible = false;
+                }
+                else if (DGV.Columns.Contains("IsLocked"))
+                {
+                    DGV.Columns["IsLocked"].HeaderText = "Is Locked";
+
+                    // عرض IsLocked بشكل مقروء (Yes/No) إن لم يكن هناك عمود نصي مخصص
+                    foreach (DataGridViewRow r in DGV.Rows)
+                    {
+                        try
+                        {
+                            var cell = r.Cells["IsLocked"];
+                            if (cell.Value == null || cell.Value == DBNull.Value)
+                                cell.Value = "No";
+                            else
+                            {
+                                int v;
+                                if (int.TryParse(cell.Value.ToString(), out v))
+                                    cell.Value = (v == 1) ? "Yes" : "No";
+                                else
+                                    cell.Value = (cell.Value.ToString().Trim() == "1") ? "Yes" : "No";
+                            }
+                        }
+                        catch { }
+                    }
+                }
+            }
         }
 
 
@@ -146,16 +211,24 @@ namespace DVLD_Management_System.Tests
 
             LoadData_();
 
-            if (DGV.Rows.Count > 0)
+            if (DGV.Columns.Contains("TestID"))
+                DGV.Columns["TestID"].HeaderText = "Appointment ID";
+
+            if (DGV.Columns.Contains("ExamDate"))
+                DGV.Columns["ExamDate"].HeaderText = "Appointment Date";
+
+            if (DGV.Columns.Contains("FeesExam"))
             {
-                DGV.Columns[0].HeaderText = "Appointment ID";
-
-                DGV.Columns[1].HeaderText = "Appointment Date";
-
-                DGV.Columns[2].HeaderText = "Paid Fees";
-
-                DGV.Columns[3].HeaderText = "Is Locked";
+                DGV.Columns["FeesExam"].HeaderText = "Paid Fees";
+                DGV.Columns["FeesExam"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
+
+            if (DGV.Columns.Contains("IsLocked"))
+                DGV.Columns["IsLocked"].HeaderText = "Is Locked";
+
+            if (DGV.Columns.Contains("IsLockedText"))
+                DGV.Columns["IsLockedText"].HeaderText = "Is Locked";
+
 
             lblRecordsCount.Text = DT.Rows.Count.ToString();
         }
@@ -221,7 +294,7 @@ namespace DVLD_Management_System.Tests
         // منع استثناءات تحويل البيانات في DataGridView
         private void DGV_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            // إلغاء الخطأ حتى لا يظهر استثناء للمستخدم
+            // إلغاء الخطأ حتى لا يظهر للمستخدم
             e.Cancel = true;
         }
 

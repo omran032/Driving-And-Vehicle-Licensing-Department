@@ -204,8 +204,7 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
                 RequestID = @RequestID
                 AND TestTypeID = @TestTypeID
                 AND Result IS NULL
-            ORDER BY TestID DESC;
-        ";
+            ORDER BY TestID DESC; ";
 
                 SqlCommand command = new SqlCommand(query, connection);
 

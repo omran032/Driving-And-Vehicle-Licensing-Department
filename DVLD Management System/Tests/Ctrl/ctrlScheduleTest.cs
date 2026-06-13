@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول;
 using System.Data.SqlTypes;
+using System.Data.SqlClient;
 
 namespace DVLD_Management_System.Tests.Ctrl
 {
@@ -428,6 +429,7 @@ namespace DVLD_Management_System.Tests.Ctrl
 
         SELECT SCOPE_IDENTITY();  ";
 
+
             var parameters = new Dictionary<string, object>()
             {
                 { "@ExamDate", examDate },
@@ -465,9 +467,9 @@ namespace DVLD_Management_System.Tests.Ctrl
 
             var parameters = new Dictionary<string, object>()
             {
-                { "@ExamDate", examDate },
-                { "@FeesExam", fees },
-                { "@TestID", testID }
+                { "@ExamDate", new SqlParameter("@ExamDate", System.Data.SqlDbType.Date) { Value = examDate } },
+                { "@FeesExam", new SqlParameter("@FeesExam", System.Data.SqlDbType.Int) { Value = fees } },
+                { "@TestID", new SqlParameter("@TestID", System.Data.SqlDbType.Int) { Value = testID } }
             };
 
             object result = ClsCommandDB.ExecuteNonQuery_Command(query, parameters, false);
@@ -485,23 +487,15 @@ namespace DVLD_Management_System.Tests.Ctrl
                 dtpTestDate.Value = DateTime.Today;
         }
 
-        // Helper: parse numeric fees from label text safely (ignores non-digits)
+
         private int ParseFeesLabel(string text)
         {
-            if (string.IsNullOrWhiteSpace(text)) return 0;
-            try
-            {
-                var digits = new System.Text.StringBuilder();
-                foreach (char c in text)
-                {
-                    if (char.IsDigit(c)) digits.Append(c);
-                }
-                if (digits.Length == 0) return 0;
-                return int.Parse(digits.ToString());
-            }
-            catch { return 0; }
-        }
+            int value;
+            if (int.TryParse(text, out value))
+                return value;
 
+            return 0;
+        }
 
         /// <summary>
         /// تضبط وتعيد قيمة الرسوم حسب وضع الإنشاء (Street / FirstTime / Retake)
