@@ -431,6 +431,7 @@
             this.dtpTestDate.Size = new System.Drawing.Size(163, 29);
             this.dtpTestDate.TabIndex = 155;
             this.dtpTestDate.Value = new System.DateTime(2000, 12, 31, 0, 0, 0, 0);
+            this.dtpTestDate.ValueChanged += new System.EventHandler(this.dtpTestDate_ValueChanged);
             // 
             // label1
             // 

@@ -55,22 +55,25 @@ namespace DVLD_Management_System.Tests
             ID_Test = Convert.ToInt32(DGV.Rows[IndexRow].Cells[0].Value);
         }
 
+        DataTable DT;
+      void LoadData_()
+        {
+            ///   تجلب  جميع الاختبارات المرتبطة بطلب معيّن ونوع اختبار محدد
+            DT = Cls_CMDCommandLocalDrivingLicenceApp.GetTestsPerType(infoLicenseApplication.RequestID, (int)TestType);
+            DGV.DataSource = DT;
+        }
 
-      
-      
 
         // تحميل الفورم
         private void frmListTestApp_Load(object sender, EventArgs e)
         {
             if (infoLicenseApplication == null) return;
             // تحميل بيانات الطلب و المعلومات كاملة
-             ctrl_DLApplInfo1.InfoLicenseAplication = infoLicenseApplication;
+            ctrl_DLApplInfo1.InfoLicenseAplication = infoLicenseApplication;
 
-            LoadData();
+            Load_();
 
-            ///   تجلب  جميع الاختبارات المرتبطة بطلب معيّن ونوع اختبار محدد
-             DataTable DT = Cls_CMDCommandLocalDrivingLicenceApp.GetTestsPerType(infoLicenseApplication.RequestID, (int)TestType);
-             DGV.DataSource = DT;
+            LoadData_();
 
             if (DGV.Rows.Count > 0)
             {
@@ -86,7 +89,8 @@ namespace DVLD_Management_System.Tests
             lblRecordsCount.Text = DT.Rows.Count.ToString();
         }
 
-        void LoadData()
+
+        void Load_()
         {
             switch (TestType)
             {
@@ -115,13 +119,26 @@ namespace DVLD_Management_System.Tests
             }
         }
 
+        //زر إضافة موعد جديد 
         private void btnAddNewAppointment_Click(object sender, EventArgs e)
         {
+            int LocalDrivingLicenseApplicationID = infoLicenseApplication.RequestID;
+
+            frmScheduleTest frm = new frmScheduleTest(TestType , LocalDrivingLicenseApplicationID);
+            frm.ctrlScheduleTest1.OnAppointmentSaved += LoadData_;
+            frm.ShowDialog();
 
         }
 
+        // زر تعديل موعد
         private void Context_Edit_Click(object sender, EventArgs e)
         {
+            int TestAppointmentID = ID_Test;
+            int LocalDrivingLicenseApplicationID = infoLicenseApplication.RequestID;
+
+            frmScheduleTest frm = new frmScheduleTest(TestType , LocalDrivingLicenseApplicationID, TestAppointmentID);
+            frm.ctrlScheduleTest1.OnAppointmentSaved += LoadData_;
+            frm.ShowDialog();
 
         }
 
@@ -129,5 +146,7 @@ namespace DVLD_Management_System.Tests
         {
 
         }
+
+     
     }
 }
