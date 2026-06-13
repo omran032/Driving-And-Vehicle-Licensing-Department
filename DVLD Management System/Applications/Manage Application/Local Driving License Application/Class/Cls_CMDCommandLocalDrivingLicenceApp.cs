@@ -1,6 +1,9 @@
-﻿using DVLD_Management_System.Class.Class_DB;
+﻿using DVLD_Management_System.Class.Class;
+using DVLD_Management_System.Class.Class_DB;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -107,6 +110,95 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
                 return 0;
 
             return Convert.ToInt32(result);
+        }
+
+
+
+
+        /// <summary>
+        ///   تجلب هذه الدالة جميع الاختبارات المرتبطة بطلب معيّن ونوع اختبار محدد
+        /// اعتماداً على مخطط DVLD (من جدول Tests فقط)
+        /// وتعيد TestID و ExamDate و FeesExam و Result مرتّبة من الأحدث إلى الأقدم.
+        /// </summary>
+        /// <param name="RequestID"></param>
+        /// <param name="TestTypeID"></param>
+        /// <returns></returns>
+        public static DataTable GetTestsPerType(int RequestID, int TestTypeID)
+        {
+                string query = @"
+            SELECT 
+                TestID,
+                ExamDate,
+                FeesExam,
+                Result
+            FROM Tests
+            WHERE 
+                TestTypeID = @TestTypeID
+                AND RequestID = @RequestID
+            ORDER BY TestID DESC;";
+
+                var parameters = new Dictionary<string, object>()
+            {
+                { "@RequestID", RequestID },
+                { "@TestTypeID", TestTypeID }
+            };
+
+            return ClsCommandDB.SelectCommand(query , parameters);
+        }
+
+
+
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// تتحقق هذه الدالة من وجود اختبار مجدول لنفس الطلب ولنفس نوع الاختبار
+        ///    اعتماداً على أن نتيجة الاختبار (Result) نصية وتكون NULL عندما لا يتم تحديد النتيجة بعد
+        /// أي أن Result IS NULL يعني أن الاختبار مجدول ولم يُنفّذ بعد.
+        /// </summary>
+        /// <param name="RequestID"></param>
+        /// <param name="TestTypeID"></param>
+        /// <returns></returns>
+        public static bool IsThereAnActiveScheduledTest(int RequestID, int TestTypeID)
+        {
+            bool result = false;
+
+            using (SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString))
+            {
+                string query = @"
+            SELECT TOP 1 1
+            FROM Tests
+            WHERE 
+                RequestID = @RequestID
+                AND TestTypeID = @TestTypeID
+                AND Result IS NULL
+            ORDER BY TestID DESC;
+        ";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@RequestID", RequestID);
+                command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+
+                try
+                {
+                    connection.Open();
+                    object scalar = command.ExecuteScalar();
+
+                    if (scalar != null)
+                        result = true;
+                }
+                catch
+                {
+                }
+            }
+
+            return result;
         }
 
 

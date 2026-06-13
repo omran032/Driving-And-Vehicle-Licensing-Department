@@ -14,7 +14,24 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
     {
         public int RequestID { get; set; }
 
-        public string Status { get; set; }
+        private string _status;
+
+        public string Status
+        {
+            get { return _status; }
+            set
+            {
+                if (value == "-1")
+                    _status = "Canceled";
+                else if (value == "0")
+                    _status = "New";
+                else if (value == "1")
+                    _status = "Completed";
+                else
+                    _status = value;
+            }
+        }
+
 
         public int Fees { get; set; }
 
@@ -30,6 +47,7 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
 
 
 
+        public enum enTestType { VisionTest = 1, WrittenTest = 2, StreetTest = 3 };
 
 
 

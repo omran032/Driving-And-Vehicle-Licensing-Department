@@ -2,6 +2,7 @@
 using DVLD_Management_System.Applications.Driver_Licenses_Services.New_Driving_License.Local_License.Class;
 using DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.Class;
 using DVLD_Management_System.Class.Class;
+using DVLD_Management_System.Tests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.Class.ClassInfoLicenseAplication;
 
 namespace DVLD_Management_System.Applications
 {
@@ -25,7 +27,9 @@ namespace DVLD_Management_System.Applications
             ShowNumberIndexRowSelectedInTable();
         }
 
-
+        // معلومات الطلب
+        ClassInfoLicenseAplication infoLicenseAplication = new ClassInfoLicenseAplication();
+        ClassInfoLicenseAplication.enTestType _TestType  = ClassInfoLicenseAplication.enTestType.VisionTest;
 
         DataTable Data ;
         void LoadData()
@@ -62,7 +66,7 @@ namespace DVLD_Management_System.Applications
             OnRowRightClick = (d) =>
             {
                 IndexRowSelected = d;
-                DataRowSelected(IndexRowSelected); // ← هون لازم تنفّذ
+                DataRowSelected(IndexRowSelected); // حفظ البيانات
             };
 
             ControlHelper.EnableRightClickSelection(DGV, MyContextMenuStrip, OnRowRightClick);
@@ -90,14 +94,23 @@ namespace DVLD_Management_System.Applications
         // زر عرض واجهة إضافة طلبات رخص محلية
         private void btnAddLocalDrivingLicenseApp_Click(object sender, EventArgs e)
         {
-            if(ID_Request == -1) return;
+            if (ID_Request == -1) return;
 
-            ClassInfoLicenseAplication infoLicenseAplication = new ClassInfoLicenseAplication();
-            infoLicenseAplication = ClassInfoLicenseAplication.FindInfoRequest(ID_Request); // تحميل البيانات بالاوبجكت
+            LoadInfoAppointment(); if (ID_Request == -1) return;
+
             // استدعاء الفورم
             FrmLDLAppInfo frmLDLApp = new FrmLDLAppInfo(infoLicenseAplication);
             MyTools.ShowForm(frmLDLApp);
         }
+        // تحميل بيانات الطلب بالاوبجكت
+        void LoadInfoAppointment()
+        {
+            infoLicenseAplication = ClassInfoLicenseAplication.FindInfoRequest(ID_Request); // تحميل البيانات بالاوبجكت
+             
+        }
+
+
+
 
         // زر عرض واجهة تعديل طلبات رخص محلية
         private void Context_btnEditLocalDrivingLicenseApp_Click(object sender, EventArgs e)
@@ -147,7 +160,37 @@ namespace DVLD_Management_System.Applications
         }
 
 
+        #region (VisionTest _ WnitteTest _ StreetTest)  خيارات عمل اختبارات القيادة 
 
+        //  عرض واجهة انشاء اختبار من نوع محدد
+        private void _ScheduleTest(ClassInfoLicenseAplication.enTestType _TestType)
+        {
+            LoadInfoAppointment();
+            frmListTestApp frmListTestApp = new frmListTestApp(infoLicenseAplication , _TestType);
+            frmListTestApp.ShowDialog();
+         //   LoadData();
+        }
+
+
+        // VisionTest  // إختبار فحص النظر
+        private void Context_btnSchedualeVisionTest_Click(object sender, EventArgs e)
+        {
+            _ScheduleTest(enTestType.VisionTest);
+        }
+
+        // WnitteTest  // اختبار كتابة
+        private void Context_btnSchedualeWnitteTest_Click(object sender, EventArgs e)
+        {
+            _ScheduleTest(enTestType.WrittenTest);
+        }
+
+        // StreetTest  // اختبار القيادة
+        private void Context_btnSchedualeStreetTest_Click(object sender, EventArgs e)
+        {
+            _ScheduleTest(enTestType.StreetTest);
+        }
+
+        #endregion
 
 
 
@@ -166,7 +209,7 @@ namespace DVLD_Management_System.Applications
         /// </summary>
         void Status_btnSechdualeTests ()
         {
-            sechduleTestsToolStripMenuItem.Enabled = PassedTests != 3 && Status != "Cancelled";
+            sechduleTestsToolStripMenuItem.Enabled = PassedTests != 3 && Status != "Canceled";
             Context_btnSchedualeVisionTest.Enabled = PassedTests == 0;
             Context_btnSchedualeWnitteTest.Enabled = PassedTests == 1;
             Context_btnSchedualeStreetTest.Enabled = PassedTests == 2; 
@@ -183,8 +226,12 @@ namespace DVLD_Management_System.Applications
 
 
 
+
+
+
+
         #endregion
 
-       
+      
     }
 }
