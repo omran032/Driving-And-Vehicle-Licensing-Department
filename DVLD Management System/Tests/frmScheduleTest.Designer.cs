@@ -51,7 +51,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmScheduleTest";
-            this.Text = "frmScheduleTest";
+            this.Text = " Test";
             this.ResumeLayout(false);
 
         }

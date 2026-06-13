@@ -6,3 +6,4 @@
 ## General Guidelines
 - Include Arabic translations in responses.
 - Write code comments in Arabic for code changes.
+- Include Arabic translation of all assistant replies.

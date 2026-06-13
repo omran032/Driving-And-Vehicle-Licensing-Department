@@ -179,42 +179,7 @@ namespace DVLD_Management_System.Tests.Ctrl
             return 0;
         }
 
-        /// <summary>
-        /// يتحقق إن كان للشخص نتيجة ناجحة لنوع الاختبار (يمنع جدولة جديدة)
-        /// </summary>
-        private bool HasPersonPassedTestTypeLocal(int personID, int testTypeID)
-        {
-            // التفاف على الدالة المشتركة في Cls_CMDCommandLocalDrivingLicenceApp
-            return Cls_CMDCommandLocalDrivingLicenceApp.HasPersonPassedTestType(personID, testTypeID);
-        }
-
-        /// <summary>
-        /// يتحقق إن كان هناك موعد مجدول نشط لنفس الطلب ونوع الاختبار
-        /// </summary>
-        private bool IsThereActiveScheduledTestLocal(int requestID, int testTypeID)
-        {
-            return Cls_CMDCommandLocalDrivingLicenceApp.IsThereAnActiveScheduledTest(requestID, testTypeID);
-        }
-
-        /// <summary>
-        /// يفحص إذا كانت نتيجة الموعد مُسجلة (Pass/Fail) — يستخدم قبل التعديل
-        /// </summary>
-        private bool IsAppointmentResultSet(int testID)
-        {
-            try
-            {
-                string q = "SELECT Result FROM Tests WHERE TestID = @TestID";
-                var p = new Dictionary<string, object>() { { "@TestID", testID } };
-                var dt = ClsCommandDB.SelectCommand(q, p);
-                if (dt != null && dt.Rows.Count > 0)
-                {
-                    var v = dt.Rows[0][0];
-                    return (v != DBNull.Value && !string.IsNullOrWhiteSpace(v.ToString()));
-                }
-            }
-            catch { }
-            return false;
-        }
+      
 
         // =========================
         // UI Population Helpers
@@ -245,9 +210,34 @@ namespace DVLD_Management_System.Tests.Ctrl
         {
             dtpTestDate.Value = Convert.ToDateTime(row["ExamDate"]);
             lblRetakeTestAppID.Text = row["TestID"].ToString();
-            lblRetakeAppFees.Text = row["FeesExam"].ToString();
-            // التحديث الأولي لمجموع الرسوم
-            lblTotalFees.Text = row["FeesExam"].ToString();
+
+            // FeesExam في قاعدة البيانات هو المجموع المدفوع (Base + Retake إذا وُجد)
+            int feesExam = 0;
+            try { feesExam = Convert.ToInt32(row["FeesExam"]); } catch { feesExam = 0; }
+
+            // الحصول على قيمة الرسوم الأساسية إذا لم تكن معروضة
+            int baseFee = ParseFeesLabel(lblFees.Text);
+            if (baseFee == 0)
+            {
+                try
+                {
+                    string qFeesTest = "SELECT TOP 1 Fees FROM TestTypes WHERE TestTypeID = @TestTypeID";
+                    var pf = new Dictionary<string, object>() { { "@TestTypeID", (int)TestTypeID } };
+                    var dtf2 = ClsCommandDB.SelectCommand(qFeesTest, pf);
+                    if (dtf2 != null && dtf2.Rows.Count > 0)
+                        baseFee = Convert.ToInt32(dtf2.Rows[0][0]);
+                }
+                catch { baseFee = 0; }
+            }
+
+            // حساب رسوم إعادة الاختبار كفرق بين الإجمالي والرسوم الأساسية
+            int retakeFee = feesExam - baseFee;
+            if (retakeFee < 0) retakeFee = 0;
+
+            // تعبئة الحقول بدون تغيير قيمة الرسم الأساسي
+            lblFees.Text = baseFee.ToString();
+            lblRetakeAppFees.Text = retakeFee.ToString();
+            lblTotalFees.Text = feesExam.ToString();
         }
 
         /// <summary>
@@ -353,26 +343,34 @@ namespace DVLD_Management_System.Tests.Ctrl
             // إضافة موعد جديد
             if (_Mode == enMode.AddNew)
             {
-                // التحقق من وجود موعد فعّال مسبقاً
-                if (Cls_CMDCommandLocalDrivingLicenceApp.IsThereAnActiveScheduledTest(
-                    _LocalDrivingLicenseApplicationID, (int)TestTypeID))
+                // التحقق من وجود موعد فعّال مسبقاً لنفس الطلب ونوع الاختبار
+                if (IsThereActiveScheduledTestLocal(_LocalDrivingLicenseApplicationID, (int)TestTypeID))
                 {
                     MessageBox.Show("يوجد بالفعل موعد اختبار فعّال لهذا الطلب ولنفس نوع الاختبار.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                int Fees;
-                int.TryParse(lblFees.Text.Replace("[$$$]", "").Trim(), out Fees);
+                // منع جدولة اختبار جديد إذا كان الشخص ناجحاً مسبقاً في نفس نوع الاختبار
+                if (_ApplicantPersonID > 0 && HasPersonPassedTestTypeLocal(_ApplicantPersonID, (int)TestTypeID))
+                {
+                    MessageBox.Show("لا يمكن جدولة الاختبار لأن الشخص نجح مسبقاً في نفس نوع الاختبار.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // حساب الرسوم النهائية (رسوم الاختبار + رسوم إعادة الاختبار إن وُجدت)
+                int totalFees = ApplyFeesRules();
+
                 int IDUser = (ClassUser.IDUser <= 0) ? 3 : ClassUser.IDUser;
 
-
-                // استدعاء ميثود الإدراج
-                int newID = AddTestAppointment( dtpTestDate.Value.Date, Fees, _LocalDrivingLicenseApplicationID, (int)TestTypeID, IDUser);
+                // استدعاء ميثود الإدراج مع الرسوم النهائية
+                int newID = AddTestAppointment(dtpTestDate.Value.Date, totalFees, _LocalDrivingLicenseApplicationID, (int)TestTypeID, IDUser);
 
                 if (newID > 0)
                 {
                     MessageBox.Show("تم حفظ موعد الاختبار بنجاح.", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    OnAppointmentSaved?.Invoke(); //   إطلاق الحدث 
+                    // تحديث واجهة الرسوم بعد الحفظ
+                    ApplyFeesRules();
+                    OnAppointmentSaved?.Invoke(); //   إطلاق الحدث
                 }
                 else
                     MessageBox.Show("فشل في حفظ موعد الاختبار.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -385,14 +383,23 @@ namespace DVLD_Management_System.Tests.Ctrl
                     return;
                 }
 
-                int fees;
-                int.TryParse(lblFees.Text.Replace("[$$$]", "").Trim(), out fees);
+                // منع التعديل إذا كانت نتيجة الاختبار قد ظهرت
+                if (IsAppointmentResultSet(_TestAppointmentID))
+                {
+                    MessageBox.Show("لا يمكن تعديل الموعد لأن نتيجة الاختبار مسجلة بالفعل.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                int result = UpdateTestAppointment(_TestAppointmentID, dtpTestDate.Value.Date,  fees );
+                // حساب الرسوم النهائية بعد التعديل
+                int totalFees = ApplyFeesRules();
+
+                int result = UpdateTestAppointment(_TestAppointmentID, dtpTestDate.Value.Date, totalFees);
 
                 if (result > 0)
                 {
                     MessageBox.Show("تم تعديل موعد الاختبار بنجاح.", "تم التعديل", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // تحديث واجهة الرسوم بعد التعديل
+                    ApplyFeesRules();
                     OnAppointmentSaved?.Invoke(); //   إطلاق الحدث 
                 }
                 else
@@ -478,35 +485,106 @@ namespace DVLD_Management_System.Tests.Ctrl
                 dtpTestDate.Value = DateTime.Today;
         }
 
+        // Helper: parse numeric fees from label text safely (ignores non-digits)
+        private int ParseFeesLabel(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return 0;
+            try
+            {
+                var digits = new System.Text.StringBuilder();
+                foreach (char c in text)
+                {
+                    if (char.IsDigit(c)) digits.Append(c);
+                }
+                if (digits.Length == 0) return 0;
+                return int.Parse(digits.ToString());
+            }
+            catch { return 0; }
+        }
+
 
         /// <summary>
-        /// تضبط الرسوم حسب وضع الإنشاء (Street / FirstTime / Retake)
+        /// تضبط وتعيد قيمة الرسوم حسب وضع الإنشاء (Street / FirstTime / Retake)
+        /// يقوم باستخدام قيم الرسوم المعروضة في الواجهة (أو القيم الافتراضية)
         /// </summary>
-        private void ApplyFeesRules()
+        private int ApplyFeesRules()
         {
-            int baseFees = 1000;      // رسوم الاختبار الأساسية
-            int retakeFees = 250;     // رسوم إعادة الاختبار
+            // نحاول قراءة الرسوم من عناصر الواجهة إن كانت معروضة، وإلا نستخدم قيم افتراضية
+            int baseFees = ParseFeesLabel(lblFees.Text);
+            int retakeFees = ParseFeesLabel(lblRetakeAppFees.Text);
 
-            switch (_CreationMode)
+            // إذا لم تكن هناك قيمة في lblFees، حاول جلبها من قاعدة البيانات بحسب TestType
+            if (baseFees == 0)
             {
-                case enCreationMode.StreetTestSchedule:
-                    lblFees.Text = baseFees.ToString();
-                    lblRetakeAppFees.Text = "0";
-                    lblTotalFees.Text = baseFees.ToString();
-                    break;
-
-                case enCreationMode.FirstTimeSchedule:
-                    lblFees.Text = baseFees.ToString();
-                    lblRetakeAppFees.Text = "0";
-                    lblTotalFees.Text = baseFees.ToString();
-                    break;
-
-                case enCreationMode.RetakeTestSchedule:
-                    lblFees.Text = baseFees.ToString();
-                    lblRetakeAppFees.Text = retakeFees.ToString();
-                    lblTotalFees.Text = (baseFees + retakeFees).ToString();
-                    break;
+                try
+                {
+                    string qFeesTest = "SELECT TOP 1 Fees FROM TestTypes WHERE TestTypeID = @TestTypeID";
+                    var pf = new Dictionary<string, object>() { { "@TestTypeID", (int)TestTypeID } };
+                    var dtf2 = ClsCommandDB.SelectCommand(qFeesTest, pf);
+                    if (dtf2 != null && dtf2.Rows.Count > 0)
+                        baseFees = Convert.ToInt32(dtf2.Rows[0][0]);
+                }
+                catch { }
             }
+
+            // إذا وضع إعادة الاختبار وتحتوي lblRetakeAppFees على صفر، نحاول جلبها من RequestTypes
+            if (_CreationMode == enCreationMode.RetakeTestSchedule && retakeFees == 0)
+            {
+                try
+                {
+                    string qFee = "SELECT TOP 1 Fees FROM RequestTypes WHERE TypeName LIKE '%Retake%' OR TypeName LIKE '%retake%'";
+                    var dtf = ClsCommandDB.SelectCommand(qFee);
+                    if (dtf != null && dtf.Rows.Count > 0)
+                        retakeFees = Convert.ToInt32(dtf.Rows[0][0]);
+                }
+                catch { }
+            }
+
+            int total = baseFees + retakeFees;
+            // تحديث واجهة المستخدم
+            lblFees.Text = baseFees.ToString();
+            lblRetakeAppFees.Text = retakeFees.ToString();
+            lblTotalFees.Text = total.ToString();
+
+            return total;
+        }
+
+
+        /// <summary>
+        /// يتحقق إن كان للشخص نتيجة ناجحة لنوع الاختبار (يمنع جدولة جديدة)
+        /// </summary>
+        private bool HasPersonPassedTestTypeLocal(int personID, int testTypeID)
+        {
+            // التفاف على الدالة المشتركة في Cls_CMDCommandLocalDrivingLicenceApp
+            return Cls_CMDCommandLocalDrivingLicenceApp.HasPersonPassedTestType(personID, testTypeID);
+        }
+
+        /// <summary>
+        /// يتحقق إن كان هناك موعد مجدول نشط لنفس الطلب ونوع الاختبار
+        /// </summary>
+        private bool IsThereActiveScheduledTestLocal(int requestID, int testTypeID)
+        {
+            return Cls_CMDCommandLocalDrivingLicenceApp.IsThereAnActiveScheduledTest(requestID, testTypeID);
+        }
+
+        /// <summary>
+        /// يفحص إذا كانت نتيجة الموعد مُسجلة (Pass/Fail) — يستخدم قبل التعديل
+        /// </summary>
+        private bool IsAppointmentResultSet(int testID)
+        {
+            try
+            {
+                string q = "SELECT Result FROM Tests WHERE TestID = @TestID";
+                var p = new Dictionary<string, object>() { { "@TestID", testID } };
+                var dt = ClsCommandDB.SelectCommand(q, p);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    var v = dt.Rows[0][0];
+                    return (v != DBNull.Value && !string.IsNullOrWhiteSpace(v.ToString()));
+                }
+            }
+            catch { }
+            return false;
         }
 
     }

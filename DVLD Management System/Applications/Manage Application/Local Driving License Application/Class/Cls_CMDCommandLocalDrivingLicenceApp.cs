@@ -150,12 +150,14 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
         /// <returns></returns>
         public static DataTable GetTestsPerType(int RequestID, int TestTypeID)
         {
+                // Return tests with a computed IsLocked flag (1 = locked / result set, 0 = not locked / result NULL)
                 string query = @"
             SELECT 
                 TestID,
                 ExamDate,
                 FeesExam,
-                Result
+                Result,
+                CASE WHEN Result IS NULL THEN 0 ELSE 1 END AS IsLocked
             FROM Tests
             WHERE 
                 TestTypeID = @TestTypeID

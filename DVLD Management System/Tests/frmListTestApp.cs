@@ -58,9 +58,80 @@ namespace DVLD_Management_System.Tests
         DataTable DT;
       void LoadData_()
         {
-            ///   تجلب  جميع الاختبارات المرتبطة بطلب معيّن ونوع اختبار محدد
+            // تجلب جميع الاختبارات المرتبطة بطلب معيّن ونوع اختبار محدد
             DT = Cls_CMDCommandLocalDrivingLicenceApp.GetTestsPerType(infoLicenseApplication.RequestID, (int)TestType);
+
+            if (DT == null)
+            {
+                DGV.DataSource = null;
+                return;
+            }
+
+            // لا نكتب نصوص داخل أعمدة رقمية: نضيف عمود عرض نصي للحقل IsLocked
+            if (DT.Columns.Contains("IsLocked") && !DT.Columns.Contains("IsLockedText"))
+            {
+                DT.Columns.Add("IsLockedText", typeof(string));
+                foreach (DataRow dr in DT.Rows)
+                {
+                    try
+                    {
+                        if (dr.IsNull("IsLocked"))
+                            dr["IsLockedText"] = "No";
+                        else
+                        {
+                            int v = 0;
+                            int.TryParse(dr["IsLocked"].ToString(), out v);
+                            dr["IsLockedText"] = (v == 1) ? "Yes" : "No";
+                        }
+                    }
+                    catch { dr["IsLockedText"] = "No"; }
+                }
+            }
+
+            // اربط الـ DataTable بعد تجهيز الأعمدة النصية
             DGV.DataSource = DT;
+
+            // ضبط رؤوس الأعمدة وتنسيقها دون تغيير قيم الأعمدة الرقمية
+            if (DGV.Columns.Contains("TestID"))
+            {
+                DGV.Columns["TestID"].HeaderText = "Appointment ID";
+                DGV.Columns["TestID"].ReadOnly = true; // منع تعديل يدخّل نص غير رقمي
+            }
+
+            if (DGV.Columns.Contains("ExamDate"))
+            {
+                DGV.Columns["ExamDate"].HeaderText = "Appointment Date";
+                DGV.Columns["ExamDate"].DefaultCellStyle.Format = "d";
+            }
+
+            if (DGV.Columns.Contains("FeesExam"))
+            {
+                DGV.Columns["FeesExam"].HeaderText = "Paid Fees";
+                DGV.Columns["FeesExam"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                DGV.Columns["FeesExam"].ReadOnly = true; // منع التعديل غير الرقمي
+            }
+
+            if (DGV.Columns.Contains("Result"))
+                DGV.Columns["Result"].HeaderText = "Result";
+
+            // نعرض العمود النصي بدلاً من العمود الرقمي IsLocked
+            if (DGV.Columns.Contains("IsLockedText"))
+            {
+                DGV.Columns["IsLockedText"].HeaderText = "Is Locked";
+                DGV.Columns["IsLockedText"].DisplayIndex = DGV.Columns.Count - 1;
+                DGV.Columns["IsLockedText"].ReadOnly = true;
+            }
+
+            // تسجيل معالج أخطاء البيانات لمنع استثناءات التحويل
+            DGV.DataError -= DGV_DataError;
+            DGV.DataError += DGV_DataError;
+
+            // إخفاء أعمدة تقنية لا نريد عرضها للمستخدم
+            if (DGV.Columns.Contains("Result"))
+                DGV.Columns["Result"].Visible = false;
+
+            if (DGV.Columns.Contains("IsLocked"))
+                DGV.Columns["IsLocked"].Visible = false;
         }
 
 
@@ -145,6 +216,13 @@ namespace DVLD_Management_System.Tests
         private void Context_TakeTest_Click(object sender, EventArgs e)
         {
 
+        }
+
+        // منع استثناءات تحويل البيانات في DataGridView
+        private void DGV_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            // إلغاء الخطأ حتى لا يظهر استثناء للمستخدم
+            e.Cancel = true;
         }
 
      
