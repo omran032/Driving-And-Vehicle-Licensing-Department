@@ -35,11 +35,25 @@ namespace DVLD_Management_System.Applications
         void LoadData()
         {
             AllData();
-            lblCountRecords.Text = "Records : " + Data.Rows.Count.ToString();
 
             //  تشغيل الحدث بعد الفلترة
             ctrlLicenseAppFelter1.EventShowFelterUser += GetData;
 
+        }
+
+        /// <summary>
+        /// Public method to refresh the main data grid from other forms
+        /// </summary>
+        public void RefreshData()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => { AllData(); }));
+            }
+            else
+            {
+                AllData();
+            }
         }
 
         // عرض بيانات طلبات رخص القادة المحلية
@@ -47,6 +61,8 @@ namespace DVLD_Management_System.Applications
         {
             Data = clsLicenseClass.GetLocalLicenseRequests();
             DGV.DataSource = Data;
+            lblCountRecords.Text = "Records : " + Data.Rows.Count.ToString();
+
         }
 
         /// <summary>
@@ -54,6 +70,7 @@ namespace DVLD_Management_System.Applications
         /// </summary>
         void GetData(DataTable Data)
         {
+             
             DGV.DataSource = Data;
         }
 
@@ -91,16 +108,26 @@ namespace DVLD_Management_System.Applications
         }
 
 
-        // زر عرض واجهة إضافة طلبات رخص محلية
-        private void btnAddLocalDrivingLicenseApp_Click(object sender, EventArgs e)
+        // عرض المعلومات Context  
+        private void Context_btnAddLocalDrivingLicenseApp_Click(object sender, EventArgs e)
         {
             if (ID_Request == -1) return;
 
             LoadInfoAppointment(); if (ID_Request == -1) return;
 
             // استدعاء الفورم
-            FrmLDLAppInfo frmLDLApp = new FrmLDLAppInfo(infoLicenseAplication);
-            MyTools.ShowForm(frmLDLApp);
+
+            FrmLDLAppInfo ShowInfoApplication = new FrmLDLAppInfo(infoLicenseAplication);
+            MyTools.ShowForm(ShowInfoApplication);
+        }
+
+        // زر عرض واجهة إضافة طلبات رخص محلية
+        private void btnAddLocalDrivingLicenseApp_Click(object sender, EventArgs e)
+        {
+            FrmAddUpdateApplication frm = new FrmAddUpdateApplication();
+            MyTools.ShowForm(frm);
+            // Refrech
+            AllData();
         }
         // تحميل بيانات الطلب بالاوبجكت
         void LoadInfoAppointment()
@@ -115,8 +142,12 @@ namespace DVLD_Management_System.Applications
         // زر عرض واجهة تعديل طلبات رخص محلية
         private void Context_btnEditLocalDrivingLicenseApp_Click(object sender, EventArgs e)
         {
-            FrmAddUpdateApplication addUpdateApplication = new FrmAddUpdateApplication(1);
-            MyTools.ShowForm(addUpdateApplication);
+            if (ID_Request == -1) return;
+
+            LoadInfoAppointment(); if (ID_Request == -1) return;
+
+            FrmAddUpdateApplication UpdateApplication = new FrmAddUpdateApplication(infoLicenseAplication);
+            MyTools.ShowForm(UpdateApplication);
             // Refrech
             AllData();
         }
@@ -230,8 +261,9 @@ namespace DVLD_Management_System.Applications
 
 
 
+
         #endregion
 
-      
+       
     }
 }

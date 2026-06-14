@@ -268,6 +268,21 @@ namespace DVLD_Management_System.Tests
         {
             int LocalDrivingLicenseApplicationID = infoLicenseApplication.RequestID;
 
+            // منع جدولة اختبار جديد إذا كان الشخص قد نجح مسبقاً في نفس نوع الاختبار
+            try
+            {
+                if (infoLicenseApplication.Person != null && infoLicenseApplication.Person.IDPerson > 0)
+                {
+                    bool passed = Cls_CMDCommandLocalDrivingLicenceApp.HasPersonPassedTestType(infoLicenseApplication.Person.IDPerson, (int)TestType);
+                    if (passed)
+                    {
+                        MessageBox.Show("لا يمكن جدولة اختبار جديد لأن الشخص ناجح مسبقاً في نفس نوع الاختبار.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+            }
+            catch { }
+
             frmScheduleTest frm = new frmScheduleTest(TestType , LocalDrivingLicenseApplicationID);
             frm.ctrlScheduleTest1.OnAppointmentSaved += LoadData_;
             frm.ShowDialog();
@@ -286,9 +301,23 @@ namespace DVLD_Management_System.Tests
 
         }
 
+        // تنفيذ الاختبار
         private void Context_TakeTest_Click(object sender, EventArgs e)
         {
+            // تأكد من وجود صف محدد
+            int appointmentID = ID_Test;
+            if (appointmentID <= 0)
+            {
+                MessageBox.Show("الرجاء تحديد موعد أولاً.\nPlease select an appointment first.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            // افتح نافذة تسجيل نتيجة الاختبار ومرر المعرف ونوع الاختبار
+            FrmTakeTest frm = new FrmTakeTest(appointmentID, TestType);
+            frm.ShowDialog();
+
+            // بعد إغلاق نافذة تسجيل النتيجة نعيد تحميل البيانات
+            LoadData_();
         }
 
         // منع استثناءات تحويل البيانات في DataGridView

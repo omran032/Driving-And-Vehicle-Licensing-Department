@@ -228,5 +228,40 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
         }
 
 
+        /// <summary>
+        /// زيادة عداد PassedTests في جدول Requests لطلب محدد
+        /// </summary>
+        public static bool IncrementRequestPassedTests(int requestID)
+        {
+            string q = @"UPDATE Requests SET PassedTests = ISNULL(PassedTests,0) + 1 WHERE RequestID = @RequestID";
+            var p = new Dictionary<string, object>() { { "@RequestID", requestID } };
+            var r = ClsCommandDB.ExecuteNonQuery_Command(q, p, false);
+            return (r != null && Convert.ToInt32(r) > 0);
+        }
+
+        /// <summary>
+        /// جلب قيمة PassedTests من جدول Requests لعرضها أو لاتخاذ قرار لاحق
+        /// </summary>
+        public static int GetRequestPassedTests(int requestID)
+        {
+            string q = @"SELECT ISNULL(PassedTests,0) FROM Requests WHERE RequestID = @RequestID";
+            var p = new Dictionary<string, object>() { { "@RequestID", requestID } };
+            object r = ClsCommandDB.ExecuteScalar_Command(q, p, false);
+            if (r == null || r == DBNull.Value) return 0;
+            try { return Convert.ToInt32(r); } catch { return 0; }
+        }
+
+        /// <summary>
+        /// إنقاص عداد PassedTests في جدول Requests لطلب محدد (عند التحويل من Pass إلى Fail)
+        /// </summary>
+        public static bool DecrementRequestPassedTests(int requestID)
+        {
+            string q = @"UPDATE Requests SET PassedTests = CASE WHEN ISNULL(PassedTests,0) > 0 THEN PassedTests - 1 ELSE 0 END WHERE RequestID = @RequestID";
+            var p = new Dictionary<string, object>() { { "@RequestID", requestID } };
+            var r = ClsCommandDB.ExecuteNonQuery_Command(q, p, false);
+            return (r != null && Convert.ToInt32(r) > 0);
+        }
+
+
     }
 }

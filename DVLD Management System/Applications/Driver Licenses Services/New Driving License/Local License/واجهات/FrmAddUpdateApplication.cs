@@ -1,5 +1,6 @@
 ﻿using DVLD_Management_System.Applications.Class;
 using DVLD_Management_System.Applications.Driver_Licenses_Services.New_Driving_License.Local_License.Class;
+using DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.Class;
 using DVLD_Management_System.Class.Class;
 using DVLD_Management_System.Manage_Persons.User_Control;
 using DVLD_Management_System.Manage_Users;
@@ -34,19 +35,116 @@ namespace DVLD_Management_System.Applications
             lblTitle.Text = "Local Driving License Application";
         }
 
-        ////////// Constractor Update /////////////
-        public FrmAddUpdateApplication(int info)
+   
+      
+
+        public FrmAddUpdateApplication(ClassInfoLicenseAplication infoLicenseAplication)
         {
             InitializeComponent();
 
             LoadModeUpdate();
             LoadData();
 
-            // المستخدم مسجل الطلب
+
+            if (infoLicenseAplication != null)
+            {
+                // تعبئة بيانات الشخص
+                person = infoLicenseAplication.Person;
+
+                // تعبئة الواجهة
+                ctrlFelterPersons1.person =  person ;
+
+
+                // تعبئة فئة الرخصة
+                try
+                {
+                    // LicenseClass in ClassInfoLicenseAplication may be the class name (e.g. "Class 2 - Heavy Motorcycle")
+                    // while the combobox expects an integer ID. Resolve the ID safely.
+                    if (!string.IsNullOrEmpty(infoLicenseAplication.LicenseClass))
+                    {
+                        int resolvedId = 0;
+
+                        // 1) If the stored value is actually numeric text, use it directly
+                        if (int.TryParse(infoLicenseAplication.LicenseClass, out resolvedId))
+                        {
+                            ComboxLicenseClass.SelectedValue = resolvedId;
+                        }
+                        else
+                        {
+                            // 2) Try to resolve from the combobox DataSource (DataTable provided by LoadData)
+                            var ds = ComboxLicenseClass.DataSource as System.Data.DataTable;
+                            string safeName = infoLicenseAplication.LicenseClass.Replace("'", "''");
+                            bool set = false;
+
+                            if (ds != null)
+                            {
+                                try
+                                {
+                                    var rows = ds.Select($"ClassName = '{safeName}'");
+                                    if (rows.Length > 0)
+                                    {
+                                        resolvedId = rows[0]["LicenseClassID"] != System.DBNull.Value ? Convert.ToInt32(rows[0]["LicenseClassID"]) : 0;
+                                        if (resolvedId > 0)
+                                        {
+                                            ComboxLicenseClass.SelectedValue = resolvedId;
+                                            set = true;
+                                        }
+                                    }
+                                }
+                                catch { }
+                            }
+
+                            // 3) Fallback: query DB for matching class name
+                            if (!set)
+                            {
+                                try
+                                {
+                                    var table = clsLicenseClass.AllClassName();
+                                    if (table != null)
+                                    {
+                                        var r = table.Select($"ClassName = '{safeName}'");
+                                        if (r.Length > 0)
+                                        {
+                                            resolvedId = r[0]["LicenseClassID"] != System.DBNull.Value ? Convert.ToInt32(r[0]["LicenseClassID"]) : 0;
+                                            if (resolvedId > 0)
+                                            {
+                                                ComboxLicenseClass.SelectedValue = resolvedId;
+                                                set = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            // try contains match as last resort
+                                            var r2 = table.Select($"ClassName LIKE '%{safeName}%'");
+                                            if (r2.Length > 0)
+                                            {
+                                                resolvedId = r2[0]["LicenseClassID"] != System.DBNull.Value ? Convert.ToInt32(r2[0]["LicenseClassID"]) : 0;
+                                                if (resolvedId > 0)
+                                                {
+                                                    ComboxLicenseClass.SelectedValue = resolvedId;
+                                                    set = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                catch { }
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    // leave combobox default selection on any error
+                }
+
+                // عرض رقم الطلب
+                lblLocalDrivingLicebseApplicationID.Text = infoLicenseAplication.RequestID.ToString();
+            }
+
             lblCreatedByUser.Text = ClassUser.UserName;
             lblApplicationDate.Text = DateTime.Now.ToString("yyyy/MM/dd");
         }
-
 
         enum Mode { New = 1 , Update = 2 };
               Mode ModeForm;
@@ -62,6 +160,32 @@ namespace DVLD_Management_System.Applications
 
         }
         /// <summary>
+        /// Public method to refresh UI data without re-attaching event handlers.
+        /// Other forms (for example FrmTakeTest) can call this after changes so the main table / controls refresh.
+        /// This will reload combo data and refresh the person info display, but will NOT call EventFilter()
+        /// to avoid duplicating event subscriptions.
+        /// </summary>
+        public void RefreshData()
+        {
+            if (DesignMode)
+                return;
+
+            // Reload shared data sources (e.g. comboboxes)
+            LoadData();
+
+            // Try to refresh the person info display if available.
+            // ctrl_InfoPerson.LoadData was used as an event handler earlier, invoking it directly refreshes the UI.
+            try
+            {
+                // ctrl_InfoPerson.LoadData expects a Person parameter — pass the current person if available
+                ctrl_InfoPerson?.LoadData(person);
+            }
+            catch
+            {
+                // Ignore any errors during refresh to avoid breaking callers.
+            }
+        }
+        /// <summary>
         /// تفعيل وضع التعديل
         /// </summary>
         void LoadModeUpdate()
@@ -69,7 +193,6 @@ namespace DVLD_Management_System.Applications
             ModeForm = Mode.Update;
             ctrlFelterPersons1.Enabled = false;
             lblTitle.Text = "Update Local Driving License Application";
-
 
         }
 
@@ -142,7 +265,7 @@ namespace DVLD_Management_System.Applications
 
                 clsRequest Request = new clsRequest()
                 {
-                    Status = 1,
+                    Status = 0, // New 
                     Fees = 15,
                     DateRequest = DateTime.Now,
                     IDPerson = IDPerson,
