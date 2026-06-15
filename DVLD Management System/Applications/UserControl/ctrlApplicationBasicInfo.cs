@@ -1,5 +1,6 @@
 ﻿using DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.Class;
 using DVLD_Management_System.Class.Class;
+using DVLD_Management_System.Class.Class_Buisness;
 using DVLD_Management_System.Manage_Persons.واجهات_فرعية;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DVLD_Management_System
 {
@@ -55,6 +57,64 @@ namespace DVLD_Management_System
         {
             FrmShowPerson showPerson = new FrmShowPerson(infoLicenseAplication.Person);
             showPerson.Show();
+        }
+
+
+
+        /// /////////////////////////////////
+
+
+
+
+
+
+
+
+        private clsApplication _Application;
+
+        private int _ApplicationID = -1;
+
+        public int ApplicationID
+        {
+            get { return _ApplicationID; }
+        }
+
+
+        public void ResetApplicationInfo()
+        {
+            _ApplicationID = -1;
+
+             lblStatus.Text = "[????]";
+            lblType.Text = "[????]";
+            lblFees.Text = "[????]";
+            lblApplicant.Text = "[????]";
+            lblDate.Text = "[????]";
+            lblCreatedByUser.Text = "[????]";
+
+        }
+
+
+        public void LoadApplicationInfo(int ApplicationID)
+        {
+            _Application = clsApplication.FindBaseApplication(ApplicationID);
+            if (_Application == null)
+            {
+                ResetApplicationInfo();
+                MessageBox.Show("No Application with ApplicationID = " + ApplicationID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+                _FillApplicationInfo();
+        }
+
+        private void _FillApplicationInfo()
+        {
+            _ApplicationID = _Application.ApplicationID;
+             lblStatus.Text = _Application.StatusText;
+            lblType.Text = _Application.ApplicationTypeInfo.Title;
+            lblFees.Text = _Application.PaidFees.ToString();
+            lblApplicant.Text = _Application.ApplicantFullName;
+            lblDate.Text = clsFormat.DateToShort(_Application.ApplicationDate);
+             lblCreatedByUser.Text = _Application.CreatedByUserInfo.UserName;
         }
 
     }

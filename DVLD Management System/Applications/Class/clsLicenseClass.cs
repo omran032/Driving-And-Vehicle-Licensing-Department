@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DVLD_Management_System.Applications.Driver_Licenses_Services.New_Driving_License.Local_License.Class
 {
-    internal class clsLicenseClass
+    public  class clsLicenseClass
     {
         public int LicenseClassID {  get; set; }
 

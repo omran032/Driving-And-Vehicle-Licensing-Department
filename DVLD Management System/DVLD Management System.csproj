@@ -133,6 +133,33 @@
     <Compile Include="Applications\Manage Test Type\واجهات\FrmUpdateTestType.Designer.cs">
       <DependentUpon>FrmUpdateTestType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Class\Class Buisness\clsApplication.cs" />
+    <Compile Include="Class\Class Buisness\clsApplicationData.cs" />
+    <Compile Include="Class\Class Buisness\clsApplicationType.cs" />
+    <Compile Include="Class\Class Buisness\clsApplicationTypeData.cs" />
+    <Compile Include="Class\Class Buisness\clsCountry.cs" />
+    <Compile Include="Class\Class Buisness\clsCountryData.cs" />
+    <Compile Include="Class\Class Buisness\clsDetainedLicense.cs" />
+    <Compile Include="Class\Class Buisness\clsDetainedLicenseData.cs" />
+    <Compile Include="Class\Class Buisness\clsDriverData.cs" />
+    <Compile Include="Class\Class Buisness\clsFormat.cs" />
+    <Compile Include="Class\Class Buisness\clsGlobal.cs" />
+    <Compile Include="Class\Class Buisness\clsInternationalLicense.cs" />
+    <Compile Include="Class\Class Buisness\clsInternationalLicenseData.cs" />
+    <Compile Include="Class\Class Buisness\clsLicenseClass.cs" />
+    <Compile Include="Class\Class Buisness\clsLicenseClassData.cs" />
+    <Compile Include="Class\Class Buisness\clsLicenseData.cs" />
+    <Compile Include="Class\Class Buisness\clsLocalDrivingLicenseApplication.cs" />
+    <Compile Include="Class\Class Buisness\clsLocalDrivingLicenseApplicationData.cs" />
+    <Compile Include="Class\Class Buisness\clsPerson.cs" />
+    <Compile Include="Class\Class Buisness\clsPersonData.cs" />
+    <Compile Include="Class\Class Buisness\clsTestAppointment.cs" />
+    <Compile Include="Class\Class Buisness\clsTestAppointmentData.cs" />
+    <Compile Include="Class\Class Buisness\clsTestData.cs" />
+    <Compile Include="Class\Class Buisness\clsTestType.cs" />
+    <Compile Include="Class\Class Buisness\clsTestTypeData.cs" />
+    <Compile Include="Class\Class Buisness\clsUser.cs" />
+    <Compile Include="Class\Class Buisness\clsUserData.cs" />
     <Compile Include="Class\Class DB\ClsCommandDB.cs" />
     <Compile Include="Class\Class DB\ClsConnection.cs" />
     <Compile Include="Class\Class\ControlHelper.cs" />
@@ -154,11 +181,25 @@
     <Compile Include="Applications\Manage Application\Local Driving License Application\UI\FrmLDLAppInfo.Designer.cs">
       <DependentUpon>FrmLDLAppInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Class\Class Buisness\clsDriver.cs" />
+    <Compile Include="Class\Class Buisness\clsLicense.cs" />
     <Compile Include="Local Licenses\Ctrl\CtrlDriverLicenseInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Local Licenses\Ctrl\CtrlDriverLicenseInfo.Designer.cs">
       <DependentUpon>CtrlDriverLicenseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Local Licenses\FrmIssueDriverLicenseFirstTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Local Licenses\FrmIssueDriverLicenseFirstTime.Designer.cs">
+      <DependentUpon>FrmIssueDriverLicenseFirstTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Local Licenses\frmShowLicenseInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Local Licenses\frmShowLicenseInfo.Designer.cs">
+      <DependentUpon>frmShowLicenseInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Manage Persons\Class\Person.cs" />
     <Compile Include="Class\Class\MyTools.cs" />
@@ -337,6 +378,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Local Licenses\Ctrl\CtrlDriverLicenseInfo.resx">
       <DependentUpon>CtrlDriverLicenseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Local Licenses\FrmIssueDriverLicenseFirstTime.resx">
+      <DependentUpon>FrmIssueDriverLicenseFirstTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Local Licenses\frmShowLicenseInfo.resx">
+      <DependentUpon>frmShowLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Manage Persons\User Control\CtrlFelterPersons.resx">
       <DependentUpon>CtrlFelterPersons.cs</DependentUpon>

@@ -1,3 +1,4 @@
+using DVLD_Management_System.Class.Class_Buisness;
 using DVLD_Management_System.Class.Class_DB;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,12 @@ namespace DVLD_Management_System.Tests.Class
         public bool TestResult { get; set; }
         public string Notes { get; set; }
         public int CreatedByUserID { get; set; }
+
+        public clsTest()
+        {
+
+        }
+
 
         public static clsTest Find(int testID)
         {
@@ -49,5 +56,112 @@ namespace DVLD_Management_System.Tests.Class
             }
             catch { return false; }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public clsTestAppointment TestAppointmentInfo { set; get; }
+
+
+        public enum enMode { AddNew = 0, Update = 1 };
+        public enMode Mode = enMode.AddNew;
+
+        public clsTest(int TestID, int TestAppointmentID,
+          bool TestResult, string Notes, int CreatedByUserID)
+
+        {
+            this.TestID = TestID;
+            this.TestAppointmentID = TestAppointmentID;
+           this.TestAppointmentInfo = clsTestAppointment.Find(TestAppointmentID);
+            this.TestResult = TestResult;
+            this.Notes = Notes;
+            this.CreatedByUserID = CreatedByUserID;
+
+            Mode = enMode.Update;
+        }
+
+        private bool _AddNewTest()
+        {
+            //call DataAccess Layer 
+
+            this.TestID = clsTestData.AddNewTest(this.TestAppointmentID,
+                this.TestResult, this.Notes, this.CreatedByUserID);
+
+
+            return (this.TestID != -1);
+        }
+
+        private bool _UpdateTest()
+        {
+            //call DataAccess Layer 
+
+            return clsTestData.UpdateTest(this.TestID, this.TestAppointmentID,
+                this.TestResult, this.Notes, this.CreatedByUserID);
+        }
+
+      
+
+        public static clsTest FindLastTestPerPersonAndLicenseClass
+            (int PersonID, int LicenseClassID, clsTestType.enTestType TestTypeID)
+        {
+            int TestID = -1;
+            int TestAppointmentID = -1;
+            bool TestResult = false; string Notes = ""; int CreatedByUserID = -1;
+
+            if (clsTestData.GetLastTestByPersonAndTestTypeAndLicenseClass
+                (PersonID, LicenseClassID, (int)TestTypeID, ref TestID,
+            ref TestAppointmentID, ref TestResult,
+            ref Notes, ref CreatedByUserID))
+
+                return new clsTest(TestID,
+                        TestAppointmentID, TestResult,
+                        Notes, CreatedByUserID);
+            else
+                return null;
+
+        }
+
+        public static DataTable GetAllTests()
+        {
+            return clsTestData.GetAllTests();
+
+        }
+
+      
+
+        public static byte GetPassedTestCount(int LocalDrivingLicenseApplicationID)
+        {
+            return clsTestData.GetPassedTestCount(LocalDrivingLicenseApplicationID);
+        }
+
+        public static bool PassedAllTests(int LocalDrivingLicenseApplicationID)
+        {
+            //if total passed test less than 3 it will return false otherwise will return true
+            return GetPassedTestCount(LocalDrivingLicenseApplicationID) == 3;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

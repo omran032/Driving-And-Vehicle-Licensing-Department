@@ -2,11 +2,15 @@
 using DVLD_Management_System.Applications.Driver_Licenses_Services.New_Driving_License.Local_License.Class;
 using DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.Class;
 using DVLD_Management_System.Class.Class;
+using DVLD_Management_System.Class.Class_DB;
+using DVLD_Management_System.Local_Licenses;
+using DVLD_Management_System.Local_Licenses.Class;
 using DVLD_Management_System.Tests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -306,8 +310,38 @@ namespace DVLD_Management_System.Applications
             Context_btnDeleteLocalDrivingLicenseApp.Enabled = !IsCompleted;
         }
 
+
         #endregion
 
+        
+        private void Context_btn_ShowLicense_Click(object sender, EventArgs e) // خيار عرض الرخصة
+        {
+            int LocalDrivingLicenseApplicationID = (int)DGV.CurrentRow.Cells[0].Value;
 
+            int LicenseID = clsLicense.GetLicenseIDByRequestID(LocalDrivingLicenseApplicationID);
+
+
+            if (LicenseID != -1)
+            {
+                frmShowLicenseInfo frm = new frmShowLicenseInfo(LicenseID);
+                frm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No License Found!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        
+        private void Context_btn_lssueDriving_Click(object sender, EventArgs e)// زر انشاء رخصة لأول مرة
+        {
+            int LocalDrivingLicenseApplicationID = (int)DGV.CurrentRow.Cells[0].Value;
+            FrmIssueDriverLicenseFirstTime frm = new FrmIssueDriverLicenseFirstTime(LocalDrivingLicenseApplicationID);
+            frm.ShowDialog();
+
+            // Refrech
+            AllData();  
+        }
     }
 }
