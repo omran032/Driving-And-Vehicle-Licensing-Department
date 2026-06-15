@@ -57,7 +57,7 @@ namespace DVLD_Management_System.Applications
         }
 
         // عرض بيانات طلبات رخص القادة المحلية
-        void AllData()
+        public void AllData()
         {
             Data = clsLicenseClass.GetLocalLicenseRequests();
             DGV.DataSource = Data;
@@ -104,7 +104,7 @@ namespace DVLD_Management_System.Applications
             FullName = DGV.Rows[IndexRow].Cells[3].Value.ToString();
             ApllicationDate = Convert.ToDateTime(DGV.Rows[IndexRow].Cells[4].Value);
             PassedTests = Convert.ToInt32(DGV.Rows[IndexRow].Cells[5].Value);
-            Status = DGV.Rows[IndexRow].Cells[6].Value.ToString();
+            Status = DGV.Rows[IndexRow].Cells[6].Value.ToString().ToLower();
         }
 
 
@@ -125,8 +125,17 @@ namespace DVLD_Management_System.Applications
         private void btnAddLocalDrivingLicenseApp_Click(object sender, EventArgs e)
         {
             FrmAddUpdateApplication frm = new FrmAddUpdateApplication();
+            // subscribe to OnSaved to refresh parent data when child adds/updates
+            frm.OnSaved += (all) =>
+            {
+                try
+                {
+                    if (all != null) all(); else AllData();
+                }
+                catch { }
+            };
             MyTools.ShowForm(frm);
-            // Refrech
+            // initial refresh after showing
             AllData();
         }
         // تحميل بيانات الطلب بالاوبجكت
@@ -147,6 +156,14 @@ namespace DVLD_Management_System.Applications
             LoadInfoAppointment(); if (ID_Request == -1) return;
 
             FrmAddUpdateApplication UpdateApplication = new FrmAddUpdateApplication(infoLicenseAplication);
+            UpdateApplication.OnSaved += (all) =>
+            {
+                try
+                {
+                    if (all != null) all(); else AllData();
+                }
+                catch { }
+            };
             MyTools.ShowForm(UpdateApplication);
             // Refrech
             AllData();
@@ -188,6 +205,12 @@ namespace DVLD_Management_System.Applications
             Status_btnSechdualeTests();
 
             CanEditRequest();
+
+            IsEncabledBtn_IssusDriverL();
+
+            IsEnabledContext_btn_ShowLicense();
+
+            IsEnabledContextDelete();
         }
 
 
@@ -232,7 +255,7 @@ namespace DVLD_Management_System.Applications
         /// </summary>
         void StatusRequest_isNew()
         {
-            Context_btnCancleApplication.Enabled = Status == "New" || Status == "Completed";
+            Context_btnCancleApplication.Enabled = Status == "new" || false;
         }
 
         /// <summary>
@@ -240,7 +263,7 @@ namespace DVLD_Management_System.Applications
         /// </summary>
         void Status_btnSechdualeTests ()
         {
-            sechduleTestsToolStripMenuItem.Enabled = PassedTests != 3 && Status != "Canceled";
+            Context_btnSechduleTests.Enabled = PassedTests != 3 && Status != "canceled";
             Context_btnSchedualeVisionTest.Enabled = PassedTests == 0;
             Context_btnSchedualeWnitteTest.Enabled = PassedTests == 1;
             Context_btnSchedualeStreetTest.Enabled = PassedTests == 2; 
@@ -252,18 +275,39 @@ namespace DVLD_Management_System.Applications
         void CanEditRequest()
         {
             // New لا يمكن تعديل الطلب الا اذا كانت حالته 
-            Context_btnEditLocalDrivingLicenseApp.Enabled = Status == "New" ;
+            Context_btnEditLocalDrivingLicenseApp.Enabled = Status == "new" ;
         }
 
+        /// <summary>
+        /// تحديد متى يمكن الضغط على زر  ...اصدار رخصة لاول مرة
+        /// </summary>
+        void IsEncabledBtn_IssusDriverL()
+        {
+            // New عندما تكون حالة الطلب 
+            // وعندما يكون الشخص قد نجح في الاختبارات كلها
+            Context_btn_lssueDriving.Enabled = Status == "new" && PassedTests == 3;
+        }
 
+        /// <summary>
+        /// تحديد متى يمكن عرض الرخصة 
+        /// </summary>
+        void IsEnabledContext_btn_ShowLicense()
+        {
+            Context_btn_ShowLicense.Enabled = Status == "completed" && PassedTests == 3;
+        }
 
+        /// <summary>
+        /// متى يسمح بالحذف
+        /// </summary>
+        void IsEnabledContextDelete()
+        {
+            bool IsCompleted = Status == "completed";
 
-
-
-
+            Context_btnDeleteLocalDrivingLicenseApp.Enabled = !IsCompleted;
+        }
 
         #endregion
 
-       
+
     }
 }

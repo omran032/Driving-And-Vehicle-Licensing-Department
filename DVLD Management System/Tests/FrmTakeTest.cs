@@ -30,8 +30,7 @@ namespace DVLD_Management_System.Tests
             _TestType = TestType;
 
         }
-
-        private void frmTakeTest_Load(object sender, EventArgs e)
+        private void FrmTakeTest_Load_1(object sender, EventArgs e)
         {
             ctrlSecheduledTest1.TestTypeID = _TestType;
 
@@ -70,16 +69,16 @@ namespace DVLD_Management_System.Tests
                 // لم يكن هناك معرف اختبار → نهيئ كائن جديد دائماً
                 _Test = new clsTest();
             }
-
         }
 
-        
+         
 
-       
+
+
         // زر الحفظ
         private void btnSave_Click_1(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to save? After that you cannot change the Pass/Fail results after you save?.",
+            if (MessageBox.Show("هل أنت متأكد أنك تريد الحفظ؟ بعد ذلك لن تتمكن من تغيير نتائج النجاح/الرسوب بعد الحفظ.",
                       "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No
              )
             {
@@ -94,9 +93,20 @@ namespace DVLD_Management_System.Tests
             _Test.Notes = txtNotes.Text.Trim();
             _Test.CreatedByUserID = ClassUser.IDUser <= 0 ? 3 : ClassUser.IDUser;
 
+
+            bool previousIsPass = false;
+
+            if (_TestID > 0)
+            {
+                var old = clsTest.Find(_TestID);
+                if (old != null)
+                    previousIsPass = old.TestResult;
+            }
+
+
             if (_Test.Save())
             {
-                MessageBox.Show("Data Saved Successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("تم الحفظ بنجاح.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnSave.Enabled = false;
                 try
                 {
@@ -107,13 +117,6 @@ namespace DVLD_Management_System.Tests
                         // إذا انتقلنا من غير ناجح إلى ناجح → زِد
                         // إذا انتقلنا من ناجح إلى غير ناجح → أنقص
                         bool currentIsPass = _Test.TestResult;
-                        // محاولة جلب الحالة السابقة من قاعدة البيانات عبر TestID (إذا وُجد)
-                        bool previousIsPass = false;
-                        if (_Test.TestID > 0)
-                        {
-                            var old = clsTest.Find(_Test.TestID);
-                            if (old != null) previousIsPass = old.TestResult;
-                        }
 
                         if (!previousIsPass && currentIsPass)
                         {
@@ -124,19 +127,26 @@ namespace DVLD_Management_System.Tests
                             Cls_CMDCommandLocalDrivingLicenceApp.DecrementRequestPassedTests(requestId);
                         }
 
-                        // بعد التعديل، تحقق إذا وصل العداد إلى 3 → حدّث الحالة إلى Completed
-                        int passed = Cls_CMDCommandLocalDrivingLicenceApp.GetRequestPassedTests(requestId);
-                        if (passed >= 3)
-                            Cls_CMDCommandLocalDrivingLicenceApp.UpdateRequestStatus(requestId, 1);
-                        else
-                            Cls_CMDCommandLocalDrivingLicenceApp.UpdateRequestStatus(requestId, 0);
+
+                        /////////////////////////////////////////    هاد لازم تحطه بس لما يطلع الرخصة لاول مرة ////////////////////////////////////////
+                        //// بعد التعديل، تحقق إذا وصل العداد إلى 3 → حدّث الحالة إلى Completed
+                        //int passed = Cls_CMDCommandLocalDrivingLicenceApp.GetRequestPassedTests(requestId);
+                        //if (passed >= 3)
+                        //    Cls_CMDCommandLocalDrivingLicenceApp.UpdateRequestStatus(requestId, 1);
+                        //else
+                        //    Cls_CMDCommandLocalDrivingLicenceApp.UpdateRequestStatus(requestId, 0);
+
+
 
                         // إذا كانت واجهة FrmLocalDrivingLicenseApplication مفتوحة فحدّثها فورياً
                         foreach (Form f in Application.OpenForms)
                         {
                             if (f is DVLD_Management_System.Applications.FrmLocalDrivingLicenseApplication frm)
                             {
-                                try { frm.RefreshData(); } catch { }
+                                try {
+                                      frm.RefreshData();
+                                    }
+                                catch { }
                             }
                         }
                     }
@@ -144,7 +154,7 @@ namespace DVLD_Management_System.Tests
                 catch { }
             }
             else
-                MessageBox.Show("Error: Data Is not Saved Successfully.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("لم يتم حفظ البيانات", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         // زر الاغلاق
@@ -152,5 +162,7 @@ namespace DVLD_Management_System.Tests
         {
             this.Close();
         }
+
+       
     }
 }

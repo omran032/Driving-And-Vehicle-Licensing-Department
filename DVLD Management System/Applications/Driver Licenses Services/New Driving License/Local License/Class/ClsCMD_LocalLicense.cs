@@ -31,7 +31,7 @@ namespace DVLD_Management_System.Applications.Driver_Licenses_Services.New_Drivi
                         where IDPerson = @PersonID 
                             and   LicenseClassID = @ClassLicenseID 
                             and  RequestTypeID  = @RquestTypeID 
-                            and Status = 1; ";                // يعني فعّال  
+                            and Status IN (0)   -- الطلبات الفعّالة فقط   ";                // يعني New  
 
             object result =  ClsCommandDB.ExecuteScalar_Command(Query, Parameters);
 

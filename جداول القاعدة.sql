@@ -80,6 +80,9 @@ ALTER TABLE Requests
 ADD CONSTRAINT FK_Requests_Users
 FOREIGN KEY (CreateByUserID) REFERENCES Users(IDUser);
 
+-- اضافة عمود عدد الاختبارات الناجحة
+ALTER TABLE Requests
+ADD PassedTests INT NOT NULL DEFAULT 0;
 
 
 -- الفحوصات

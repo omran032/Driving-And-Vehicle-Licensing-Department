@@ -38,7 +38,7 @@
             this.renewDrivingLicenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.replToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.releaseDetainedDrivingLicenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.retakeTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolS_RetakeTest = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolS_LocalDrivingLicenseApplication = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolS_internationalLicenseApplications = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,7 +103,7 @@
             this.renewDrivingLicenseToolStripMenuItem,
             this.replToolStripMenuItem,
             this.releaseDetainedDrivingLicenseToolStripMenuItem,
-            this.retakeTestToolStripMenuItem});
+            this.ToolS_RetakeTest});
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
             this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -151,11 +151,12 @@
             this.releaseDetainedDrivingLicenseToolStripMenuItem.Size = new System.Drawing.Size(399, 26);
             this.releaseDetainedDrivingLicenseToolStripMenuItem.Text = "Release Detained Driving License";
             // 
-            // retakeTestToolStripMenuItem
+            // ToolS_RetakeTest
             // 
-            this.retakeTestToolStripMenuItem.Name = "retakeTestToolStripMenuItem";
-            this.retakeTestToolStripMenuItem.Size = new System.Drawing.Size(399, 26);
-            this.retakeTestToolStripMenuItem.Text = "Retake Test";
+            this.ToolS_RetakeTest.Name = "ToolS_RetakeTest";
+            this.ToolS_RetakeTest.Size = new System.Drawing.Size(399, 26);
+            this.ToolS_RetakeTest.Text = "Retake Test";
+            this.ToolS_RetakeTest.Click += new System.EventHandler(this.ToolS_RetakeTest_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -350,7 +351,7 @@
         private System.Windows.Forms.ToolStripMenuItem renewDrivingLicenseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem replToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem releaseDetainedDrivingLicenseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem retakeTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolS_RetakeTest;
         private System.Windows.Forms.ToolStripMenuItem ToolS_LocalDrivingLicenseApplication;
         private System.Windows.Forms.ToolStripMenuItem ToolS_internationalLicenseApplications;
         private System.Windows.Forms.ToolStripMenuItem ToolSM_CurrentUserInfo;

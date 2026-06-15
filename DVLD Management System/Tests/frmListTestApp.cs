@@ -1,7 +1,9 @@
 ﻿using Dev_Note_Assistant;
 using DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.Class;
 using DVLD_Management_System.Class.Class;
+using DVLD_Management_System.Class.Class_DB;
 using DVLD_Management_System.Properties;
+using DVLD_Management_System.Tests.Ctrl;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,8 +63,8 @@ namespace DVLD_Management_System.Tests
             ///   تجلب  جميع الاختبارات المرتبطة بطلب معيّن ونوع اختبار محدد
             DT = Cls_CMDCommandLocalDrivingLicenceApp.GetTestsPerType(infoLicenseApplication.RequestID, (int)TestType);
 
-            if (DGV.Columns.Contains("Result"))
-                DGV.Columns["Result"].Visible = false;
+          //  if (DGV.Columns.Contains("Result"))
+               // DGV.Columns["Result"].Visible = false;
 
             if (DT == null)
             {
@@ -122,6 +124,8 @@ namespace DVLD_Management_System.Tests
 
             // اربط DataGridView بالجدول بعد إضافة أعمدة النص حتى يتم استخدام أعمدة العرض النصية عندما وُجدت
             DGV.DataSource = DT;
+
+            AddColumnIsLockedCheck();
 
             // ربط معالج أخطاء البيانات لمنع ظهور مربع خطأ عند تحويل القيم
             DGV.DataError -= DGV_DataError;
@@ -200,6 +204,36 @@ namespace DVLD_Management_System.Tests
         }
 
 
+        /// <summary>
+        /// الذي يعرض حالة الاختبار Check إضافة عمود 
+        /// </summary>
+        void AddColumnIsLockedCheck()
+        {
+            // إزالة أي عمود CheckBox سابق
+            if (DGV.Columns.Contains("IsLockedCheck"))
+                DGV.Columns.Remove("IsLockedCheck");
+
+            // إنشاء عمود CheckBox جديد
+            DataGridViewCheckBoxColumn chk = new DataGridViewCheckBoxColumn();
+            chk.Name = "IsLockedCheck";
+            chk.HeaderText = "Is Locked";
+            chk.DataPropertyName = "IsLocked";   // ربطه بالقيمة الأصلية 0/1
+            chk.ReadOnly = true;                 // لأنه حالة فقط، مو للتعديل
+            chk.ThreeState = false;
+
+            // إضافة العمود
+            DGV.Columns.Add(chk);
+
+            // إخفاء العمود الرقمي الأصلي
+            if (DGV.Columns.Contains("IsLocked"))
+                DGV.Columns["IsLocked"].Visible = false;
+
+            // إخفاء العمود النصي إذا كان موجود
+            if (DGV.Columns.Contains("IsLockedText"))
+                DGV.Columns["IsLockedText"].Visible = false;
+        }
+
+
         // تحميل الفورم
         private void frmListTestApp_Load(object sender, EventArgs e)
         {
@@ -268,6 +302,12 @@ namespace DVLD_Management_System.Tests
         {
             int LocalDrivingLicenseApplicationID = infoLicenseApplication.RequestID;
 
+            // التحقق من وجود موعد فعّال مسبقاً لنفس الطلب ونوع الاختبار
+            if (ctrlScheduleTest.IsThereActiveScheduledTestLocal(LocalDrivingLicenseApplicationID, (int)TestType))
+            {
+                MessageBox.Show("يوجد بالفعل موعد اختبار فعّال لهذا الطلب ولنفس نوع الاختبار.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             // منع جدولة اختبار جديد إذا كان الشخص قد نجح مسبقاً في نفس نوع الاختبار
             try
             {
@@ -295,11 +335,23 @@ namespace DVLD_Management_System.Tests
             int TestAppointmentID = ID_Test;
             int LocalDrivingLicenseApplicationID = infoLicenseApplication.RequestID;
 
-            frmScheduleTest frm = new frmScheduleTest(TestType , LocalDrivingLicenseApplicationID, TestAppointmentID);
+            if (TestAppointmentID <= 0)
+                return;
+
+            // ❗ منع تعديل اختبار ظهرت نتيجته
+            if (IsResultSet(TestAppointmentID))
+            {
+                MessageBox.Show("لا يمكن تعديل موعد اختبار ظهرت نتيجته (Pass/Fail).",
+                                "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // إذا ما في نتيجة → اسمح بالتعديل
+            frmScheduleTest frm = new frmScheduleTest(TestType, LocalDrivingLicenseApplicationID, TestAppointmentID);
             frm.ctrlScheduleTest1.OnAppointmentSaved += LoadData_;
             frm.ShowDialog();
-
         }
+
 
         // تنفيذ الاختبار
         private void Context_TakeTest_Click(object sender, EventArgs e)
@@ -308,7 +360,7 @@ namespace DVLD_Management_System.Tests
             int appointmentID = ID_Test;
             if (appointmentID <= 0)
             {
-                MessageBox.Show("الرجاء تحديد موعد أولاً.\nPlease select an appointment first.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("الرجاء تحديد موعد أولاً.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -327,6 +379,24 @@ namespace DVLD_Management_System.Tests
             e.Cancel = true;
         }
 
-     
+        bool IsResultSet(int testID)
+        {
+            try
+            {
+                string q = "SELECT Result FROM Tests WHERE TestID = @TestID";
+                var p = new Dictionary<string, object>() { { "@TestID", testID } };
+                var dt = ClsCommandDB.SelectCommand(q, p);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    var v = dt.Rows[0][0];
+                    return (v != DBNull.Value && !string.IsNullOrWhiteSpace(v.ToString()));
+                }
+            }
+            catch { }
+
+            return false;
+        }
+
     }
 }

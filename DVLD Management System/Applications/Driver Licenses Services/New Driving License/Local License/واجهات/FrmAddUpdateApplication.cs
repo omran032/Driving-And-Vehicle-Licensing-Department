@@ -20,7 +20,9 @@ namespace DVLD_Management_System.Applications
 {
     public partial class FrmAddUpdateApplication : Form
     {
-                 ////////// Constractor New /////////////
+        // حدث يُشغّل بعد إضافة أو تعديل الطلب
+        public event Action<Action> OnSaved; // المرسل يطلب Action (مثل AllData) ليتم تنفيذها من المستدعي
+                 ////////// Constractor Add /////////////
         public FrmAddUpdateApplication()
         {
             InitializeComponent();
@@ -35,8 +37,9 @@ namespace DVLD_Management_System.Applications
             lblTitle.Text = "Local Driving License Application";
         }
 
-   
-      
+
+
+        ////////// Constractor New /////////////
 
         public FrmAddUpdateApplication(ClassInfoLicenseAplication infoLicenseAplication)
         {
@@ -160,21 +163,21 @@ namespace DVLD_Management_System.Applications
 
         }
         /// <summary>
-        /// Public method to refresh UI data without re-attaching event handlers.
-        /// Other forms (for example FrmTakeTest) can call this after changes so the main table / controls refresh.
-        /// This will reload combo data and refresh the person info display, but will NOT call EventFilter()
-        /// to avoid duplicating event subscriptions.
+        /// طريقة عامة لتحديث بيانات واجهة المستخدم بدون إعادة إرفاق معالجات الأحداث.
+        /// يمكن للأشكال الأخرى (مثل FrmTakeTest) استدعاء هذا بعد التغييرات لكي يتم تحديث الجدول الرئيسي / عناصر التحكم.
+        /// سيعيد هذا تحميل بيانات القوائم المنسدلة ويحدث عرض معلومات الشخص، ولكنه لن يستدعي EventFilter()
+        /// لتجنب تكرار الاشتراكات في الأحداث.
         /// </summary>
         public void RefreshData()
         {
             if (DesignMode)
                 return;
 
-            // Reload shared data sources (e.g. comboboxes)
+            // إعادة تحميل مصادر البيانات المشتركة (مثل القوائم المنسدلة)
             LoadData();
 
-            // Try to refresh the person info display if available.
-            // ctrl_InfoPerson.LoadData was used as an event handler earlier, invoking it directly refreshes the UI.
+            // حاول تحديث عرض معلومات الشخص إذا كان متاحًا.
+            // تم استخدام ctrl_InfoPerson.LoadData كمعالج حدث سابقًا، واستدعاؤه مباشرة يجدد واجهة المستخدم.
             try
             {
                 // ctrl_InfoPerson.LoadData expects a Person parameter — pass the current person if available
@@ -182,7 +185,7 @@ namespace DVLD_Management_System.Applications
             }
             catch
             {
-                // Ignore any errors during refresh to avoid breaking callers.
+                 // تجاهل أي أخطاء أثناء التحديث لتجنب تعطيل المستدعين.
             }
         }
         /// <summary>
@@ -253,6 +256,7 @@ namespace DVLD_Management_System.Applications
                 if (APPlicationID != -1)
                 {
                     MessageBox.Show("هذا الشخص لديه طلب بالفعل في نفس الفئة", "لا يمكن إضافة الطلب", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.Close();
                     return;
                 }
 
@@ -260,6 +264,7 @@ namespace DVLD_Management_System.Applications
                 if (clsCMD_Licenses.IsLicenseExistByPersonID(IDPerson, ClassLisenseID) != -1)
                 {
                     MessageBox.Show("هذا الشخص حاصل على هذه الفئة من الرخصة", "لا يمكن إضافة الطلب", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.Close();
                     return;
                 }
 
@@ -277,12 +282,64 @@ namespace DVLD_Management_System.Applications
                 lblLocalDrivingLicebseApplicationID.Text = clsRequest.AddRequest(Request).ToString();
                 LoadModeUpdate();
 
+                // تشغيل الحدث إن وُجد: نمرّر مرجعاً لدالة التحديث العامة إذا كانت مفتوحة في الـ Forms
+                try
+                {
+                    Action allDataDelegate = null;
+                    foreach (Form f in Application.OpenForms)
+                    {
+                        if (f is DVLD_Management_System.Applications.FrmLocalDrivingLicenseApplication main)
+                        {
+                            allDataDelegate = new Action(main.AllData);
+                            break;
+                        }
+                    }
+
+                    OnSaved?.Invoke(allDataDelegate);
+                }
+                catch { }
+
             }
 
-            else if(ModeForm == Mode.Update)
+            else if (ModeForm == Mode.Update)
             {
-                
-                // وضع امر التعديل 
+                // تنفيذ التعديل عبر clsRequest.UpdateRequest
+                int reqId = 0;
+                try { reqId = Convert.ToInt32(lblLocalDrivingLicebseApplicationID.Text); } catch { reqId = 0; }
+                if (reqId <= 0) return;
+
+                clsRequest r = new clsRequest()
+                {
+                    RequestID = reqId,
+                    LicenseClassID = Convert.ToInt32(ComboxLicenseClass.SelectedValue)
+                };
+
+                bool updated = clsRequest.UpdateRequest(r);
+                if (updated)
+                {
+                    MessageBox.Show("تم تحديث الطلب بنجاح", "تم التحديث", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // تشغيل الحدث لإبلاغ الأب بتحديث البيانات
+                    try
+                    {
+                        Action allDataDelegate = null;
+                        foreach (Form f in Application.OpenForms)
+                        {
+                            if (f is DVLD_Management_System.Applications.FrmLocalDrivingLicenseApplication main)
+                            {
+                                allDataDelegate = new Action(main.AllData);
+                                break;
+                            }
+                        }
+
+                        OnSaved?.Invoke(allDataDelegate);
+                    }
+                    catch { }
+                }
+                else
+                {
+                    MessageBox.Show("فشل تحديث الطلب", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
                  
         }

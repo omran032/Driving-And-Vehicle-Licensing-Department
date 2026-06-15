@@ -19,7 +19,7 @@ namespace DVLD_Management_System.Tests.Ctrl
 {
     public partial class ctrlScheduleTest : UserControl
     {
-        public ctrlScheduleTest( )
+        public ctrlScheduleTest()
         {
             InitializeComponent();
         }
@@ -96,6 +96,8 @@ namespace DVLD_Management_System.Tests.Ctrl
                 _Mode = enMode.AddNew;
             else
                 _Mode = enMode.Update;
+
+            CheckIdDate();
 
             _LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
             _TestAppointmentID = AppointmentID;
@@ -180,7 +182,7 @@ namespace DVLD_Management_System.Tests.Ctrl
             return 0;
         }
 
-      
+
 
         // =========================
         // UI Population Helpers
@@ -256,7 +258,7 @@ namespace DVLD_Management_System.Tests.Ctrl
                 _CreationMode = attempts > 0 ? enCreationMode.RetakeTestSchedule : enCreationMode.FirstTimeSchedule;
             }
 
-      //      ApplyFeesRules(); // تحديد رسوم الدفع حسب الوضع
+            //      ApplyFeesRules(); // تحديد رسوم الدفع حسب الوضع
 
             // ضبط واجهة إعادة الاختبار
             if (_CreationMode == enCreationMode.RetakeTestSchedule)
@@ -556,7 +558,7 @@ namespace DVLD_Management_System.Tests.Ctrl
         /// <summary>
         /// يتحقق إن كان هناك موعد مجدول نشط لنفس الطلب ونوع الاختبار
         /// </summary>
-        private bool IsThereActiveScheduledTestLocal(int requestID, int testTypeID)
+        public static bool IsThereActiveScheduledTestLocal(int requestID, int testTypeID)
         {
             return Cls_CMDCommandLocalDrivingLicenceApp.IsThereAnActiveScheduledTest(requestID, testTypeID);
         }
@@ -579,6 +581,41 @@ namespace DVLD_Management_System.Tests.Ctrl
             }
             catch { }
             return false;
+        }
+
+
+        /// <summary>
+        /// يمنع ادخال تاريخ قد فات في وضع الاضافة
+        /// ويمكن تعديل تاريخ قد فات في وضع التعديل
+        /// </summary>
+        void CheckIdDate()
+        {
+            if (_Mode == enMode.Update && _TestAppointmentID > 0)
+            {
+                var appt = GetTestAppointment(_TestAppointmentID);
+
+                if (appt != null)
+                {
+                    DateTime examDate = Convert.ToDateTime(appt["ExamDate"]);
+
+                    // إذا التاريخ قد فات → امنع التعديل نهائياً
+                    if (examDate < DateTime.Today)
+                    {
+                        MessageBox.Show("لا يمكن تعديل موعد اختبار قد مضى.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        btnSave.Enabled = false;
+                        dtpTestDate.Enabled = false;
+                        return;
+                    }
+
+                    // تعبئة البيانات
+                    PopulateAppointmentInfo(appt);
+                }
+            }
+            if (_Mode == enMode.AddNew)
+            {
+                dtpTestDate.MinDate = DateTime.Today;
+            }
+
         }
 
     }

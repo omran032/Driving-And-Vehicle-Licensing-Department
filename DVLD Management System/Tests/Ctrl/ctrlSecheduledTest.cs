@@ -57,7 +57,7 @@ namespace DVLD_Management_System.Tests.Ctrl
             var model = GetAppointmentData(_TestAppointmentID);
             if (model == null)
             {
-                MessageBox.Show("No appointment found with ID=" + _TestAppointmentID, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("لم يتم العثور على موعد بالمعرف " + _TestAppointmentID, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

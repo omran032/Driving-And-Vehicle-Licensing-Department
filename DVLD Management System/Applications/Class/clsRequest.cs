@@ -68,6 +68,28 @@ namespace DVLD_Management_System.Applications.Class
             return (int)RequestID;
         }
 
+        /// <summary>
+        /// تحديث بيانات الطلب الأساسية (حالياً يدعم تحديث LicenseClassID فقط)
+        /// </summary>
+        /// <param name="RequestInfo">كائن الطلب مع RequestID وقيمة LicenseClassID المراد تحديثها</param>
+        /// <returns>true إذا تم التحديث</returns>
+        public static bool UpdateRequest(clsRequest RequestInfo)
+        {
+            if (RequestInfo == null || RequestInfo.RequestID <= 0) return false;
+
+            var Parameters = new Dictionary<string, object>()
+            {
+                { "@LicenseClassID", RequestInfo.LicenseClassID },
+                { "@RequestID", RequestInfo.RequestID }
+            };
+
+            string Query = @"UPDATE Requests SET LicenseClassID = @LicenseClassID WHERE RequestID = @RequestID";
+
+            var result = ClsCommandDB.ExecuteNonQuery_Command(Query, Parameters, false);
+
+            return (result != null && Convert.ToInt32(result) > 0);
+        }
+
 
     }
 }
