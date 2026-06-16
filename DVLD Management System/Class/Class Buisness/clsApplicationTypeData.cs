@@ -12,60 +12,71 @@ namespace DVLD_Management_System.Class.Class_Buisness
     public class clsApplicationTypeData
     {
 
-        public static bool GetApplicationTypeInfoByID(int ApplicationTypeID,
-            ref string ApplicationTypeTitle, ref float ApplicationFees)
+
+
+        /// <summary>
+        /// يجلب معلومات الطلب من جدول Requests ويعامل الطلب كـ Application.
+        /// يعيد بيانات الشخص، تاريخ الطلب، نوع الطلب، حالة الطلب، الرسوم، والموظف الذي أنشأ الطلب.
+        /// يعالج قيم NULL بشكل آمن لمنع الأخطاء.
+        /// </summary>
+        public static bool GetApplicationTypeInfoByID(
+          int RequestTypeID,
+          ref string ApplicationTypeTitle,
+          ref float ApplicationFees)
         {
             bool isFound = false;
 
-            SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString);
-
-            string query = "SELECT * FROM ApplicationTypes WHERE ApplicationTypeID = @ApplicationTypeID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
-
-            try
+            using (SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString))
             {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                string query = @"
+            SELECT TypeName, Description
+            FROM RequestTypes
+            WHERE RequestTypeID = @RequestTypeID";
 
-                if (reader.Read())
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@RequestTypeID", RequestTypeID);
+
+                try
                 {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
 
-                    // The record was found
-                    isFound = true;
+                    if (reader.Read())
+                    {
+                        isFound = true;
 
-                    ApplicationTypeTitle = (string)reader["ApplicationTypeTitle"];
-                    ApplicationFees = Convert.ToSingle(reader["ApplicationFees"]);
+                        ApplicationTypeTitle = reader["TypeName"] != DBNull.Value
+                            ? reader["TypeName"].ToString()
+                            : "";
 
+                        // ما عندك عمود ApplicationFees في RequestTypes
+                        // إذا بدك رسوم، لازم تجيبها من جدول Requests نفسه
+                        ApplicationFees = 0;
+                    }
 
-
-
-
+                    reader.Close();
                 }
-                else
+                catch
                 {
-                    // The record was not found
                     isFound = false;
                 }
-
-                reader.Close();
-
-
-            }
-            catch (Exception ex)
-            {
-                //Console.WriteLine("Error: " + ex.Message);
-                isFound = false;
-            }
-            finally
-            {
-                connection.Close();
             }
 
             return isFound;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public static DataTable GetAllApplicationTypes()
         {

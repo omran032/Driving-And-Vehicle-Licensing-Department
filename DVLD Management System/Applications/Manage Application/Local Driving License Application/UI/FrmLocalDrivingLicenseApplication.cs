@@ -337,7 +337,11 @@ namespace DVLD_Management_System.Applications
         private void Context_btn_lssueDriving_Click(object sender, EventArgs e)// زر انشاء رخصة لأول مرة
         {
             int LocalDrivingLicenseApplicationID = (int)DGV.CurrentRow.Cells[0].Value;
-            FrmIssueDriverLicenseFirstTime frm = new FrmIssueDriverLicenseFirstTime(LocalDrivingLicenseApplicationID);
+            if (ID_Request == -1) return;
+
+            LoadInfoAppointment();  
+
+            FrmIssueDriverLicenseFirstTime frm = new FrmIssueDriverLicenseFirstTime(LocalDrivingLicenseApplicationID , infoLicenseAplication);
             frm.ShowDialog();
 
             // Refrech

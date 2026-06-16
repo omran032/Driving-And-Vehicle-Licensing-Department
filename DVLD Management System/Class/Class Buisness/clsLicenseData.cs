@@ -375,52 +375,56 @@ namespace DVLD_Management_System.Class.Class_Buisness
             return (rowsAffected > 0);
         }
 
+        /// <summary>
+        /// يجلب رقم الرخصة الفعّالة لشخص معيّن حسب فئة الرخصة.
+        /// يعتمد على الربط بين Licenses و Requests عبر RequestID.
+        /// </summary>
         public static int GetActiveLicenseIDByPersonID(int PersonID, int LicenseClassID)
         {
             int LicenseID = -1;
 
-            SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString);
-
-            string query = @"SELECT        Licenses.LicenseID
-                            FROM Licenses INNER JOIN
-                                                     Drivers ON Licenses.DriverID = Drivers.DriverID
-                            WHERE  
-                             
-                             Licenses.LicenseClass = @LicenseClass 
-                              AND Drivers.PersonID = @PersonID
-                              And IsActive=1;";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@PersonID", PersonID);
-            command.Parameters.AddWithValue("@LicenseClass", LicenseClassID);
-
-            try
+            using (SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString))
             {
-                connection.Open();
+                string query = @"
+            SELECT Licences.LicenceID
+            FROM Licenses AS Licences
+            INNER JOIN Requests AS Req
+                ON Licences.RequestID = Req.RequestID
+            WHERE Req.IDPerson = @PersonID
+              AND Licences.LicenseClassID = @LicenseClassID
+              AND Licences.StatusRelease = 1";
 
-                object result = command.ExecuteScalar();
+                SqlCommand command = new SqlCommand(query, connection);
 
-                if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                command.Parameters.AddWithValue("@PersonID", PersonID);
+                command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
+
+                try
                 {
-                    LicenseID = insertedID;
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int foundID))
+                    {
+                        LicenseID = foundID;
+                    }
+                }
+                catch
+                {
+                    // تجاهل الخطأ وإرجاع -1
                 }
             }
 
-            catch (Exception ex)
-            {
-                //Console.WriteLine("Error: " + ex.Message);
-
-            }
-
-            finally
-            {
-                connection.Close();
-            }
-
-
             return LicenseID;
         }
+
+
+
+
+
+
+
 
         public static bool DeactivateLicense(int LicenseID)
         {

@@ -470,12 +470,9 @@
     <Content Include="AI\haarcascade_frontalface_default.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DB_DVLD.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="DB_DVLD.mdf" />
     <Content Include="DB_DVLD_log.ldf">
       <DependentUpon>DB_DVLD.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="License-LGPL.txt" />
     <None Include="Resources\Edit.png" />

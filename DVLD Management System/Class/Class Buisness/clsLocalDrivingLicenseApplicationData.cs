@@ -12,60 +12,145 @@ namespace DVLD_Management_System.Class.Class_Buisness
     public class clsLocalDrivingLicenseApplicationData
     {
 
-        public static bool GetLocalDrivingLicenseApplicationInfoByID(
-            int LocalDrivingLicenseApplicationID, ref int ApplicationID,
+        /// <summary>
+        ///  يجلب معلومات طلب رخصة قيادة محلية من جدول Requests
+        ///  اعتماداً على رقم الطلب (RequestID).
+        ///  يرجع ApplicationID (هو نفسه RequestID) و LicenseClassID.
+        /// </summary>
+        public static bool GetLocalDrivingLicenseApplicationInfoByID____(
+            int RequestID,
+            ref int ApplicationID,
             ref int LicenseClassID)
         {
             bool isFound = false;
 
-            SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString);
-
-
-            string query = "SELECT * FROM LocalDrivingLicenseApplications WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
-
-            try
+            using (SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString))
             {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                string query = @"
+            SELECT RequestID, LicenseClassID
+            FROM Requests
+            WHERE RequestID = @RequestID";
 
-                if (reader.Read())
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@RequestID", RequestID);
+
+                try
                 {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
 
-                    // The record was found
-                    isFound = true;
+                    if (reader.Read())
+                    {
+                        isFound = true;
 
-                    ApplicationID = (int)reader["ApplicationID"];
-                    LicenseClassID = (int)reader["LicenseClassID"];
+                        ApplicationID = Convert.ToInt32(reader["RequestID"]);
+                        LicenseClassID = Convert.ToInt32(reader["LicenseClassID"]);
+                    }
 
-
-
+                    reader.Close();
                 }
-                else
+                catch(Exception ex)
                 {
-                    // The record was not found
+                    Console.WriteLine("Error: " + ex.Message);
                     isFound = false;
                 }
-
-                reader.Close();
-
-
-            }
-            catch (Exception ex)
-            {
-                //Console.WriteLine("Error: " + ex.Message);
-                isFound = false;
-            }
-            finally
-            {
-                connection.Close();
             }
 
             return isFound;
         }
+
+
+        ///// <summary>
+        /////  يجلب ApplicationID الحقيقي + LicenseClassID من جدول Requests
+        ///// </summary>
+        //public static bool GetLocalDrivingLicenseApplicationInfoByID(
+        //    int RequestID,
+        //    ref int ApplicationID,
+        //    ref int LicenseClassID)
+        //{
+        //    bool isFound = false;
+
+        //    using (SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString))
+        //    {
+        //        string query = @"
+        //    SELECT ApplicationID, LicenseClassID
+        //    FROM Requests
+        //    WHERE RequestID = @RequestID";
+
+        //        SqlCommand command = new SqlCommand(query, connection);
+        //        command.Parameters.AddWithValue("@RequestID", RequestID);
+
+        //        try
+        //        {
+        //            connection.Open();
+        //            SqlDataReader reader = command.ExecuteReader();
+
+        //            if (reader.Read())
+        //            {
+        //                isFound = true;
+
+        //                ApplicationID = Convert.ToInt32(reader["ApplicationID"]);
+        //                LicenseClassID = Convert.ToInt32(reader["LicenseClassID"]);
+        //            }
+
+        //            reader.Close();
+        //        }
+        //        catch
+        //        {
+        //            isFound = false;
+        //        }
+        //    }
+
+        //    return isFound;
+        //}
+
+        /// <summary>
+        /// يجلب LicenseClassID من جدول Requests
+        /// ويعتبر أن ApplicationID = RequestID
+        /// </summary>
+        public static bool GetLocalDrivingLicenseApplicationInfoByID(
+            int RequestID,
+            ref int ApplicationID,
+            ref int LicenseClassID)
+        {
+            bool isFound = false;
+
+            using (SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString))
+            {
+                string query = @"
+            SELECT LicenseClassID
+            FROM Requests
+            WHERE RequestID = @RequestID";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@RequestID", RequestID);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        isFound = true;
+
+                        // ApplicationID = RequestID
+                        ApplicationID = RequestID;
+
+                        LicenseClassID = Convert.ToInt32(reader["LicenseClassID"]);
+                    }
+
+                    reader.Close();
+                }
+                catch
+                {
+                    isFound = false;
+                }
+            }
+
+            return isFound;
+        }
+
 
         public static bool GetLocalDrivingLicenseApplicationInfoByApplicationID(
          int ApplicationID, ref int LocalDrivingLicenseApplicationID,

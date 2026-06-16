@@ -81,6 +81,39 @@ namespace DVLD_Management_System.Class.Class_Buisness
             Mode = enMode.Update;
         }
 
+
+        public clsPerson(
+    int personID,
+    string fullName,
+    string housing,
+    string phone,
+    string email,
+    string nationality,
+    string nationalNumber,
+    string gender,
+    DateTime birthdate,
+    byte[] picture)
+        {
+            PersonID = personID;
+         //   FullName = fullName;
+            Housing = housing;
+            Phone = phone;
+            Email = email;
+            Nationality = nationality;
+            NationalNumber = nationalNumber;
+            Gender = gender;
+            Birthdate = birthdate;
+            Picture = picture;
+        }
+       //  public string FullName { get; set; }
+        public string Housing { get; set; }
+         public string Nationality { get; set; }
+        public string NationalNumber { get; set; }
+        public string Gender { get; set; }
+        public DateTime Birthdate { get; set; }
+        public byte[] Picture { get; set; }
+
+
         private bool _AddNewPerson()
         {
             //call DataAccess Layer 
@@ -105,29 +138,48 @@ namespace DVLD_Management_System.Class.Class_Buisness
                   this.NationalityCountryID, this.ImagePath);
         }
 
+        /// <summary>
+        /// يبحث عن شخص في قاعدة البيانات باستخدام IDPerson.
+        /// يجلب البيانات من جدول Persons ويعيد كائن clsPerson جاهز.
+        /// </summary>
         public static clsPerson Find(int PersonID)
         {
+            string FullName = "", Housing = "", Phone = "", Email = "",
+                   Nationality = "", NationalNumber = "", Gender = "";
+            DateTime Birthdate = DateTime.MinValue;
+            byte[] Picture = null;
 
-            string FirstName = "", SecondName = "", ThirdName = "", LastName = "", NationalNo = "", Email = "", Phone = "", Address = "", ImagePath = "";
-            DateTime DateOfBirth = DateTime.Now;
-            int NationalityCountryID = -1;
-            short Gendor = 0;
+            bool IsFound = clsPersonData.GetPersonInfoByID(
+                PersonID,
+                ref FullName,
+                ref Housing,
+                ref Phone,
+                ref Email,
+                ref Nationality,
+                ref NationalNumber,
+                ref Gender,
+                ref Birthdate,
+                ref Picture
+            );
 
-            bool IsFound = clsPersonData.GetPersonInfoByID
-                                (
-                                    PersonID, ref FirstName, ref SecondName,
-                                    ref ThirdName, ref LastName, ref NationalNo, ref DateOfBirth,
-                                    ref Gendor, ref Address, ref Phone, ref Email,
-                                    ref NationalityCountryID, ref ImagePath
-                                );
-
-            if (IsFound)
-                //we return new object of that person with the right data
-                return new clsPerson(PersonID, FirstName, SecondName, ThirdName, LastName,
-                          NationalNo, DateOfBirth, Gendor, Address, Phone, Email, NationalityCountryID, ImagePath);
-            else
+            if (!IsFound)
                 return null;
+
+            // إنشاء كائن clsPerson الجديد المتوافق مع قاعدة البيانات
+            return new clsPerson(
+                PersonID,
+                FullName,
+                Housing,
+                Phone,
+                Email,
+                Nationality,
+                NationalNumber,
+                Gender,
+                Birthdate,
+                Picture
+            );
         }
+
 
         public static clsPerson Find(string NationalNo)
         {

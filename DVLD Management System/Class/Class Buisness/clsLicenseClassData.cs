@@ -12,59 +12,73 @@ namespace DVLD_Management_System.Class.Class_Buisness
     public class clsLicenseClassData
     {
 
-        public static bool GetLicenseClassInfoByID(int LicenseClassID,
-            ref string ClassName, ref string ClassDescription, ref byte MinimumAllowedAge,
-            ref byte DefaultValidityLength, ref float ClassFees)
+        /// <summary>
+        /// يجلب معلومات فئة الرخصة من جدول LicenseClass اعتماداً على رقم الفئة.
+        /// يعيد اسم الفئة، الوصف، العمر الأدنى، مدة الصلاحية الافتراضية، والرسوم.
+        /// </summary>
+        public static bool GetLicenseClassInfoByClassID(
+            int LicenseClassID,
+            ref string ClassName,
+            ref string ClassDescription,
+            ref byte MinimumAllowedAge,
+            ref byte DefaultValidityLength,
+            ref float ClassFees)
         {
             bool isFound = false;
 
-            SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString);
-
-            string query = "SELECT * FROM LicenseClasses WHERE LicenseClassID = @LicenseClassID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
-
-            try
+            using (SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString))
             {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                string query = @"
+            SELECT ClassName, ClassDescription, MinAge, ValidatyLength, [Class fees]
+            FROM LicenseClass
+            WHERE LicenseClassID = @LicenseClassID";
 
-                if (reader.Read())
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
+
+                try
                 {
-                    // The record was found
-                    isFound = true;
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
 
-                    ClassName = (string)reader["ClassName"];
-                    ClassDescription = (string)reader["ClassDescription"];
-                    MinimumAllowedAge = (byte)reader["MinimumAllowedAge"];
-                    DefaultValidityLength = (byte)reader["DefaultValidityLength"];
-                    ClassFees = Convert.ToSingle(reader["ClassFees"]);
+                    if (reader.Read())
+                    {
+                        isFound = true;
 
+                        ClassName = reader["ClassName"]?.ToString() ?? "";
+                        ClassDescription = reader["ClassDescription"]?.ToString() ?? "";
+
+                        MinimumAllowedAge = reader["MinAge"] != DBNull.Value
+                            ? Convert.ToByte(reader["MinAge"])
+                            : (byte)0;
+
+                        DefaultValidityLength = reader["ValidatyLength"] != DBNull.Value
+                            ? Convert.ToByte(reader["ValidatyLength"])
+                            : (byte)0;
+
+                        ClassFees = reader["Class fees"] != DBNull.Value
+                            ? Convert.ToSingle(reader["Class fees"])
+                            : 0;
+                    }
+
+                    reader.Close();
                 }
-                else
+                catch
                 {
-                    // The record was not found
                     isFound = false;
                 }
-
-                reader.Close();
-
-
-            }
-            catch (Exception ex)
-            {
-                //Console.WriteLine("Error: " + ex.Message);
-                isFound = false;
-            }
-            finally
-            {
-                connection.Close();
             }
 
             return isFound;
         }
+
+
+
+
+
+
+
+
 
 
         public static bool GetLicenseClassInfoByClassName(string ClassName, ref int LicenseClassID,

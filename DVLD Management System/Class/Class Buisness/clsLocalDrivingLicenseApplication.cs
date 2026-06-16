@@ -37,25 +37,52 @@ namespace DVLD_Management_System.Class.Class_Buisness
 
         }
 
-        private clsLocalDrivingLicenseApplication(int LocalDrivingLicenseApplicationID, int ApplicationID, int ApplicantPersonID,
-            DateTime ApplicationDate, int ApplicationTypeID,
-             enApplicationStatus ApplicationStatus, DateTime LastStatusDate,
-             float PaidFees, int CreatedByUserID, int LicenseClassID)
 
+        public clsPerson PersonInfo { get; set; }
+
+
+        /// <summary>
+        ///  يبني كائن طلب رخصة قيادة محلية اعتماداً على بيانات Requests + Applications
+        /// </summary>
+        public clsLocalDrivingLicenseApplication(
+            int requestID,
+            int applicationID,
+            int applicantPersonID,
+            DateTime applicationDate,
+            int applicationTypeID,
+            enApplicationStatus applicationStatus,
+            DateTime lastStatusDate,
+            float paidFees,
+            int createdByUserID,
+            int licenseClassID)
         {
-            this.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID; ;
-            this.ApplicationID = ApplicationID;
-            this.ApplicantPersonID = ApplicantPersonID;
-            this.ApplicationDate = ApplicationDate;
-            this.ApplicationTypeID = (int)ApplicationTypeID;
-            this.ApplicationStatus = ApplicationStatus;
-            this.LastStatusDate = LastStatusDate;
-            this.PaidFees = PaidFees;
-            this.CreatedByUserID = CreatedByUserID;
-            this.LicenseClassID = LicenseClassID;
-            this.LicenseClassInfo = clsLicenseClass.Find(LicenseClassID);
-            Mode = enMode.Update;
+            this.LocalDrivingLicenseApplicationID = requestID;
+            this.ApplicationID = applicationID;
+            this.ApplicantPersonID = applicantPersonID;
+            this.ApplicationDate = applicationDate;
+            this.ApplicationTypeID = applicationTypeID;
+            this.ApplicationStatus = applicationStatus;
+            this.LastStatusDate = lastStatusDate;
+            this.PaidFees = paidFees;
+            this.CreatedByUserID = createdByUserID;
+            this.LicenseClassID = licenseClassID;
+
+            // تحميل معلومات الشخص
+            this.PersonInfo = clsPerson.Find(applicantPersonID);
+
+            // تحميل معلومات الفئة
+            this.LicenseClassInfo = clsLicenseClass.Find(licenseClassID);
         }
+
+
+
+
+
+
+
+
+
+
 
         private bool _AddNewLocalDrivingLicenseApplication()
         {
@@ -77,6 +104,34 @@ namespace DVLD_Management_System.Class.Class_Buisness
                 this.LocalDrivingLicenseApplicationID, this.ApplicationID, this.LicenseClassID);
 
         }
+
+
+
+        public static clsLocalDrivingLicenseApplication FindByLocalDrivingAppLicenseID_(int RequestID)
+        {
+            int LicenseClassID = -1;
+
+            bool IsFound = clsLocalDrivingLicenseApplicationData.GetLocalDrivingLicenseApplicationInfoByID
+                (RequestID, ref RequestID, ref LicenseClassID);
+
+            if (!IsFound)
+                return null;
+
+            // ApplicationID = RequestID
+            clsApplication Application = clsApplication.FindBaseApplication(RequestID);
+
+            if (Application == null)
+                return null;
+
+            return new clsLocalDrivingLicenseApplication(
+                RequestID, RequestID,
+                Application.ApplicantPersonID,
+                Application.ApplicationDate, Application.ApplicationTypeID,
+                (enApplicationStatus)Application.ApplicationStatus, Application.LastStatusDate,
+                Application.PaidFees, Application.CreatedByUserID, LicenseClassID);
+        }
+
+
 
         public static clsLocalDrivingLicenseApplication FindByLocalDrivingAppLicenseID(int LocalDrivingLicenseApplicationID)
         {

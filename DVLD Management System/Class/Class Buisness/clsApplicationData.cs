@@ -11,22 +11,32 @@ namespace DVLD_Management_System.Class.Class_Buisness
 {
     public class clsApplicationData
     {
-      
 
-        public static bool GetApplicationInfoByID(int ApplicationID, 
-            ref int ApplicantPersonID, ref DateTime ApplicationDate, ref int ApplicationTypeID, 
-            ref byte ApplicationStatus,ref DateTime LastStatusDate,
-            ref float PaidFees, ref int CreatedByUserID)
+
+        /// <summary>
+        /// يجلب معلومات الطلب من جدول Requests ويعتبره Application
+        /// </summary>
+        public static bool GetApplicationInfoByID(
+        int RequestID,
+        ref int ApplicantPersonID,
+        ref DateTime ApplicationDate,
+        ref int ApplicationTypeID,
+        ref byte ApplicationStatus,
+        ref DateTime LastStatusDate,
+        ref float PaidFees,
+        ref int CreatedByUserID)
+        {
+            bool isFound = false;
+
+            using (SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString))
             {
-                bool isFound = false;
-
-                SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString);
-
-                string query = "SELECT * FROM Applications WHERE ApplicationID = @ApplicationID";
+                string query = @"
+            SELECT IDPerson, DateRequest, RequestTypeID, Status, Fees, CreateByUserID
+            FROM Requests
+            WHERE RequestID = @RequestID";
 
                 SqlCommand command = new SqlCommand(query, connection);
-
-                command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
+                command.Parameters.AddWithValue("@RequestID", RequestID);
 
                 try
                 {
@@ -35,42 +45,28 @@ namespace DVLD_Management_System.Class.Class_Buisness
 
                     if (reader.Read())
                     {
-
-                        // The record was found
                         isFound = true;
 
-                        ApplicantPersonID = (int)reader["ApplicantPersonID"];
-                        ApplicationDate = (DateTime) reader["ApplicationDate"];
-                        ApplicationTypeID = (int)reader["ApplicationTypeID"];
-                        ApplicationStatus = (byte)reader["ApplicationStatus"];
-                        LastStatusDate = (DateTime)reader["LastStatusDate"];
-                        PaidFees = Convert.ToSingle(reader["PaidFees"]);
-                        CreatedByUserID = (int)reader["CreatedByUserID"];
-
-
-                    }
-                    else
-                    {
-                        // The record was not found
-                        isFound = false;
+                        ApplicantPersonID = reader["IDPerson"] != DBNull.Value ? Convert.ToInt32(reader["IDPerson"]) : -1;
+                        ApplicationDate = reader["DateRequest"] != DBNull.Value ? Convert.ToDateTime(reader["DateRequest"]) : DateTime.MinValue;
+                        ApplicationTypeID = reader["RequestTypeID"] != DBNull.Value ? Convert.ToInt32(reader["RequestTypeID"]) : -1;
+                        ApplicationStatus = reader["Status"] != DBNull.Value ? Convert.ToByte(reader["Status"]) : (byte)0;
+                        LastStatusDate = ApplicationDate;
+                        PaidFees = reader["Fees"] != DBNull.Value ? Convert.ToSingle(reader["Fees"]) : 0;
+                        CreatedByUserID = reader["CreateByUserID"] != DBNull.Value ? Convert.ToInt32(reader["CreateByUserID"]) : -1;
                     }
 
                     reader.Close();
-
-
                 }
-                catch (Exception ex)
+                catch
                 {
-                    //Console.WriteLine("Error: " + ex.Message);
                     isFound = false;
                 }
-                finally
-                {
-                    connection.Close();
-                }
-
-                return isFound;
             }
+
+            return isFound;
+        }
+
 
         public static DataTable GetAllApplications()
             {

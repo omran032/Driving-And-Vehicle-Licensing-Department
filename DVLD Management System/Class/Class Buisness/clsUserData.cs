@@ -12,59 +12,63 @@ namespace DVLD_Management_System.Class.Class_Buisness
     public class clsUserData
     {
 
-        public static bool GetUserInfoByUserID(int UserID, ref int PersonID, ref string UserName,
-            ref string Password, ref bool IsActive)
+        /// <summary>
+        /// يجلب معلومات المستخدم من جدول Users اعتماداً على رقم المستخدم (IDUser).
+        /// يعيد رقم الشخص المرتبط بالمستخدم، اسم المستخدم، كلمة المرور،
+        /// وحالة الحساب (Active / Inactive) بشكل Boolean.
+        /// </summary>
+        public static bool GetUserInfoByUserID(
+            int UserID,
+            ref int PersonID,
+            ref string UserName,
+            ref string Password,
+            ref bool IsActive)
         {
             bool isFound = false;
 
-            SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString);
-
-            string query = "SELECT * FROM Users WHERE UserID = @UserID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@UserID", UserID);
-
-            try
+            using (SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString))
             {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                string query = @"
+            SELECT IDPerson, UserName, Password, [Status Account]
+            FROM Users
+            WHERE IDUser = @UserID";
 
-                if (reader.Read())
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@UserID", UserID);
+
+                try
                 {
-                    // The record was found
-                    isFound = true;
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
 
-                    PersonID = (int)reader["PersonID"];
-                    UserName = (string)reader["UserName"];
-                    Password = (string)reader["Password"];
-                    IsActive = (bool)reader["IsActive"];
+                    if (reader.Read())
+                    {
+                        isFound = true;
 
+                        PersonID = reader["IDPerson"] != DBNull.Value
+                            ? Convert.ToInt32(reader["IDPerson"])
+                            : -1;
 
+                        UserName = reader["UserName"]?.ToString() ?? "";
+
+                        Password = reader["Password"]?.ToString() ?? "";
+
+                        // تحويل Status Account إلى Boolean
+                        string status = reader["Status Account"]?.ToString() ?? "Inactive";
+                        IsActive = status.ToLower() == "active" || status.ToLower() == "action";
+                    }
+
+                    reader.Close();
                 }
-                else
+                catch
                 {
-                    // The record was not found
                     isFound = false;
                 }
-
-                reader.Close();
-
-
-            }
-            catch (Exception ex)
-            {
-                //Console.WriteLine("Error: " + ex.Message);
-
-                isFound = false;
-            }
-            finally
-            {
-                connection.Close();
             }
 
             return isFound;
         }
+
 
 
         public static bool GetUserInfoByPersonID(int PersonID, ref int UserID, ref string UserName,

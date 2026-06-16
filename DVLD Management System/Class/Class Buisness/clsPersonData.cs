@@ -11,97 +11,72 @@ namespace DVLD_Management_System.Class.Class_Buisness
 {
     public class clsPersonData
     {
-
-        public static bool GetPersonInfoByID(int PersonID, ref string FirstName, ref string SecondName,
-          ref string ThirdName, ref string LastName, ref string NationalNo, ref DateTime DateOfBirth,
-           ref short Gendor, ref string Address, ref string Phone, ref string Email,
-           ref int NationalityCountryID, ref string ImagePath)
+        /// <summary>
+        /// يجلب معلومات الشخص من جدول Persons اعتماداً على رقم الشخص (IDPerson).
+        /// يعيد الاسم الكامل، السكن، الهاتف، البريد، الجنسية، الرقم الوطني، الجنس، تاريخ الميلاد، والصورة.
+        /// يعالج قيم NULL بشكل آمن.
+        /// </summary>
+        public static bool GetPersonInfoByID(
+            int PersonID,
+            ref string FullName,
+            ref string Housing,
+            ref string Phone,
+            ref string Email,
+            ref string Nationality,
+            ref string NationalNumber,
+            ref string Gender,
+            ref DateTime Birthdate,
+            ref byte[] Picture)
         {
             bool isFound = false;
 
-            SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString);
-
-            string query = "SELECT * FROM People WHERE PersonID = @PersonID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@PersonID", PersonID);
-
-            try
+            using (SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString))
             {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                string query = @"
+            SELECT FullName, Housing, NumPhone, Email, Nationality, [National number],
+                   Gender, Birthdate, Picture
+            FROM Persons
+            WHERE IDPerson = @PersonID";
 
-                if (reader.Read())
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@PersonID", PersonID);
+
+                try
                 {
-                    // The record was found
-                    isFound = true;
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
 
-                    FirstName = (string)reader["FirstName"];
-                    SecondName = (string)reader["SecondName"];
-
-                    //ThirdName: allows null in database so we should handle null
-                    if (reader["ThirdName"] != DBNull.Value)
+                    if (reader.Read())
                     {
-                        ThirdName = (string)reader["ThirdName"];
-                    }
-                    else
-                    {
-                        ThirdName = "";
-                    }
+                        isFound = true;
 
-                    LastName = (string)reader["LastName"];
-                    NationalNo = (string)reader["NationalNo"];
-                    DateOfBirth = (DateTime)reader["DateOfBirth"];
-                    Gendor = (byte)reader["Gendor"];
-                    Address = (string)reader["Address"];
-                    Phone = (string)reader["Phone"];
+                        FullName = reader["FullName"]?.ToString() ?? "";
+                        Housing = reader["Housing"]?.ToString() ?? "";
+                        Phone = reader["NumPhone"]?.ToString() ?? "";
+                        Email = reader["Email"]?.ToString() ?? "";
+                        Nationality = reader["Nationality"]?.ToString() ?? "";
+                        NationalNumber = reader["National number"]?.ToString() ?? "";
+                        Gender = reader["Gender"]?.ToString() ?? "";
+                        Birthdate = reader["Birthdate"] != DBNull.Value
+                            ? Convert.ToDateTime(reader["Birthdate"])
+                            : DateTime.MinValue;
 
-
-                    //Email: allows null in database so we should handle null
-                    if (reader["Email"] != DBNull.Value)
-                    {
-                        Email = (string)reader["Email"];
-                    }
-                    else
-                    {
-                        Email = "";
+                        Picture = reader["Picture"] != DBNull.Value
+                            ? (byte[])reader["Picture"]
+                            : null;
                     }
 
-                    NationalityCountryID = (int)reader["NationalityCountryID"];
-
-                    //ImagePath: allows null in database so we should handle null
-                    if (reader["ImagePath"] != DBNull.Value)
-                    {
-                        ImagePath = (string)reader["ImagePath"];
-                    }
-                    else
-                    {
-                        ImagePath = "";
-                    }
-
+                    reader.Close();
                 }
-                else
+                catch
                 {
-                    // The record was not found
                     isFound = false;
                 }
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                //Console.WriteLine("Error: " + ex.Message);
-
-                isFound = false;
-            }
-            finally
-            {
-                connection.Close();
             }
 
             return isFound;
         }
+
 
 
         public static bool GetPersonInfoByNationalNo(string NationalNo, ref int PersonID, ref string FirstName, ref string SecondName,

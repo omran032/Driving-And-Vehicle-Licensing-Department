@@ -114,6 +114,7 @@ namespace DVLD_Management_System
             lblFees.Text = _Application.PaidFees.ToString();
             lblApplicant.Text = _Application.ApplicantFullName;
             lblDate.Text = clsFormat.DateToShort(_Application.ApplicationDate);
+            if (_Application.CreatedByUserInfo == null) return;
              lblCreatedByUser.Text = _Application.CreatedByUserInfo.UserName;
         }
 

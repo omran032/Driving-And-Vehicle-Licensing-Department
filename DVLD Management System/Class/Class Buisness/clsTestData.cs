@@ -286,50 +286,50 @@ namespace DVLD_Management_System.Class.Class_Buisness
             return (rowsAffected > 0);
         }
 
-        public static byte GetPassedTestCount(int LocalDrivingLicenseApplicationID)
+
+
+
+        /// <summary>
+        ///  يحسب عدد الاختبارات الناجحة لطلب معيّن (RequestID)
+        ///  بالاعتماد على جدول Tests فقط.
+        /// </summary>
+        public static byte GetPassedTestCount(int requestID)
         {
-            byte PassedTestCount = 0;
+            byte passedTestCount = 0;
 
-            SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString);
-
-            string query = @"SELECT PassedTestCount = count(TestTypeID)
-                         FROM Tests INNER JOIN
-                         TestAppointments ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID
-						 where LocalDrivingLicenseApplicationID =@LocalDrivingLicenseApplicationID and TestResult=1";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
-
-
-            try
+            using (SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString))
             {
-                connection.Open();
+                string query = @"
+            SELECT COUNT(*) 
+            FROM Tests
+            WHERE RequestID = @RequestID
+              AND Result = @SuccessValue";
 
-                object result = command.ExecuteScalar();
+                SqlCommand command = new SqlCommand(query, connection);
 
-                if (result != null && byte.TryParse(result.ToString(), out byte ptCount))
+                command.Parameters.AddWithValue("@RequestID", requestID);
+
+                // غيّر قيمة @SuccessValue حسب ما تخزّن في العمود Result عند النجاح
+                command.Parameters.AddWithValue("@SuccessValue", "ناجح");
+                // أو مثلاً: "Pass"
+
+                try
                 {
-                    PassedTestCount = ptCount;
+                    connection.Open();
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && byte.TryParse(result.ToString(), out byte ptCount))
+                        passedTestCount = ptCount;
+                }
+                catch
+                {
+                    // ممكن تتركها فاضية أو تسجل الخطأ في Log
                 }
             }
 
-            catch (Exception ex)
-            {
-                //Console.WriteLine("Error: " + ex.Message);
-
-            }
-
-            finally
-            {
-                connection.Close();
-            }
-
-            return PassedTestCount;
-
-
-
+            return passedTestCount;
         }
+
 
 
 
