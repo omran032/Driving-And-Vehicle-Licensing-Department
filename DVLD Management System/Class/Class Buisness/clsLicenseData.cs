@@ -236,86 +236,66 @@ namespace DVLD_Management_System.Class.Class_Buisness
 
         }
 
-        public static int AddNewLicense(int ApplicationID, int DriverID, int LicenseClass,
-             DateTime IssueDate, DateTime ExpirationDate, string Notes,
-             float PaidFees, bool IsActive, byte IssueReason, int CreatedByUserID)
+        /// <summary>
+        /// ينشئ رخصة جديدة في جدول Licenses حسب تصميم قاعدة البيانات الحالية.
+        /// </summary>
+        public static int AddNewLicense(
+            int RequestID,
+            int DriverID,
+            int LicenseClassID,
+            int CategoryID,
+            string StatusRelease,
+            DateTime RelesaseDate,
+            DateTime? EndDate,
+            byte[] ProfilePicture)
         {
             int LicenseID = -1;
 
-            SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString);
-
-            string query = @"
-                              INSERT INTO Licenses
-                               (ApplicationID,
-                                DriverID,
-                                LicenseClass,
-                                IssueDate,
-                                ExpirationDate,
-                                Notes,
-                                PaidFees,
-                                IsActive,IssueReason,
-                                CreatedByUserID)
-                         VALUES
-                               (
-                               @ApplicationID,
-                               @DriverID,
-                               @LicenseClass,
-                               @IssueDate,
-                               @ExpirationDate,
-                               @Notes,
-                               @PaidFees,
-                               @IsActive,@IssueReason, 
-                               @CreatedByUserID);
-                            SELECT SCOPE_IDENTITY();";
-
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
-            command.Parameters.AddWithValue("@DriverID", DriverID);
-            command.Parameters.AddWithValue("@LicenseClass", LicenseClass);
-            command.Parameters.AddWithValue("@IssueDate", IssueDate);
-
-            command.Parameters.AddWithValue("@ExpirationDate", ExpirationDate);
-
-            if (Notes == "")
-                command.Parameters.AddWithValue("@Notes", DBNull.Value);
-            else
-                command.Parameters.AddWithValue("@Notes", Notes);
-
-            command.Parameters.AddWithValue("@PaidFees", PaidFees);
-            command.Parameters.AddWithValue("@IsActive", IsActive);
-            command.Parameters.AddWithValue("@IssueReason", IssueReason);
-
-            command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
-
-
-
-            try
+            using (SqlConnection connection = new SqlConnection(ClsConnection.ConnectionString))
             {
-                connection.Open();
+                string query = @"
+            INSERT INTO Licenses
+                (RequestID, DriverID, LicenseClassID, CategoryID,
+                 StatusRelease, RelesaseDate, EndDate, ProfilePicture)
+            VALUES
+                (@RequestID, @DriverID, @LicenseClassID, @CategoryID,
+                 @StatusRelease, @RelesaseDate, @EndDate, @ProfilePicture);
 
-                object result = command.ExecuteScalar();
+            SELECT SCOPE_IDENTITY();";
 
-                if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@RequestID", RequestID);
+                command.Parameters.AddWithValue("@DriverID", DriverID);
+                command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
+                command.Parameters.AddWithValue("@CategoryID", CategoryID);
+                command.Parameters.AddWithValue("@StatusRelease", StatusRelease);
+                command.Parameters.AddWithValue("@RelesaseDate", RelesaseDate);
+
+                if (EndDate == null)
+                    command.Parameters.AddWithValue("@EndDate", DBNull.Value);
+                else
+                    command.Parameters.AddWithValue("@EndDate", EndDate);
+
+                command.Parameters.AddWithValue("@ProfilePicture", ProfilePicture);
+
+                try
                 {
-                    LicenseID = insertedID;
+                    connection.Open();
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                        LicenseID = insertedID;
+                }
+                catch
+                {
+                    LicenseID = -1;
                 }
             }
 
-            catch (Exception ex)
-            {
-                //Console.WriteLine("Error: " + ex.Message);
-
-            }
-
-            finally
-            {
-                connection.Close();
-            }
-
-
             return LicenseID;
-
         }
+
 
         public static bool UpdateLicense(int LicenseID, int ApplicationID, int DriverID, int LicenseClass,
              DateTime IssueDate, DateTime ExpirationDate, string Notes,

@@ -41,7 +41,13 @@ namespace DVLD_Management_System.Local_Licenses.Class
         }
 
 
-
+        public int RequestID { get; set; }
+        public int LicenseClassID { get; set; }
+        public int CategoryID { get; set; }
+        public string StatusRelease { get; set; }
+        public DateTime ReleseaseDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public byte[] ProfilePicture { get; set; }
 
 
 
@@ -159,12 +165,16 @@ namespace DVLD_Management_System.Local_Licenses.Class
 
         private bool _AddNewLicense()
         {
-            //call DataAccess Layer 
-
-            this.LicenseID = clsLicenseData.AddNewLicense(this.ApplicationID, this.DriverID, this.LicenseClass,
-               this.IssueDate, this.ExpirationDate, this.Notes, this.PaidFees,
-               this.IsActive, (byte)this.IssueReason, this.CreatedByUserID);
-
+            this.LicenseID = clsLicenseData.AddNewLicense(
+                this.RequestID,
+                this.DriverID,
+                this.LicenseClassID,
+                this.CategoryID,
+                this.StatusRelease,
+                this.ReleseaseDate,
+                this.EndDate,
+                this.ProfilePicture
+            );
 
             return (this.LicenseID != -1);
         }
@@ -178,9 +188,10 @@ namespace DVLD_Management_System.Local_Licenses.Class
                this.IsActive, (byte)this.IssueReason, this.CreatedByUserID);
         }
 
-       
-     
-        
+   
+
+
+
         /// <summary>
         ///
         ///  يقوم هذا الميثود بالبحث عن رخصة قيادة حسب رقم الرخصة (LicenseID)

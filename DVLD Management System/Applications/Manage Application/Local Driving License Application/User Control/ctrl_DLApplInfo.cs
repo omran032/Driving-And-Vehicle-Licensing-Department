@@ -1,5 +1,7 @@
 ﻿using DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.Class;
 using DVLD_Management_System.Class.Class_Buisness;
+using DVLD_Management_System.Local_Licenses;
+using DVLD_Management_System.Local_Licenses.Class;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -54,7 +56,19 @@ namespace DVLD_Management_System
         // عرص معلومات الرخصة
         private void llShowLicenceInfo_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show("مو شغال زبطه ");
+            int RequestID = infoLicenseAplication.RequestID;
+
+            ClassLicenseInfo info = ClassLicenseInfo.GetLicenseInfoByRequestID(RequestID);
+
+            if (info != null)
+            {
+                frmShowLicenseInfo frm = new frmShowLicenseInfo(info);
+                frm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("الرخصة غير موجودة بعد أو لم يتم اصدارها!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 

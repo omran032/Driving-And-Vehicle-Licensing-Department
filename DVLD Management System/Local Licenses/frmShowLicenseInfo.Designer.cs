@@ -28,20 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlDriverLicenseInfo1 = new DVLD_Management_System.Local_Licenses.Ctrl.CtrlDriverLicenseInfo();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.ctrlDriverLicenseInfo1 = new DVLD_Management_System.Local_Licenses.Ctrl.CtrlDriverLicenseInfo();
             this.pbTestTypeImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbTestTypeImage)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ctrlDriverLicenseInfo1
-            // 
-            this.ctrlDriverLicenseInfo1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlDriverLicenseInfo1.Location = new System.Drawing.Point(13, 177);
-            this.ctrlDriverLicenseInfo1.Margin = new System.Windows.Forms.Padding(4);
-            this.ctrlDriverLicenseInfo1.Name = "ctrlDriverLicenseInfo1";
-            this.ctrlDriverLicenseInfo1.Size = new System.Drawing.Size(927, 338);
-            this.ctrlDriverLicenseInfo1.TabIndex = 0;
             // 
             // lblTitle
             // 
@@ -54,15 +45,25 @@
             this.lblTitle.Text = "Driver License Info";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // ctrlDriverLicenseInfo1
+            // 
+            this.ctrlDriverLicenseInfo1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlDriverLicenseInfo1.Location = new System.Drawing.Point(13, 177);
+            this.ctrlDriverLicenseInfo1.Margin = new System.Windows.Forms.Padding(4);
+            this.ctrlDriverLicenseInfo1.Name = "ctrlDriverLicenseInfo1";
+            this.ctrlDriverLicenseInfo1.Size = new System.Drawing.Size(927, 338);
+            this.ctrlDriverLicenseInfo1.TabIndex = 0;
+            // 
             // pbTestTypeImage
             // 
             this.pbTestTypeImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbTestTypeImage.Image = global::DVLD_Management_System.Properties.Resources.DrivigLicense;
             this.pbTestTypeImage.InitialImage = null;
-            this.pbTestTypeImage.Location = new System.Drawing.Point(423, 24);
+            this.pbTestTypeImage.Location = new System.Drawing.Point(431, 39);
             this.pbTestTypeImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pbTestTypeImage.Name = "pbTestTypeImage";
-            this.pbTestTypeImage.Size = new System.Drawing.Size(113, 104);
-            this.pbTestTypeImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbTestTypeImage.Size = new System.Drawing.Size(100, 90);
+            this.pbTestTypeImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbTestTypeImage.TabIndex = 136;
             this.pbTestTypeImage.TabStop = false;
             // 
@@ -70,17 +71,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 528);
+            this.ClientSize = new System.Drawing.Size(960, 531);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pbTestTypeImage);
             this.Controls.Add(this.ctrlDriverLicenseInfo1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmShowLicenseInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "License Info";
+            this.Load += new System.EventHandler(this.frmShowLicenseInfo_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.pbTestTypeImage)).EndInit();
             this.ResumeLayout(false);
 

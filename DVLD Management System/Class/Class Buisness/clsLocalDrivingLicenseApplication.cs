@@ -2,10 +2,12 @@
 using DVLD_Management_System.Tests.Class;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DVLD_Management_System.Class.Class_Buisness
 {
@@ -358,7 +360,7 @@ namespace DVLD_Management_System.Class.Class_Buisness
 
             if (Driver == null)
             {
-                //we check if the driver already there for this person.
+                //  نتحقق إذا كان السائق موجود بالفعل لهذا الشخص.
                 Driver = new clsDriver();
 
                 Driver.PersonID = this.ApplicantPersonID;
@@ -399,7 +401,8 @@ namespace DVLD_Management_System.Class.Class_Buisness
             }
 
             else
-                return -1;
+
+            return -1;
         }
 
         public bool IsLicenseIssued()

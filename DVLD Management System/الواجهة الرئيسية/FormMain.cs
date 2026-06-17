@@ -3,6 +3,7 @@ using DVLD_Management_System.Applications;
 using DVLD_Management_System.Applications.Manage_Application_Type;
 using DVLD_Management_System.Applications.Manage_Test_Type.واجهات;
 using DVLD_Management_System.Class.Class;
+using DVLD_Management_System.Local_Licenses;
 using DVLD_Management_System.Manage_Persons.Class;
 using DVLD_Management_System.Manage_Users;
 using DVLD_Management_System.Manage_Users.Class;
@@ -106,6 +107,13 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
             // نفس واجهة طلبات عرض الرخص المحلية
             FrmLocalDrivingLicenseApplication localDrivingLicenseApplication = new FrmLocalDrivingLicenseApplication();
             MyTools.ShowForm(localDrivingLicenseApplication);
+        }
+
+
+        private void ToolS_RenewDrivingLicense_Click(object sender, EventArgs e) // طلب تجديد الرخصة العادية
+        {
+            frmRenewLocalDrivingLicenseApplication NewLicense = new frmRenewLocalDrivingLicenseApplication();
+            MyTools.ShowForm(NewLicense);
         }
     }
 }

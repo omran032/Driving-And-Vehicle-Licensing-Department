@@ -313,25 +313,24 @@ namespace DVLD_Management_System.Applications
 
         #endregion
 
-        
-        private void Context_btn_ShowLicense_Click(object sender, EventArgs e) // خيار عرض الرخصة
+        private void Context_btn_ShowLicense_Click(object sender, EventArgs e)
         {
-            int LocalDrivingLicenseApplicationID = (int)DGV.CurrentRow.Cells[0].Value;
+            int RequestID = (int)DGV.CurrentRow.Cells[0].Value;
 
-            int LicenseID = clsLicense.GetLicenseIDByRequestID(LocalDrivingLicenseApplicationID);
+            ClassLicenseInfo info = ClassLicenseInfo.GetLicenseInfoByRequestID(RequestID);
 
-
-            if (LicenseID != -1)
+            if (info != null)
             {
-                frmShowLicenseInfo frm = new frmShowLicenseInfo(LicenseID);
+                frmShowLicenseInfo frm = new frmShowLicenseInfo(info);
                 frm.ShowDialog();
             }
             else
             {
-                MessageBox.Show("No License Found!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                MessageBox.Show("الرخصة غير موجودة!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+      
 
         
         private void Context_btn_lssueDriving_Click(object sender, EventArgs e)// زر انشاء رخصة لأول مرة

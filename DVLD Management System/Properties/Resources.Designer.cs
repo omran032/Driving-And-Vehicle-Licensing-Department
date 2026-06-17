@@ -143,6 +143,16 @@ namespace DVLD_Management_System.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DrivigLicense {
+            get {
+                object obj = ResourceManager.GetObject("DrivigLicense", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Driving_License {
             get {
                 object obj = ResourceManager.GetObject("Driving License", resourceCulture);
@@ -236,6 +246,16 @@ namespace DVLD_Management_System.Properties {
         internal static System.Drawing.Bitmap Remove {
             get {
                 object obj = ResourceManager.GetObject("Remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchDrivigLicense {
+            get {
+                object obj = ResourceManager.GetObject("SearchDrivigLicense", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

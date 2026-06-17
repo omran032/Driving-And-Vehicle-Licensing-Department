@@ -128,14 +128,7 @@ namespace DVLD_Management_System.Tests
                         }
 
 
-                        /////////////////////////////////////////    هاد لازم تحطه بس لما يطلع الرخصة لاول مرة ////////////////////////////////////////
-                        //// بعد التعديل، تحقق إذا وصل العداد إلى 3 → حدّث الحالة إلى Completed
-                        //int passed = Cls_CMDCommandLocalDrivingLicenceApp.GetRequestPassedTests(requestId);
-                        //if (passed >= 3)
-                        //    Cls_CMDCommandLocalDrivingLicenceApp.UpdateRequestStatus(requestId, 1);
-                        //else
-                        //    Cls_CMDCommandLocalDrivingLicenceApp.UpdateRequestStatus(requestId, 0);
-
+                    
 
 
                         // إذا كانت واجهة FrmLocalDrivingLicenseApplication مفتوحة فحدّثها فورياً

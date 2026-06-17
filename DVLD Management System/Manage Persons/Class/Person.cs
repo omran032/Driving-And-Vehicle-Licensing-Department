@@ -47,5 +47,19 @@ namespace DVLD_Management_System.Class.Class
 
 
         }
+
+
+        /// <summary>
+        /// تحويل صورة Image إلى مصفوفة بايت لتخزينها في قاعدة البيانات
+        /// </summary>
+        public static byte[] ImageToBytes(Image img)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                img.Save(ms, img.RawFormat);
+                return ms.ToArray();
+            }
+        }
+
     }
 }

@@ -127,7 +127,7 @@ FOREIGN KEY (CreateByUserID) REFERENCES Users(IDUser);
 CREATE TABLE [dbo].Licenses
 (
 	[LicenceID] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [StatusRelease] NVARCHAR(50) NOT NULL, 
+    [StatusRelease] bit NOT NULL, 
     [RelesaseDate] DATE NOT NULL, 
     [EndDate] DATE NULL, 
     [ProfilePicture] VARBINARY(MAX) NOT NULL
@@ -262,12 +262,37 @@ CREATE TABLE [dbo].TestTypes
     [Description] NVARCHAR(200) NULL 
 );
 
+--//////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////
+                --لاضفاتها بالمخطط
 
 
+-- السواقين
+CREATE TABLE Drivers
+(
+    DriverID INT IDENTITY(1,1) PRIMARY KEY,
+    PersonID INT NOT NULL,
+    CreatedByUserID INT NOT NULL,
+    CreatedDate DATETIME NOT NULL DEFAULT GETDATE(),
+
+    CONSTRAINT FK_Drivers_Persons
+        FOREIGN KEY (PersonID) REFERENCES Persons(IDPerson),
+
+    CONSTRAINT FK_Drivers_Users
+        FOREIGN KEY (CreatedByUserID) REFERENCES Users(IDUser)
+);
+
+--تعديل جدول Licenses ليرتبط مع Drivers
+ALTER TABLE Licenses
+ADD DriverID INT NULL;
+
+ALTER TABLE Licenses
+ADD CONSTRAINT FK_Licenses_Drivers
+    FOREIGN KEY (DriverID) REFERENCES Drivers(DriverID);
 
 
+    -- بجدول الرخص 
 
-
-
-
-
+    ALTER TABLE Licenses
+ADD IssueReason NVARCHAR(50) NOT NULL DEFAULT 'First Time';

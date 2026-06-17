@@ -183,17 +183,36 @@
     </Compile>
     <Compile Include="Class\Class Buisness\clsDriver.cs" />
     <Compile Include="Class\Class Buisness\clsLicense.cs" />
+    <Compile Include="Local Licenses\Class\ClassLicenseInfo.cs" />
     <Compile Include="Local Licenses\Ctrl\CtrlDriverLicenseInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Local Licenses\Ctrl\CtrlDriverLicenseInfo.Designer.cs">
       <DependentUpon>CtrlDriverLicenseInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Local Licenses\Ctrl\ctrlDriverLicenseInfoWithFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Local Licenses\Ctrl\ctrlDriverLicenseInfoWithFilter.Designer.cs">
+      <DependentUpon>ctrlDriverLicenseInfoWithFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Local Licenses\FrmIssueDriverLicenseFirstTime.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Local Licenses\FrmIssueDriverLicenseFirstTime.Designer.cs">
       <DependentUpon>FrmIssueDriverLicenseFirstTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Local Licenses\frmRenewLocalDrivingLicenseApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Local Licenses\frmRenewLocalDrivingLicenseApplication.Designer.cs">
+      <DependentUpon>frmRenewLocalDrivingLicenseApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Local Licenses\frmReplaceLostOrDamagedLicenseApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Local Licenses\frmReplaceLostOrDamagedLicenseApplication.Designer.cs">
+      <DependentUpon>frmReplaceLostOrDamagedLicenseApplication.cs</DependentUpon>
     </Compile>
     <Compile Include="Local Licenses\frmShowLicenseInfo.cs">
       <SubType>Form</SubType>
@@ -379,8 +398,17 @@
     <EmbeddedResource Include="Local Licenses\Ctrl\CtrlDriverLicenseInfo.resx">
       <DependentUpon>CtrlDriverLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Local Licenses\Ctrl\ctrlDriverLicenseInfoWithFilter.resx">
+      <DependentUpon>ctrlDriverLicenseInfoWithFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Local Licenses\FrmIssueDriverLicenseFirstTime.resx">
       <DependentUpon>FrmIssueDriverLicenseFirstTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Local Licenses\frmRenewLocalDrivingLicenseApplication.resx">
+      <DependentUpon>frmRenewLocalDrivingLicenseApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Local Licenses\frmReplaceLostOrDamagedLicenseApplication.resx">
+      <DependentUpon>frmReplaceLostOrDamagedLicenseApplication.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Local Licenses\frmShowLicenseInfo.resx">
       <DependentUpon>frmShowLicenseInfo.cs</DependentUpon>
@@ -470,11 +498,16 @@
     <Content Include="AI\haarcascade_frontalface_default.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DB_DVLD.mdf" />
+    <Content Include="DB_DVLD.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="DB_DVLD_log.ldf">
       <DependentUpon>DB_DVLD.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="License-LGPL.txt" />
+    <None Include="Resources\SearchDrivigLicense.png" />
+    <None Include="Resources\DrivigLicense.png" />
     <None Include="Resources\Edit.png" />
     <None Include="Resources\exam1.png" />
     <None Include="Resources\exam.png" />
@@ -509,9 +542,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Local Licenses\Class\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.CV.4.1.1.3497\build\EMGU.CV.targets" Condition="Exists('..\packages\EMGU.CV.4.1.1.3497\build\EMGU.CV.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
