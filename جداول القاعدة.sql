@@ -296,3 +296,7 @@ ADD CONSTRAINT FK_Licenses_Drivers
 
     ALTER TABLE Licenses
 ADD IssueReason NVARCHAR(50) NOT NULL DEFAULT 'First Time';
+
+-- تحويل عمود حالة الرخصة الدولية ..ل بايت
+ALTER TABLE InternationalLicenses
+ADD IsActive BIT;

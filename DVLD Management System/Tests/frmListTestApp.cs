@@ -311,9 +311,12 @@ namespace DVLD_Management_System.Tests
             // منع جدولة اختبار جديد إذا كان الشخص قد نجح مسبقاً في نفس نوع الاختبار
             try
             {
+                int LicenseClass = infoLicenseApplication.LicenseClassID;
+
                 if (infoLicenseApplication.Person != null && infoLicenseApplication.Person.IDPerson > 0)
                 {
-                    bool passed = Cls_CMDCommandLocalDrivingLicenceApp.HasPersonPassedTestType(infoLicenseApplication.Person.IDPerson, (int)TestType);
+                    // التحقق هل الشخص ناجح مسبقا ؟
+                    bool passed = Cls_CMDCommandLocalDrivingLicenceApp.HasPersonPassedTestType(infoLicenseApplication.Person.IDPerson, (int)TestType , LicenseClass);
                     if (passed)
                     {
                         MessageBox.Show("لا يمكن جدولة اختبار جديد لأن الشخص ناجح مسبقاً في نفس نوع الاختبار.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);

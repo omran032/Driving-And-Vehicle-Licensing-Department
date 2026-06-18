@@ -89,16 +89,12 @@ namespace DVLD_Management_System.Local_Licenses.Ctrl
         {
             ClassLicenseInfo info = ClassLicenseInfo.GetLicenseInfoLicenseID(LicenseID);
 
-            if (info != null)
-            {
-                frmShowLicenseInfo frm = new frmShowLicenseInfo(info);
-                frm.ShowDialog();
-            }
-            else
+            if (info == null)
             {
                 MessageBox.Show("الرخصة غير موجودة بعد أو لم يتم اصدارها!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-
+           
             lblLicenseID.Text = info.LicenseID.ToString();
             lblIsActive.Text = info.StatusRelease ? "Active" : "Inactive";
             lblIsDetained.Text = info.IsDetained ? "Yes" : "No";

@@ -107,7 +107,7 @@
 
         #endregion
         private System.Windows.Forms.Label label3;
-        private Guna.UI2.WinForms.Guna2TextBox TxtFelter;
-        private Guna.UI2.WinForms.Guna2ComboBox ComboFelter;
+        public Guna.UI2.WinForms.Guna2TextBox TxtFelter;
+        public Guna.UI2.WinForms.Guna2ComboBox ComboFelter;
     }
 }

@@ -36,7 +36,7 @@
             this.ToolS_LocalLicense = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolS_InternationalLicense = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolS_RenewDrivingLicense = new System.Windows.Forms.ToolStripMenuItem();
-            this.replToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolS_Replacement = new System.Windows.Forms.ToolStripMenuItem();
             this.releaseDetainedDrivingLicenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolS_RetakeTest = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,7 +51,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsDdb_People = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStrip_Drivers = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsDdb_Users = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -70,7 +70,7 @@
             this.toolStripSeparator1,
             this.tsDdb_People,
             this.toolStripSeparator2,
-            this.toolStripDropDownButton4,
+            this.toolStrip_Drivers,
             this.toolStripSeparator3,
             this.tsDdb_Users,
             this.toolStripSeparator4,
@@ -101,7 +101,7 @@
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newDrivingLicenseToolStripMenuItem,
             this.ToolS_RenewDrivingLicense,
-            this.replToolStripMenuItem,
+            this.ToolS_Replacement,
             this.releaseDetainedDrivingLicenseToolStripMenuItem,
             this.ToolS_RetakeTest});
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
@@ -140,11 +140,12 @@
             this.ToolS_RenewDrivingLicense.Text = "Renew Driving License";
             this.ToolS_RenewDrivingLicense.Click += new System.EventHandler(this.ToolS_RenewDrivingLicense_Click);
             // 
-            // replToolStripMenuItem
+            // ToolS_Replacement
             // 
-            this.replToolStripMenuItem.Name = "replToolStripMenuItem";
-            this.replToolStripMenuItem.Size = new System.Drawing.Size(399, 26);
-            this.replToolStripMenuItem.Text = "Replacement for Lost or Damaged License";
+            this.ToolS_Replacement.Name = "ToolS_Replacement";
+            this.ToolS_Replacement.Size = new System.Drawing.Size(399, 26);
+            this.ToolS_Replacement.Text = "Replacement for Lost or Damaged License";
+            this.ToolS_Replacement.Click += new System.EventHandler(this.ToolS_Replacement_Click);
             // 
             // releaseDetainedDrivingLicenseToolStripMenuItem
             // 
@@ -243,14 +244,15 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
             // 
-            // toolStripDropDownButton4
+            // toolStrip_Drivers
             // 
-            this.toolStripDropDownButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton4.Image")));
-            this.toolStripDropDownButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
-            this.toolStripDropDownButton4.Size = new System.Drawing.Size(137, 52);
-            this.toolStripDropDownButton4.Text = "Drivers   ";
+            this.toolStrip_Drivers.Image = ((System.Drawing.Image)(resources.GetObject("toolStrip_Drivers.Image")));
+            this.toolStrip_Drivers.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStrip_Drivers.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStrip_Drivers.Name = "toolStrip_Drivers";
+            this.toolStrip_Drivers.Size = new System.Drawing.Size(137, 52);
+            this.toolStrip_Drivers.Text = "Drivers   ";
+            this.toolStrip_Drivers.Click += new System.EventHandler(this.toolStrip_Drivers_Click);
             // 
             // toolStripSeparator3
             // 
@@ -335,7 +337,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripDropDownButton tsDdb_People;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton4;
+        private System.Windows.Forms.ToolStripDropDownButton toolStrip_Drivers;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripDropDownButton tsDdb_Users;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -350,7 +352,7 @@
         private System.Windows.Forms.ToolStripMenuItem releaseDetainedLicenseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newDrivingLicenseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ToolS_RenewDrivingLicense;
-        private System.Windows.Forms.ToolStripMenuItem replToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolS_Replacement;
         private System.Windows.Forms.ToolStripMenuItem releaseDetainedDrivingLicenseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ToolS_RetakeTest;
         private System.Windows.Forms.ToolStripMenuItem ToolS_LocalDrivingLicenseApplication;

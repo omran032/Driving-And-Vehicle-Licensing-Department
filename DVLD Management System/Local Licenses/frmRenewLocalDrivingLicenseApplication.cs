@@ -1,4 +1,6 @@
-﻿using DVLD_Management_System.Class.Class_Buisness;
+﻿using Dev_Note_Assistant;
+using DVLD_Management_System.Class.Class_Buisness;
+using DVLD_Management_System.Drivers;
 using DVLD_Management_System.Local_Licenses.Class;
 using DVLD_Management_System.Local_Licenses.Ctrl;
 using DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول;
@@ -136,6 +138,13 @@ namespace DVLD_Management_System.Local_Licenses
             this.Close();
         }
 
+        private void llShowLicenseHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) // عرض سجل الرخص
+        {
+            int PersonID = Old_Licenseinfo.PersonID;
+            if (PersonID <= 0) return;
 
+            FrmShowPersonLicenseHistory personLicenseHistory = new FrmShowPersonLicenseHistory(PersonID);
+            MyTools.ShowForm(personLicenseHistory);
+        }
     }
 }

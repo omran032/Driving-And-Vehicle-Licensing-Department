@@ -75,16 +75,7 @@ namespace DVLD_Management_System.Local_Licenses.Ctrl
         // مربع النص
         private void guna2TextBox1_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtLicenseID.Text.Trim()))
-            {
-                e.Cancel = true;
-                errorProvider1.SetError(txtLicenseID, "هذا الحقل مطلوب ");
-            }
-            else
-            {
-                //e.Cancel = false;
-                errorProvider1.SetError(txtLicenseID, null);
-            }
+           
         }
 
         // مربع النص
@@ -98,6 +89,16 @@ namespace DVLD_Management_System.Local_Licenses.Ctrl
             {
 
                 btnFind.PerformClick();
+            }
+
+            if (string.IsNullOrEmpty(txtLicenseID.Text.Trim()))
+            {
+                 errorProvider1.SetError(txtLicenseID, "هذا الحقل مطلوب ");
+            }
+            else
+            {
+                //e.Cancel = false;
+                errorProvider1.SetError(txtLicenseID, null);
             }
         }
 

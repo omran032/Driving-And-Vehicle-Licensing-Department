@@ -23,15 +23,26 @@ namespace DVLD_Management_System.Local_Licenses
 
             infoLicenseAplication = infoLicenseAplication_;
         }
-
-        ClassLicenseInfo info;
         public frmShowLicenseInfo(ClassLicenseInfo info_)
         {
             InitializeComponent();
 
-            
+
             info = info_;
         }
+
+        public frmShowLicenseInfo(int LicenseID_)
+        {
+            InitializeComponent();
+
+
+            LicenseID = LicenseID_;
+        }
+
+        ClassLicenseInfo info;
+        int LicenseID;
+
+      
 
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -43,7 +54,12 @@ namespace DVLD_Management_System.Local_Licenses
 
         private void frmShowLicenseInfo_Load_1(object sender, EventArgs e)
         {
+            if(info != null)
             ctrlDriverLicenseInfo1.LoadInfo(info);
+
+            else if (LicenseID != 0)
+                ctrlDriverLicenseInfo1.LoadInfoByLicenseID(LicenseID);
+
 
         }
     }

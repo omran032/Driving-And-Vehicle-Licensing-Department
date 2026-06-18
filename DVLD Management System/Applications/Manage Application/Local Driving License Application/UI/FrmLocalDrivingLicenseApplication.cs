@@ -3,6 +3,7 @@ using DVLD_Management_System.Applications.Driver_Licenses_Services.New_Driving_L
 using DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.Class;
 using DVLD_Management_System.Class.Class;
 using DVLD_Management_System.Class.Class_DB;
+using DVLD_Management_System.Drivers;
 using DVLD_Management_System.Local_Licenses;
 using DVLD_Management_System.Local_Licenses.Class;
 using DVLD_Management_System.Tests;
@@ -346,5 +347,20 @@ namespace DVLD_Management_System.Applications
             // Refrech
             AllData();  
         }
+
+        private void lssueDrivingLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (infoLicenseAplication.Person != null) return;
+
+            int PersonID = infoLicenseAplication.Person.IDPerson;
+
+            if (PersonID <= 0) return;
+
+            FrmShowPersonLicenseHistory personLicenseHistory = new FrmShowPersonLicenseHistory(PersonID);
+            MyTools.ShowForm(personLicenseHistory);
+
+        }
+
+        
     }
 }

@@ -183,6 +183,25 @@
     </Compile>
     <Compile Include="Class\Class Buisness\clsDriver.cs" />
     <Compile Include="Class\Class Buisness\clsLicense.cs" />
+    <Compile Include="Drivers\Class\ClassDriver_DB.cs" />
+    <Compile Include="Drivers\Ctrl\CtrlDriverLicenses.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Drivers\Ctrl\CtrlDriverLicenses.Designer.cs">
+      <DependentUpon>CtrlDriverLicenses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Drivers\FrmListDrivers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Drivers\FrmListDrivers.Designer.cs">
+      <DependentUpon>FrmListDrivers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Drivers\FrmShowPersonLicenseHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Drivers\FrmShowPersonLicenseHistory.Designer.cs">
+      <DependentUpon>FrmShowPersonLicenseHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Local Licenses\Class\ClassLicenseInfo.cs" />
     <Compile Include="Local Licenses\Ctrl\CtrlDriverLicenseInfo.cs">
       <SubType>UserControl</SubType>
@@ -389,6 +408,15 @@
     <EmbeddedResource Include="Applications\Manage Application\Local Driving License Application\User Control\ctrl_DLApplInfo.resx">
       <DependentUpon>ctrl_DLApplInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Drivers\Ctrl\CtrlDriverLicenses.resx">
+      <DependentUpon>CtrlDriverLicenses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Drivers\FrmListDrivers.resx">
+      <DependentUpon>FrmListDrivers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Drivers\FrmShowPersonLicenseHistory.resx">
+      <DependentUpon>FrmShowPersonLicenseHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -506,6 +534,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="License-LGPL.txt" />
+    <None Include="Resources\id.png" />
+    <None Include="Resources\driver.png" />
+    <None Include="Resources\Search.png" />
     <None Include="Resources\SearchDrivigLicense.png" />
     <None Include="Resources\DrivigLicense.png" />
     <None Include="Resources\Edit.png" />

@@ -116,7 +116,7 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
         /// <summary>
         /// يتحقق ما إذا كان الشخص قد نجح سابقاً في اختبار من نوع محدد
         /// </summary>
-        public static bool HasPersonPassedTestType(int personID, int testTypeID)
+        public static bool HasPersonPassedTestType_(int personID, int testTypeID)
         {
             string query = @"
         SELECT TOP 1 1
@@ -137,6 +137,32 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
             return (result != null && result != DBNull.Value);
         }
 
+
+        /// <summary>
+        /// يتحقق ما إذا كان الشخص قد نجح سابقاً في اختبار من نوع محدد لنفس الفئة المطلوبة
+        /// </summary>
+        public static bool HasPersonPassedTestType(int personID, int testTypeID, int licenseClassID)
+        {
+            string query = @"
+    SELECT TOP 1 1
+    FROM Tests T
+    INNER JOIN Requests R ON T.RequestID = R.RequestID
+    WHERE R.IDPerson = @PersonID
+      AND R.LicenseClassID = @LicenseClassID
+      AND T.TestTypeID = @TestTypeID
+      AND T.Result = 'Pass'";
+
+            var parameters = new Dictionary<string, object>()
+    {
+        { "@PersonID", personID },
+        { "@LicenseClassID", licenseClassID },
+        { "@TestTypeID", testTypeID }
+    };
+
+            object result = ClsCommandDB.ExecuteScalar_Command(query, parameters, false);
+
+            return (result != null && result != DBNull.Value);
+        }
 
 
 

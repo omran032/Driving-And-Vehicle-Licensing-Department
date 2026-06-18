@@ -38,10 +38,8 @@
             this.lblCountRecords = new System.Windows.Forms.Label();
             this.DGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.MyContextMenuStrip = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
-            this.ctrlLicenseAppFelter1 = new DVLD.Applications.LocalDrivingLicense.CtrlLicenseAppFelter();
             this.btnAddLocalDrivingLicenseApp = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.MyContextMenuStrip = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.Context_btnAddLocalDrivingLicenseApp = new System.Windows.Forms.ToolStripMenuItem();
             this.Context_btnEditLocalDrivingLicenseApp = new System.Windows.Forms.ToolStripMenuItem();
             this.Context_btnDeleteLocalDrivingLicenseApp = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +51,8 @@
             this.Context_btn_lssueDriving = new System.Windows.Forms.ToolStripMenuItem();
             this.Context_btn_ShowLicense = new System.Windows.Forms.ToolStripMenuItem();
             this.lssueDrivingLicenseHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctrlLicenseAppFelter1 = new DVLD.Applications.LocalDrivingLicense.CtrlLicenseAppFelter();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.MyContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
@@ -137,6 +137,27 @@
             this.DGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // btnAddLocalDrivingLicenseApp
+            // 
+            this.btnAddLocalDrivingLicenseApp.BorderRadius = 15;
+            this.btnAddLocalDrivingLicenseApp.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnAddLocalDrivingLicenseApp.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnAddLocalDrivingLicenseApp.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnAddLocalDrivingLicenseApp.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnAddLocalDrivingLicenseApp.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnAddLocalDrivingLicenseApp.FillColor = System.Drawing.Color.LightCyan;
+            this.btnAddLocalDrivingLicenseApp.FillColor2 = System.Drawing.Color.Ivory;
+            this.btnAddLocalDrivingLicenseApp.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddLocalDrivingLicenseApp.ForeColor = System.Drawing.Color.Black;
+            this.btnAddLocalDrivingLicenseApp.Image = global::DVLD_Management_System.Properties.Resources.Add_File;
+            this.btnAddLocalDrivingLicenseApp.ImageSize = new System.Drawing.Size(60, 60);
+            this.btnAddLocalDrivingLicenseApp.Location = new System.Drawing.Point(1059, 255);
+            this.btnAddLocalDrivingLicenseApp.Name = "btnAddLocalDrivingLicenseApp";
+            this.btnAddLocalDrivingLicenseApp.Size = new System.Drawing.Size(81, 72);
+            this.btnAddLocalDrivingLicenseApp.TabIndex = 11;
+            this.toolTip1.SetToolTip(this.btnAddLocalDrivingLicenseApp, "Add New Driving License Application");
+            this.btnAddLocalDrivingLicenseApp.Click += new System.EventHandler(this.btnAddLocalDrivingLicenseApp_Click);
+            // 
             // MyContextMenuStrip
             // 
             this.MyContextMenuStrip.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -163,47 +184,6 @@
             this.MyContextMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.MyContextMenuStrip.Size = new System.Drawing.Size(297, 312);
             this.MyContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.MyContextMenuStrip_Opening);
-            // 
-            // ctrlLicenseAppFelter1
-            // 
-            this.ctrlLicenseAppFelter1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlLicenseAppFelter1.Location = new System.Drawing.Point(13, 273);
-            this.ctrlLicenseAppFelter1.Margin = new System.Windows.Forms.Padding(4);
-            this.ctrlLicenseAppFelter1.Name = "ctrlLicenseAppFelter1";
-            this.ctrlLicenseAppFelter1.Size = new System.Drawing.Size(681, 54);
-            this.ctrlLicenseAppFelter1.TabIndex = 10;
-            // 
-            // btnAddLocalDrivingLicenseApp
-            // 
-            this.btnAddLocalDrivingLicenseApp.BorderRadius = 15;
-            this.btnAddLocalDrivingLicenseApp.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnAddLocalDrivingLicenseApp.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnAddLocalDrivingLicenseApp.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnAddLocalDrivingLicenseApp.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnAddLocalDrivingLicenseApp.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnAddLocalDrivingLicenseApp.FillColor = System.Drawing.Color.LightCyan;
-            this.btnAddLocalDrivingLicenseApp.FillColor2 = System.Drawing.Color.Ivory;
-            this.btnAddLocalDrivingLicenseApp.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddLocalDrivingLicenseApp.ForeColor = System.Drawing.Color.Black;
-            this.btnAddLocalDrivingLicenseApp.Image = global::DVLD_Management_System.Properties.Resources.Add_File;
-            this.btnAddLocalDrivingLicenseApp.ImageSize = new System.Drawing.Size(60, 60);
-            this.btnAddLocalDrivingLicenseApp.Location = new System.Drawing.Point(1059, 255);
-            this.btnAddLocalDrivingLicenseApp.Name = "btnAddLocalDrivingLicenseApp";
-            this.btnAddLocalDrivingLicenseApp.Size = new System.Drawing.Size(81, 72);
-            this.btnAddLocalDrivingLicenseApp.TabIndex = 11;
-            this.toolTip1.SetToolTip(this.btnAddLocalDrivingLicenseApp, "Add New Driving License Application");
-            this.btnAddLocalDrivingLicenseApp.Click += new System.EventHandler(this.btnAddLocalDrivingLicenseApp_Click);
-            // 
-            // guna2PictureBox1
-            // 
-            this.guna2PictureBox1.Image = global::DVLD_Management_System.Properties.Resources.Documents;
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(502, 78);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(130, 117);
-            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2PictureBox1.TabIndex = 9;
-            this.guna2PictureBox1.TabStop = false;
             // 
             // Context_btnAddLocalDrivingLicenseApp
             // 
@@ -298,6 +278,27 @@
             this.lssueDrivingLicenseHistoryToolStripMenuItem.Name = "lssueDrivingLicenseHistoryToolStripMenuItem";
             this.lssueDrivingLicenseHistoryToolStripMenuItem.Size = new System.Drawing.Size(296, 36);
             this.lssueDrivingLicenseHistoryToolStripMenuItem.Text = "Show Person License History";
+            this.lssueDrivingLicenseHistoryToolStripMenuItem.Click += new System.EventHandler(this.lssueDrivingLicenseHistoryToolStripMenuItem_Click);
+            // 
+            // ctrlLicenseAppFelter1
+            // 
+            this.ctrlLicenseAppFelter1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlLicenseAppFelter1.Location = new System.Drawing.Point(13, 273);
+            this.ctrlLicenseAppFelter1.Margin = new System.Windows.Forms.Padding(4);
+            this.ctrlLicenseAppFelter1.Name = "ctrlLicenseAppFelter1";
+            this.ctrlLicenseAppFelter1.Size = new System.Drawing.Size(681, 54);
+            this.ctrlLicenseAppFelter1.TabIndex = 10;
+            // 
+            // guna2PictureBox1
+            // 
+            this.guna2PictureBox1.Image = global::DVLD_Management_System.Properties.Resources.Documents;
+            this.guna2PictureBox1.ImageRotate = 0F;
+            this.guna2PictureBox1.Location = new System.Drawing.Point(502, 78);
+            this.guna2PictureBox1.Name = "guna2PictureBox1";
+            this.guna2PictureBox1.Size = new System.Drawing.Size(130, 117);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox1.TabIndex = 9;
+            this.guna2PictureBox1.TabStop = false;
             // 
             // FrmLocalDrivingLicenseApplication
             // 

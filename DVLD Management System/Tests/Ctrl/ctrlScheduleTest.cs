@@ -552,7 +552,7 @@ namespace DVLD_Management_System.Tests.Ctrl
         private bool HasPersonPassedTestTypeLocal(int personID, int testTypeID)
         {
             // التفاف على الدالة المشتركة في Cls_CMDCommandLocalDrivingLicenceApp
-            return Cls_CMDCommandLocalDrivingLicenceApp.HasPersonPassedTestType(personID, testTypeID);
+            return Cls_CMDCommandLocalDrivingLicenceApp.HasPersonPassedTestType(personID, testTypeID , _LocalDrivingLicenseApplication.LicenseClassID);
         }
 
         /// <summary>

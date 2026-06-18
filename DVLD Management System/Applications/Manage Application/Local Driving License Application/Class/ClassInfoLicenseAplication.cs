@@ -43,6 +43,21 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
 
         public string LicenseClass { get; set; }
 
+        private int LicenseClassID_;
+
+        public int LicenseClassID
+        {
+            get 
+            {
+                LicenseClassID_ = GetLicenseClassIDByName(LicenseClass.Trim());
+                return LicenseClassID_; 
+            }
+            set
+            {
+                LicenseClassID_ = value;
+            }
+        }
+
         public string RequestType { get; set; }
 
 
@@ -151,6 +166,36 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
 
             return info;
         }
+
+
+
+
+
+        /// <summary>
+        /// ترجع ID الفئة بناءً على اسم الفئة ClassName
+        /// </summary>
+        public static int GetLicenseClassIDByName(string className)
+        {
+            string query = @"
+        SELECT LicenseClassID
+        FROM LicenseClass
+        WHERE ClassName = @ClassName";
+
+            var parameters = new Dictionary<string, object>()
+    {
+        { "@ClassName", className }
+    };
+
+            object result = ClsCommandDB.ExecuteScalar_Command(query, parameters, false);
+
+            if (result != null && result != DBNull.Value)
+                return Convert.ToInt32(result);
+
+            return -1; // في حال لم يتم العثور على الفئة
+        }
+
+
+
 
 
     }

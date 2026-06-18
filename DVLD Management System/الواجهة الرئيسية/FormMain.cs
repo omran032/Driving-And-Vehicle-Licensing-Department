@@ -3,6 +3,7 @@ using DVLD_Management_System.Applications;
 using DVLD_Management_System.Applications.Manage_Application_Type;
 using DVLD_Management_System.Applications.Manage_Test_Type.واجهات;
 using DVLD_Management_System.Class.Class;
+using DVLD_Management_System.Drivers;
 using DVLD_Management_System.Local_Licenses;
 using DVLD_Management_System.Manage_Persons.Class;
 using DVLD_Management_System.Manage_Users;
@@ -114,6 +115,20 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
         {
             frmRenewLocalDrivingLicenseApplication NewLicense = new frmRenewLocalDrivingLicenseApplication();
             MyTools.ShowForm(NewLicense);
+        }
+
+        private void ToolS_Replacement_Click(object sender, EventArgs e) // واجهة استبدال الرخصة   بدل فاقد _ تالف
+        {
+            frmReplaceLostOrDamagedLicenseApplication ReplaceLicense = new frmReplaceLostOrDamagedLicenseApplication();
+            MyTools.ShowForm(ReplaceLicense);
+
+        }
+
+        private void toolStrip_Drivers_Click(object sender, EventArgs e) // عرض السائقين
+        {
+            FrmListDrivers frmListDrivers = new FrmListDrivers();
+            MyTools.ShowForm(frmListDrivers);
+
         }
     }
 }

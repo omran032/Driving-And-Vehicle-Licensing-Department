@@ -21,7 +21,7 @@ namespace DVLD_Management_System.Local_Licenses.Class
         public string FullName { get; set; }
         public string NationalNo { get; set; }
         public string Gender { get; set; }
-        public DateTime Birthdate { get; set; }
+         public DateTime Birthdate { get; set; }
 
         public int PersonID { get; set; }
 
@@ -409,6 +409,239 @@ namespace DVLD_Management_System.Local_Licenses.Class
             return newLicenseInfo;
         }
 
+
+
+
+        /// <summary>
+        /// إنشاء رخصة جديدة بدل فاقد أو بدل تالف:
+        /// 1) إنشاء طلب جديد (Requests)
+        /// 2) إنشاء رخصة جديدة (Licenses)
+        /// 3) تعطيل الرخصة القديمة
+        /// 4) إرجاع معلومات الرخصة الجديدة + معرف الطلب + الرسوم
+        /// </summary>
+        public static ClassLicenseInfo CreateReplacementLicense( ClassLicenseInfo oldLicenseInfo, int createdByUserID, bool isLost, // true = بدل فاقد ، false = بدل تالف
+            out int newRequestID,
+            out int applicationFees,
+            out int licenseFees)
+        {
+            newRequestID = -1;
+            applicationFees = 0;
+            licenseFees = 0;
+
+            ClassLicenseInfo newLicenseInfo = null;
+
+            using (SqlConnection con = new SqlConnection(ClsConnection.ConnectionString))
+            {
+                con.Open();
+                SqlTransaction transaction = con.BeginTransaction();
+
+                try
+                {
+                    // 1) جلب معلومات الفئة
+                    int licenseClassID = -1;
+                    int validityYears = 0;
+                    int classFees = 0;
+
+                    string getClassQuery = @"
+                SELECT LicenseClassID, ValidatyLength, [Class fees]
+                FROM LicenseClass
+                WHERE ClassName = @ClassName";
+
+                    SqlCommand getClassCmd = new SqlCommand(getClassQuery, con, transaction);
+                    getClassCmd.Parameters.AddWithValue("@ClassName", oldLicenseInfo.ClassName);
+
+                    using (SqlDataReader reader = getClassCmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            licenseClassID = reader.GetInt32(0);
+                            validityYears = reader.GetInt32(1);
+                            classFees = reader.GetInt32(2);
+                        }
+                        else
+                        {
+                            transaction.Rollback();
+                            return null;
+                        }
+                    }
+
+                    // 2) تحديد الرسوم (من جدول RequestTypes)
+                    int requestTypeID = isLost ? 6 : 5; // 5 = Replacement for Damaged, 6 = Replacement for Lost
+
+                    string getFeesQuery = @"
+                    SELECT Fees
+                         FROM RequestTypes
+                             WHERE RequestTypeID = @RequestTypeID";
+
+                    SqlCommand getFeesCmd = new SqlCommand(getFeesQuery, con, transaction);
+                    getFeesCmd.Parameters.AddWithValue("@RequestTypeID", requestTypeID);
+
+                    object feesResult = getFeesCmd.ExecuteScalar();
+                    if (feesResult == null)
+                    {
+                        transaction.Rollback();
+                        return null;
+                    }
+
+                    applicationFees = Convert.ToInt32(Convert.ToDecimal(feesResult)); // كلفة طلب البدل من RequestTypes
+                    licenseFees = classFees; // كلفة الرخصة نفسها من جدول LicenseClass (كما هي)
+
+
+
+                    // 3) إنشاء طلب جديد
+                    string insertRequestQuery = @"
+                INSERT INTO Requests
+                (Status, Fees, DateRequest, IDPerson, LicenseClassID, RequestTypeID, CreateByUserID, PassedTests)
+                VALUES
+                (@Status, @Fees, @DateRequest, @IDPerson, @LicenseClassID, @RequestTypeID, @CreateByUserID, @PassedTests);
+                SELECT SCOPE_IDENTITY();";
+
+                    SqlCommand insertRequestCmd = new SqlCommand(insertRequestQuery, con, transaction);
+
+                    insertRequestCmd.Parameters.AddWithValue("@Status", 1);
+                    insertRequestCmd.Parameters.AddWithValue("@Fees", applicationFees);
+                    insertRequestCmd.Parameters.AddWithValue("@DateRequest", DateTime.Now);
+                    insertRequestCmd.Parameters.AddWithValue("@IDPerson", oldLicenseInfo.PersonID);
+                    insertRequestCmd.Parameters.AddWithValue("@LicenseClassID", licenseClassID);
+                    insertRequestCmd.Parameters.AddWithValue("@RequestTypeID", isLost ? 3 : 4); // 3 = Lost , 4 = Damaged
+                    insertRequestCmd.Parameters.AddWithValue("@CreateByUserID", createdByUserID);
+                    insertRequestCmd.Parameters.AddWithValue("@PassedTests", 0);
+
+                    object requestResult = insertRequestCmd.ExecuteScalar();
+                    if (requestResult == null)
+                    {
+                        transaction.Rollback();
+                        return null;
+                    }
+
+                    newRequestID = Convert.ToInt32(requestResult);
+
+                    // 4) جلب CategoryID و DriverID من الرخصة القديمة
+                    int categoryID = 1;
+                    int driverID = oldLicenseInfo.DriverID;
+
+                    string getOldLicenseQuery = @"
+                SELECT CategoryID, DriverID
+                FROM Licenses
+                WHERE LicenceID = @OldLicenseID";
+
+                    SqlCommand getOldLicenseCmd = new SqlCommand(getOldLicenseQuery, con, transaction);
+                    getOldLicenseCmd.Parameters.AddWithValue("@OldLicenseID", oldLicenseInfo.LicenseID);
+
+                    using (SqlDataReader reader = getOldLicenseCmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            if (!reader.IsDBNull(0))
+                                categoryID = reader.GetInt32(0);
+
+                            if (!reader.IsDBNull(1))
+                                driverID = reader.GetInt32(1);
+                        }
+                    }
+
+                    // 5) تجهيز الصورة
+                    byte[] pictureBytes = oldLicenseInfo.PersonPicture ?? Person.ImageToBytes(Properties.Resources.Male);
+
+                    // 6) إنشاء الرخصة الجديدة
+                    string insertLicenseQuery = @"
+                INSERT INTO Licenses
+                (RequestID, DriverID, LicenseClassID, CategoryID,
+                 StatusRelease, RelesaseDate, EndDate, ProfilePicture, IssueReason)
+                VALUES
+                (@RequestID, @DriverID, @LicenseClassID, @CategoryID,
+                 @StatusRelease, @RelesaseDate, @EndDate, @ProfilePicture, @IssueReason);
+                SELECT SCOPE_IDENTITY();";
+
+                    SqlCommand insertLicenseCmd = new SqlCommand(insertLicenseQuery, con, transaction);
+
+                    insertLicenseCmd.Parameters.AddWithValue("@RequestID", newRequestID);
+                    insertLicenseCmd.Parameters.AddWithValue("@DriverID", driverID);
+                    insertLicenseCmd.Parameters.AddWithValue("@LicenseClassID", licenseClassID);
+                    insertLicenseCmd.Parameters.AddWithValue("@CategoryID", categoryID);
+                    insertLicenseCmd.Parameters.AddWithValue("@StatusRelease", 1);
+                    insertLicenseCmd.Parameters.AddWithValue("@RelesaseDate", DateTime.Now);
+                    insertLicenseCmd.Parameters.AddWithValue("@EndDate", DateTime.Now.AddYears(validityYears));
+                    insertLicenseCmd.Parameters.Add("@ProfilePicture", SqlDbType.VarBinary).Value = pictureBytes;
+                    insertLicenseCmd.Parameters.AddWithValue("@IssueReason", isLost ? "Lost Replacement" : "Damaged Replacement");
+
+                    object newLicenseResult = insertLicenseCmd.ExecuteScalar();
+                    if (newLicenseResult == null)
+                    {
+                        transaction.Rollback();
+                        return null;
+                    }
+
+                    int newLicenseID = Convert.ToInt32(newLicenseResult);
+
+                    // 7) تعطيل الرخصة القديمة
+                    string updateOldLicenseQuery = @"
+                UPDATE Licenses
+                SET StatusRelease = 0
+                WHERE LicenceID = @OldLicenseID";
+
+                    SqlCommand updateOldLicenseCmd = new SqlCommand(updateOldLicenseQuery, con, transaction);
+                    updateOldLicenseCmd.Parameters.AddWithValue("@OldLicenseID", oldLicenseInfo.LicenseID);
+                    updateOldLicenseCmd.ExecuteNonQuery();
+
+                    // 8) جلب معلومات الرخصة الجديدة
+                    string getNewLicenseInfoQuery = @"
+                SELECT 
+                    L.LicenceID,
+                    L.StatusRelease,
+                    L.RelesaseDate,
+                    L.EndDate,
+                    L.DriverID,
+                    LC.ClassName,
+                    P.FullName,
+                    P.[National number],
+                    P.Gender,
+                    P.Birthdate,
+                    P.Picture,
+                    L.IssueReason
+                FROM Licenses L
+                INNER JOIN Drivers D ON L.DriverID = D.DriverID
+                INNER JOIN Persons P ON D.PersonID = P.IDPerson
+                INNER JOIN LicenseClass LC ON L.LicenseClassID = LC.LicenseClassID
+                WHERE L.LicenceID = @NewLicenseID";
+
+                    SqlCommand getNewLicenseInfoCmd = new SqlCommand(getNewLicenseInfoQuery, con, transaction);
+                    getNewLicenseInfoCmd.Parameters.AddWithValue("@NewLicenseID", newLicenseID);
+
+                    using (SqlDataReader reader = getNewLicenseInfoCmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            newLicenseInfo = new ClassLicenseInfo
+                            {
+                                LicenseID = reader.GetInt32(0),
+                                StatusRelease = reader.GetBoolean(1),
+                                IssueDate = reader.GetDateTime(2),
+                                ExpirationDate = reader.GetDateTime(3),
+                                DriverID = reader.GetInt32(4),
+                                ClassName = reader.GetString(5),
+                                FullName = reader.GetString(6),
+                                NationalNo = reader.GetString(7),
+                                Gender = reader.GetString(8),
+                                Birthdate = reader.GetDateTime(9),
+                                PersonPicture = reader["Picture"] != DBNull.Value ? (byte[])reader["Picture"] : null,
+                                IssueReason = reader.GetString(11),
+                                Notes = oldLicenseInfo.Notes
+                            };
+                        }
+                    }
+
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    return null;
+                }
+            }
+
+            return newLicenseInfo;
+        }
 
 
         /// <summary>
