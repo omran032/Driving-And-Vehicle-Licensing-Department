@@ -37,14 +37,16 @@
             this.ctrl_InfoPerson1.Location = new System.Drawing.Point(15, 4);
             this.ctrl_InfoPerson1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.ctrl_InfoPerson1.Name = "ctrl_InfoPerson1";
-            this.ctrl_InfoPerson1.Size = new System.Drawing.Size(701, 451);
+            this.ctrl_InfoPerson1.person = null;
+            this.ctrl_InfoPerson1.PersonID = 0;
+            this.ctrl_InfoPerson1.Size = new System.Drawing.Size(752, 451);
             this.ctrl_InfoPerson1.TabIndex = 0;
             // 
             // FrmShowPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 458);
+            this.ClientSize = new System.Drawing.Size(782, 458);
             this.Controls.Add(this.ctrl_InfoPerson1);
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);

@@ -62,7 +62,7 @@
             this.ctrl_InfoPerson1.Name = "ctrl_InfoPerson1";
             this.ctrl_InfoPerson1.person = null;
             this.ctrl_InfoPerson1.PersonID = 0;
-            this.ctrl_InfoPerson1.Size = new System.Drawing.Size(574, 383);
+            this.ctrl_InfoPerson1.Size = new System.Drawing.Size(634, 383);
             this.ctrl_InfoPerson1.TabIndex = 2;
             // 
             // lblTitle

@@ -18,6 +18,19 @@ namespace DVLD_Management_System.Manage_Persons.واجهات_فرعية
             person = person_;
             InitializeComponent();
         }
+
+        public FrmShowPerson(int PersonID_)
+        {
+            PersonID = PersonID_;
+
+            person = Person.GetPersonByID(PersonID);
+
+            InitializeComponent();
+
+        }
+
+        public   int PersonID { get; set; }
+
         public static Person person;
     }
 }

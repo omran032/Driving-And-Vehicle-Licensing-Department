@@ -3,6 +3,7 @@ using DVLD_Management_System.Applications;
 using DVLD_Management_System.Applications.Manage_Application_Type;
 using DVLD_Management_System.Applications.Manage_Test_Type.واجهات;
 using DVLD_Management_System.Class.Class;
+using DVLD_Management_System.Detain_Licenses;
 using DVLD_Management_System.Drivers;
 using DVLD_Management_System.Local_Licenses;
 using DVLD_Management_System.Manage_Persons.Class;
@@ -129,6 +130,24 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
             FrmListDrivers frmListDrivers = new FrmListDrivers();
             MyTools.ShowForm(frmListDrivers);
 
+        }
+
+        private void ToolS_ManageDetainedLicenses_Click(object sender, EventArgs e) // واجهة عرض الرخص المخالفة
+        {
+            FrmListDetainedLicenses listDetainedLicenses = new FrmListDetainedLicenses();
+            MyTools.ShowForm(listDetainedLicenses);
+        }
+
+        private void ToolS_DetaunLicense_Click(object sender, EventArgs e) // واجهة حجز رخصة
+        {
+            FrmDetainLicenseApplication detainLicenseApplication = new FrmDetainLicenseApplication();
+            MyTools.ShowForm(detainLicenseApplication);
+        }
+
+        private void ToolS_ReleaseDetainedLicense_Click(object sender, EventArgs e) //واجهة فك حجز الرخصة
+        {
+            FrmReleaseDetainedLicenseApplication frmReleaseDetained = new FrmReleaseDetainedLicenseApplication();
+            MyTools.ShowForm(frmReleaseDetained);
         }
     }
 }

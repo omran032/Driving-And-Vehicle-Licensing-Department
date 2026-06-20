@@ -350,7 +350,9 @@ namespace DVLD_Management_System.Applications
 
         private void lssueDrivingLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (infoLicenseAplication.Person != null) return;
+            LoadInfoAppointment();
+
+            if (infoLicenseAplication.Person == null) return;
 
             int PersonID = infoLicenseAplication.Person.IDPerson;
 

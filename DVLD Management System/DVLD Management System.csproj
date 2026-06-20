@@ -183,6 +183,26 @@
     </Compile>
     <Compile Include="Class\Class Buisness\clsDriver.cs" />
     <Compile Include="Class\Class Buisness\clsLicense.cs" />
+    <Compile Include="Detain Licenses\Class\ClassDetainCMD.cs" />
+    <Compile Include="Detain Licenses\Class\ClassDetainInfo.cs" />
+    <Compile Include="Detain Licenses\FrmDetainLicenseApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Detain Licenses\FrmDetainLicenseApplication.Designer.cs">
+      <DependentUpon>FrmDetainLicenseApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Detain Licenses\FrmListDetainedLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Detain Licenses\FrmListDetainedLicenses.Designer.cs">
+      <DependentUpon>FrmListDetainedLicenses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Detain Licenses\FrmReleaseDetainedLicenseApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Detain Licenses\FrmReleaseDetainedLicenseApplication.Designer.cs">
+      <DependentUpon>FrmReleaseDetainedLicenseApplication.cs</DependentUpon>
+    </Compile>
     <Compile Include="Drivers\Class\ClassDriver_DB.cs" />
     <Compile Include="Drivers\Ctrl\CtrlDriverLicenses.cs">
       <SubType>UserControl</SubType>
@@ -408,6 +428,15 @@
     <EmbeddedResource Include="Applications\Manage Application\Local Driving License Application\User Control\ctrl_DLApplInfo.resx">
       <DependentUpon>ctrl_DLApplInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Detain Licenses\FrmDetainLicenseApplication.resx">
+      <DependentUpon>FrmDetainLicenseApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Detain Licenses\FrmListDetainedLicenses.resx">
+      <DependentUpon>FrmListDetainedLicenses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Detain Licenses\FrmReleaseDetainedLicenseApplication.resx">
+      <DependentUpon>FrmReleaseDetainedLicenseApplication.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Drivers\Ctrl\CtrlDriverLicenses.resx">
       <DependentUpon>CtrlDriverLicenses.cs</DependentUpon>
     </EmbeddedResource>
@@ -534,6 +563,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="License-LGPL.txt" />
+    <None Include="Resources\Detain 32.png" />
+    <None Include="Resources\Release Detained License 32.png" />
+    <None Include="Resources\User 32 -2.png" />
+    <None Include="Resources\Number 32.png" />
+    <None Include="Resources\Calendar 32.png" />
+    <None Include="Resources\money 32.png" />
+    <None Include="Resources\Cancel.png" />
+    <None Include="Resources\PersonDetails 32.png" />
+    <None Include="Resources\PersonLicenseHistory 32.png" />
+    <None Include="Resources\Release Detained License 512.png" />
+    <None Include="Resources\LocalDriving License.png" />
+    <None Include="Resources\Detain 512.png" />
     <None Include="Resources\id.png" />
     <None Include="Resources\driver.png" />
     <None Include="Resources\Search.png" />
@@ -573,7 +614,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Detain Licenses\Ctrl\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.CV.4.1.1.3497\build\EMGU.CV.targets" Condition="Exists('..\packages\EMGU.CV.4.1.1.3497\build\EMGU.CV.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

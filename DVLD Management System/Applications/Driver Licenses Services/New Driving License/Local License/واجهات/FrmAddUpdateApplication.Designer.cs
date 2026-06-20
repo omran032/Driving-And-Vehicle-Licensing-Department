@@ -169,7 +169,7 @@
             this.ctrl_InfoPerson.Name = "ctrl_InfoPerson";
             this.ctrl_InfoPerson.person = null;
             this.ctrl_InfoPerson.PersonID = 0;
-            this.ctrl_InfoPerson.Size = new System.Drawing.Size(715, 429);
+            this.ctrl_InfoPerson.Size = new System.Drawing.Size(774, 429);
             this.ctrl_InfoPerson.TabIndex = 126;
             // 
             // tabPage2
