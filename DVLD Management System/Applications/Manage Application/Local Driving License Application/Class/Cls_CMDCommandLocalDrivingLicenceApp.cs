@@ -1,5 +1,6 @@
 ﻿using DVLD_Management_System.Class.Class;
 using DVLD_Management_System.Class.Class_DB;
+using Emgu.CV.Dnn;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -287,6 +288,169 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
             var r = ClsCommandDB.ExecuteNonQuery_Command(q, p, false);
             return (r != null && Convert.ToInt32(r) > 0);
         }
+
+
+
+        //--------------------------------------------------
+        //--------------------------------------------------
+
+
+
+
+
+
+        #region ****||***  FrmShowLicenses اوامر واجهة    ****||***
+
+        /// <summary>
+        /// فلترة الرخص حسب ما يلي
+        /// </summary>
+        /// <param name="Typelicense">نوع الرخصة</param>
+        /// <param name="FilterDateRange">الفترة</param>
+        /// <param name="FilterLicenseStatus">حالة الرخصة</param>
+        /// <returns></returns>
+        public static DataTable FelterLicenses(string Typelicense, string FilterDateRange, string FilterLicenseStatus)
+        {
+            if (Typelicense == "Local Licnse")
+            {
+                return GetLicensesByFilters(FilterDateRange, FilterLicenseStatus);
+            }
+            else // International License
+            {
+                return GetInternationalLicensesByFilters(FilterDateRange, FilterLicenseStatus);
+            }
+        }
+
+
+        /// <summary>
+        /// إرجاع قائمة الرخص حسب فلترين نصيّين (اختياريين)
+        /// </summary>
+        static DataTable GetLicensesByFilters(string FilterDateRange, string FilterLicenseStatus)
+        {
+            DataTable dt = new DataTable();
+
+            string query = @"
+        SELECT 
+            L.LicenceID,
+            L.DriverID,
+            D.PersonID,
+            P.[National number] AS NationalNum,
+            L.RelesaseDate AS IssueDate,
+            L.EndDate AS ExpirationDate
+        FROM Licenses L
+        INNER JOIN Drivers D ON L.DriverID = D.DriverID
+        INNER JOIN Persons P ON D.PersonID = P.IDPerson
+        WHERE 1 = 1 ";
+
+            // دمج الفلتر الأول
+            if (!string.IsNullOrWhiteSpace(FilterDateRange))
+            {
+                string f = FilterDateRange.Trim();
+
+                if (f == "This Month")
+                    query += " AND MONTH(L.RelesaseDate) = MONTH(GETDATE()) AND YEAR(L.RelesaseDate) = YEAR(GETDATE()) ";
+
+                else if (f == "This Year")
+                    query += " AND YEAR(L.RelesaseDate) = YEAR(GETDATE()) ";
+
+          
+            }
+           
+            // دمج الفلتر الثاني
+            if (!string.IsNullOrWhiteSpace(FilterLicenseStatus))
+            {
+                string f = FilterLicenseStatus.Trim();
+
+                  if (f == "New License")
+                    query += " AND L.StatusRelease = 1 ";
+
+                else if (f == "Expired License")
+                    query += " AND L.EndDate < GETDATE() ";
+            }
+
+            using (SqlConnection con = new SqlConnection(ClsConnection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+
+            return dt;
+        }
+
+
+
+
+        /// <summary>
+        /// إرجاع قائمة الرخص الدولية حسب فلترين نصيّين (اختياريين)
+        /// </summary>
+          static DataTable GetInternationalLicensesByFilters(string FilterDateRange, string FilterLicenseStatus)
+        {
+            DataTable dt = new DataTable();
+
+            string query = @"
+    SELECT 
+        IL.interLicenseID,
+        L.LicenceID,
+        L.DriverID,
+        D.PersonID,
+        P.[National number] AS NationalNum,
+        IL.IssueDate,
+        IL.ExpiryDate
+    FROM InternationalLicenses IL
+    INNER JOIN Licenses L ON IL.LicenceID = L.LicenceID
+    INNER JOIN Drivers D ON L.DriverID = D.DriverID
+    INNER JOIN Persons P ON D.PersonID = P.IDPerson
+    WHERE 1 = 1 ";
+
+            // فلترة التاريخ
+            if (!string.IsNullOrWhiteSpace(FilterDateRange))
+            {
+                string f = FilterDateRange.Trim() ;
+
+                if (f == "This Month")
+                    query += " AND MONTH(IL.IssueDate) = MONTH(GETDATE()) AND YEAR(IL.IssueDate) = YEAR(GETDATE()) ";
+
+                else if (f == "This Year")
+                    query += " AND YEAR(IL.IssueDate) = YEAR(GETDATE()) ";
+            }
+
+            // فلترة حالة الرخصة الدولية
+            if (!string.IsNullOrWhiteSpace(FilterLicenseStatus))
+            {
+                string f = FilterLicenseStatus.Trim() ;
+
+                if (f == "New License")
+                    query += " AND IL.IsActive = 1 ";
+
+                else if (f == "Expired License")
+                    query += " AND IL.ExpiryDate < GETDATE() ";
+            }
+
+            using (SqlConnection con = new SqlConnection(ClsConnection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                dt.Load(cmd.ExecuteReader());
+            }
+
+            return dt;
+        }
+
+
+
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
 
 
     }

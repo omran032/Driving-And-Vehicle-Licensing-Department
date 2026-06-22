@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsDdb_Application = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,15 +70,15 @@
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.lblNamePerson_User = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.PnlLicenseExpiring = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblCountLicenseExpiring = new System.Windows.Forms.Label();
-            this.guna2ShadowPanel2 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.PnlUnpaidViolation = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lblCountUnpaidViolations = new System.Windows.Forms.Label();
-            this.guna2ShadowPanel3 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.PnlNewLicense = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblCountNewLicense = new System.Windows.Forms.Label();
@@ -102,11 +102,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            this.guna2ShadowPanel1.SuspendLayout();
+            this.PnlLicenseExpiring.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.guna2ShadowPanel2.SuspendLayout();
+            this.PnlUnpaidViolation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.guna2ShadowPanel3.SuspendLayout();
+            this.PnlNewLicense.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.PnlAddNewLocalLicense.SuspendLayout();
@@ -487,22 +487,23 @@
             this.pictureBox5.TabIndex = 17;
             this.pictureBox5.TabStop = false;
             // 
-            // guna2ShadowPanel1
+            // PnlLicenseExpiring
             // 
-            this.guna2ShadowPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ShadowPanel1.Controls.Add(this.pictureBox1);
-            this.guna2ShadowPanel1.Controls.Add(this.label2);
-            this.guna2ShadowPanel1.Controls.Add(this.lblCountLicenseExpiring);
-            this.guna2ShadowPanel1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2ShadowPanel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(103)))), ((int)(((byte)(196)))));
-            this.guna2ShadowPanel1.Location = new System.Drawing.Point(37, 113);
-            this.guna2ShadowPanel1.Name = "guna2ShadowPanel1";
-            this.guna2ShadowPanel1.Radius = 5;
-            this.guna2ShadowPanel1.ShadowColor = System.Drawing.Color.Black;
-            this.guna2ShadowPanel1.ShadowShift = 4;
-            this.guna2ShadowPanel1.Size = new System.Drawing.Size(442, 161);
-            this.guna2ShadowPanel1.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.guna2ShadowPanel1, "الرخصة ستنتهي قريبًا\nخلال 30 يومًا");
+            this.PnlLicenseExpiring.BackColor = System.Drawing.Color.Transparent;
+            this.PnlLicenseExpiring.Controls.Add(this.pictureBox1);
+            this.PnlLicenseExpiring.Controls.Add(this.label2);
+            this.PnlLicenseExpiring.Controls.Add(this.lblCountLicenseExpiring);
+            this.PnlLicenseExpiring.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PnlLicenseExpiring.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(103)))), ((int)(((byte)(196)))));
+            this.PnlLicenseExpiring.Location = new System.Drawing.Point(37, 113);
+            this.PnlLicenseExpiring.Name = "PnlLicenseExpiring";
+            this.PnlLicenseExpiring.Radius = 5;
+            this.PnlLicenseExpiring.ShadowColor = System.Drawing.Color.Black;
+            this.PnlLicenseExpiring.ShadowShift = 4;
+            this.PnlLicenseExpiring.Size = new System.Drawing.Size(442, 161);
+            this.PnlLicenseExpiring.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.PnlLicenseExpiring, "الرخصة ستنتهي قريبًا\nخلال 30 يومًا");
+            this.PnlLicenseExpiring.Click += new System.EventHandler(this.PnlLicenseExpiring_Click);
             // 
             // pictureBox1
             // 
@@ -514,6 +515,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.PnlLicenseExpiring_Click);
             // 
             // label2
             // 
@@ -528,6 +530,7 @@
             this.label2.Text = "License Expiring Soon\r\nWithin 30 Days";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.toolTip1.SetToolTip(this.label2, "الرخصة ستنتهي قريبًا\r\nخلال 30 يومًا");
+            this.label2.Click += new System.EventHandler(this.PnlLicenseExpiring_Click);
             // 
             // lblCountLicenseExpiring
             // 
@@ -541,23 +544,25 @@
             this.lblCountLicenseExpiring.TabIndex = 8;
             this.lblCountLicenseExpiring.Text = "8";
             this.toolTip1.SetToolTip(this.lblCountLicenseExpiring, "الرخصة ستنتهي قريبًا\nخلال 30 يومًا");
+            this.lblCountLicenseExpiring.Click += new System.EventHandler(this.PnlLicenseExpiring_Click);
             // 
-            // guna2ShadowPanel2
+            // PnlUnpaidViolation
             // 
-            this.guna2ShadowPanel2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ShadowPanel2.Controls.Add(this.pictureBox2);
-            this.guna2ShadowPanel2.Controls.Add(this.label3);
-            this.guna2ShadowPanel2.Controls.Add(this.lblCountUnpaidViolations);
-            this.guna2ShadowPanel2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2ShadowPanel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(39)))), ((int)(((byte)(45)))));
-            this.guna2ShadowPanel2.Location = new System.Drawing.Point(503, 113);
-            this.guna2ShadowPanel2.Name = "guna2ShadowPanel2";
-            this.guna2ShadowPanel2.Radius = 5;
-            this.guna2ShadowPanel2.ShadowColor = System.Drawing.Color.Black;
-            this.guna2ShadowPanel2.ShadowShift = 4;
-            this.guna2ShadowPanel2.Size = new System.Drawing.Size(442, 161);
-            this.guna2ShadowPanel2.TabIndex = 6;
-            this.toolTip1.SetToolTip(this.guna2ShadowPanel2, "المخالفات غير المدفوعة\nقيد الانتظار للدفع");
+            this.PnlUnpaidViolation.BackColor = System.Drawing.Color.Transparent;
+            this.PnlUnpaidViolation.Controls.Add(this.pictureBox2);
+            this.PnlUnpaidViolation.Controls.Add(this.label3);
+            this.PnlUnpaidViolation.Controls.Add(this.lblCountUnpaidViolations);
+            this.PnlUnpaidViolation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PnlUnpaidViolation.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(39)))), ((int)(((byte)(45)))));
+            this.PnlUnpaidViolation.Location = new System.Drawing.Point(503, 113);
+            this.PnlUnpaidViolation.Name = "PnlUnpaidViolation";
+            this.PnlUnpaidViolation.Radius = 5;
+            this.PnlUnpaidViolation.ShadowColor = System.Drawing.Color.Black;
+            this.PnlUnpaidViolation.ShadowShift = 4;
+            this.PnlUnpaidViolation.Size = new System.Drawing.Size(442, 161);
+            this.PnlUnpaidViolation.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.PnlUnpaidViolation, "المخالفات غير المدفوعة\nقيد الانتظار للدفع");
+            this.PnlUnpaidViolation.Click += new System.EventHandler(this.PnlUnpaidViolation_Click);
             // 
             // pictureBox2
             // 
@@ -569,6 +574,7 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 16;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.PnlUnpaidViolation_Click);
             // 
             // label3
             // 
@@ -582,6 +588,7 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Unpaid Violations\r\nPinding Payment";
             this.toolTip1.SetToolTip(this.label3, "المخالفات غير المدفوعة\nقيد الانتظار للدفع");
+            this.label3.Click += new System.EventHandler(this.PnlUnpaidViolation_Click);
             // 
             // lblCountUnpaidViolations
             // 
@@ -596,23 +603,25 @@
             this.lblCountUnpaidViolations.Text = "8";
             this.lblCountUnpaidViolations.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolTip1.SetToolTip(this.lblCountUnpaidViolations, "المخالفات غير المدفوعة\r\nقيد الانتظار للدفع");
+            this.lblCountUnpaidViolations.Click += new System.EventHandler(this.PnlUnpaidViolation_Click);
             // 
-            // guna2ShadowPanel3
+            // PnlNewLicense
             // 
-            this.guna2ShadowPanel3.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ShadowPanel3.Controls.Add(this.pictureBox3);
-            this.guna2ShadowPanel3.Controls.Add(this.label5);
-            this.guna2ShadowPanel3.Controls.Add(this.lblCountNewLicense);
-            this.guna2ShadowPanel3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2ShadowPanel3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(136)))), ((int)(((byte)(47)))));
-            this.guna2ShadowPanel3.Location = new System.Drawing.Point(971, 113);
-            this.guna2ShadowPanel3.Name = "guna2ShadowPanel3";
-            this.guna2ShadowPanel3.Radius = 5;
-            this.guna2ShadowPanel3.ShadowColor = System.Drawing.Color.Black;
-            this.guna2ShadowPanel3.ShadowShift = 4;
-            this.guna2ShadowPanel3.Size = new System.Drawing.Size(442, 161);
-            this.guna2ShadowPanel3.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.guna2ShadowPanel3, "رخصة جديدة هذا الشهر");
+            this.PnlNewLicense.BackColor = System.Drawing.Color.Transparent;
+            this.PnlNewLicense.Controls.Add(this.pictureBox3);
+            this.PnlNewLicense.Controls.Add(this.label5);
+            this.PnlNewLicense.Controls.Add(this.lblCountNewLicense);
+            this.PnlNewLicense.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PnlNewLicense.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(136)))), ((int)(((byte)(47)))));
+            this.PnlNewLicense.Location = new System.Drawing.Point(971, 113);
+            this.PnlNewLicense.Name = "PnlNewLicense";
+            this.PnlNewLicense.Radius = 5;
+            this.PnlNewLicense.ShadowColor = System.Drawing.Color.Black;
+            this.PnlNewLicense.ShadowShift = 4;
+            this.PnlNewLicense.Size = new System.Drawing.Size(442, 161);
+            this.PnlNewLicense.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.PnlNewLicense, "رخصة جديدة هذا الشهر");
+            this.PnlNewLicense.Click += new System.EventHandler(this.PnlNewLicense_Click);
             // 
             // pictureBox3
             // 
@@ -624,6 +633,7 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 17;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.PnlNewLicense_Click);
             // 
             // label5
             // 
@@ -637,6 +647,7 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "New License This Month";
             this.toolTip1.SetToolTip(this.label5, "رخصة جديدة هذا الشهر");
+            this.label5.Click += new System.EventHandler(this.PnlNewLicense_Click);
             // 
             // lblCountNewLicense
             // 
@@ -651,32 +662,33 @@
             this.lblCountNewLicense.Text = "8";
             this.lblCountNewLicense.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolTip1.SetToolTip(this.lblCountNewLicense, "رخصة جديدة هذا الشهر");
+            this.lblCountNewLicense.Click += new System.EventHandler(this.PnlNewLicense_Click);
             // 
             // DGV
             // 
             this.DGV.AllowUserToAddRows = false;
             this.DGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.DGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            this.DGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.DGV.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.DGV.ColumnHeadersHeight = 35;
             this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV.DefaultCellStyle = dataGridViewCellStyle9;
             this.DGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.DGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DGV.Location = new System.Drawing.Point(37, 390);
@@ -918,9 +930,9 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.TxtLogID);
             this.Controls.Add(this.DGV);
-            this.Controls.Add(this.guna2ShadowPanel3);
-            this.Controls.Add(this.guna2ShadowPanel2);
-            this.Controls.Add(this.guna2ShadowPanel1);
+            this.Controls.Add(this.PnlNewLicense);
+            this.Controls.Add(this.PnlUnpaidViolation);
+            this.Controls.Add(this.PnlLicenseExpiring);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -937,14 +949,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            this.guna2ShadowPanel1.ResumeLayout(false);
-            this.guna2ShadowPanel1.PerformLayout();
+            this.PnlLicenseExpiring.ResumeLayout(false);
+            this.PnlLicenseExpiring.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.guna2ShadowPanel2.ResumeLayout(false);
-            this.guna2ShadowPanel2.PerformLayout();
+            this.PnlUnpaidViolation.ResumeLayout(false);
+            this.PnlUnpaidViolation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.guna2ShadowPanel3.ResumeLayout(false);
-            this.guna2ShadowPanel3.PerformLayout();
+            this.PnlNewLicense.ResumeLayout(false);
+            this.PnlNewLicense.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
             this.PnlAddNewLocalLicense.ResumeLayout(false);
@@ -992,9 +1004,9 @@
         private System.Windows.Forms.ToolStripMenuItem ToolS_LocalLicense;
         private System.Windows.Forms.ToolStripMenuItem ToolS_InternationalLicense;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel1;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel2;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel3;
+        private Guna.UI2.WinForms.Guna2ShadowPanel PnlLicenseExpiring;
+        private Guna.UI2.WinForms.Guna2ShadowPanel PnlUnpaidViolation;
+        private Guna.UI2.WinForms.Guna2ShadowPanel PnlNewLicense;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblCountLicenseExpiring;
         private System.Windows.Forms.Label label3;

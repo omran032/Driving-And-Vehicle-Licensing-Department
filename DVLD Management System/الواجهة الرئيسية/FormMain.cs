@@ -1,5 +1,6 @@
 ﻿using Dev_Note_Assistant;
 using DVLD_Management_System.Applications;
+using DVLD_Management_System.Applications.Manage_Application.Local_Driving_License_Application.UI;
 using DVLD_Management_System.Applications.Manage_Application_Type;
 using DVLD_Management_System.Applications.Manage_Test_Type.واجهات;
 using DVLD_Management_System.Class.Class;
@@ -102,6 +103,27 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
             // تحميل في جدول السجلات
             DataTable DataLogs = GetAuditLogs(LogID);
             DGV.DataSource = DataLogs;
+        }
+
+     
+
+        private void PnlLicenseExpiring_Click(object sender, EventArgs e) // بنل عرض الرخص المنتهية هذا الشهر
+        {
+            FrmShowLicenses showLicenses = new FrmShowLicenses();
+            showLicenses.LicenseStatus = "Expired License";
+            MyTools.ShowForm(showLicenses);
+        }
+        
+        private void PnlUnpaidViolation_Click(object sender, EventArgs e)// بنل عرض المخالفات الغير مدفوعة
+        {
+            FrmListDetainedLicenses listDetainedLicenses = new FrmListDetainedLicenses();
+            listDetainedLicenses.ShowLocenseUnpaidViolations = true;
+            MyTools.ShowForm(listDetainedLicenses);
+        }
+        private void PnlNewLicense_Click(object sender, EventArgs e) // بنل عرض الرخص الجديدة هذا الشهر
+        {
+            FrmShowLicenses showLicenses = new FrmShowLicenses();
+            MyTools.ShowForm(showLicenses);
         }
 
         #endregion
@@ -418,10 +440,18 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
 
 
 
+
+
+
+
+
+
+
+
+
+
         #endregion
 
-     
-
-    
+        
     }
 }

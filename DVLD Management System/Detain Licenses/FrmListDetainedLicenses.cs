@@ -36,12 +36,29 @@ namespace DVLD_Management_System.Detain_Licenses
             LoadData();
         }
 
+        // هي لحتى اتحكم بالفورم بحيث اول ما افتحه اعرض الرخص يلي عليها غرامة مباشرة
+        // بصير بيعرض الرخص يلي عليها غرامة True  اذا كان
+      public  bool ShowLocenseUnpaidViolations = false;
 
         void LoadData()
         {
-            CombxFilterBy.Text = "None";
+            if(!ShowLocenseUnpaidViolations)
+            {
+                CombxFilterBy.Text = "None";
 
-            DataInfoTable = ClassDetainCMD.GetDetainedLicensesWithFilter(enDetainFilter_);
+                DataInfoTable = ClassDetainCMD.GetDetainedLicensesWithFilter(enDetainFilter_);
+            }
+            else // تحميل الرخص التي عليها غرامة
+            {
+                CombxFilterBy.Text = "Is Released";
+                CombxIsReleased.Text = "No";
+                CombxIsReleased.Visible = true; 
+
+                enDetainFilter_ = enDetainFilter.IsReleased;
+                DataInfoTable = ClassDetainCMD.GetDetainedLicensesWithFilter(enDetainFilter_, "", enIsReleasedFilter.NotReleased);
+                LoadDataFromDGV(DataInfoTable);
+            }
+          
             LoadDataFromDGV(DataInfoTable);
         }
 
