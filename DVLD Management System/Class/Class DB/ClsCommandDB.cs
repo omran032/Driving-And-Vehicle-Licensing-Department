@@ -179,11 +179,13 @@ namespace DVLD_Management_System.Class.Class_DB
 
 
 
-
         /// <summary>
         /// التحقق من المستخدم عند تسجيل الدخول
+        /// ترجع true إذا كانت المعلومات صحيحة،
+        /// false إذا كانت خاطئة.
+        /// كما تقوم بتحميل معلومات المستخدم داخل ClassUser.
         /// </summary>
-        public static bool IsExistUser(string username, string password , string Role)
+        public static bool LoginUser(string username, string password)
         {
             password = ReturnEncrptionPassword(password);
 
@@ -191,44 +193,91 @@ namespace DVLD_Management_System.Class.Class_DB
             {
                 using (SqlConnection connection = new SqlConnection(ConnectionString))
                 {
-                    string query = @"SELECT  Authorities, IDUser, IDPerson ,[Status Account]
-                     FROM Users 
-                     WHERE Username = @Username 
-                     AND Password = @Password 
-                     AND Role = @Role  
-                     AND [Status Account] = 'Active'";
+                    string query = @"
+                SELECT 
+                    IDUser,
+                    IDPerson,
+                    UserName,
+                    Role,
+                    Authorities,
+                    [Status Account]
+                FROM Users
+                WHERE UserName = @Username
+                AND Password = @Password
+                AND [Status Account] = 'Active'; ";
 
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@Username", username);
                     command.Parameters.AddWithValue("@Password", password);
-                    command.Parameters.AddWithValue("@Role", Role);
 
                     connection.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        if (reader.Read())   // يعني وجد صف واحد على الأقل
-                        {
-                            // حفظ القيم
-                            ClassUser.Authorities   = reader["Authorities"].ToString();
-                            ClassUser.IDUser        = Convert.ToInt32(reader["IDUser"]);
-                            ClassUser.IDPerson      = Convert.ToInt32(reader["IDPerson"]);
-                            ClassUser.StatusAccount = reader["Status Account"].ToString();  
-                            ClassUser.UserName = username;
-                            ClassUser.Role     = Role;
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        if (!reader.Read())
+                            return false; // المستخدم غير موجود أو الحساب غير فعال
+
+                        // تعبئة بيانات المستخدم
+                        ClassUser.IDUser = Convert.ToInt32(reader["IDUser"]);
+                        ClassUser.IDPerson = Convert.ToInt32(reader["IDPerson"]);
+                        ClassUser.UserName = reader["UserName"].ToString();
+                        ClassUser.Role = reader["Role"].ToString();
+                        ClassUser.Authorities = reader["Authorities"].ToString();
+                        ClassUser.StatusAccount = reader["Status Account"].ToString();
+
+                        return true;
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("مشكلة في ", "Error in IsExistUser DB " , MessageBoxButtons.OK , MessageBoxIcon.Hand);
+                MessageBox.Show("خطأ أثناء تسجيل الدخول:\n" + ex.Message,
+                    "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
+            }
+        }
+
+
+        /// <summary>
+        /// التحقق من اسم المستخدم وكلمة المرور فقط.
+        /// ترجع دور المستخدم (Role) إذا كان موجوداً.
+        /// إذا لم يتم العثور على المستخدم → ترجع null.
+        /// </summary>
+        public static string GetUserRole(string username, string password)
+        {
+            password = ReturnEncrptionPassword(password);
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                {
+                    string query = @"
+                SELECT Role
+                FROM Users
+                WHERE UserName = @Username
+                AND Password = @Password
+                AND [Status Account] = 'Active';
+            ";
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Username", username);
+                    command.Parameters.AddWithValue("@Password", password);
+
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    if (result == null)
+                        return null; // المستخدم غير موجود
+
+                    return result.ToString(); // رجّع الدور
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("خطأ أثناء التحقق من المستخدم:\n" + ex.Message,
+                    "DB Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
         }
 

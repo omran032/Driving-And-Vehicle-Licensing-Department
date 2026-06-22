@@ -1,6 +1,7 @@
 ﻿using Dev_Note_Assistant;
 using DVLD_Management_System.Class.Class_DB;
 using DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول.Class;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Win32;
+using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 
 namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول
 {
@@ -46,19 +47,20 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
         {
               username = TxtUserName.Text.Trim().ToLower();
               password = TxtPassword.Text.Trim();
-              role = ComboRole.SelectedItem?.ToString(); // اختيار الدور
 
 
-            if ( IsNull(TxtUserName, "الرجاء إدخال اسم المستخدم") || IsNull(TxtPassword, "الرجاء إدخال كلمة المرور") || IsNull(ComboRole, "الرجاء اختيار الدور"))
+            if ( IsNull(TxtUserName, "الرجاء إدخال اسم المستخدم") || IsNull(TxtPassword, "الرجاء إدخال كلمة المرور") )
             {
                 return; // إذا كان هناك أي حقل فارغ، لا يتم متابعة عملية تسجيل الدخول
             }
 
-            if (ClsCommandDB.IsExistUser(username , password , role ) )
+            if (ClsCommandDB.LoginUser(username , password  ) )
             {
+                ClassAuditLogs.AddLog(LogAction.UserLogin, ClassUser.IDUser, "تم تسجيل الدخول للنظام");
+
                 // عرض الواجهة حسب الصلاحيات
                 // فعلها بس تقسم الصلاحيات
-                //  ClsPersonAuthorities personAuthorities = new ClsPersonAuthorities(Authorities); 
+                ClsPersonAuthorities personAuthorities = new ClsPersonAuthorities(ClassUser.Role); 
 
                 // Windows Registry هل تم تفعيل حفظ المعلومات لحفظها في
                 IsCheck_RememberMy();

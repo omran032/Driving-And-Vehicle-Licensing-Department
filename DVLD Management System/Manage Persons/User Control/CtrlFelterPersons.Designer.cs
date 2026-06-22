@@ -36,7 +36,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.label3.ForeColor = System.Drawing.Color.DimGray;
             this.label3.Location = new System.Drawing.Point(2, 25);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -46,6 +46,7 @@
             // 
             // TxtFelter
             // 
+            this.TxtFelter.BorderColor = System.Drawing.Color.Gray;
             this.TxtFelter.BorderRadius = 15;
             this.TxtFelter.Cursor = System.Windows.Forms.Cursors.Default;
             this.TxtFelter.DefaultText = "";
@@ -69,6 +70,7 @@
             // ComboFelter
             // 
             this.ComboFelter.BackColor = System.Drawing.Color.Transparent;
+            this.ComboFelter.BorderColor = System.Drawing.Color.Gray;
             this.ComboFelter.BorderRadius = 15;
             this.ComboFelter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.ComboFelter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -92,7 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackColor = System.Drawing.Color.Snow;
             this.Controls.Add(this.label3);
             this.Controls.Add(this.TxtFelter);
             this.Controls.Add(this.ComboFelter);

@@ -1,4 +1,5 @@
 ﻿using DVLD_Management_System.Class.Class_DB;
+using DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 
 namespace DVLD_Management_System.Applications.Manage_Application_Type.Class
 {
@@ -46,7 +48,11 @@ namespace DVLD_Management_System.Applications.Manage_Application_Type.Class
             if (result == null)
                 MessageBox.Show("لم يتم تعديل نوع الطلب  ... حاول مجدداً", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
+            {
                 MessageBox.Show(" تم تعديل نوع الطلب بنجاح ", "تم");
+                AddLog(LogAction.UpdateRequestType, ClassUser.IDUser, $"تعديل نوع الطلب رقم {infoApplication.ID}"); // التسجيل في Logs
+
+            }
         }
 
 

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 
 namespace DVLD_Management_System.Detain_Licenses
 {
@@ -84,15 +85,32 @@ namespace DVLD_Management_System.Detain_Licenses
             txtReason.Text     = DetainInfo.Reason;
         }
 
-        private void btnRelease_Click(object sender, EventArgs e) // زر فك الحجز
+    
+
+        private void llShowLicenseHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)  // عرض جميع رخص الشخص
+        {
+            int PersonID = Licenseinfo.PersonID;
+            if (PersonID <= 0) return;
+
+            FrmShowPersonLicenseHistory personLicenseHistory = new FrmShowPersonLicenseHistory(PersonID);
+            MyTools.ShowForm(personLicenseHistory);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnRelease_Click_1(object sender, EventArgs e)// زر فك الحجز
         {
             if (DetainInfo == null) return;
 
             bool Result = ClassDetainCMD.ReleaseLicense(DetainInfo.LicenseID);
 
-            if(Result)
+            if (Result)
             {
-                MessageBox.Show("تم فك الحجز عن الرخصة", "تم",   MessageBoxButtons.OK, MessageBoxIcon.Question);
+                AddLog(LogAction.ReleaseLicense, ClassUser.IDUser, "  فك حجز رخصة " + "\n + ID = " + DetainInfo.LicenseID);   // تسجيل عملية فك حجز رخصة في سجل الـ Logs
+                MessageBox.Show("تم فك الحجز عن الرخصة", "تم", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 btnRelease.Enabled = false;
                 ctrlDriverLicenseInfoWithFilter1.gbFilters.Visible = false;
                 EventRefreshData?.Invoke();
@@ -104,16 +122,8 @@ namespace DVLD_Management_System.Detain_Licenses
                 btnRelease.Enabled = false;
                 return;
             }
-
         }
 
-        private void llShowLicenseHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)  // عرض جميع رخص الشخص
-        {
-            int PersonID = Licenseinfo.PersonID;
-            if (PersonID <= 0) return;
 
-            FrmShowPersonLicenseHistory personLicenseHistory = new FrmShowPersonLicenseHistory(PersonID);
-            MyTools.ShowForm(personLicenseHistory);
-        }
     }
 }

@@ -30,10 +30,10 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnIssueLicense = new System.Windows.Forms.Button();
             this.ctrl_DLApplInfo1 = new DVLD_Management_System.ctrl_DLApplInfo();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnIssueLicense = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.btnClose = new Guna.UI2.WinForms.Guna2GradientButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,32 +57,6 @@
             this.txtNotes.Size = new System.Drawing.Size(783, 127);
             this.txtNotes.TabIndex = 176;
             // 
-            // btnClose
-            // 
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(674, 639);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(126, 37);
-            this.btnClose.TabIndex = 178;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            // 
-            // btnIssueLicense
-            // 
-            this.btnIssueLicense.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnIssueLicense.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIssueLicense.Location = new System.Drawing.Point(808, 639);
-            this.btnIssueLicense.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnIssueLicense.Name = "btnIssueLicense";
-            this.btnIssueLicense.Size = new System.Drawing.Size(126, 37);
-            this.btnIssueLicense.TabIndex = 177;
-            this.btnIssueLicense.Text = "Issue";
-            this.btnIssueLicense.UseVisualStyleBackColor = true;
-            this.btnIssueLicense.Click += new System.EventHandler(this.btnIssueLicense_Click_1);
-            // 
             // ctrl_DLApplInfo1
             // 
             this.ctrl_DLApplInfo1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -103,18 +77,65 @@
             this.pictureBox1.TabIndex = 180;
             this.pictureBox1.TabStop = false;
             // 
+            // btnIssueLicense
+            // 
+            this.btnIssueLicense.BorderColor = System.Drawing.Color.Gray;
+            this.btnIssueLicense.BorderRadius = 10;
+            this.btnIssueLicense.BorderThickness = 1;
+            this.btnIssueLicense.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnIssueLicense.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnIssueLicense.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnIssueLicense.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnIssueLicense.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnIssueLicense.FillColor = System.Drawing.Color.White;
+            this.btnIssueLicense.FillColor2 = System.Drawing.Color.White;
+            this.btnIssueLicense.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIssueLicense.ForeColor = System.Drawing.Color.Navy;
+            this.btnIssueLicense.Image = global::DVLD_Management_System.Properties.Resources.Save;
+            this.btnIssueLicense.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnIssueLicense.Location = new System.Drawing.Point(810, 639);
+            this.btnIssueLicense.Name = "btnIssueLicense";
+            this.btnIssueLicense.Size = new System.Drawing.Size(124, 45);
+            this.btnIssueLicense.TabIndex = 182;
+            this.btnIssueLicense.Text = "Issue";
+            this.btnIssueLicense.TextOffset = new System.Drawing.Point(2, 0);
+            this.btnIssueLicense.Click += new System.EventHandler(this.btnIssueLicense_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.BorderRadius = 10;
+            this.btnClose.BorderThickness = 1;
+            this.btnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnClose.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnClose.FillColor = System.Drawing.Color.White;
+            this.btnClose.FillColor2 = System.Drawing.Color.White;
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnClose.Image = global::DVLD_Management_System.Properties.Resources.Close_32;
+            this.btnClose.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnClose.Location = new System.Drawing.Point(675, 639);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(117, 45);
+            this.btnClose.TabIndex = 183;
+            this.btnClose.Text = "Close";
+            // 
             // FrmIssueDriverLicenseFirstTime
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(969, 692);
+            this.BackColor = System.Drawing.Color.AliceBlue;
+            this.ClientSize = new System.Drawing.Size(969, 709);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnIssueLicense);
             this.Controls.Add(this.ctrl_DLApplInfo1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtNotes);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnIssueLicense);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -133,8 +154,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNotes;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnIssueLicense;
         private ctrl_DLApplInfo ctrl_DLApplInfo1;
+        private Guna.UI2.WinForms.Guna2GradientButton btnIssueLicense;
+        private Guna.UI2.WinForms.Guna2GradientButton btnClose;
     }
 }

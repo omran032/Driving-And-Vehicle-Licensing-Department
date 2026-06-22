@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlScheduleTest));
             this.gbTestType = new System.Windows.Forms.GroupBox();
+            this.btnSave = new Guna.UI2.WinForms.Guna2GradientButton();
             this.gbRetakeTestInfo = new System.Windows.Forms.GroupBox();
             this.lblTotalFees = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -47,7 +49,6 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.lblLocalDrivingLicenseAppID = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
             this.lblFullName = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -77,6 +78,7 @@
             // 
             // gbTestType
             // 
+            this.gbTestType.Controls.Add(this.btnSave);
             this.gbTestType.Controls.Add(this.gbRetakeTestInfo);
             this.gbTestType.Controls.Add(this.pbTestTypeImage);
             this.gbTestType.Controls.Add(this.lblUserMessage);
@@ -86,7 +88,6 @@
             this.gbTestType.Controls.Add(this.pictureBox4);
             this.gbTestType.Controls.Add(this.lblLocalDrivingLicenseAppID);
             this.gbTestType.Controls.Add(this.label8);
-            this.gbTestType.Controls.Add(this.btnSave);
             this.gbTestType.Controls.Add(this.lblFullName);
             this.gbTestType.Controls.Add(this.pictureBox2);
             this.gbTestType.Controls.Add(this.label6);
@@ -108,6 +109,30 @@
             this.gbTestType.TabIndex = 153;
             this.gbTestType.TabStop = false;
             this.gbTestType.Text = "Test Type";
+            // 
+            // btnSave
+            // 
+            this.btnSave.BorderColor = System.Drawing.Color.Gray;
+            this.btnSave.BorderRadius = 10;
+            this.btnSave.BorderThickness = 1;
+            this.btnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSave.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSave.FillColor = System.Drawing.Color.White;
+            this.btnSave.FillColor2 = System.Drawing.Color.White;
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.ForeColor = System.Drawing.Color.Navy;
+            this.btnSave.Image = global::DVLD_Management_System.Properties.Resources.Save;
+            this.btnSave.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnSave.Location = new System.Drawing.Point(408, 682);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(124, 45);
+            this.btnSave.TabIndex = 190;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextOffset = new System.Drawing.Point(2, 0);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
             // 
             // gbRetakeTestInfo
             // 
@@ -151,6 +176,7 @@
             // 
             // pictureBox9
             // 
+            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
             this.pictureBox9.Location = new System.Drawing.Point(406, 40);
             this.pictureBox9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox9.Name = "pictureBox9";
@@ -183,6 +209,7 @@
             // 
             // pictureBox6
             // 
+            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
             this.pictureBox6.Location = new System.Drawing.Point(140, 40);
             this.pictureBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox6.Name = "pictureBox6";
@@ -193,6 +220,7 @@
             // 
             // pictureBox5
             // 
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
             this.pictureBox5.Location = new System.Drawing.Point(140, 76);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(31, 26);
@@ -225,7 +253,7 @@
             // pbTestTypeImage
             // 
             this.pbTestTypeImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbTestTypeImage.Image = global::DVLD_Management_System.Properties.Resources.exam1;
+            this.pbTestTypeImage.Image = global::DVLD_Management_System.Properties.Resources.Written_Test_512;
             this.pbTestTypeImage.InitialImage = null;
             this.pbTestTypeImage.Location = new System.Drawing.Point(203, 47);
             this.pbTestTypeImage.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
@@ -250,10 +278,11 @@
             // 
             // pictureBox7
             // 
+            this.pictureBox7.Image = global::DVLD_Management_System.Properties.Resources.License_Type_32;
             this.pictureBox7.Location = new System.Drawing.Point(140, 329);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox7.TabIndex = 187;
             this.pictureBox7.TabStop = false;
             // 
@@ -281,10 +310,11 @@
             // 
             // pictureBox4
             // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
             this.pictureBox4.Location = new System.Drawing.Point(140, 293);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 169;
             this.pictureBox4.TabStop = false;
             // 
@@ -310,20 +340,6 @@
             this.label8.TabIndex = 167;
             this.label8.Text = "D.L.App.ID:";
             // 
-            // btnSave
-            // 
-            this.btnSave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(395, 687);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(137, 36);
-            this.btnSave.TabIndex = 166;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // lblFullName
             // 
             this.lblFullName.AutoSize = true;
@@ -337,6 +353,7 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Image = global::DVLD_Management_System.Properties.Resources.Woman_32;
             this.pictureBox2.Location = new System.Drawing.Point(140, 365);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox2.Name = "pictureBox2";
@@ -380,6 +397,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::DVLD_Management_System.Properties.Resources.Count_32;
             this.pictureBox1.Location = new System.Drawing.Point(140, 401);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
@@ -412,6 +430,7 @@
             // 
             // pictureBox3
             // 
+            this.pictureBox3.Image = global::DVLD_Management_System.Properties.Resources.money_32;
             this.pictureBox3.Location = new System.Drawing.Point(140, 473);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox3.Name = "pictureBox3";
@@ -446,11 +465,12 @@
             // 
             // pictureBox8
             // 
+            this.pictureBox8.Image = global::DVLD_Management_System.Properties.Resources.Calendar;
             this.pictureBox8.Location = new System.Drawing.Point(140, 437);
             this.pictureBox8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox8.Size = new System.Drawing.Size(31, 29);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox8.TabIndex = 154;
             this.pictureBox8.TabStop = false;
             // 
@@ -514,7 +534,6 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label lblLocalDrivingLicenseAppID;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblFullName;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label6;
@@ -528,5 +547,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.Label lblTitle;
+        private Guna.UI2.WinForms.Guna2GradientButton btnSave;
     }
 }

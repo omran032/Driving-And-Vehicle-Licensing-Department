@@ -67,17 +67,20 @@
             // ctrl_InfoPerson1
             // 
             this.ctrl_InfoPerson1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrl_InfoPerson1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ctrl_InfoPerson1.Location = new System.Drawing.Point(11, 16);
             this.ctrl_InfoPerson1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.ctrl_InfoPerson1.Name = "ctrl_InfoPerson1";
             this.ctrl_InfoPerson1.person = null;
             this.ctrl_InfoPerson1.PersonID = 0;
-            this.ctrl_InfoPerson1.Size = new System.Drawing.Size(585, 376);
+            this.ctrl_InfoPerson1.Size = new System.Drawing.Size(705, 376);
             this.ctrl_InfoPerson1.TabIndex = 0;
             // 
             // btnSave
             // 
+            this.btnSave.BorderColor = System.Drawing.Color.Gray;
             this.btnSave.BorderRadius = 10;
+            this.btnSave.BorderThickness = 1;
             this.btnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -86,17 +89,19 @@
             this.btnSave.FillColor = System.Drawing.Color.White;
             this.btnSave.FillColor2 = System.Drawing.Color.White;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnSave.ForeColor = System.Drawing.Color.Navy;
+            this.btnSave.Image = global::DVLD_Management_System.Properties.Resources.Save;
+            this.btnSave.ImageSize = new System.Drawing.Size(30, 30);
             this.btnSave.Location = new System.Drawing.Point(634, 612);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(110, 35);
             this.btnSave.TabIndex = 31;
             this.btnSave.Text = "Save";
-            this.btnSave.TextOffset = new System.Drawing.Point(15, 0);
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // TxtConfirmPassword
             // 
+            this.TxtConfirmPassword.BorderColor = System.Drawing.Color.Gray;
             this.TxtConfirmPassword.BorderRadius = 15;
             this.TxtConfirmPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TxtConfirmPassword.DefaultText = "";
@@ -109,6 +114,7 @@
             this.TxtConfirmPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TxtConfirmPassword.Location = new System.Drawing.Point(523, 557);
             this.TxtConfirmPassword.Name = "TxtConfirmPassword";
+            this.TxtConfirmPassword.PlaceholderForeColor = System.Drawing.Color.Silver;
             this.TxtConfirmPassword.PlaceholderText = "تأكيد كلمة المرور";
             this.TxtConfirmPassword.SelectedText = "";
             this.TxtConfirmPassword.Size = new System.Drawing.Size(223, 36);
@@ -116,6 +122,7 @@
             // 
             // TxtNewPasswprd
             // 
+            this.TxtNewPasswprd.BorderColor = System.Drawing.Color.Gray;
             this.TxtNewPasswprd.BorderRadius = 15;
             this.TxtNewPasswprd.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TxtNewPasswprd.DefaultText = "";
@@ -128,6 +135,7 @@
             this.TxtNewPasswprd.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TxtNewPasswprd.Location = new System.Drawing.Point(265, 557);
             this.TxtNewPasswprd.Name = "TxtNewPasswprd";
+            this.TxtNewPasswprd.PlaceholderForeColor = System.Drawing.Color.Silver;
             this.TxtNewPasswprd.PlaceholderText = "كلمة المرور الجديدة";
             this.TxtNewPasswprd.SelectedText = "";
             this.TxtNewPasswprd.Size = new System.Drawing.Size(223, 36);
@@ -135,6 +143,7 @@
             // 
             // TxtOldPasswprd
             // 
+            this.TxtOldPasswprd.BorderColor = System.Drawing.Color.Gray;
             this.TxtOldPasswprd.BorderRadius = 15;
             this.TxtOldPasswprd.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TxtOldPasswprd.DefaultText = "";
@@ -147,6 +156,7 @@
             this.TxtOldPasswprd.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TxtOldPasswprd.Location = new System.Drawing.Point(15, 557);
             this.TxtOldPasswprd.Name = "TxtOldPasswprd";
+            this.TxtOldPasswprd.PlaceholderForeColor = System.Drawing.Color.Silver;
             this.TxtOldPasswprd.PlaceholderText = "كلمة المرور القديمة";
             this.TxtOldPasswprd.SelectedText = "";
             this.TxtOldPasswprd.Size = new System.Drawing.Size(223, 36);
@@ -154,7 +164,9 @@
             // 
             // btnClose
             // 
+            this.btnClose.BorderColor = System.Drawing.Color.Gray;
             this.btnClose.BorderRadius = 10;
+            this.btnClose.BorderThickness = 1;
             this.btnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -164,12 +176,13 @@
             this.btnClose.FillColor2 = System.Drawing.Color.White;
             this.btnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnClose.Image = global::DVLD_Management_System.Properties.Resources.Close_32;
+            this.btnClose.ImageSize = new System.Drawing.Size(30, 30);
             this.btnClose.Location = new System.Drawing.Point(499, 612);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(110, 35);
             this.btnClose.TabIndex = 27;
             this.btnClose.Text = "Close";
-            this.btnClose.TextOffset = new System.Drawing.Point(15, 0);
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // errorProvider1
@@ -180,6 +193,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(764, 659);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.TxtConfirmPassword);
@@ -189,9 +203,12 @@
             this.Controls.Add(this.ctrlInfoUser1);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "FrmChangePassword";
-            this.Text = "FrmChangePassword";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Change Password User";
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

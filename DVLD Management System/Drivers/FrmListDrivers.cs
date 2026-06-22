@@ -80,11 +80,7 @@ namespace DVLD_Management_System.Drivers
             }
         }
 
-        private void txtFilterValue_TextChanged(object sender, EventArgs e)
-        {
-
-
-        }
+       
 
         private void btnSearch_Click(object sender, EventArgs e) // زر البحث
         {
@@ -150,6 +146,11 @@ namespace DVLD_Management_System.Drivers
             FrmShowPersonLicenseHistory personLicenseHistory = new FrmShowPersonLicenseHistory(PersonID);
             MyTools.ShowForm(personLicenseHistory);
 
+        }
+
+        private void btnClose_Click(object sender, EventArgs e) // اغلاق
+        {
+            this.Close();
         }
     }
 }

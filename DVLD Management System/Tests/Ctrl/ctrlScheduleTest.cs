@@ -50,7 +50,7 @@ namespace DVLD_Management_System.Tests.Ctrl
                     case ClassInfoLicenseAplication.enTestType.WrittenTest:
                         {
                             gbTestType.Text = "Written Test";
-                            pbTestTypeImage.Image = Resources.exam;
+                            pbTestTypeImage.Image = Resources.Written_Test_512;
                             break;
                         }
                     case ClassInfoLicenseAplication.enTestType.StreetTest:
@@ -333,89 +333,8 @@ namespace DVLD_Management_System.Tests.Ctrl
             }
         }
 
-        // زر الحفظ
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            // التحقق من رقم الطلب
-            if (_LocalDrivingLicenseApplicationID <= 0)
-            {
-                MessageBox.Show("رقم الطلب غير صالح.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // إضافة موعد جديد
-            if (_Mode == enMode.AddNew)
-            {
-                // التحقق من وجود موعد فعّال مسبقاً لنفس الطلب ونوع الاختبار
-                if (IsThereActiveScheduledTestLocal(_LocalDrivingLicenseApplicationID, (int)TestTypeID))
-                {
-                    MessageBox.Show("يوجد بالفعل موعد اختبار فعّال لهذا الطلب ولنفس نوع الاختبار.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // منع جدولة اختبار جديد إذا كان الشخص ناجحاً مسبقاً في نفس نوع الاختبار
-                if (_ApplicantPersonID > 0 && HasPersonPassedTestTypeLocal(_ApplicantPersonID, (int)TestTypeID))
-                {
-                    MessageBox.Show("لا يمكن جدولة الاختبار لأن الشخص نجح مسبقاً في نفس نوع الاختبار.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // حساب الرسوم النهائية (رسوم الاختبار + رسوم إعادة الاختبار إن وُجدت)
-                int totalFees = ApplyFeesRules();
-
-                int IDUser = (ClassUser.IDUser <= 0) ? 3 : ClassUser.IDUser;
-
-                // استدعاء ميثود الإدراج مع الرسوم النهائية
-                int newID = AddTestAppointment(dtpTestDate.Value.Date, totalFees, _LocalDrivingLicenseApplicationID, (int)TestTypeID, IDUser);
-
-                if (newID > 0)
-                {
-                    MessageBox.Show("تم حفظ موعد الاختبار بنجاح.", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // تحديث واجهة الرسوم بعد الحفظ
-                    ApplyFeesRules();
-                    OnAppointmentSaved?.Invoke(); //   إطلاق الحدث
-                }
-                else
-                    MessageBox.Show("فشل في حفظ موعد الاختبار.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else // تعديل موعد
-            {
-                if (_TestAppointmentID <= 0)
-                {
-                    MessageBox.Show("رقم الموعد غير صالح للتعديل.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // منع التعديل إذا كانت نتيجة الاختبار قد ظهرت
-                if (IsAppointmentResultSet(_TestAppointmentID))
-                {
-                    MessageBox.Show("لا يمكن تعديل الموعد لأن نتيجة الاختبار مسجلة بالفعل.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // حساب الرسوم النهائية بعد التعديل
-                int totalFees = ApplyFeesRules();
-
-                int result = UpdateTestAppointment(_TestAppointmentID, dtpTestDate.Value.Date, totalFees);
-
-                if (result > 0)
-                {
-                    MessageBox.Show("تم تعديل موعد الاختبار بنجاح.", "تم التعديل", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // تحديث واجهة الرسوم بعد التعديل
-                    ApplyFeesRules();
-                    OnAppointmentSaved?.Invoke(); //   إطلاق الحدث 
-                }
-                else
-                    MessageBox.Show("فشل في تعديل موعد الاختبار.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-
-
-
-
-
-
+        
+         
 
         /// <summary>
         /// إضافة موعد اختبار جديد إلى جدول Tests
@@ -618,5 +537,81 @@ namespace DVLD_Management_System.Tests.Ctrl
 
         }
 
+        
+        private void btnSave_Click_1(object sender, EventArgs e) // زر الحفظ
+        {
+            // التحقق من رقم الطلب
+            if (_LocalDrivingLicenseApplicationID <= 0)
+            {
+                MessageBox.Show("رقم الطلب غير صالح.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // إضافة موعد جديد
+            if (_Mode == enMode.AddNew)
+            {
+                // التحقق من وجود موعد فعّال مسبقاً لنفس الطلب ونوع الاختبار
+                if (IsThereActiveScheduledTestLocal(_LocalDrivingLicenseApplicationID, (int)TestTypeID))
+                {
+                    MessageBox.Show("يوجد بالفعل موعد اختبار فعّال لهذا الطلب ولنفس نوع الاختبار.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // منع جدولة اختبار جديد إذا كان الشخص ناجحاً مسبقاً في نفس نوع الاختبار
+                if (_ApplicantPersonID > 0 && HasPersonPassedTestTypeLocal(_ApplicantPersonID, (int)TestTypeID))
+                {
+                    MessageBox.Show("لا يمكن جدولة الاختبار لأن الشخص نجح مسبقاً في نفس نوع الاختبار.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // حساب الرسوم النهائية (رسوم الاختبار + رسوم إعادة الاختبار إن وُجدت)
+                int totalFees = ApplyFeesRules();
+
+                int IDUser = (ClassUser.IDUser <= 0) ? 3 : ClassUser.IDUser;
+
+                // استدعاء ميثود الإدراج مع الرسوم النهائية
+                int newID = AddTestAppointment(dtpTestDate.Value.Date, totalFees, _LocalDrivingLicenseApplicationID, (int)TestTypeID, IDUser);
+
+                if (newID > 0)
+                {
+                    MessageBox.Show("تم حفظ موعد الاختبار بنجاح.", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // تحديث واجهة الرسوم بعد الحفظ
+                    ApplyFeesRules();
+                    OnAppointmentSaved?.Invoke(); //   إطلاق الحدث
+                }
+                else
+                    MessageBox.Show("فشل في حفظ موعد الاختبار.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else // تعديل موعد
+            {
+                if (_TestAppointmentID <= 0)
+                {
+                    MessageBox.Show("رقم الموعد غير صالح للتعديل.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // منع التعديل إذا كانت نتيجة الاختبار قد ظهرت
+                if (IsAppointmentResultSet(_TestAppointmentID))
+                {
+                    MessageBox.Show("لا يمكن تعديل الموعد لأن نتيجة الاختبار مسجلة بالفعل.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // حساب الرسوم النهائية بعد التعديل
+                int totalFees = ApplyFeesRules();
+
+                int result = UpdateTestAppointment(_TestAppointmentID, dtpTestDate.Value.Date, totalFees);
+
+                if (result > 0)
+                {
+                    MessageBox.Show("تم تعديل موعد الاختبار بنجاح.", "تم التعديل", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // تحديث واجهة الرسوم بعد التعديل
+                    ApplyFeesRules();
+                    OnAppointmentSaved?.Invoke(); //   إطلاق الحدث 
+                }
+                else
+                    MessageBox.Show("فشل في تعديل موعد الاختبار.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

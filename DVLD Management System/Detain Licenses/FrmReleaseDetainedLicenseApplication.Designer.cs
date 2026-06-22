@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnRelease = new System.Windows.Forms.Button();
             this.llShowLicenseHistory = new System.Windows.Forms.LinkLabel();
             this.gpDetain = new System.Windows.Forms.GroupBox();
+            this.txtReason = new Guna.UI2.WinForms.Guna2TextBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.lblTotalFees = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -54,11 +55,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblDetainID = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.txtReason = new Guna.UI2.WinForms.Guna2TextBox();
             this.ctrlDriverLicenseInfoWithFilter1 = new DVLD_Management_System.Local_Licenses.Ctrl.ctrlDriverLicenseInfoWithFilter();
+            this.btnClose = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.btnRelease = new Guna.UI2.WinForms.Guna2GradientButton();
             this.gpDetain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -66,12 +67,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
             // 
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTitle.Location = new System.Drawing.Point(39, 9);
             this.lblTitle.Name = "lblTitle";
@@ -80,39 +80,12 @@
             this.lblTitle.Text = "Release Detained License";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnClose
-            // 
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(642, 780);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(135, 37);
-            this.btnClose.TabIndex = 193;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            // 
-            // btnRelease
-            // 
-            this.btnRelease.Enabled = false;
-            this.btnRelease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRelease.Image = global::DVLD_Management_System.Properties.Resources.Release_Detained_License_32;
-            this.btnRelease.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRelease.Location = new System.Drawing.Point(804, 780);
-            this.btnRelease.Name = "btnRelease";
-            this.btnRelease.Size = new System.Drawing.Size(151, 37);
-            this.btnRelease.TabIndex = 194;
-            this.btnRelease.Text = "Release";
-            this.btnRelease.UseVisualStyleBackColor = true;
-            this.btnRelease.Click += new System.EventHandler(this.btnRelease_Click);
-            // 
             // llShowLicenseHistory
             // 
             this.llShowLicenseHistory.AutoSize = true;
             this.llShowLicenseHistory.Enabled = false;
             this.llShowLicenseHistory.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.llShowLicenseHistory.Location = new System.Drawing.Point(196, 787);
+            this.llShowLicenseHistory.Location = new System.Drawing.Point(71, 800);
             this.llShowLicenseHistory.Name = "llShowLicenseHistory";
             this.llShowLicenseHistory.Size = new System.Drawing.Size(195, 22);
             this.llShowLicenseHistory.TabIndex = 195;
@@ -152,6 +125,51 @@
             this.gpDetain.TabIndex = 192;
             this.gpDetain.TabStop = false;
             this.gpDetain.Text = "Detain Info";
+            // 
+            // txtReason
+            // 
+            this.txtReason.BorderColor = System.Drawing.Color.Silver;
+            this.txtReason.BorderRadius = 10;
+            this.txtReason.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtReason.DefaultText = "";
+            this.txtReason.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtReason.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtReason.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtReason.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtReason.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtReason.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtReason.ForeColor = System.Drawing.Color.Silver;
+            this.txtReason.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtReason.Location = new System.Drawing.Point(233, 229);
+            this.txtReason.Name = "txtReason";
+            this.txtReason.PlaceholderText = "";
+            this.txtReason.ReadOnly = true;
+            this.txtReason.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtReason.SelectedText = "";
+            this.txtReason.Size = new System.Drawing.Size(630, 30);
+            this.txtReason.TabIndex = 205;
+            this.txtReason.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::DVLD_Management_System.Properties.Resources.Edit;
+            this.pictureBox7.Location = new System.Drawing.Point(187, 232);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 204;
+            this.pictureBox7.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(25, 232);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(90, 20);
+            this.label3.TabIndex = 203;
+            this.label3.Text = "Reasons :";
             // 
             // lblTotalFees
             // 
@@ -377,49 +395,6 @@
             this.label4.TabIndex = 172;
             this.label4.Text = "Detain ID:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(16, 232);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 20);
-            this.label3.TabIndex = 203;
-            this.label3.Text = "Total Fees:";
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Image = global::DVLD_Management_System.Properties.Resources.Edit;
-            this.pictureBox7.Location = new System.Drawing.Point(187, 232);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 204;
-            this.pictureBox7.TabStop = false;
-            // 
-            // txtReason
-            // 
-            this.txtReason.BorderRadius = 10;
-            this.txtReason.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtReason.DefaultText = "";
-            this.txtReason.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtReason.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtReason.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtReason.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtReason.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtReason.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtReason.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtReason.Location = new System.Drawing.Point(233, 229);
-            this.txtReason.Name = "txtReason";
-            this.txtReason.PlaceholderText = "";
-            this.txtReason.ReadOnly = true;
-            this.txtReason.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtReason.SelectedText = "";
-            this.txtReason.Size = new System.Drawing.Size(630, 30);
-            this.txtReason.TabIndex = 205;
-            this.txtReason.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // ctrlDriverLicenseInfoWithFilter1
             // 
             this.ctrlDriverLicenseInfoWithFilter1.FilterEnabled = true;
@@ -432,13 +407,62 @@
             this.ctrlDriverLicenseInfoWithFilter1.Size = new System.Drawing.Size(958, 429);
             this.ctrlDriverLicenseInfoWithFilter1.TabIndex = 0;
             // 
+            // btnClose
+            // 
+            this.btnClose.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.BorderRadius = 10;
+            this.btnClose.BorderThickness = 1;
+            this.btnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnClose.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnClose.FillColor = System.Drawing.Color.White;
+            this.btnClose.FillColor2 = System.Drawing.Color.White;
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnClose.Image = global::DVLD_Management_System.Properties.Resources.Close_32;
+            this.btnClose.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnClose.Location = new System.Drawing.Point(649, 788);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(117, 45);
+            this.btnClose.TabIndex = 196;
+            this.btnClose.Text = "Close";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnRelease
+            // 
+            this.btnRelease.BorderColor = System.Drawing.Color.Gray;
+            this.btnRelease.BorderRadius = 10;
+            this.btnRelease.BorderThickness = 1;
+            this.btnRelease.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnRelease.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnRelease.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnRelease.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnRelease.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnRelease.FillColor = System.Drawing.Color.White;
+            this.btnRelease.FillColor2 = System.Drawing.Color.White;
+            this.btnRelease.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRelease.ForeColor = System.Drawing.Color.Navy;
+            this.btnRelease.Image = global::DVLD_Management_System.Properties.Resources.Release_Detained_License_32;
+            this.btnRelease.ImageSize = new System.Drawing.Size(35, 35);
+            this.btnRelease.Location = new System.Drawing.Point(797, 788);
+            this.btnRelease.Name = "btnRelease";
+            this.btnRelease.Size = new System.Drawing.Size(158, 45);
+            this.btnRelease.TabIndex = 197;
+            this.btnRelease.Text = "Release";
+            this.btnRelease.TextOffset = new System.Drawing.Point(2, 0);
+            this.btnRelease.Click += new System.EventHandler(this.btnRelease_Click_1);
+            // 
             // FrmReleaseDetainedLicenseApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(983, 876);
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnRelease);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.llShowLicenseHistory);
             this.Controls.Add(this.gpDetain);
             this.Controls.Add(this.lblTitle);
@@ -453,6 +477,7 @@
             this.Load += new System.EventHandler(this.FrmReleaseDetainedLicenseApplication_Load);
             this.gpDetain.ResumeLayout(false);
             this.gpDetain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -460,7 +485,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -470,8 +494,6 @@
 
         private Local_Licenses.Ctrl.ctrlDriverLicenseInfoWithFilter ctrlDriverLicenseInfoWithFilter1;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnRelease;
         private System.Windows.Forms.LinkLabel llShowLicenseHistory;
         private System.Windows.Forms.GroupBox gpDetain;
         private System.Windows.Forms.Label lblTotalFees;
@@ -498,5 +520,7 @@
         private Guna.UI2.WinForms.Guna2TextBox txtReason;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.Label label3;
+        private Guna.UI2.WinForms.Guna2GradientButton btnClose;
+        private Guna.UI2.WinForms.Guna2GradientButton btnRelease;
     }
 }

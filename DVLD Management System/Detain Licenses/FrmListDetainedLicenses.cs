@@ -4,6 +4,7 @@ using DVLD_Management_System.Detain_Licenses.Class;
 using DVLD_Management_System.Drivers;
 using DVLD_Management_System.Local_Licenses;
 using DVLD_Management_System.Manage_Persons.واجهات_فرعية;
+using DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 using static DVLD_Management_System.Detain_Licenses.Class.ClassDetainCMD;
 
 namespace DVLD_Management_System.Detain_Licenses
@@ -161,10 +163,7 @@ namespace DVLD_Management_System.Detain_Licenses
             MyTools.ShowForm(detainLicenseApplication);
         }
 
-        private void btnClose_Click(object sender, EventArgs e) // اغلاق الواجهة
-        {
-            this.Close();
-        }
+       
 
 
         private void cmsApplications_Opening(object sender, CancelEventArgs e)    // حدث عند فتح  القائمة 
@@ -194,7 +193,9 @@ namespace DVLD_Management_System.Detain_Licenses
              bool IsSecsesfule =    ClassDetainCMD.ReleaseLicense(LicenseID);
                 if(IsSecsesfule)
                 {
+                    AddLog(LogAction.ReleaseLicense, ClassUser.IDUser, "  فك حجز رخصة " + "\n + ID = " +LicenseID);   // تسجيل عملية فك حجز رخصة في سجل الـ Logs
                     MessageBox.Show("تم فك الحجز عن الرخصة", "تم", MessageBoxButtons.OK, MessageBoxIcon.Question);
+
                     LoadData();
                 }
                 else
@@ -228,8 +229,11 @@ namespace DVLD_Management_System.Detain_Licenses
             FrmShowPersonLicenseHistory personLicenseHistory = new FrmShowPersonLicenseHistory(PersonID);
             MyTools.ShowForm(personLicenseHistory);
         }
-
-     
+        
+        private void btnClose_Click_1(object sender, EventArgs e)// اغلاق الواجهة
+        {
+            this.Close();
+        }
 
 
     }

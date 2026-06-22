@@ -24,11 +24,11 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
         /// </summary>
         void DispalyForm()
         {
-            if (Authorities == "")
+            if (Authorities == "Admin")
             {
 
             }
-            else if (Authorities == "")
+            else if (Authorities == "Employee")
             {
 
             }

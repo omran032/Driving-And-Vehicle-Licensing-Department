@@ -28,7 +28,9 @@ namespace DVLD_Management_System.Tests
             ctrlScheduleTest1.LoadInfo(localAppID, appointmentID);
         }
 
+        private void frmScheduleTest_Load(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

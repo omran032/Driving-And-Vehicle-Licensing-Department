@@ -34,6 +34,7 @@
             // 
             // TxtFelter
             // 
+            this.TxtFelter.BorderColor = System.Drawing.Color.Gray;
             this.TxtFelter.BorderRadius = 15;
             this.TxtFelter.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TxtFelter.DefaultText = "";
@@ -57,6 +58,7 @@
             // ComboFelter
             // 
             this.ComboFelter.BackColor = System.Drawing.Color.Transparent;
+            this.ComboFelter.BorderColor = System.Drawing.Color.Gray;
             this.ComboFelter.BorderRadius = 15;
             this.ComboFelter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.ComboFelter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -81,11 +83,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.Controls.Add(this.TxtFelter);
             this.Controls.Add(this.ComboFelter);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CtrlFeltterUser";
             this.Size = new System.Drawing.Size(485, 49);
             this.ResumeLayout(false);

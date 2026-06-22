@@ -7,7 +7,7 @@
     <ProjectGuid>{BF8F16E5-89D6-462A-8C27-72E3F53DC95B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>DVLD_Management_System</RootNamespace>
-    <AssemblyName>DVLD Management System</AssemblyName>
+    <AssemblyName>DVLD Manager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -51,6 +51,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon_DVLD_.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV.UI, Version=4.1.1.3497, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>..\packages\EMGU.CV.4.1.1.3497\lib\net35\Emgu.CV.UI.dll</HintPath>
@@ -93,6 +96,12 @@
     </Compile>
     <Compile Include="Applications\Manage Application\Local Driving License Application\Class\ClassInfoLicenseAplication.cs" />
     <Compile Include="Applications\Manage Application\Local Driving License Application\Class\Cls_CMDCommandLocalDrivingLicenceApp.cs" />
+    <Compile Include="Applications\Manage Application\Local Driving License Application\UI\FrmShowLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Manage Application\Local Driving License Application\UI\FrmShowLicenses.Designer.cs">
+      <DependentUpon>FrmShowLicenses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applications\Manage Application\Local Driving License Application\User Control\CtrlLicenseAppFelter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -160,6 +169,7 @@
     <Compile Include="Class\Class Buisness\clsTestTypeData.cs" />
     <Compile Include="Class\Class Buisness\clsUser.cs" />
     <Compile Include="Class\Class Buisness\clsUserData.cs" />
+    <Compile Include="Class\Class DB\ClassAuditLogs.cs" />
     <Compile Include="Class\Class DB\ClsCommandDB.cs" />
     <Compile Include="Class\Class DB\ClsConnection.cs" />
     <Compile Include="Class\Class\ControlHelper.cs" />
@@ -222,7 +232,33 @@
     <Compile Include="Drivers\FrmShowPersonLicenseHistory.Designer.cs">
       <DependentUpon>FrmShowPersonLicenseHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="International License\Class\Cls_InternationalLicenseCMD.cs" />
+    <Compile Include="International License\Class\Cls_InternationalLicenseInfo.cs" />
+    <Compile Include="International License\FrmListInternational_LApp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="International License\FrmListInternational_LApp.Designer.cs">
+      <DependentUpon>FrmListInternational_LApp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="International License\FrmNewInternationalLicenseApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="International License\FrmNewInternationalLicenseApplication.Designer.cs">
+      <DependentUpon>FrmNewInternationalLicenseApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="International License\FrmShowInfo_InternationL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="International License\FrmShowInfo_InternationL.Designer.cs">
+      <DependentUpon>FrmShowInfo_InternationL.cs</DependentUpon>
+    </Compile>
     <Compile Include="Local Licenses\Class\ClassLicenseInfo.cs" />
+    <Compile Include="International License\Ctrl\ctrlDriverInternationalLicenseInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="International License\Ctrl\ctrlDriverInternationalLicenseInfo.Designer.cs">
+      <DependentUpon>ctrlDriverInternationalLicenseInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Local Licenses\Ctrl\CtrlDriverLicenseInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -404,6 +440,9 @@
     <EmbeddedResource Include="Applications\Driver Licenses Services\New Driving License\Local License\واجهات\FrmAddUpdateApplication.resx">
       <DependentUpon>FrmAddUpdateApplication.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Manage Application\Local Driving License Application\UI\FrmShowLicenses.resx">
+      <DependentUpon>FrmShowLicenses.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Applications\Manage Application\Local Driving License Application\User Control\CtrlLicenseAppFelter.resx">
       <DependentUpon>CtrlLicenseAppFelter.cs</DependentUpon>
     </EmbeddedResource>
@@ -451,6 +490,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Manage Application\Local Driving License Application\UI\FrmLDLAppInfo.resx">
       <DependentUpon>FrmLDLAppInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="International License\FrmListInternational_LApp.resx">
+      <DependentUpon>FrmListInternational_LApp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="International License\FrmNewInternationalLicenseApplication.resx">
+      <DependentUpon>FrmNewInternationalLicenseApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="International License\Ctrl\ctrlDriverInternationalLicenseInfo.resx">
+      <DependentUpon>ctrlDriverInternationalLicenseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="International License\FrmShowInfo_InternationL.resx">
+      <DependentUpon>FrmShowInfo_InternationL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Local Licenses\Ctrl\CtrlDriverLicenseInfo.resx">
       <DependentUpon>CtrlDriverLicenseInfo.cs</DependentUpon>
@@ -562,7 +613,32 @@
       <DependentUpon>DB_DVLD.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Icon_DVLD.ico" />
+    <Content Include="Icon_DVLD_.ico" />
     <Content Include="License-LGPL.txt" />
+    <None Include="Resources\Synchronize.png" />
+    <None Include="Resources\Local 32.png" />
+    <None Include="Resources\Role.png" />
+    <None Include="Resources\Retake Test 32.png" />
+    <None Include="Resources\Written Test 512.png" />
+    <None Include="Resources\Count 32.png" />
+    <None Include="Resources\Password 32.png" />
+    <None Include="Resources\License Type 32.png" />
+    <None Include="Resources\Save.png" />
+    <None Include="Resources\Next.png" />
+    <None Include="Resources\Male 5122.png" />
+    <None Include="Resources\Man 321.png" />
+    <None Include="Resources\Male 5121.png" />
+    <None Include="Resources\Question 321.png" />
+    <None Include="Resources\Man 32.png" />
+    <None Include="Resources\LicenseView 400.png" />
+    <None Include="Resources\Male 512.png" />
+    <None Include="Resources\Question 32.png" />
+    <None Include="Resources\Woman 32.png" />
+    <None Include="Resources\Close 32.png" />
+    <None Include="Resources\New Application 64.png" />
+    <None Include="Resources\International 32.png" />
+    <None Include="Resources\Local Driving License 512.png" />
     <None Include="Resources\Detain 32.png" />
     <None Include="Resources\Release Detained License 32.png" />
     <None Include="Resources\User 32 -2.png" />

@@ -1,7 +1,7 @@
 ﻿using DVLD_Management_System.Class.Class;
 using DVLD_Management_System.Class.Class_DB;
+using DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول;
 using System;
-using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,6 +9,8 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 
 namespace DVLD_Management_System.Manage_Users.Class
 {
@@ -72,7 +74,7 @@ FETCH NEXT 50 ROWS ONLY;";
         ///  ID وارجاع  User إضافة 
         /// </summary>
         /// <returns> بعد الإضافة  ID User </returns>
-        public static int AddUser(string UserName ,  string Password , string Status_Account , int PersonID)
+        public static int AddUser(string UserName ,  string Password , string Status_Account , int PersonID , string Role)
         {
             Password = ClsCommandDB.ReturnEncrptionPassword(Password); // تشغير كلمة المرور 
 
@@ -88,14 +90,17 @@ FETCH NEXT 50 ROWS ONLY;";
                 { "@UserName"      , UserName },
                 { "@Password"      , Password },
                 { "@Status_Account", Status_Account },
-                { "@Authorities"   , "Admin" }, //التعديل عند تقسم الصلاحيات
-                { "@Role"          , "Admin" },        //
+                { "@Authorities"   , "Employee" }, // التعديل عند تقسم الصلاحيات // يعني السلطات
+                { "@Role"          , Role },        
                 { "@PersonID"      , PersonID },
             };
 
             int ID = Convert.ToInt32(ClsCommandDB.ExecuteScalar_Command(Query, parameters));
-            if (ID > 0) 
-            MessageBox.Show("تم إضافة المستخدم بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (ID > 0)
+            {
+                AddLog(LogAction.AddUser, ClassUser.IDUser, $"إضافة مستخدم جديد رقم {ID}");   // تسجيل عملية إضافة مستخدم في سجل الـ Logs
+                MessageBox.Show("تم إضافة المستخدم بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             else
                 MessageBox.Show("لم يتم إضافة المستخدم ", "فشل العملية", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -150,7 +155,7 @@ FROM Users {Where}";
         /// <param name="Password"></param>
         /// <param name="Status_Account"></param>
         /// <param name="PersonID"></param>
-        public static void UpdateUser(int IDUser , string UserName, string Password, string Status_Account, int PersonID)
+        public static void UpdateUser(int IDUser , string UserName, string Password, string Status_Account, int PersonID , string Role)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
@@ -158,8 +163,8 @@ FROM Users {Where}";
                 { "@UserName"      , UserName },
                 { "@Password"      , Password },
                 { "@Status_Account", Status_Account },
-                { "@Authorities"   , "Admin" }, //التعديل عند تقسم الصلاحيات
-                { "@Role"          , "Admin" },        //
+                { "@Authorities"   , "Employee" }, //التعديل عند تقسم الصلاحيات
+                { "@Role"          , Role },        
                 { "@PersonID"      , PersonID },
             };
 
@@ -177,7 +182,10 @@ WHERE
 
           object result =   ClsCommandDB.ExecuteNonQuery_Command(Query, parameters , false);
             if (result != null)
+            {
+                AddLog(LogAction.UpdateUser, ClassUser.IDUser, $"تعديل بيانات المستخدم رقم {IDUser}");   // تسجيل عملية تعديل مستخدم في سجل الـ Logs
                 MessageBox.Show("تم تعديل المستخدم بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             else
                 MessageBox.Show("لم يتم تعديل المستخدم ", "فشل العملية", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

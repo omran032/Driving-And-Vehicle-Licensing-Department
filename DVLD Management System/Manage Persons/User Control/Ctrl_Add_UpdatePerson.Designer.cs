@@ -61,6 +61,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lbl_IDPerson = new System.Windows.Forms.Label();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.MyErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture)).BeginInit();
@@ -73,12 +74,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 59);
+            this.label2.Location = new System.Drawing.Point(16, 64);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 19);
             this.label2.TabIndex = 12;
@@ -100,7 +102,7 @@
             "فلسطيني",
             "اردني",
             "لبناني"});
-            this.ComboCountry.Location = new System.Drawing.Point(553, 112);
+            this.ComboCountry.Location = new System.Drawing.Point(553, 117);
             this.ComboCountry.Name = "ComboCountry";
             this.ComboCountry.Size = new System.Drawing.Size(229, 36);
             this.ComboCountry.TabIndex = 11;
@@ -117,7 +119,7 @@
             this.txtFullName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtFullName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtFullName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtFullName.Location = new System.Drawing.Point(147, 54);
+            this.txtFullName.Location = new System.Drawing.Point(147, 59);
             this.txtFullName.Name = "txtFullName";
             this.txtFullName.PlaceholderText = "";
             this.txtFullName.SelectedText = "";
@@ -127,7 +129,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(442, 59);
+            this.label1.Location = new System.Drawing.Point(442, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 19);
             this.label1.TabIndex = 13;
@@ -145,7 +147,7 @@
             this.txtEmail.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtEmail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtEmail.Location = new System.Drawing.Point(147, 240);
+            this.txtEmail.Location = new System.Drawing.Point(147, 245);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.PlaceholderText = "";
             this.txtEmail.SelectedText = "";
@@ -156,7 +158,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 185);
+            this.label3.Location = new System.Drawing.Point(19, 190);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 19);
             this.label3.TabIndex = 15;
@@ -165,7 +167,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(29, 248);
+            this.label4.Location = new System.Drawing.Point(29, 253);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 19);
             this.label4.TabIndex = 17;
@@ -174,7 +176,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(438, 121);
+            this.label5.Location = new System.Drawing.Point(438, 126);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 19);
             this.label5.TabIndex = 18;
@@ -183,7 +185,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 121);
+            this.label6.Location = new System.Drawing.Point(15, 126);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(75, 19);
             this.label6.TabIndex = 19;
@@ -192,7 +194,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(421, 185);
+            this.label9.Location = new System.Drawing.Point(421, 190);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 19);
             this.label9.TabIndex = 22;
@@ -208,7 +210,7 @@
             this.RdoMale.CheckedState.InnerColor = System.Drawing.Color.White;
             this.RdoMale.CheckedState.InnerOffset = -4;
             this.RdoMale.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.RdoMale.Location = new System.Drawing.Point(545, 245);
+            this.RdoMale.Location = new System.Drawing.Point(545, 250);
             this.RdoMale.Name = "RdoMale";
             this.RdoMale.Size = new System.Drawing.Size(45, 23);
             this.RdoMale.TabIndex = 23;
@@ -230,7 +232,7 @@
             this.RdoFemale.CheckedState.InnerColor = System.Drawing.Color.White;
             this.RdoFemale.CheckedState.InnerOffset = -4;
             this.RdoFemale.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.RdoFemale.Location = new System.Drawing.Point(701, 245);
+            this.RdoFemale.Location = new System.Drawing.Point(701, 250);
             this.RdoFemale.Name = "RdoFemale";
             this.RdoFemale.Size = new System.Drawing.Size(48, 23);
             this.RdoFemale.TabIndex = 24;
@@ -269,7 +271,7 @@
             "ادلب",
             "اللاذقية",
             "طرطوس"});
-            this.ComboHousing.Location = new System.Drawing.Point(553, 54);
+            this.ComboHousing.Location = new System.Drawing.Point(553, 59);
             this.ComboHousing.Name = "ComboHousing";
             this.ComboHousing.Size = new System.Drawing.Size(229, 36);
             this.ComboHousing.TabIndex = 29;
@@ -286,7 +288,7 @@
             this.txtNationalNumber.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtNationalNumber.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtNationalNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNationalNumber.Location = new System.Drawing.Point(147, 116);
+            this.txtNationalNumber.Location = new System.Drawing.Point(147, 121);
             this.txtNationalNumber.Name = "txtNationalNumber";
             this.txtNationalNumber.PlaceholderText = "";
             this.txtNationalNumber.SelectedText = "";
@@ -301,7 +303,7 @@
             this.DT_BirthDate.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.DT_BirthDate.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DT_BirthDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DT_BirthDate.Location = new System.Drawing.Point(553, 175);
+            this.DT_BirthDate.Location = new System.Drawing.Point(553, 180);
             this.DT_BirthDate.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.DT_BirthDate.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.DT_BirthDate.Name = "DT_BirthDate";
@@ -322,7 +324,7 @@
             this.txtnumPhone.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtnumPhone.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtnumPhone.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtnumPhone.Location = new System.Drawing.Point(147, 178);
+            this.txtnumPhone.Location = new System.Drawing.Point(147, 183);
             this.txtnumPhone.Name = "txtnumPhone";
             this.txtnumPhone.PlaceholderText = "";
             this.txtnumPhone.SelectedText = "";
@@ -339,6 +341,9 @@
             this.btnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.Image = global::DVLD_Management_System.Properties.Resources.Save;
+            this.btnSave.ImageOffset = new System.Drawing.Point(-5, 0);
+            this.btnSave.ImageSize = new System.Drawing.Size(30, 30);
             this.btnSave.Location = new System.Drawing.Point(281, 446);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(319, 41);
@@ -351,7 +356,7 @@
             this.AddPicture.AutoSize = true;
             this.AddPicture.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AddPicture.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddPicture.Location = new System.Drawing.Point(398, 407);
+            this.AddPicture.Location = new System.Drawing.Point(398, 412);
             this.AddPicture.Name = "AddPicture";
             this.AddPicture.Size = new System.Drawing.Size(86, 22);
             this.AddPicture.TabIndex = 43;
@@ -370,8 +375,8 @@
             // Picture
             // 
             this.Picture.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Picture.Image = global::DVLD_Management_System.Properties.Resources.Male;
-            this.Picture.Location = new System.Drawing.Point(370, 280);
+            this.Picture.Image = global::DVLD_Management_System.Properties.Resources.Male_5122;
+            this.Picture.Location = new System.Drawing.Point(370, 285);
             this.Picture.Name = "Picture";
             this.Picture.Size = new System.Drawing.Size(137, 124);
             this.Picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -383,7 +388,7 @@
             // 
             this.pictureBox10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox10.Image")));
-            this.pictureBox10.Location = new System.Drawing.Point(507, 179);
+            this.pictureBox10.Location = new System.Drawing.Point(507, 184);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(27, 28);
             this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -394,7 +399,7 @@
             // 
             this.pictureBox8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(502, 55);
+            this.pictureBox8.Location = new System.Drawing.Point(502, 60);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(36, 28);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -405,7 +410,7 @@
             // 
             this.pictureBox7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
-            this.pictureBox7.Location = new System.Drawing.Point(502, 111);
+            this.pictureBox7.Location = new System.Drawing.Point(502, 116);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(36, 38);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -416,7 +421,7 @@
             // 
             this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(101, 51);
+            this.pictureBox6.Location = new System.Drawing.Point(101, 56);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(36, 35);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -427,7 +432,7 @@
             // 
             this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(101, 112);
+            this.pictureBox5.Location = new System.Drawing.Point(101, 117);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(36, 37);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -438,7 +443,7 @@
             // 
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(101, 179);
+            this.pictureBox4.Location = new System.Drawing.Point(101, 184);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(36, 28);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -449,7 +454,7 @@
             // 
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(101, 242);
+            this.pictureBox1.Location = new System.Drawing.Point(101, 247);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(36, 36);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -460,7 +465,7 @@
             // 
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(755, 244);
+            this.pictureBox2.Location = new System.Drawing.Point(755, 249);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(27, 25);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -471,7 +476,7 @@
             // 
             this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(594, 244);
+            this.pictureBox3.Location = new System.Drawing.Point(594, 249);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(27, 25);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -483,16 +488,28 @@
             this.lbl_IDPerson.AutoSize = true;
             this.lbl_IDPerson.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_IDPerson.ForeColor = System.Drawing.Color.Navy;
-            this.lbl_IDPerson.Location = new System.Drawing.Point(29, 5);
+            this.lbl_IDPerson.Location = new System.Drawing.Point(29, 10);
             this.lbl_IDPerson.Name = "lbl_IDPerson";
             this.lbl_IDPerson.Size = new System.Drawing.Size(41, 22);
             this.lbl_IDPerson.TabIndex = 44;
             this.lbl_IDPerson.Text = "ID :";
             // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox9.Image = global::DVLD_Management_System.Properties.Resources.Number_32;
+            this.pictureBox9.Location = new System.Drawing.Point(101, 4);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(36, 35);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.TabIndex = 45;
+            this.pictureBox9.TabStop = false;
+            // 
             // Ctrl_Add_UpdatePerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.lbl_IDPerson);
             this.Controls.Add(this.AddPicture);
             this.Controls.Add(this.btnSave);
@@ -538,6 +555,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -576,5 +594,6 @@
         private System.Windows.Forms.ErrorProvider MyErrorProvider;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label lbl_IDPerson;
+        private System.Windows.Forms.PictureBox pictureBox9;
     }
 }

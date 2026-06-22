@@ -82,7 +82,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(915, 255);
+            this.groupBox1.Size = new System.Drawing.Size(925, 255);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Application Basic Info";
@@ -91,9 +91,10 @@
             // 
             this.llViewPersonInfo.AutoSize = true;
             this.llViewPersonInfo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.llViewPersonInfo.Location = new System.Drawing.Point(368, 211);
+            this.llViewPersonInfo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llViewPersonInfo.Location = new System.Drawing.Point(351, 218);
             this.llViewPersonInfo.Name = "llViewPersonInfo";
-            this.llViewPersonInfo.Size = new System.Drawing.Size(126, 19);
+            this.llViewPersonInfo.Size = new System.Drawing.Size(155, 22);
             this.llViewPersonInfo.TabIndex = 187;
             this.llViewPersonInfo.TabStop = true;
             this.llViewPersonInfo.Text = "View Person Info.";
@@ -133,7 +134,8 @@
             // 
             // pictureBox6
             // 
-            this.pictureBox6.Location = new System.Drawing.Point(113, 119);
+            this.pictureBox6.Image = global::DVLD_Management_System.Properties.Resources.Question_32;
+            this.pictureBox6.Location = new System.Drawing.Point(113, 120);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(31, 26);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -298,7 +300,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "ctrlApplicationBasicInfo";
-            this.Size = new System.Drawing.Size(921, 261);
+            this.Size = new System.Drawing.Size(931, 261);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();

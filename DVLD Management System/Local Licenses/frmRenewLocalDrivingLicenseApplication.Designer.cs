@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRenewLocalDrivingLicenseApplication));
             this.lblTitle = new System.Windows.Forms.Label();
             this.llShowLicenseInfo = new System.Windows.Forms.LinkLabel();
             this.llShowLicenseHistory = new System.Windows.Forms.LinkLabel();
-            this.btnRenewLicense = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
             this.gpApplicationInfo = new System.Windows.Forms.GroupBox();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -68,6 +67,8 @@
             this.lblApplicationID = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.ctrlDriverLicenseInfoWithFilter1 = new DVLD_Management_System.Local_Licenses.Ctrl.ctrlDriverLicenseInfoWithFilter();
+            this.btnClose = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.btnRenewLicense = new Guna.UI2.WinForms.Guna2GradientButton();
             this.gpApplicationInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
@@ -98,9 +99,10 @@
             this.llShowLicenseInfo.AutoSize = true;
             this.llShowLicenseInfo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.llShowLicenseInfo.Enabled = false;
-            this.llShowLicenseInfo.Location = new System.Drawing.Point(219, 801);
+            this.llShowLicenseInfo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llShowLicenseInfo.Location = new System.Drawing.Point(278, 820);
             this.llShowLicenseInfo.Name = "llShowLicenseInfo";
-            this.llShowLicenseInfo.Size = new System.Drawing.Size(172, 19);
+            this.llShowLicenseInfo.Size = new System.Drawing.Size(210, 22);
             this.llShowLicenseInfo.TabIndex = 187;
             this.llShowLicenseInfo.TabStop = true;
             this.llShowLicenseInfo.Text = "Show New Licenses Info";
@@ -111,42 +113,14 @@
             this.llShowLicenseHistory.AutoSize = true;
             this.llShowLicenseHistory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.llShowLicenseHistory.Enabled = false;
-            this.llShowLicenseHistory.Location = new System.Drawing.Point(36, 801);
+            this.llShowLicenseHistory.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llShowLicenseHistory.Location = new System.Drawing.Point(35, 820);
             this.llShowLicenseHistory.Name = "llShowLicenseHistory";
-            this.llShowLicenseHistory.Size = new System.Drawing.Size(161, 19);
+            this.llShowLicenseHistory.Size = new System.Drawing.Size(195, 22);
             this.llShowLicenseHistory.TabIndex = 186;
             this.llShowLicenseHistory.TabStop = true;
             this.llShowLicenseHistory.Text = "Show Licenses History";
             this.llShowLicenseHistory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llShowLicenseHistory_LinkClicked);
-            // 
-            // btnRenewLicense
-            // 
-            this.btnRenewLicense.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRenewLicense.Enabled = false;
-            this.btnRenewLicense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRenewLicense.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRenewLicense.Location = new System.Drawing.Point(783, 820);
-            this.btnRenewLicense.Name = "btnRenewLicense";
-            this.btnRenewLicense.Size = new System.Drawing.Size(164, 37);
-            this.btnRenewLicense.TabIndex = 185;
-            this.btnRenewLicense.Text = " Renew";
-            this.btnRenewLicense.UseVisualStyleBackColor = true;
-            this.btnRenewLicense.Click += new System.EventHandler(this.btnRenewLicense_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(586, 820);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(161, 37);
-            this.btnClose.TabIndex = 184;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // gpApplicationInfo
             // 
@@ -192,6 +166,7 @@
             // 
             // pictureBox11
             // 
+            this.pictureBox11.Image = global::DVLD_Management_System.Properties.Resources.Edit;
             this.pictureBox11.Location = new System.Drawing.Point(182, 199);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(31, 26);
@@ -243,6 +218,7 @@
             // 
             // pictureBox10
             // 
+            this.pictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox10.Image")));
             this.pictureBox10.Location = new System.Drawing.Point(699, 167);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(31, 26);
@@ -274,6 +250,7 @@
             // 
             // pictureBox9
             // 
+            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
             this.pictureBox9.Location = new System.Drawing.Point(183, 167);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(31, 26);
@@ -283,6 +260,7 @@
             // 
             // pictureBox8
             // 
+            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
             this.pictureBox8.Location = new System.Drawing.Point(699, 70);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(31, 26);
@@ -314,6 +292,7 @@
             // 
             // pictureBox7
             // 
+            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
             this.pictureBox7.Location = new System.Drawing.Point(699, 38);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(31, 26);
@@ -356,6 +335,7 @@
             // 
             // pictureBox6
             // 
+            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
             this.pictureBox6.Location = new System.Drawing.Point(699, 102);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(31, 26);
@@ -387,6 +367,7 @@
             // 
             // pictureBox5
             // 
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
             this.pictureBox5.Location = new System.Drawing.Point(182, 102);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(31, 26);
@@ -407,6 +388,7 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(183, 38);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(31, 26);
@@ -416,6 +398,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::DVLD_Management_System.Properties.Resources.User_32__2;
             this.pictureBox1.Location = new System.Drawing.Point(699, 134);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(31, 26);
@@ -469,6 +452,7 @@
             // 
             // pictureBox3
             // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.Location = new System.Drawing.Point(183, 134);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(31, 26);
@@ -489,6 +473,7 @@
             // 
             // pictureBox4
             // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
             this.pictureBox4.Location = new System.Drawing.Point(183, 70);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(31, 26);
@@ -542,15 +527,65 @@
             this.ctrlDriverLicenseInfoWithFilter1.TabIndex = 0;
             this.ctrlDriverLicenseInfoWithFilter1.Load += new System.EventHandler(this.ctrlDriverLicenseInfoWithFilter1_Load);
             // 
+            // btnClose
+            // 
+            this.btnClose.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.BorderRadius = 10;
+            this.btnClose.BorderThickness = 1;
+            this.btnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnClose.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnClose.FillColor = System.Drawing.Color.White;
+            this.btnClose.FillColor2 = System.Drawing.Color.White;
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnClose.Image = global::DVLD_Management_System.Properties.Resources.Close_32;
+            this.btnClose.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnClose.Location = new System.Drawing.Point(636, 814);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(117, 45);
+            this.btnClose.TabIndex = 188;
+            this.btnClose.Text = "Close";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click_1);
+            // 
+            // btnRenewLicense
+            // 
+            this.btnRenewLicense.BorderColor = System.Drawing.Color.Gray;
+            this.btnRenewLicense.BorderRadius = 10;
+            this.btnRenewLicense.BorderThickness = 1;
+            this.btnRenewLicense.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnRenewLicense.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnRenewLicense.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnRenewLicense.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnRenewLicense.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnRenewLicense.FillColor = System.Drawing.Color.White;
+            this.btnRenewLicense.FillColor2 = System.Drawing.Color.White;
+            this.btnRenewLicense.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRenewLicense.ForeColor = System.Drawing.Color.Navy;
+            this.btnRenewLicense.Image = global::DVLD_Management_System.Properties.Resources.Synchronize;
+            this.btnRenewLicense.ImageOffset = new System.Drawing.Point(-5, 0);
+            this.btnRenewLicense.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnRenewLicense.Location = new System.Drawing.Point(778, 814);
+            this.btnRenewLicense.Name = "btnRenewLicense";
+            this.btnRenewLicense.Size = new System.Drawing.Size(169, 45);
+            this.btnRenewLicense.TabIndex = 189;
+            this.btnRenewLicense.Text = "Save";
+            this.btnRenewLicense.TextOffset = new System.Drawing.Point(3, 0);
+            this.btnRenewLicense.Click += new System.EventHandler(this.btnRenewLicense_Click_1);
+            // 
             // frmRenewLocalDrivingLicenseApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(989, 871);
-            this.Controls.Add(this.llShowLicenseInfo);
-            this.Controls.Add(this.llShowLicenseHistory);
             this.Controls.Add(this.btnRenewLicense);
             this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.llShowLicenseInfo);
+            this.Controls.Add(this.llShowLicenseHistory);
             this.Controls.Add(this.gpApplicationInfo);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.ctrlDriverLicenseInfoWithFilter1);
@@ -586,8 +621,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.LinkLabel llShowLicenseInfo;
         private System.Windows.Forms.LinkLabel llShowLicenseHistory;
-        private System.Windows.Forms.Button btnRenewLicense;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.GroupBox gpApplicationInfo;
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.Label label3;
@@ -622,5 +655,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblApplicationID;
         private System.Windows.Forms.Label label4;
+        private Guna.UI2.WinForms.Guna2GradientButton btnClose;
+        private Guna.UI2.WinForms.Guna2GradientButton btnRenewLicense;
     }
 }

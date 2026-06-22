@@ -43,7 +43,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.groupBox1.Location = new System.Drawing.Point(19, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(736, 459);
+            this.groupBox1.Size = new System.Drawing.Size(767, 459);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Person Information";
@@ -51,11 +51,13 @@
             // ctrl_InfoPerson1
             // 
             this.ctrl_InfoPerson1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrl_InfoPerson1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ctrl_InfoPerson1.Location = new System.Drawing.Point(11, 16);
             this.ctrl_InfoPerson1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.ctrl_InfoPerson1.Name = "ctrl_InfoPerson1";
             this.ctrl_InfoPerson1.person = null;
-            this.ctrl_InfoPerson1.Size = new System.Drawing.Size(692, 435);
+            this.ctrl_InfoPerson1.PersonID = 0;
+            this.ctrl_InfoPerson1.Size = new System.Drawing.Size(747, 435);
             this.ctrl_InfoPerson1.TabIndex = 0;
             // 
             // ctrlInfoUser1
@@ -64,21 +66,23 @@
             this.ctrlInfoUser1.Location = new System.Drawing.Point(19, 476);
             this.ctrlInfoUser1.Margin = new System.Windows.Forms.Padding(4);
             this.ctrlInfoUser1.Name = "ctrlInfoUser1";
-            this.ctrlInfoUser1.Size = new System.Drawing.Size(736, 135);
+            this.ctrlInfoUser1.Size = new System.Drawing.Size(767, 135);
             this.ctrlInfoUser1.TabIndex = 4;
             // 
             // FrmInfoUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 631);
+            this.ClientSize = new System.Drawing.Size(815, 631);
             this.Controls.Add(this.ctrlInfoUser1);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.MaximizeBox = false;
             this.Name = "FrmInfoUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmInfoUser";
+            this.Text = "Information User";
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 

@@ -73,8 +73,13 @@ namespace DVLD_Management_System.Manage_Users
         {
             OldPassword = TxtOldPasswprd.Text.Trim();
 
-            if (ClsCommandDB.IsExistUser(user.UserName, OldPassword, user.Role)) // كلمة المرور صحيحة
+           string Role =    ClsCommandDB.GetUserRole(user.UserName, OldPassword);
+
+            if (Role != null) // كلمة المرور صحيحة
             {
+                //
+                // ببقا تعرض الدور تبع المستخدم بالواجهة
+                //
                 ActiveErrorProvider(TxtOldPasswprd, false);
                 return false;
             }

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 
 namespace DVLD_Management_System.Detain_Licenses
 {
@@ -53,13 +54,33 @@ namespace DVLD_Management_System.Detain_Licenses
 
         }
 
-        private void btnDetain_Click(object sender, EventArgs e) // زر حفظ الحجز
+        
+        private void llShowLicenseHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) // عرض جميع رخص الشخص
+        {
+            int PersonID = Licenseinfo.PersonID;
+            if (PersonID <= 0) return;
+
+            FrmShowPersonLicenseHistory personLicenseHistory = new FrmShowPersonLicenseHistory(PersonID);
+            MyTools.ShowForm(personLicenseHistory);
+        }
+
+        private void guna2GradientButton1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtFineFees_KeyPress(object sender, KeyPressEventArgs e) // TextBox Fees
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void btnDetain_Click_1(object sender, EventArgs e) // زر حفظ الحجز
         {
             if (Licenseinfo == null) return;
 
             string Fees = txtFineFees.Text.Trim();
 
-            if(string.IsNullOrEmpty(Fees))
+            if (string.IsNullOrEmpty(Fees))
             {
                 errorProvider1.SetError(txtFineFees, "حدد الغرامة أولاً");
                 return;
@@ -76,7 +97,7 @@ namespace DVLD_Management_System.Detain_Licenses
 
 
             bool IsLicenseDetained = ClassDetainCMD.IsLicenseDetained(Licenseinfo.LicenseID);
-            if(IsLicenseDetained)
+            if (IsLicenseDetained)
             {
                 MessageBox.Show("الرخصة محجوزة حالياً", "لا يمكن حجز الرخصة", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 btnDetain.Enabled = false;
@@ -84,7 +105,7 @@ namespace DVLD_Management_System.Detain_Licenses
             }
 
             bool IsActive = ClassDetainCMD.IsLicenseActive(Licenseinfo.LicenseID);
-            if ( !IsActive )
+            if (!IsActive)
             {
                 MessageBox.Show("الرخصة غير فعالة لذلك لا يمكن حجزها", "لا يمكن حجز الرخصة", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 btnDetain.Enabled = false;
@@ -95,8 +116,11 @@ namespace DVLD_Management_System.Detain_Licenses
 
             bool Result = ClassDetainCMD.DetainLicense(Licenseinfo.LicenseID, Reason, Amount);
 
-            if(Result)
-                MessageBox.Show("تم حجز الرخصة ووضع الغرامة عليها", "تم", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (Result)
+            {
+                AddLog(LogAction.HoldLicense, ClassUser.IDUser, $" حجز الرخصة رقم  {Licenseinfo.LicenseID}  ");   // Log Entry
+                 MessageBox.Show("تم حجز الرخصة ووضع الغرامة عليها", "تم", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
             else
                 MessageBox.Show("حدث مشكلة اثناء حجز الرخصة", "مشكلة", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -107,23 +131,6 @@ namespace DVLD_Management_System.Detain_Licenses
 
         }
 
-        private void llShowLicenseHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) // عرض جميع رخص الشخص
-        {
-            int PersonID = Licenseinfo.PersonID;
-            if (PersonID <= 0) return;
-
-            FrmShowPersonLicenseHistory personLicenseHistory = new FrmShowPersonLicenseHistory(PersonID);
-            MyTools.ShowForm(personLicenseHistory);
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void txtFineFees_KeyPress(object sender, KeyPressEventArgs e) // TextBox Fees
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
+      
     }
 }

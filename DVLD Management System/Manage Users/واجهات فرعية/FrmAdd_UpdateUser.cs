@@ -32,6 +32,7 @@ namespace DVLD_Management_System.Manage_Users
             }
             else
             {
+                Mode = "Update";
                 user = users_;
                 LoadUserDataInUpdate();
             }
@@ -49,11 +50,7 @@ namespace DVLD_Management_System.Manage_Users
 
         string Mode = "Add";
 
-        private void btnClose_Click(object sender, EventArgs e) // إغلاق 
-        {
-            this.Close();
-        }
-
+     
 
         void EventFilter()
         {
@@ -84,6 +81,7 @@ namespace DVLD_Management_System.Manage_Users
 
             TxtUserName.Text = user.UserName;
             Chck_IsActive.Checked = user.Status_Account == "active";
+            CombxRoles.Text       = user.Role;
 
             // تحميل الشخص المرتبط
             person = Cls_CMD_PresonsDB.GetPersonByID(user.IDPerson);
@@ -148,6 +146,7 @@ namespace DVLD_Management_System.Manage_Users
             if (IsNull(TxtPassword)) return false;
             if (IsNull(TxtConfirmPassword)) return false;
             if (PasswordMatch()) return false;
+            if (IsNull(CombxRoles)) return false;
 
             return true;
         }
@@ -159,11 +158,12 @@ namespace DVLD_Management_System.Manage_Users
 
             string userName = TxtUserName.Text.Trim().ToLower();
             string password = TxtPassword.Text.Trim();
+            string Role     = CombxRoles.Text;
 
             if (Mode == "Add")
             {
                 // 1) إضافة المستخدم
-                int newID = ClsCMD_UserDB.AddUser(userName, password, IsActivo, person.IDPerson);
+                int newID = ClsCMD_UserDB.AddUser(userName, password, IsActivo, person.IDPerson , Role);
                 lbl_IDUser.Text = newID.ToString();
 
                 // 2) تحديث كائن user
@@ -180,7 +180,7 @@ namespace DVLD_Management_System.Manage_Users
             }
             else // Update
             {
-                ClsCMD_UserDB.UpdateUser(user.IDUser, userName, password, IsActivo, person.IDPerson);
+                ClsCMD_UserDB.UpdateUser(user.IDUser, userName, password, IsActivo, person.IDPerson , Role);
             }
 
             Add_UpdateUser?.Invoke();
@@ -251,6 +251,10 @@ namespace DVLD_Management_System.Manage_Users
         }
 
 
+        private void btnClose_Click_1(object sender, EventArgs e)// إغلاق 
+        {
+            this.Close();
+        }
     }
 }
                             

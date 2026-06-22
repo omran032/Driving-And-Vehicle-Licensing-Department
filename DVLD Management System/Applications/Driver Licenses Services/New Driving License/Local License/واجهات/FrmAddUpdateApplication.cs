@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Hosting;
 using System.Windows.Forms;
+using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 
 namespace DVLD_Management_System.Applications
 {
@@ -160,8 +161,9 @@ namespace DVLD_Management_System.Applications
         {
             // Combox  عرض فئات الرخص في 
             clsLicenseClass.DisplayCLassNameInCombox(ComboxLicenseClass);
-
         }
+
+
         /// <summary>
         /// طريقة عامة لتحديث بيانات واجهة المستخدم بدون إعادة إرفاق معالجات الأحداث.
         /// يمكن للأشكال الأخرى (مثل FrmTakeTest) استدعاء هذا بعد التغييرات لكي يتم تحديث الجدول الرئيسي / عناصر التحكم.
@@ -188,6 +190,9 @@ namespace DVLD_Management_System.Applications
                  // تجاهل أي أخطاء أثناء التحديث لتجنب تعطيل المستدعين.
             }
         }
+
+
+
         /// <summary>
         /// تفعيل وضع التعديل
         /// </summary>
@@ -246,6 +251,7 @@ namespace DVLD_Management_System.Applications
                 return;
             }
 
+            // وضع الاضافة
             if (ModeForm == Mode.New)
             {
 
@@ -280,6 +286,10 @@ namespace DVLD_Management_System.Applications
 
                 // ID الطلب
                 lblLocalDrivingLicebseApplicationID.Text = clsRequest.AddRequest(Request).ToString();
+
+                AddLog(LogAction.AddRequest, ClassUser.IDUser, "إضافة طلب لرخصة محلية"); // التسجيل في Logs
+
+
                 LoadModeUpdate();
 
                 // تشغيل الحدث إن وُجد: نمرّر مرجعاً لدالة التحديث العامة إذا كانت مفتوحة في الـ Forms
@@ -301,6 +311,7 @@ namespace DVLD_Management_System.Applications
 
             }
 
+            // وضع التعديل
             else if (ModeForm == Mode.Update)
             {
                 // تنفيذ التعديل عبر clsRequest.UpdateRequest
@@ -318,6 +329,8 @@ namespace DVLD_Management_System.Applications
                 if (updated)
                 {
                     MessageBox.Show("تم تحديث الطلب بنجاح", "تم التحديث", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    AddLog(LogAction.UpdateRequest, ClassUser.IDUser, "تعديل طلب رخصة محلية");   // تسجيل العملية في سجل الـ Logs
 
                     // تشغيل الحدث لإبلاغ الأب بتحديث البيانات
                     try

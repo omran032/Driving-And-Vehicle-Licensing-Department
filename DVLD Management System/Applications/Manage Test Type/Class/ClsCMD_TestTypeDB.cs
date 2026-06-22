@@ -1,4 +1,5 @@
 ﻿using DVLD_Management_System.Class.Class_DB;
+using DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 
 namespace DVLD_Management_System.Applications.Manage_Test_Type.Class
 {
@@ -45,7 +47,11 @@ namespace DVLD_Management_System.Applications.Manage_Test_Type.Class
             if(result == null )
                 MessageBox.Show("لم يتم تعديل","مشكلة",MessageBoxButtons.OK ,MessageBoxIcon.Error);
             else
+            {
+
+                AddLog(LogAction.UpdateTestType, ClassUser.IDUser, $"تعديل نوع اختبار رقم {infoTestType.ID}");   // Log: تعديل نوع اختبار
                 MessageBox.Show("تم تعديل نوع الإختبار", "تم");
+            }
         }
 
 

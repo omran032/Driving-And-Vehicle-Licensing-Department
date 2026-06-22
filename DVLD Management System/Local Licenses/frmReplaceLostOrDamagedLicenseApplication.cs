@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 
 namespace DVLD_Management_System.Local_Licenses
 {
@@ -78,35 +79,7 @@ namespace DVLD_Management_System.Local_Licenses
 
         }
 
-        private void btnIssueReplacement_Click(object sender, EventArgs e) // زر استبدال الرخصة
-        {
-            DialogResult Result = MessageBox.Show("هل تريد تجديد الرخصة فعلا ؟", "تأكيد", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (Result == DialogResult.No) return;
-
-            int UserID = ClassUser.IDUser == 0 ? 3 : ClassUser.IDUser;
-
-            bool isLost = applicationType == enApplicationType.ReplaceLostDrivingLicense;
-
-              int newRequestID;
-              int applicationFees;
-              int licenseFees;
-
-            // تقوم بارجاع معلومات   الرخصة الجديدة
-            // تنفيذ امر تجديد الرخصة
-            New_Licenseinfo = ClassLicenseInfo.CreateReplacementLicense(Old_Licenseinfo , UserID , isLost, out newRequestID , out applicationFees , out licenseFees);
-
-            if (New_Licenseinfo == null) return;
-
-            // عرض معلومات الرخصة الجديدة
-            LoadInfoNewLicense(newRequestID, applicationFees, licenseFees);
-
-            llShowLicenseInfo.Enabled = true;
-            ctrlDriverLicenseInfoWithFilter1.FilterEnabled = false; //ايقاف البحث
-            btnIssueReplacement.Enabled = false;
-
-            MessageBox.Show("معرف الرخصة الجديدة هو " + New_Licenseinfo.LicenseID, "تم انشاء الرخصة و استبدالها", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        }
+    
 
 
         /// <summary>
@@ -134,10 +107,6 @@ namespace DVLD_Management_System.Local_Licenses
             applicationType = enApplicationType.ReplaceLostDrivingLicense;
         }
 
-        private void btnClose_Click(object sender, EventArgs e) // اغلاق
-        {
-            this.Close();
-        }
 
         private void llShowLicenseInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) // عرض معلومات الرخصة الجديدة
         {
@@ -155,6 +124,42 @@ namespace DVLD_Management_System.Local_Licenses
 
             FrmShowPersonLicenseHistory personLicenseHistory = new FrmShowPersonLicenseHistory(PersonID);
             MyTools.ShowForm(personLicenseHistory);
+        }
+
+        private void btnClose_Click_1(object sender, EventArgs e)  // اغلاق
+        {
+            this.Close();
+        }
+
+      
+        private void btnIssueReplacement_Click(object sender, EventArgs e) // زر استبدال الرخصة
+        {
+            DialogResult Result = MessageBox.Show("هل تريد تجديد الرخصة فعلا ؟", "تأكيد", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Result == DialogResult.No) return;
+
+            int UserID = ClassUser.IDUser == 0 ? 3 : ClassUser.IDUser;
+
+            bool isLost = applicationType == enApplicationType.ReplaceLostDrivingLicense;
+
+            int newRequestID;
+            int applicationFees;
+            int licenseFees;
+
+            // تقوم بارجاع معلومات   الرخصة الجديدة
+            // تنفيذ امر تجديد الرخصة
+            New_Licenseinfo = ClassLicenseInfo.CreateReplacementLicense(Old_Licenseinfo, UserID, isLost, out newRequestID, out applicationFees, out licenseFees);
+
+            if (New_Licenseinfo == null) return;
+
+            // عرض معلومات الرخصة الجديدة
+            LoadInfoNewLicense(newRequestID, applicationFees, licenseFees);
+
+            llShowLicenseInfo.Enabled = true;
+            ctrlDriverLicenseInfoWithFilter1.FilterEnabled = false; //ايقاف البحث
+            btnIssueReplacement.Enabled = false;
+
+            AddLog(LogAction.ReplaceLostLocalLicense, ClassUser.IDUser, $"استبدال رخصة (بدل فاقد) للرخصة رقم  \n\n {New_Licenseinfo.LicenseID} \n بالرخصة الجديدة رقم {Old_Licenseinfo.LicenseID}");   // تسجيل عملية استبدال رخصة بدل فاقد
+            MessageBox.Show("معرف الرخصة الجديدة هو " + New_Licenseinfo.LicenseID, "تم انشاء الرخصة و استبدالها", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

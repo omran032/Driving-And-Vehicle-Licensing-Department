@@ -35,7 +35,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.lblRecordsCount = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.MyContextMenuStrip = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
@@ -45,6 +44,7 @@
             this.pbTestTypeImage = new System.Windows.Forms.PictureBox();
             this.ctrl_DLApplInfo1 = new DVLD_Management_System.ctrl_DLApplInfo();
             this.DGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.guna2GradientButton1 = new Guna.UI2.WinForms.Guna2GradientButton();
             this.MyContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbTestTypeImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
@@ -70,19 +70,6 @@
             this.label1.Size = new System.Drawing.Size(125, 20);
             this.label1.TabIndex = 139;
             this.label1.Text = "Appointments:";
-            // 
-            // btnClose
-            // 
-            this.btnClose.AutoEllipsis = true;
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(827, 842);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(135, 36);
-            this.btnClose.TabIndex = 141;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
             // 
             // lblRecordsCount
             // 
@@ -180,6 +167,7 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.DGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.DGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DGV.BackgroundColor = System.Drawing.Color.MintCream;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -215,7 +203,7 @@
             this.DGV.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
             this.DGV.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
             this.DGV.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.DGV.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.DGV.ThemeStyle.BackColor = System.Drawing.Color.MintCream;
             this.DGV.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DGV.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             this.DGV.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -232,14 +220,39 @@
             this.DGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // guna2GradientButton1
+            // 
+            this.guna2GradientButton1.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2GradientButton1.BorderRadius = 10;
+            this.guna2GradientButton1.BorderThickness = 1;
+            this.guna2GradientButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2GradientButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2GradientButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2GradientButton1.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2GradientButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2GradientButton1.FillColor = System.Drawing.Color.White;
+            this.guna2GradientButton1.FillColor2 = System.Drawing.Color.White;
+            this.guna2GradientButton1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2GradientButton1.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.guna2GradientButton1.Image = global::DVLD_Management_System.Properties.Resources.Close_32;
+            this.guna2GradientButton1.ImageSize = new System.Drawing.Size(30, 30);
+            this.guna2GradientButton1.Location = new System.Drawing.Point(845, 836);
+            this.guna2GradientButton1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.guna2GradientButton1.Name = "guna2GradientButton1";
+            this.guna2GradientButton1.Size = new System.Drawing.Size(117, 45);
+            this.guna2GradientButton1.TabIndex = 146;
+            this.guna2GradientButton1.Text = "Close";
+            this.guna2GradientButton1.Click += new System.EventHandler(this.guna2GradientButton1_Click);
+            // 
             // frmListTestApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1008, 893);
+            this.Controls.Add(this.guna2GradientButton1);
             this.Controls.Add(this.DGV);
             this.Controls.Add(this.btnAddNewAppointment);
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblRecordsCount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTitle);
@@ -265,7 +278,6 @@
         private System.Windows.Forms.PictureBox pbTestTypeImage;
         private ctrl_DLApplInfo ctrl_DLApplInfo1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblRecordsCount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAddNewAppointment;
@@ -273,5 +285,6 @@
         private System.Windows.Forms.ToolStripMenuItem Context_Edit;
         private System.Windows.Forms.ToolStripMenuItem Context_TakeTest;
         private Guna.UI2.WinForms.Guna2DataGridView DGV;
+        private Guna.UI2.WinForms.Guna2GradientButton guna2GradientButton1;
     }
 }

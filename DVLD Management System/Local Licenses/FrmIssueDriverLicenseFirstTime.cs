@@ -2,6 +2,7 @@
 using DVLD_Management_System.Class.Class_Buisness;
 using DVLD_Management_System.Class.Class_DB;
 using DVLD_Management_System.Local_Licenses.Class;
+using DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 
 namespace DVLD_Management_System.Local_Licenses
 {
@@ -80,52 +82,6 @@ namespace DVLD_Management_System.Local_Licenses
 
 
         }
-
-
-
-        private void btnIssueLicense_Click_1(object sender, EventArgs e) // زر انشاء الرخصة
-        {
-            // 1) التحقق إذا الشخص لديه رخصة مسبقاً
-            if (DoesPersonHaveLicense(InfoLicenseAplication.Person.IDPerson))
-            {
-                MessageBox.Show("هذا الشخص يمتلك رخصة مسبقاً ولا يمكن إصدار رخصة جديدة.",
-                    "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // 2) متابعة الإصدار إذا لم يكن لديه رخصة
-            bool ExistUserID = clsGlobal.CurrentUser == null;
-            int UserID = !ExistUserID ? clsGlobal.CurrentUser.UserID : 3;
-
-
-
-            if (!HasPassedAllRequiredTests(InfoLicenseAplication.Person.IDPerson, GetLicenseClassIDByName(InfoLicenseAplication.LicenseClass) )  ) 
-            {
-                MessageBox.Show("لا يمكن إصدار الرخصة لأن الشخص لم يجتز جميع الاختبارات المطلوبة.",
-                    "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-         
-            int newLicenseID = CreateLicenseFromApplicationInfo(InfoLicenseAplication, UserID);
-
-            if (newLicenseID != -1)
-            {
-                StatusRequest_Completed(InfoLicenseAplication.RequestID);
-                btnIssueLicense.Enabled = false; // تعطيل الزر
-
-                MessageBox.Show("تم إنشاء الترخيص بنجاح. المعرف = " + newLicenseID   ,  "تم انشاء رخصة", MessageBoxButtons.OK, MessageBoxIcon.Information );
-            }
-            else
-                MessageBox.Show("فشل في إنشاء الترخيص!", "فشل انشاء رخصة", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
-
-        }
-
-
-
-
 
 
 
@@ -462,11 +418,45 @@ namespace DVLD_Management_System.Local_Licenses
             }
         }
 
+        private void btnIssueLicense_Click(object sender, EventArgs e) // زر انشاء الرخصة
+        {
+            // 1) التحقق إذا الشخص لديه رخصة مسبقاً
+            if (DoesPersonHaveLicense(InfoLicenseAplication.Person.IDPerson))
+            {
+                MessageBox.Show("هذا الشخص يمتلك رخصة مسبقاً ولا يمكن إصدار رخصة جديدة.",
+                    "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2) متابعة الإصدار إذا لم يكن لديه رخصة
+            bool ExistUserID = clsGlobal.CurrentUser == null;
+            int UserID = !ExistUserID ? clsGlobal.CurrentUser.UserID : 3;
 
 
 
+            if (!HasPassedAllRequiredTests(InfoLicenseAplication.Person.IDPerson, GetLicenseClassIDByName(InfoLicenseAplication.LicenseClass)))
+            {
+                MessageBox.Show("لا يمكن إصدار الرخصة لأن الشخص لم يجتز جميع الاختبارات المطلوبة.",
+                    "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
 
+            int newLicenseID = CreateLicenseFromApplicationInfo(InfoLicenseAplication, UserID);
+
+            if (newLicenseID != -1)
+            {
+                StatusRequest_Completed(InfoLicenseAplication.RequestID);
+                btnIssueLicense.Enabled = false; // تعطيل الزر
+
+                AddLog(LogAction.AddLocalLicense, ClassUser.IDUser, "إضافة رخصة محلية");   // Log: إضافة رخصة محلية
+                MessageBox.Show("تم إنشاء الترخيص بنجاح. المعرف = " + newLicenseID, "تم انشاء رخصة", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("فشل في إنشاء الترخيص!", "فشل انشاء رخصة", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+        }
     }
 
 }

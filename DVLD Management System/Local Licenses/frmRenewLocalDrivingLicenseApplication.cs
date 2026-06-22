@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 
 namespace DVLD_Management_System.Local_Licenses
 {
@@ -77,33 +78,7 @@ namespace DVLD_Management_System.Local_Licenses
 
 
 
-        private void btnRenewLicense_Click(object sender, EventArgs e) // زر تجديد الرخصة
-        {
-            DialogResult Result = MessageBox.Show("هل تريد تجديد الرخصة فعلا ؟", "تأكيد", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (Result == DialogResult.No) return;
-
-            int UserID = ClassUser.IDUser == 0 ? 3 : ClassUser.IDUser;
-
-            int NewRequestID;   // معرف الطلب
-            int ApplicationFees;
-            int LicenseFees;
-
-            // تقوم بارجاع معلومات   الرخصة الجديدة
-            // تنفيذ امر تجديد الرخصة
-            New_Licenseinfo = ClassLicenseInfo.RenewLicense(Old_Licenseinfo, UserID, out NewRequestID, out ApplicationFees, out LicenseFees );
-
-            if (New_Licenseinfo == null) return;
-
-            // عرض معلومات الرخصة الجديدة
-            LoadInfoNewLicense(NewRequestID , ApplicationFees , LicenseFees);
-
-            llShowLicenseInfo.Enabled = true;
-            ctrlDriverLicenseInfoWithFilter1.FilterEnabled = false; //ايقاف البحث
-            btnRenewLicense.Enabled = false;
-
-            MessageBox.Show("معرف الرخصة الجديدة هو " + New_Licenseinfo.LicenseID, "تم انشاء الرخصة", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        }
+    
 
         /// <summary>
         /// تحميل بيانات الرخصة المجددة
@@ -145,6 +120,39 @@ namespace DVLD_Management_System.Local_Licenses
 
             FrmShowPersonLicenseHistory personLicenseHistory = new FrmShowPersonLicenseHistory(PersonID);
             MyTools.ShowForm(personLicenseHistory);
+        }
+
+        private void btnRenewLicense_Click_1(object sender, EventArgs e) // زر تجديد الرخصة
+        {
+            DialogResult Result = MessageBox.Show("هل تريد تجديد الرخصة فعلا ؟", "تأكيد", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (Result == DialogResult.No) return;
+
+            int UserID = ClassUser.IDUser == 0 ? 3 : ClassUser.IDUser;
+
+            int NewRequestID;   // معرف الطلب
+            int ApplicationFees;
+            int LicenseFees;
+
+            // تقوم بارجاع معلومات   الرخصة الجديدة
+            // تنفيذ امر تجديد الرخصة
+            New_Licenseinfo = ClassLicenseInfo.RenewLicense(Old_Licenseinfo, UserID, out NewRequestID, out ApplicationFees, out LicenseFees);
+
+            if (New_Licenseinfo == null) return;
+
+            // عرض معلومات الرخصة الجديدة
+            LoadInfoNewLicense(NewRequestID, ApplicationFees, LicenseFees);
+
+            llShowLicenseInfo.Enabled = true;
+            ctrlDriverLicenseInfoWithFilter1.FilterEnabled = false; //ايقاف البحث
+            btnRenewLicense.Enabled = false;
+
+            AddLog(LogAction.RenewLocalLicense, ClassUser.IDUser, "تجديد رخصة محلية " + "\n\n ID =  " + Old_Licenseinfo.LicenseID);   // Log: تجديد رخصة محلية
+            MessageBox.Show("معرف الرخصة الجديدة هو " + New_Licenseinfo.LicenseID, "تم انشاء الرخصة", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnClose_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

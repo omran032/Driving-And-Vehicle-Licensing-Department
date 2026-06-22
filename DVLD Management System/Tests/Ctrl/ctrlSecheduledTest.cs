@@ -1,6 +1,6 @@
 ﻿using DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.Class;
-using DVLD_Management_System.Properties;
 using DVLD_Management_System.Class.Class_DB;
+using DVLD_Management_System.Properties;
 using DVLD_Management_System.Tests.Class;
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DVLD_Management_System.Tests.Ctrl
 {
@@ -130,7 +131,7 @@ namespace DVLD_Management_System.Tests.Ctrl
                     break;
                 case ClassInfoLicenseAplication.enTestType.WrittenTest:
                     gbTestType.Text = "Written Test";
-                    pbTestTypeImage.Image = Resources.exam;
+                    pbTestTypeImage.Image = Resources.Written_Test_512;
                     break;
                 case ClassInfoLicenseAplication.enTestType.StreetTest:
                     gbTestType.Text = "Street Test";

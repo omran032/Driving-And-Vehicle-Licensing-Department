@@ -1,5 +1,6 @@
 ﻿using DVLD_Management_System.Class.Class;
 using DVLD_Management_System.Class.Class_DB;
+using DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace DVLD_Management_System.Manage_Persons.Class
@@ -64,7 +66,10 @@ namespace DVLD_Management_System.Manage_Persons.Class
 
             object result = ClsCommandDB.ExecuteScalar_Command(Query, parameters, true);
             if(result != null)
+            {
+                AddLog(LogAction.AddPerson, ClassUser.IDUser, $"إضافة شخص جديد رقم {person.IDPerson}");   // تسجيل عملية إضافة شخص في سجل الـ Logs
                 MessageBox.Show("تم الاضافة");
+            }
             else
                 MessageBox.Show("لم تنجح الاضافة");
 
@@ -99,7 +104,10 @@ namespace DVLD_Management_System.Manage_Persons.Class
             object result = ClsCommandDB.ExecuteNonQuery_Command(Query, parameters, true);
 
             if (result != null)
-                MessageBox.Show("تم التعديل");
+            {
+                MessageBox.Show("تم التعديل" , "تم" , MessageBoxButtons.OK , MessageBoxIcon.Information);
+                AddLog(LogAction.UpdatePerson, ClassUser.IDUser, $"تعديل معلومات الشخص رقم {person.IDPerson}");   // تسجيل عملية تعديل معلومات شخص في سجل الـ Logs
+            }
             else
                 MessageBox.Show("لم تنجح التعديل");
 

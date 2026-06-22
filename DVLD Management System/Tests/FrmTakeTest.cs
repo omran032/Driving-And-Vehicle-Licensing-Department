@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.Class;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,12 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.Class;
 
 namespace DVLD_Management_System.Tests
 {
-    using DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول;
     using DVLD_Management_System.Tests.Class;
+    using DVLD_Management_System.الواجهة_الرئيسية.تسجيل_الدخول;
+    using static DVLD_Management_System.Class.Class_DB.ClassAuditLogs;
 
     public partial class FrmTakeTest : Form
     {
@@ -72,15 +73,12 @@ namespace DVLD_Management_System.Tests
         }
 
          
+         
 
-
-
-        // زر الحفظ
-        private void btnSave_Click_1(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)     // زر الحفظ
         {
             if (MessageBox.Show("هل أنت متأكد أنك تريد الحفظ؟ بعد ذلك لن تتمكن من تغيير نتائج النجاح/الرسوب بعد الحفظ.",
-                      "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No
-             )
+                    "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No )
             {
                 return;
             }
@@ -106,6 +104,7 @@ namespace DVLD_Management_System.Tests
 
             if (_Test.Save())
             {
+                AddLog(LogAction.SetTestResult, ClassUser.IDUser, $"تحديد نتيجة الاختبار رقم {_TestID}");   // تسجيل تحديد نتيجة اختبار (ناجح/راسب)
                 MessageBox.Show("تم الحفظ بنجاح.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnSave.Enabled = false;
                 try
@@ -128,7 +127,7 @@ namespace DVLD_Management_System.Tests
                         }
 
 
-                    
+
 
 
                         // إذا كانت واجهة FrmLocalDrivingLicenseApplication مفتوحة فحدّثها فورياً
@@ -136,9 +135,10 @@ namespace DVLD_Management_System.Tests
                         {
                             if (f is DVLD_Management_System.Applications.FrmLocalDrivingLicenseApplication frm)
                             {
-                                try {
-                                      frm.RefreshData();
-                                    }
+                                try
+                                {
+                                    frm.RefreshData();
+                                }
                                 catch { }
                             }
                         }
@@ -150,12 +150,10 @@ namespace DVLD_Management_System.Tests
                 MessageBox.Show("لم يتم حفظ البيانات", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        // زر الاغلاق
-        private void btnClose_Click(object sender, EventArgs e)
+        private void btnClose_Click_1(object sender, EventArgs e)   // زر الاغلاق
         {
             this.Close();
-        }
 
-       
+        }
     }
 }

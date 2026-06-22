@@ -401,5 +401,9 @@ namespace DVLD_Management_System.Tests
             return false;
         }
 
+        private void guna2GradientButton1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

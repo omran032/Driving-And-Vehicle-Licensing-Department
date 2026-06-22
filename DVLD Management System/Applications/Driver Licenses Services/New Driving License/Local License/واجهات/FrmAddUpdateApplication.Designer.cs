@@ -28,30 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnSave = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.btnClose = new Guna.UI2.WinForms.Guna2GradientButton();
             this.MyTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btnNext = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.ctrlFelterPersons1 = new DVLD_Management_System.Manage_Persons.User_Control.CtrlFelterPersons();
-            this.ctrl_InfoPerson = new DVLD_Management_System.Manage_Persons.User_Control.ctrl_InfoPerson();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ComboxLicenseClass = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCreatedByUser = new System.Windows.Forms.Label();
             this.lblFees = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.label15 = new System.Windows.Forms.Label();
             this.lblApplicationDate = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblLocalDrivingLicebseApplicationID = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.ctrlFelterPersons1 = new DVLD_Management_System.Manage_Persons.User_Control.CtrlFelterPersons();
+            this.ctrl_InfoPerson = new DVLD_Management_System.Manage_Persons.User_Control.ctrl_InfoPerson();
+            this.btnSave = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.btnClose = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.btnNext = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.MyTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -62,47 +62,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnSave
-            // 
-            this.btnSave.BorderRadius = 10;
-            this.btnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSave.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSave.FillColor = System.Drawing.Color.White;
-            this.btnSave.FillColor2 = System.Drawing.Color.White;
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnSave.Location = new System.Drawing.Point(665, 644);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(111, 41);
-            this.btnSave.TabIndex = 130;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextOffset = new System.Drawing.Point(15, 0);
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.BorderRadius = 10;
-            this.btnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnClose.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnClose.FillColor = System.Drawing.Color.White;
-            this.btnClose.FillColor2 = System.Drawing.Color.White;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnClose.Location = new System.Drawing.Point(530, 644);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(111, 41);
-            this.btnClose.TabIndex = 129;
-            this.btnClose.Text = "Close";
-            this.btnClose.TextOffset = new System.Drawing.Point(15, 0);
-            // 
             // MyTabControl
             // 
             this.MyTabControl.Controls.Add(this.tabPage1);
@@ -111,7 +70,7 @@
             this.MyTabControl.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MyTabControl.Name = "MyTabControl";
             this.MyTabControl.SelectedIndex = 0;
-            this.MyTabControl.Size = new System.Drawing.Size(810, 555);
+            this.MyTabControl.Size = new System.Drawing.Size(820, 555);
             this.MyTabControl.TabIndex = 128;
             // 
             // tabPage1
@@ -123,77 +82,33 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPage1.Size = new System.Drawing.Size(802, 523);
+            this.tabPage1.Size = new System.Drawing.Size(812, 523);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Personal Info";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // btnNext
-            // 
-            this.btnNext.BorderRadius = 10;
-            this.btnNext.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btnNext.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnNext.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnNext.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnNext.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnNext.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnNext.FillColor = System.Drawing.Color.White;
-            this.btnNext.FillColor2 = System.Drawing.Color.White;
-            this.btnNext.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNext.ForeColor = System.Drawing.Color.Navy;
-            this.btnNext.Location = new System.Drawing.Point(650, 466);
-            this.btnNext.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(111, 41);
-            this.btnNext.TabIndex = 129;
-            this.btnNext.Text = "Next";
-            this.btnNext.TextOffset = new System.Drawing.Point(15, 0);
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // ctrlFelterPersons1
-            // 
-            this.ctrlFelterPersons1.BackColor = System.Drawing.Color.Transparent;
-            this.ctrlFelterPersons1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlFelterPersons1.Location = new System.Drawing.Point(18, 7);
-            this.ctrlFelterPersons1.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
-            this.ctrlFelterPersons1.Name = "ctrlFelterPersons1";
-            this.ctrlFelterPersons1.Size = new System.Drawing.Size(591, 60);
-            this.ctrlFelterPersons1.TabIndex = 127;
-            // 
-            // ctrl_InfoPerson
-            // 
-            this.ctrl_InfoPerson.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ctrl_InfoPerson.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrl_InfoPerson.Location = new System.Drawing.Point(8, 67);
-            this.ctrl_InfoPerson.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
-            this.ctrl_InfoPerson.Name = "ctrl_InfoPerson";
-            this.ctrl_InfoPerson.person = null;
-            this.ctrl_InfoPerson.PersonID = 0;
-            this.ctrl_InfoPerson.Size = new System.Drawing.Size(774, 429);
-            this.ctrl_InfoPerson.TabIndex = 126;
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.ComboxLicenseClass);
-            this.tabPage2.Controls.Add(this.pictureBox2);
-            this.tabPage2.Controls.Add(this.pictureBox1);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.lblCreatedByUser);
             this.tabPage2.Controls.Add(this.lblFees);
             this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.pictureBox3);
-            this.tabPage2.Controls.Add(this.pictureBox6);
             this.tabPage2.Controls.Add(this.label15);
             this.tabPage2.Controls.Add(this.lblApplicationDate);
-            this.tabPage2.Controls.Add(this.pictureBox4);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.lblLocalDrivingLicebseApplicationID);
             this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.pictureBox2);
+            this.tabPage2.Controls.Add(this.pictureBox1);
+            this.tabPage2.Controls.Add(this.pictureBox3);
+            this.tabPage2.Controls.Add(this.pictureBox6);
+            this.tabPage2.Controls.Add(this.pictureBox4);
             this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPage2.Size = new System.Drawing.Size(802, 523);
+            this.tabPage2.Size = new System.Drawing.Size(812, 523);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Application Info";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -213,24 +128,6 @@
             this.ComboxLicenseClass.Name = "ComboxLicenseClass";
             this.ComboxLicenseClass.Size = new System.Drawing.Size(321, 36);
             this.ComboxLicenseClass.TabIndex = 160;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(251, 63);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 159;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(251, 228);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 158;
-            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -276,24 +173,6 @@
             this.label2.TabIndex = 153;
             this.label2.Text = "Application Fees:";
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Location = new System.Drawing.Point(251, 191);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 154;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Location = new System.Drawing.Point(251, 152);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 152;
-            this.pictureBox6.TabStop = false;
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -315,15 +194,6 @@
             this.lblApplicationDate.Size = new System.Drawing.Size(109, 20);
             this.lblApplicationDate.TabIndex = 149;
             this.lblApplicationDate.Text = "[??/??/????]";
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Location = new System.Drawing.Point(251, 109);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 148;
-            this.pictureBox4.TabStop = false;
             // 
             // label5
             // 
@@ -369,19 +239,170 @@
             this.lblTitle.Text = "Local Driving License Application";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // ctrlFelterPersons1
+            // 
+            this.ctrlFelterPersons1.BackColor = System.Drawing.Color.Transparent;
+            this.ctrlFelterPersons1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlFelterPersons1.Location = new System.Drawing.Point(18, 7);
+            this.ctrlFelterPersons1.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.ctrlFelterPersons1.Name = "ctrlFelterPersons1";
+            this.ctrlFelterPersons1.Size = new System.Drawing.Size(591, 60);
+            this.ctrlFelterPersons1.TabIndex = 127;
+            // 
+            // ctrl_InfoPerson
+            // 
+            this.ctrl_InfoPerson.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ctrl_InfoPerson.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrl_InfoPerson.Location = new System.Drawing.Point(8, 67);
+            this.ctrl_InfoPerson.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.ctrl_InfoPerson.Name = "ctrl_InfoPerson";
+            this.ctrl_InfoPerson.person = null;
+            this.ctrl_InfoPerson.PersonID = 0;
+            this.ctrl_InfoPerson.Size = new System.Drawing.Size(804, 429);
+            this.ctrl_InfoPerson.TabIndex = 126;
+            // 
+            // btnSave
+            // 
+            this.btnSave.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSave.BorderRadius = 10;
+            this.btnSave.BorderThickness = 1;
+            this.btnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSave.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSave.FillColor = System.Drawing.Color.White;
+            this.btnSave.FillColor2 = System.Drawing.Color.White;
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnSave.Image = global::DVLD_Management_System.Properties.Resources.Save;
+            this.btnSave.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnSave.Location = new System.Drawing.Point(665, 644);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(111, 41);
+            this.btnSave.TabIndex = 130;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextOffset = new System.Drawing.Point(2, 0);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.BorderRadius = 10;
+            this.btnClose.BorderThickness = 1;
+            this.btnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnClose.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnClose.FillColor = System.Drawing.Color.White;
+            this.btnClose.FillColor2 = System.Drawing.Color.White;
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnClose.Image = global::DVLD_Management_System.Properties.Resources.Close_32;
+            this.btnClose.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnClose.Location = new System.Drawing.Point(530, 644);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(111, 41);
+            this.btnClose.TabIndex = 129;
+            this.btnClose.Text = "Close";
+            // 
+            // btnNext
+            // 
+            this.btnNext.BackColor = System.Drawing.Color.Transparent;
+            this.btnNext.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnNext.BorderRadius = 10;
+            this.btnNext.BorderThickness = 1;
+            this.btnNext.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnNext.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnNext.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnNext.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnNext.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnNext.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnNext.FillColor = System.Drawing.Color.White;
+            this.btnNext.FillColor2 = System.Drawing.Color.White;
+            this.btnNext.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNext.ForeColor = System.Drawing.Color.Navy;
+            this.btnNext.Image = global::DVLD_Management_System.Properties.Resources.Next;
+            this.btnNext.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnNext.Location = new System.Drawing.Point(650, 466);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(111, 41);
+            this.btnNext.TabIndex = 129;
+            this.btnNext.Text = "Next";
+            this.btnNext.TextOffset = new System.Drawing.Point(2, 0);
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::DVLD_Management_System.Properties.Resources.Number_32;
+            this.pictureBox2.Location = new System.Drawing.Point(251, 63);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 159;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DVLD_Management_System.Properties.Resources.User_32__2;
+            this.pictureBox1.Location = new System.Drawing.Point(251, 228);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 158;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::DVLD_Management_System.Properties.Resources.US_Dollar;
+            this.pictureBox3.Location = new System.Drawing.Point(251, 191);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 154;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::DVLD_Management_System.Properties.Resources.License_Type_32;
+            this.pictureBox6.Location = new System.Drawing.Point(251, 152);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 152;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::DVLD_Management_System.Properties.Resources.Calendar;
+            this.pictureBox4.Location = new System.Drawing.Point(251, 109);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 148;
+            this.pictureBox4.TabStop = false;
+            // 
             // FrmAddUpdateApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 697);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(840, 697);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.MyTabControl);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.MaximizeBox = false;
             this.Name = "FrmAddUpdateApplication";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Local Driving License Application";
             this.Load += new System.EventHandler(this.FrmAddUpdateApplication_Load);
             this.MyTabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

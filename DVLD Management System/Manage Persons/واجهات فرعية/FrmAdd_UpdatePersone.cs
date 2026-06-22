@@ -61,6 +61,10 @@ namespace DVLD_Management_System.Manage_Persons.واجهات_فرعية
         {
             onEventRefreachData?.Invoke();
         }
- 
+
+        private void ctrl_Add_UpdatePerson1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
