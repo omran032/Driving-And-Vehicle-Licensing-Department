@@ -80,7 +80,7 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
                 string path = ofd.FileName;
 
                 // استدعاء دالة كشف الوجه
-                bool hasFace = cls_InspectImage.DetectFace(path);
+                bool hasFace = cls_InspectImage.HasFace(path);
 
                 if (hasFace)
                 {
