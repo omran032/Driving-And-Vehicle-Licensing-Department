@@ -1,6 +1,5 @@
 ﻿using DVLD_Management_System.Class.Class;
 using DVLD_Management_System.Manage_Persons.واجهات_فرعية;
-using Emgu.CV.XFeatures2D;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

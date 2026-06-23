@@ -84,13 +84,12 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
 
                 if (hasFace)
                 {
-                    MessageBox.Show("✔ تم التحقق من الصورة – يوجد وجه.");
                     Picture.Image = Image.FromFile(path);
                     Picture.Tag = "Selected";
                 }
                 else
                 {
-                    MessageBox.Show("❌ الصورة لا تحتوي على وجه. الرجاء اختيار صورة صحيحة.");
+                    MessageBox.Show("❌ الصورة لا تحتوي على وجه , الرجاء اختيار صورة صحيحة " , "Problem Image" , MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
             }
 

@@ -28,7 +28,7 @@ namespace DVLD_Management_System
                 string path = ofd.FileName;
 
                 // استدعاء دالة كشف الوجه
-                bool hasFace = cls_InspectImage. DetectFace(path);
+                bool hasFace = cls_InspectImage.HasFace(path);
 
                 if (hasFace)
                 {

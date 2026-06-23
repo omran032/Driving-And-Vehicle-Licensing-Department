@@ -1,6 +1,5 @@
 ﻿using DVLD_Management_System.Class.Class;
 using DVLD_Management_System.Class.Class_DB;
-using Emgu.CV.Dnn;
 using System;
 using System.Collections.Generic;
 using System.Data;
