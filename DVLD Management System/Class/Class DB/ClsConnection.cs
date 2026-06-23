@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DVLD_Management_System.Class.Class_DB
 {
-    internal class ClsConnection      
+    public class ClsConnection      
 
     {
         ///////******  ///////******  ///////******  ///////******  ///////******  ///////******  ///////******  
@@ -32,6 +32,22 @@ namespace DVLD_Management_System.Class.Class_DB
         //      Integrated Security=True;
         //      Connect Timeout=30; ";
 
+
+
+
+        ///////******  ///////******  ///////******  ///////******  ///////******  ///////******  ///////******  
+        ///////******  ///////******  ///////******  ///////******  ///////******  ///////******  ///////******  
+        //  مسار القاعدة    بالمستندات exe
+
+        //    static string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        //    static string dbFolder = Path.Combine(documents, "DVLD");
+        //    static string dbPath = Path.Combine(dbFolder, "DB_DVLD.mdf");
+
+        //    public static string ConnectionString = $@"
+        //Data Source=(LocalDB)\MSSQLLocalDB;
+        //AttachDbFilename={dbPath};
+        //Integrated Security=True;
+        //Connect Timeout=30;";
 
 
 
