@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ComboxFelter = new Guna.UI2.WinForms.Guna2ComboBox();
             this.TxtFelter = new Guna.UI2.WinForms.Guna2TextBox();
+            this.CombxStatus = new Guna.UI2.WinForms.Guna2ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -84,12 +85,36 @@
             this.TxtFelter.SelectedText = "";
             this.TxtFelter.Size = new System.Drawing.Size(286, 36);
             this.TxtFelter.TabIndex = 2;
+            this.TxtFelter.Visible = false;
             this.TxtFelter.TextChanged += new System.EventHandler(this.TxtFelter_TextChanged_1);
+            // 
+            // CombxStatus
+            // 
+            this.CombxStatus.BackColor = System.Drawing.Color.Transparent;
+            this.CombxStatus.BorderRadius = 10;
+            this.CombxStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.CombxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CombxStatus.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CombxStatus.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CombxStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.CombxStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.CombxStatus.ItemHeight = 30;
+            this.CombxStatus.Items.AddRange(new object[] {
+            "New",
+            "Completed",
+            "Canceled"});
+            this.CombxStatus.Location = new System.Drawing.Point(355, 10);
+            this.CombxStatus.Name = "CombxStatus";
+            this.CombxStatus.Size = new System.Drawing.Size(177, 36);
+            this.CombxStatus.TabIndex = 3;
+            this.CombxStatus.Visible = false;
+            this.CombxStatus.SelectedIndexChanged += new System.EventHandler(this.CombxStatus_SelectedIndexChanged);
             // 
             // CtrlLicenseAppFelter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.CombxStatus);
             this.Controls.Add(this.TxtFelter);
             this.Controls.Add(this.ComboxFelter);
             this.Controls.Add(this.label1);
@@ -107,5 +132,6 @@
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2ComboBox ComboxFelter;
         private Guna.UI2.WinForms.Guna2TextBox TxtFelter;
+        private Guna.UI2.WinForms.Guna2ComboBox CombxStatus;
     }
 }

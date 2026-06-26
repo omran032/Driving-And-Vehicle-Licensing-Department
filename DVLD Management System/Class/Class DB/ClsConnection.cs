@@ -59,12 +59,36 @@ namespace DVLD_Management_System.Class.Class_DB
 
         // الغيها بس تنتهي من البرنامج وشغل يلي قبلها 
 
+
+
+
         static string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DB_DVLD.mdf");
 
-        public static string ConnectionString = $@"
-            Data Source=(LocalDB)\MSSQLLocalDB;
-            AttachDbFilename= {dbPath};
-            Integrated Security=True;
-            Connect Timeout=30; ";
+
+        // بيشتغل على لوكال 2025
+        public static string ConnectionString = @"Data Source=(localdb)\\LocalDB2025;" +
+                                                 "AttachDbFilename=" + dbPath + ";" +
+                                                  "Integrated Security=True;" +
+                                                     "Connect Timeout=30;";
+
+
+        // بيشتغل على لكوكال 2022
+        //    public static string ConnectionString = $@"
+        //Data Source=(LocalDB)\LocalDB2022;
+        //AttachDbFilename={dbPath};
+        //Integrated Security=True;
+        //Connect Timeout=30;";
+
+
+
+        //              // هاد بيستخدم لوكال قديم وما بيشتغل ع لوكال 2022
+        //public static string ConnectionString = $@"
+        //    Data Source=(LocalDB)\MSSQLLocalDB;
+        //    AttachDbFilename= {dbPath};
+        //    Integrated Security=True;
+        //    Connect Timeout=30; ";
+
+
+
     }
 }

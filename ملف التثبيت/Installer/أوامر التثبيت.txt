@@ -1,0 +1,5 @@
+sqllocaldb create "LocalDB2025"
+
+                    ثم     
+
+sqllocaldb start "LocalDB2025"

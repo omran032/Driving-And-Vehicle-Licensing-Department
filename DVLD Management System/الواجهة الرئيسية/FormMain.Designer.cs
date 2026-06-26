@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsDdb_Application = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -403,6 +403,7 @@
             this.ToolSM_SingOut.Name = "ToolSM_SingOut";
             this.ToolSM_SingOut.Size = new System.Drawing.Size(230, 38);
             this.ToolSM_SingOut.Text = "Sign out";
+            this.ToolSM_SingOut.Click += new System.EventHandler(this.ToolSM_SingOut_Click);
             // 
             // guna2Panel1
             // 
@@ -502,7 +503,7 @@
             this.PnlLicenseExpiring.ShadowShift = 4;
             this.PnlLicenseExpiring.Size = new System.Drawing.Size(442, 161);
             this.PnlLicenseExpiring.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.PnlLicenseExpiring, "الرخصة ستنتهي قريبًا\nخلال 30 يومًا");
+            this.toolTip1.SetToolTip(this.PnlLicenseExpiring, "الرخصة التي انتهت في ال30 يوم التي مضت\n");
             this.PnlLicenseExpiring.Click += new System.EventHandler(this.PnlLicenseExpiring_Click);
             // 
             // pictureBox1
@@ -525,11 +526,11 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(168, 81);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(229, 60);
+            this.label2.Size = new System.Drawing.Size(252, 60);
             this.label2.TabIndex = 8;
-            this.label2.Text = "License Expiring Soon\r\nWithin 30 Days";
+            this.label2.Text = "The License that Expired\r\n in the Past 30 days";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.toolTip1.SetToolTip(this.label2, "الرخصة ستنتهي قريبًا\r\nخلال 30 يومًا");
+            this.toolTip1.SetToolTip(this.label2, "الرخصة التي انتهت في ال30 يوم التي مضت\n");
             this.label2.Click += new System.EventHandler(this.PnlLicenseExpiring_Click);
             // 
             // lblCountLicenseExpiring
@@ -543,7 +544,7 @@
             this.lblCountLicenseExpiring.Size = new System.Drawing.Size(73, 81);
             this.lblCountLicenseExpiring.TabIndex = 8;
             this.lblCountLicenseExpiring.Text = "8";
-            this.toolTip1.SetToolTip(this.lblCountLicenseExpiring, "الرخصة ستنتهي قريبًا\nخلال 30 يومًا");
+            this.toolTip1.SetToolTip(this.lblCountLicenseExpiring, "الرخصة التي انتهت في ال30 يوم التي مضت\n");
             this.lblCountLicenseExpiring.Click += new System.EventHandler(this.PnlLicenseExpiring_Click);
             // 
             // PnlUnpaidViolation
@@ -668,27 +669,27 @@
             // 
             this.DGV.AllowUserToAddRows = false;
             this.DGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            this.DGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.DGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.DGV.ColumnHeadersHeight = 35;
             this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV.DefaultCellStyle = dataGridViewCellStyle6;
             this.DGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.DGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DGV.Location = new System.Drawing.Point(37, 390);
@@ -789,6 +790,7 @@
             this.pictureBox10.TabIndex = 18;
             this.pictureBox10.TabStop = false;
             this.toolTip1.SetToolTip(this.pictureBox10, "إضافة رخصة محلية جديدة");
+            this.pictureBox10.Click += new System.EventHandler(this.PnlAddNewLocalLicense_Click);
             // 
             // label1
             // 
@@ -847,6 +849,7 @@
             this.pictureBox9.TabIndex = 17;
             this.pictureBox9.TabStop = false;
             this.toolTip1.SetToolTip(this.pictureBox9, "إضافة رخصة دولية جديدة");
+            this.pictureBox9.Click += new System.EventHandler(this.PnlAddNewInternationalLicense_Click);
             // 
             // label4
             // 
@@ -861,6 +864,7 @@
             this.label4.Text = "Add New \r\nInternational License";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolTip1.SetToolTip(this.label4, "إضافة رخصة دولية جديدة");
+            this.label4.Click += new System.EventHandler(this.PnlAddNewInternationalLicense_Click);
             // 
             // pictureBox8
             // 
@@ -873,6 +877,7 @@
             this.pictureBox8.TabIndex = 15;
             this.pictureBox8.TabStop = false;
             this.toolTip1.SetToolTip(this.pictureBox8, "إضافة رخصة دولية جديدة");
+            this.pictureBox8.Click += new System.EventHandler(this.PnlAddNewInternationalLicense_Click);
             // 
             // btnRefrech
             // 

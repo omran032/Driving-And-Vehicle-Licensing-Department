@@ -38,20 +38,17 @@ namespace DVLD_Management_System.Drivers.Class
 
             using (SqlConnection con = new SqlConnection(ClsConnection.ConnectionString))
             {
-                // الاستعلام 
                 string query = @"
 SELECT 
     D.DriverID,
     P.IDPerson AS PersonID,
-    P.NumPhone as Phone ,
+    P.NumPhone as Phone,
     P.[National number] AS NationalNum,
 
-    -- عدد الرخص الفعّالة
     (SELECT COUNT(*) 
      FROM Licenses L 
      WHERE L.DriverID = D.DriverID AND L.StatusRelease = 1) AS ActiveLicenses,
 
-    -- تاريخ آخر رخصة
     (SELECT MAX(L2.RelesaseDate)
      FROM Licenses L2
      WHERE L2.DriverID = D.DriverID) AS [Date]
@@ -59,7 +56,6 @@ SELECT
 FROM Drivers D
 INNER JOIN Persons P ON D.PersonID = P.IDPerson ";
 
-                // بناء شرط الفلترة
                 string where = "";
 
                 switch (filterType)
@@ -73,7 +69,7 @@ INNER JOIN Persons P ON D.PersonID = P.IDPerson ";
                         break;
 
                     case enDriverFilter.NationalNo:
-                        where = "WHERE P.[National number] LIKE '%' + @Value + '%'";
+                        where = "WHERE P.[National number] = @Value ";
                         break;
 
                     case enDriverFilter.FullName:
@@ -90,14 +86,21 @@ INNER JOIN Persons P ON D.PersonID = P.IDPerson ";
 
                 SqlCommand cmd = new SqlCommand(query, con);
 
-                // إضافة قيمة الفلتر إذا كان هناك فلتر
+                // إضافة قيمة الفلتر
                 if (filterType != enDriverFilter.None)
                 {
-                    // إذا كان DriverID أو PersonID → لازم يتحول لرقم
                     if (filterType == enDriverFilter.DriverID || filterType == enDriverFilter.PersonID)
-                        cmd.Parameters.AddWithValue("@Value", Convert.ToInt32(filterValue));
+                    {
+                        // التحقق قبل التحويل
+                        if (int.TryParse(filterValue, out int numericValue))
+                            cmd.Parameters.AddWithValue("@Value", numericValue);
+                        else
+                            return dt; // رجّع جدول فاضي بدل ما يعمل خطأ
+                    }
                     else
+                    {
                         cmd.Parameters.AddWithValue("@Value", filterValue);
+                    }
                 }
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -106,6 +109,7 @@ INNER JOIN Persons P ON D.PersonID = P.IDPerson ";
 
             return dt;
         }
+
 
 
 

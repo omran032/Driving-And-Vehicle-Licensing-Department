@@ -257,7 +257,7 @@
             this.ctrl_InfoPerson.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.ctrl_InfoPerson.Name = "ctrl_InfoPerson";
             this.ctrl_InfoPerson.person = null;
-            this.ctrl_InfoPerson.PersonID = 0;
+            //this.ctrl_InfoPerson.PersonID = 0;
             this.ctrl_InfoPerson.Size = new System.Drawing.Size(804, 429);
             this.ctrl_InfoPerson.TabIndex = 126;
             // 

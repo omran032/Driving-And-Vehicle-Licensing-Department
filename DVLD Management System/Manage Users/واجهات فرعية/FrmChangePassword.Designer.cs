@@ -72,7 +72,7 @@
             this.ctrl_InfoPerson1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.ctrl_InfoPerson1.Name = "ctrl_InfoPerson1";
             this.ctrl_InfoPerson1.person = null;
-            this.ctrl_InfoPerson1.PersonID = 0;
+          //  this.ctrl_InfoPerson1.PersonID = 0;
             this.ctrl_InfoPerson1.Size = new System.Drawing.Size(705, 376);
             this.ctrl_InfoPerson1.TabIndex = 0;
             // 

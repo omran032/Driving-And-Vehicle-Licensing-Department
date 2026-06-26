@@ -240,10 +240,10 @@
             this.Chk_RememberMy.UncheckedState.BorderRadius = 0;
             this.Chk_RememberMy.UncheckedState.BorderThickness = 0;
             this.Chk_RememberMy.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.Chk_RememberMy.CheckedChanged += new System.EventHandler(this.Chk_RememberMy_CheckedChanged);
             // 
             // FormLogin
             // 
+            this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -264,6 +264,7 @@
             this.Name = "FormLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.FormLogin_Load);
             this.pnl_TopBar.ResumeLayout(false);
             this.pnl_TopBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicMinimize)).EndInit();

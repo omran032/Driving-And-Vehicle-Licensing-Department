@@ -29,12 +29,22 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
 {
     public partial class FormMain : Form
     {
-        public FormMain()
+        public FormMain(FormLogin formLogin_)
         {
             InitializeComponent();
 
             LoadDataUser();
+            formLogin = formLogin_;
+            if (ClassUser.Role == "Employee")
+            {
+                tsDdb_Users.Visible = false;
+                ToolS_ManageApplicationTypes.Visible = false;
+                ToolS_ManageTestTypes.Visible = false;
+            }
         }
+
+        FormLogin formLogin;
+
         Person Person;
         Users User;
 
@@ -260,6 +270,42 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
         }
 
 
+        /// <summary>
+        /// ترجع عدد السائقين الذين انتهت رخصهم خلال آخر 30 يوم.
+        /// تعتمد على EndDate في جدول Licenses.
+        /// </summary>
+        public static int GetDriversWithLicensesExpiredLast30Days()
+        {
+            string query = @"
+        SELECT COUNT(DISTINCT DriverID)
+        FROM Licenses
+        WHERE 
+            EndDate IS NOT NULL
+            AND EndDate < CAST(GETDATE() AS DATE)
+            AND EndDate >= DATEADD(DAY, -30, CAST(GETDATE() AS DATE));
+    ";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ClsConnection.ConnectionString))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    conn.Open();
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    return count;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("خطأ أثناء حساب عدد الرخص المنتهية خلال آخر 30 يوم:\n" + ex.Message,
+                    "DB Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
+        }
+
+
+
+
 
 
         /// <summary>
@@ -436,6 +482,14 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
         }
 
 
+        private void ToolSM_SingOut_Click(object sender, EventArgs e) // زر تسجيل الخروج
+        {
+          DialogResult result =   MessageBox.Show("هل تريد تسجيل الخروج فعلا؟", "تأكيد", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No) return;
+
+            this.Close();
+            formLogin.Show();
+        }
 
 
 
@@ -452,6 +506,6 @@ namespace DVLD_Management_System.الواجهة_الرئيسية
 
         #endregion
 
-        
+
     }
 }

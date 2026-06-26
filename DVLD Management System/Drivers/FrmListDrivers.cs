@@ -84,25 +84,26 @@ namespace DVLD_Management_System.Drivers
 
         private void btnSearch_Click(object sender, EventArgs e) // زر البحث
         {
+            string Value =  txtFilterValue.Text.Trim();
             switch (TypeFelter)
             {
                 case enDriverFilter.DriverID:
-                    TableDataDrivers = ClassDriver_DB.GetDriversWithFilter(enDriverFilter.DriverID);
+                    TableDataDrivers = ClassDriver_DB.GetDriversWithFilter(enDriverFilter.DriverID , Value);
                     dgvDrivers.DataSource = TableDataDrivers;
                     break;
 
                 case enDriverFilter.PersonID:
-                    TableDataDrivers = ClassDriver_DB.GetDriversWithFilter(enDriverFilter.PersonID);
+                    TableDataDrivers = ClassDriver_DB.GetDriversWithFilter(enDriverFilter.PersonID, Value);
                     dgvDrivers.DataSource = TableDataDrivers;
                     break;
 
                 case enDriverFilter.NationalNo:
-                    TableDataDrivers = ClassDriver_DB.GetDriversWithFilter(enDriverFilter.NationalNo);
+                    TableDataDrivers = ClassDriver_DB.GetDriversWithFilter(enDriverFilter.NationalNo, Value);
                     dgvDrivers.DataSource = TableDataDrivers;
                     break;
 
                 case enDriverFilter.FullName:
-                    TableDataDrivers = ClassDriver_DB.GetDriversWithFilter(enDriverFilter.FullName);
+                    TableDataDrivers = ClassDriver_DB.GetDriversWithFilter(enDriverFilter.FullName, Value);
                     dgvDrivers.DataSource = TableDataDrivers;
                     break;
 

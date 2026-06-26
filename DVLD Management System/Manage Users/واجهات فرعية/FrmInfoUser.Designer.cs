@@ -56,7 +56,7 @@
             this.ctrl_InfoPerson1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.ctrl_InfoPerson1.Name = "ctrl_InfoPerson1";
             this.ctrl_InfoPerson1.person = null;
-            this.ctrl_InfoPerson1.PersonID = 0;
+         //   this.ctrl_InfoPerson1.PersonID = 0;
             this.ctrl_InfoPerson1.Size = new System.Drawing.Size(747, 435);
             this.ctrl_InfoPerson1.TabIndex = 0;
             // 
@@ -73,6 +73,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(815, 631);
             this.Controls.Add(this.ctrlInfoUser1);
             this.Controls.Add(this.groupBox1);

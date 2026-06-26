@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 //namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_license_Application.User_Control
 namespace DVLD.Applications.LocalDrivingLicense
@@ -63,9 +64,7 @@ namespace DVLD.Applications.LocalDrivingLicense
                         DataTableUser = clsLicenseClass.FelterLocalLicenseRequestsByFullNamePerson(text);
                         break;
 
-                    case "status":
-                        // يمكن نستخدملها كومبوكس لحالها
-                        break;
+                    
                 }
 
                 EventShowFelterUser?.Invoke(DataTableUser);
@@ -85,7 +84,9 @@ namespace DVLD.Applications.LocalDrivingLicense
             TxtFelter.Text = null;
             TypeFelter = ComboxFelter.Text.Trim().ToLower();
 
-            TxtFelter.Enabled = true; // القيمة الافتراضية
+            TxtFelter.Visible = false; // الحالة الافتراضية
+            CombxStatus.Visible = false;
+
             ControlHelper.EnableNumbersOnly(TxtFelter, false);
             switch (TypeFelter)
             {
@@ -94,13 +95,33 @@ namespace DVLD.Applications.LocalDrivingLicense
                     EventShowFelterUser?.Invoke(DataTableUser);
                     break;
 
-                case "request id":
-              //  case "national number":
-                    TxtFelter.Enabled = true;
+                case "status":
+                    TxtFelter.Visible = false;
+                    CombxStatus.Visible = true;
+                     break;
+
+                    default: // يعني غيرها من الخيارات
+                    TxtFelter.Visible = true;
+                    CombxStatus.Visible = false;
+                    if(TypeFelter == "full name")
+                    {
+                    ControlHelper.EnableNumbersOnly(TxtFelter, false);
+                        return;
+                    }
                     ControlHelper.EnableNumbersOnly(TxtFelter, true);
                     break;
- 
+
             }
+        }
+
+     
+
+        private void CombxStatus_SelectedIndexChanged(object sender, EventArgs e) // عرض الطلبات حسب الحالة
+        {
+            string StatusText = CombxStatus.Text.Trim();
+          
+            DataTableUser = clsLicenseClass.FelterLocalLicenseRequestsByStatusRequest(StatusText);
+                    EventShowFelterUser?.Invoke(DataTableUser);
         }
     }
 

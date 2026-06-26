@@ -319,7 +319,6 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
             }
         }
 
-
         /// <summary>
         /// إرجاع قائمة الرخص حسب فلترين نصيّين (اختياريين)
         /// </summary>
@@ -328,42 +327,71 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
             DataTable dt = new DataTable();
 
             string query = @"
-        SELECT 
-            L.LicenceID,
-            L.DriverID,
-            D.PersonID,
-            P.[National number] AS NationalNum,
-            L.RelesaseDate AS IssueDate,
-            L.EndDate AS ExpirationDate
-        FROM Licenses L
-        INNER JOIN Drivers D ON L.DriverID = D.DriverID
-        INNER JOIN Persons P ON D.PersonID = P.IDPerson
-        WHERE 1 = 1 ";
+SELECT 
+    L.LicenceID,
+    L.DriverID,
+    D.PersonID,
+    P.[National number] AS NationalNum,
+    L.RelesaseDate AS IssueDate,
+    L.EndDate AS ExpirationDate
+FROM Licenses L
+INNER JOIN Drivers D ON L.DriverID = D.DriverID
+INNER JOIN Persons P ON D.PersonID = P.IDPerson
+WHERE 1 = 1 ";
 
-            // دمج الفلتر الأول
-            if (!string.IsNullOrWhiteSpace(FilterDateRange))
+            string f1 = FilterDateRange?.Trim();
+            string f2 = FilterLicenseStatus?.Trim();
+
+            bool isThisMonth = f1 == "This Month";
+            bool isThisYear = f1 == "This Year";
+
+            // -----------------------------
+            // فلترة حسب حالة الرخصة
+            // -----------------------------
+            if (f2 == "Expired License")
             {
-                string f = FilterDateRange.Trim();
+                // كل الرخص المنتهية
+                query += " AND L.EndDate < CAST(GETDATE() AS DATE) ";
 
-                if (f == "This Month")
-                    query += " AND MONTH(L.RelesaseDate) = MONTH(GETDATE()) AND YEAR(L.RelesaseDate) = YEAR(GETDATE()) ";
+                // آخر 30 يوم
+                if (isThisMonth)
+                {
+                    query += @"
+            AND L.EndDate >= DATEADD(DAY, -30, CAST(GETDATE() AS DATE)) ";
+                }
 
-                else if (f == "This Year")
-                    query += " AND YEAR(L.RelesaseDate) = YEAR(GETDATE()) ";
-
-          
+                // آخر 12 شهر
+                else if (isThisYear)
+                {
+                    query += @"
+            AND L.EndDate >= DATEADD(DAY, -365, CAST(GETDATE() AS DATE)) ";
+                }
             }
-           
-            // دمج الفلتر الثاني
-            if (!string.IsNullOrWhiteSpace(FilterLicenseStatus))
+            else if (f2 == "New License")
             {
-                string f = FilterLicenseStatus.Trim();
+                query += " AND L.StatusRelease = 1 ";
 
-                  if (f == "New License")
-                    query += " AND L.StatusRelease = 1 ";
-
-                else if (f == "Expired License")
-                    query += " AND L.EndDate < GETDATE() ";
+                // فلترة حسب تاريخ الإصدار فقط للرخص الجديدة
+                if (isThisMonth)
+                {
+                    query += " AND L.RelesaseDate >= DATEADD(DAY, -30, CAST(GETDATE() AS DATE)) ";
+                }
+                else if (isThisYear)
+                {
+                    query += " AND L.RelesaseDate >= DATEADD(DAY, -365, CAST(GETDATE() AS DATE)) ";
+                }
+            }
+            else
+            {
+                // بدون حالة → فلترة حسب التاريخ فقط
+                if (isThisMonth)
+                {
+                    query += " AND L.RelesaseDate >= DATEADD(DAY, -30, CAST(GETDATE() AS DATE)) ";
+                }
+                else if (isThisYear)
+                {
+                    query += " AND L.RelesaseDate >= DATEADD(DAY, -365, CAST(GETDATE() AS DATE)) ";
+                }
             }
 
             using (SqlConnection con = new SqlConnection(ClsConnection.ConnectionString))
@@ -376,13 +404,10 @@ namespace DVLD_Management_System.Applications.Manage_Application.Local_Driving_l
             return dt;
         }
 
-
-
-
         /// <summary>
         /// إرجاع قائمة الرخص الدولية حسب فلترين نصيّين (اختياريين)
         /// </summary>
-          static DataTable GetInternationalLicensesByFilters(string FilterDateRange, string FilterLicenseStatus)
+        static DataTable GetInternationalLicensesByFilters(string FilterDateRange, string FilterLicenseStatus)
         {
             DataTable dt = new DataTable();
 

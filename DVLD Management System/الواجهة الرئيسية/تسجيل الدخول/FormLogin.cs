@@ -25,6 +25,10 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
             //هل هناك معلومات عن مستخدم لعرضها؟
             LoadLoginFromRegistry( TxtUserName,  TxtPassword);
 
+            if(TxtUserName.Text != null) // تفعيلها اذا في حساب
+            {
+                Chk_RememberMy.Checked = true;
+            }
         }
         private void PicClose_Click(object sender, EventArgs e) // زر إغلاق النافذة
         {
@@ -60,15 +64,17 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
 
                 // عرض الواجهة حسب الصلاحيات
                 // فعلها بس تقسم الصلاحيات
-                ClsPersonAuthorities personAuthorities = new ClsPersonAuthorities(ClassUser.Role); 
+                  // ClsPersonAuthorities personAuthorities = new ClsPersonAuthorities(ClassUser.Role); 
 
                 // Windows Registry هل تم تفعيل حفظ المعلومات لحفظها في
                 IsCheck_RememberMy();
 
-                //   Close();
-                FormMain formMain = new FormMain();
+
+                this.Hide();
+                FormMain formMain = new FormMain(this);
                 MyTools.ShowForm(formMain);
                 return;
+
             }
             else
             {
@@ -111,9 +117,23 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
         }
 
         /// <summary>
+        ///  Windows Registry يحذف بيانات تسجيل الدخول من 
+        /// </summary>
+        void DeleteLoginFromRegistry()
+        {
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Login Project DVLD");
+
+            key.DeleteValue("Username", false);
+            key.DeleteValue("Password", false);
+
+            key.Close();
+        }
+
+
+        /// <summary>
         /// Windows Registry دالة القراءة من 
         /// </summary>
-         void LoadLoginFromRegistry(Control txtUserName , Control txtPassword)
+        void LoadLoginFromRegistry(Control txtUserName , Control txtPassword)
         {
             string username;
             string password;
@@ -146,10 +166,18 @@ namespace DVLD_Management_System.الواجهة_الرئيسية.تسجيل_ال
             {
                 SaveLoginToRegistry(username ,password);
             }
+            else
+            {
+                DeleteLoginFromRegistry();
+            }
         }
 
-        private void Chk_RememberMy_CheckedChanged(object sender, EventArgs e)
+        private void FormLogin_Load(object sender, EventArgs e)
         {
+
+            // ClsCommandDB.CheckDatabaseConnection();
+
+
 
         }
     }

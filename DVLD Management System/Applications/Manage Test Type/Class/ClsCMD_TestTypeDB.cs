@@ -24,35 +24,47 @@ namespace DVLD_Management_System.Applications.Manage_Test_Type.Class
 
         }
 
+     
         /// <summary>
         /// تعديل نوع الاختبار 
         /// </summary>
         public static void UpdateTestType(InfoTestType infoTestType)
         {
-            if (infoTestType == null) 
-                MessageBox.Show("البيانات المرسلة فارغة", "" ,MessageBoxButtons.OK , MessageBoxIcon.Error);
+            if (infoTestType == null)
+            {
+                MessageBox.Show("البيانات المرسلة فارغة", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             Dictionary<string, object> Parameters = new Dictionary<string, object>()
-            {
-                {"@ID"           , infoTestType.ID},
-                {"@TestTypeName" , infoTestType.TestTypeName},
-                {"@Fees"         , infoTestType.Fees},
-                {"@Description"  , infoTestType.Description},
-            };
+    {
+        {"@ID"           , infoTestType.ID},
+        {"@TestTypeName" , infoTestType.TestTypeName},
+        {"@Description"  , infoTestType.Description},
+        {"@Fees"         , infoTestType.Fees}   // احذف هذا إذا ما عندك Fees بالجدول
+    };
 
-            string Query = $@"";
+            string Query = @"
+        UPDATE TestTypes
+        SET 
+            TypeName = @TestTypeName,
+            Description = @Description,
+            Fees = @Fees   
+        WHERE TestTypeID = @ID ";
 
             object result = ClsCommandDB.ExecuteNonQuery_Command(Query, Parameters, false);
 
-            if(result == null )
-                MessageBox.Show("لم يتم تعديل","مشكلة",MessageBoxButtons.OK ,MessageBoxIcon.Error);
+            if (result == null)
+            {
+                MessageBox.Show("لم يتم التعديل", "مشكلة", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             else
             {
-
-                AddLog(LogAction.UpdateTestType, ClassUser.IDUser, $"تعديل نوع اختبار رقم {infoTestType.ID}");   // Log: تعديل نوع اختبار
-                MessageBox.Show("تم تعديل نوع الإختبار", "تم");
+                AddLog(LogAction.UpdateTestType, ClassUser.IDUser, $"تعديل نوع اختبار رقم {infoTestType.ID}");
+                MessageBox.Show("تم تعديل نوع الإختبار", "تم" , MessageBoxButtons.OK , MessageBoxIcon.Information);
             }
         }
+
 
 
 

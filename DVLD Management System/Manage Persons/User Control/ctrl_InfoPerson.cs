@@ -29,21 +29,21 @@ namespace DVLD_Management_System.Manage_Persons.User_Control
 
             LoadData(person_);
         }
-        public int PersonID
-        {
-            get
-            {
-                int id;
-                if (int.TryParse(lbl_IDPerson.Text, out id))
-                    return id;
+        //public int PersonID
+        //{
+        //    get
+        //    {
+        //        int id;
+        //        if (int.TryParse(lbl_IDPerson.Text, out id))
+        //            return id;
 
-                return 0; // قيمة افتراضية
-            }
-            set
-            {
-                lbl_IDPerson.Text = value.ToString();
-            }
-        }
+        //        return 0; // قيمة افتراضية
+        //    }
+        //    set
+        //    {
+        //        lbl_IDPerson.Text = value.ToString();
+        //    }
+        //}
 
 
         public Person person { set; get; }

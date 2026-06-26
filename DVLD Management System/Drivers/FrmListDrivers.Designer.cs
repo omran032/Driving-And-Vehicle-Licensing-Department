@@ -129,7 +129,7 @@
             "None",
             "Driver ID",
             "Person ID",
-            "National No.",
+            "National No",
             "Full Name"});
             this.cbFilterBy.Location = new System.Drawing.Point(157, 249);
             this.cbFilterBy.Name = "cbFilterBy";

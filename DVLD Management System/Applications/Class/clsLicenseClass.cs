@@ -125,31 +125,33 @@ namespace DVLD_Management_System.Applications.Driver_Licenses_Services.New_Drivi
         }
 
         /// <summary>
-        /// ( اسم الشخص الكامل ) FullName فلترة  طلبات الرخص المحلية بوساطة 
+        /// (اسم الشخص الكامل) FullName فلترة طلبات الرخص المحلية بوساطة 
+        /// (بحث يحتوي على وليس تطابق تام)
         /// </summary>
         public static DataTable FelterLocalLicenseRequestsByFullNamePerson(string FullNamePerson)
         {
             Dictionary<string, object> Parameters = new Dictionary<string, object>()
-            {
-                {"@FullNamePerson" ,FullNamePerson }
-            };
+    {
+        {"@FullNamePerson" , FullNamePerson }
+    };
 
-            string Query = $@"SELECT * from GetLocalLicenseRequests_View 
-                            where FullName = @FullNamePerson ";
+            string Query = @"
+        SELECT * 
+        FROM GetLocalLicenseRequests_View
+        WHERE FullName LIKE '%' + @FullNamePerson + '%' ";
 
             return ClsCommandDB.SelectCommand(Query, Parameters);
         }
 
+
         /// <summary>
         /// ( حالة الطلب ) StatusRequest فلترة  طلبات الرخص المحلية بوساطة 
         /// </summary>
-        public static DataTable FelterLocalLicenseRequestsByStatusRequest(int StatusRequest)
+        public static DataTable FelterLocalLicenseRequestsByStatusRequest(string StatusRequest)
         {
-            string Status = StatusRequest == 1 ? "" : "";
-
             Dictionary<string, object> Parameters = new Dictionary<string, object>()
             {
-                {"@Status" ,Status }
+                {"@Status" ,StatusRequest }
             };
 
             string Query = $@"SELECT * from GetLocalLicenseRequests_View 

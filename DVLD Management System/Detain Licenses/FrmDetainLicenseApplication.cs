@@ -49,6 +49,22 @@ namespace DVLD_Management_System.Detain_Licenses
 
             Licenseinfo = info;
 
+            bool IsLicenseDetained = ClassDetainCMD.IsLicenseDetained(Licenseinfo.LicenseID);
+            if (IsLicenseDetained)
+            {
+                MessageBox.Show("الرخصة محجوزة حالياً", "لا يمكن حجز الرخصة", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                btnDetain.Enabled = false;
+                return;
+            }
+
+            bool IsActive = ClassDetainCMD.IsLicenseActive(Licenseinfo.LicenseID);
+            if (!IsActive)
+            {
+                MessageBox.Show("الرخصة غير فعالة لذلك لا يمكن حجزها", "لا يمكن حجز الرخصة", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                btnDetain.Enabled = false;
+                return;
+            }
+
             btnDetain.Enabled = true;
             llShowLicenseHistory.Enabled = true;
 
@@ -95,22 +111,6 @@ namespace DVLD_Management_System.Detain_Licenses
             }
             errorProvider1.SetError(TxtReason, null);
 
-
-            bool IsLicenseDetained = ClassDetainCMD.IsLicenseDetained(Licenseinfo.LicenseID);
-            if (IsLicenseDetained)
-            {
-                MessageBox.Show("الرخصة محجوزة حالياً", "لا يمكن حجز الرخصة", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                btnDetain.Enabled = false;
-                return;
-            }
-
-            bool IsActive = ClassDetainCMD.IsLicenseActive(Licenseinfo.LicenseID);
-            if (!IsActive)
-            {
-                MessageBox.Show("الرخصة غير فعالة لذلك لا يمكن حجزها", "لا يمكن حجز الرخصة", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                btnDetain.Enabled = false;
-                return;
-            }
 
             int.TryParse(Fees, out int Amount);
 

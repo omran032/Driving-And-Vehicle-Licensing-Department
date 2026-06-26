@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -299,6 +300,107 @@ namespace DVLD_Management_System.Class.Class_DB
                 return builder.ToString();
             }
         }
+
+
+        /// <summary>
+        /// يقوم بفحص اذا البرنامج يحتوي على لوكال 2024  | 2025 لتشغيل التطبيق
+        /// </summary>
+        /// <returns></returns>
+        public static bool CheckDatabaseConnection(  string userMessage = "")
+        {
+            userMessage = string.Empty;
+
+            string connectionString =
+                @"Data Source=(localdb)\MSSQLLocalDB;
+          AttachDbFilename=C:\DB_DVLD\DB_DVLD.mdf;
+          Integrated Security=True;
+          Connect Timeout=5;";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                }
+
+                return true; // كل شي تمام
+            }
+            catch (SqlException ex)
+            {
+                string msg = ex.Message;
+
+                // 1) لا يوجد LocalDB نهائيًا أو غير مثبت
+                if (msg.Contains("provider") ||
+                    msg.Contains("LocalDB") && msg.Contains("cannot") ||
+                    msg.Contains("The system cannot find") ||
+                    msg.Contains("requested instance") ||
+                    msg.Contains("instance not found"))
+                {
+                    userMessage =
+                        "لا يوجد أي LocalDB حديث مثبت على جهازك.\n" +
+                        "يرجى تثبيت LocalDB 2024 أو 2025.\n\n" +
+                        "التفاصيل:\n" + msg;
+                    return false;
+                }
+
+                // 2) LocalDB تالف أو Error 50
+                if (msg.Contains("error code 50") ||
+                    msg.Contains("Unexpected error") ||
+                    msg.Contains("Internal error"))
+                {
+                    userMessage =
+                        "حدث خطأ داخلي في LocalDB (Error 50).\n" +
+                        "هذا يعني أن المثيل تالف أو غير قابل للتشغيل.\n\n" +
+                        "الحل:\n" +
+                        "1. افتح CMD كمسؤول.\n" +
+                        "2. نفّذ:\n" +
+                        "   sqllocaldb delete MSSQLLocalDB\n" +
+                        "   sqllocaldb create MSSQLLocalDB\n" +
+                        "   sqllocaldb start MSSQLLocalDB\n\n" +
+                        "التفاصيل:\n" + msg;
+                    return false;
+                }
+
+                // 3) المحرك قديم ولا يدعم القاعدة
+                if (msg.Contains("version") && msg.Contains("supports"))
+                {
+                    userMessage =
+                        "نسخة LocalDB الموجودة قديمة ولا تدعم قاعدة البيانات.\n" +
+                        "يرجى تثبيت LocalDB 2024 أو 2025.\n\n" +
+                        "التفاصيل:\n" + msg;
+                    return false;
+                }
+
+                // 4) مسار القاعدة غلط أو الملف مقفول
+                if (msg.Contains("cannot open") ||
+                    msg.Contains("AttachDbFilename") ||
+                    msg.Contains("physical file"))
+                {
+                    userMessage =
+                        "تعذر فتح قاعدة البيانات.\n" +
+                        "تأكد من مسار الملف:\nC:\\DB_DVLD\\DB_DVLD.mdf\n\n" +
+                        "التفاصيل:\n" + msg;
+                    return false;
+                }
+
+                // 5) أي خطأ آخر
+                userMessage =
+                    "حدث خطأ أثناء الاتصال بقاعدة البيانات:\n\n" +
+                    msg;
+
+                return false;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
 
 
     }
